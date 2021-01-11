@@ -1,22 +1,14 @@
-html, body, div, p, span,
-strong, b, em, iframe, pre,
-h1, h2, h3, h4, h5, h6, img, dl, dt, dd,
-fieldset, form, legend, label, table, caption,
-thead, tbody, tfoot, tr, th, td, ul, ol, a,
-select, textarea {margin: 0; padding: 0; border: 0 none; }
-body{
-    background-color:#eee;
+body {
+  color: #eee;
 }
 
-:root{
-    --main-bg-color: #eee;
+#header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #ffffff;
+  text-align: center;
+  z-index: 200;
 }
 
-#header{
-    width: 100%;
-    position: fixed;
-    top: 0;
-    background-color: #ffffff;
-    text-align:center;
-    z-index: 200;
-}
+/*# sourceMappingURL=main.css.map */
