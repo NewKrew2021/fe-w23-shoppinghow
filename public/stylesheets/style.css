@@ -11,7 +11,7 @@ li {
   list-style-type: none;
 }
 .header__title {
-  height: 180px;
+  height: 150px;
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -19,5 +19,32 @@ li {
 }
 
 .header__logo-image {
-  height: 60px;
+  height: 55px;
+}
+
+.search-box {
+  border: 1px solid #cccccc;
+  height: 50px;
+  border-radius: 10px;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  padding: 5px 20px;
+}
+
+.search-box__input {
+  width: 500px;
+  font-size: 25px;
+  border: none;
+}
+
+.search-box__input:focus {
+  outline: none;
+}
+
+.search-box__button {
+  height: 30px;
+  width: 30px;
 }
