@@ -39,7 +39,7 @@ li {
 
 .search-box {
   border: 1px solid #cccccc;
-  height: 50px;
+  height: 40px;
   border-radius: 10px;
   margin-left: 30px;
   display: flex;
@@ -50,7 +50,7 @@ li {
 }
 
 .search-box__input {
-  width: 500px;
+  width: 550px;
   font-size: 25px;
   border: none;
 }
@@ -61,7 +61,7 @@ li {
 }
 
 .search-box__button-icon {
-  height: 30px;
+  height: 22px;
 }
 
 .header-nav {
