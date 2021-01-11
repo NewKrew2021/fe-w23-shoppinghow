@@ -1,0 +1,12 @@
+.margin-zero {
+    margin: 0;
+}
+.margin-center {
+    margin: 0 auto;
+}
+.border-gray {
+    border: solid 1px #ddd;
+}
+.horizontal {
+    display: inline-block;
+}
