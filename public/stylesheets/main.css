@@ -1,0 +1,14 @@
+body {
+  color: #eee;
+}
+
+#header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #ffffff;
+  text-align: center;
+  z-index: 200;
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,23 @@
+{
+  "name": "fe-w23-shoppinghow",
+  "version": "1.0.0",
+  "description": "## 주요 기능 * 팝업 레이어 (최근 본 상품) * 무한 슬라이딩 UI (홈 > 프로모션) * 반응형 슬라이딩 UI (기획서 홈 > 패션)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChanhuiSeok/fe-w23-shoppinghow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChanhuiSeok/fe-w23-shoppinghow/issues"
+  },
+  "homepage": "https://github.com/ChanhuiSeok/fe-w23-shoppinghow#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
