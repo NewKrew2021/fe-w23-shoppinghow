@@ -20,13 +20,17 @@ button:focus {
 li {
   list-style-type: none;
 }
+.header {
+  background: #ffffff;
+  border-bottom: 2px solid #cccccc;
+}
 
 .header__title {
   height: 150px;
-  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .header__logo-image {
@@ -58,4 +62,24 @@ li {
 
 .search-box__button-icon {
   height: 30px;
+}
+
+.header-nav {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1350px;
+  height: 60px;
+}
+
+.important-nav,
+.theme-nav {
+  display: flex;
+  column-gap: 20px;
+  font-weight: bolder;
+}
+
+.theme-nav {
+  color: #888888;
 }
