@@ -1,0 +1,25 @@
+{
+  "name": "fe-w23-shoppinghow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --watch ./ ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjrdud123/fe-w23-shoppinghow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tjrdud123/fe-w23-shoppinghow/issues"
+  },
+  "homepage": "https://github.com/tjrdud123/fe-w23-shoppinghow#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
+}
