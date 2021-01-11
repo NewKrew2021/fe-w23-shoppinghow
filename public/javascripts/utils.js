@@ -1,20 +1,56 @@
-const customQuerySelector = (currentElement = document.body, target) => {
+const _getElementById = (currentElement, id) => {
+  if (currentElement.id === id) return currentElement;
+
+  for (let childElement of currentElement.children) {
+    const searchResult = _getElementById(childElement, id);
+    if (searchResult !== null) return searchResult;
+  }
+
+  return null;
+};
+
+const _getElementByClassName = (currentElement, className) => {
+  if (currentElement.className === className) return currentElement;
+
+  for (let childElement of currentElement.children) {
+    const searchResult = _getElementByClassName(childElement, className);
+    if (searchResult !== null) return searchResult;
+  }
+
+  return null;
+};
+
+const _getElementByTagName = (currentElement, tagName) => {
+  if (currentElement.tagName.toLowerCase() === tagName) return currentElement;
+
+  for (let childElement of currentElement.children) {
+    const searchResult = _getElementByTagName(childElement, tagName);
+    if (searchResult !== null) return searchResult;
+  }
+
+  return null;
+};
+
+const _querySelector = (parent = document.body, target) => {
+  let getElementFunc;
+  let selector;
   switch (target[0]) {
     case '.':
-      console.log(currentElement.className);
-      if (currentElement.className === target.substr(1)) return currentElement;
+      getElementFunc = _getElementByClassName;
+      selector = target.substr(1);
       break;
     case '#':
-      console.log(currentElement.id);
-      if (currentElement.id === target.substr(1)) return currentElement;
+      getElementFunc = _getElementById;
+      selector = target.substr(1);
       break;
     default:
-      console.log(currentElement.tagName);
-      if (currentElement.tagName.toLowerCase() === target)
-        return currentElement;
+      getElementFunc = _getElementByTagName;
+      selector = target;
   }
-  for (let childElement of currentElement.children) {
-    const searchResult = customQuerySelector(childElement, target);
+  console.log(selector);
+
+  for (let childElement of parent.children) {
+    const searchResult = getElementFunc(childElement, selector);
     if (searchResult !== null) return searchResult;
   }
   return null;
