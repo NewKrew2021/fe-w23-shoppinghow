@@ -1,0 +1,23 @@
+{
+  "name": "fe-w23-shoppinghow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unsangpark95/fe-w23-shoppinghow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unsangpark95/fe-w23-shoppinghow/issues"
+  },
+  "homepage": "https://github.com/unsangpark95/fe-w23-shoppinghow#readme",
+  "dependencies": {
+    "eslint": "^7.17.0",
+    "express": "^4.17.1"
+  }
+}
