@@ -23,4 +23,3 @@
   - 디렉터리 구조, 화면 설계
   - DOM API (querySelector, querySelectorAll, getElementById) 구현
      - 현재는 함수형 -> 클래스형으로 변경 예정 
-  
