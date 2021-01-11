@@ -9,4 +9,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .nav-item {
+    flex: auto;
+    padding: 1rem;
+    text-align: center;
+  }
 }
