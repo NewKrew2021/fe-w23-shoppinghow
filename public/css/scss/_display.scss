@@ -1,0 +1,43 @@
+$screen-width-breakpoints: (
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1280px,
+);
+
+$display-values: (
+  "none": none,
+  "block": block,
+  "inline": inline,
+  "flex": flex,
+  "inline-flex": inline-flex,
+);
+
+@each $property-name, $property-value in $display-values {
+  .d-#{$property-name} {
+    display: $property-value !important;
+  }
+}
+@each $breakpoint, $pixel in $screen-width-breakpoints {
+  @media (min-width: $pixel) {
+    @each $property-name, $property-value in $display-values {
+      .d-#{$breakpoint}-#{$property-name} {
+        display: $property-value !important;
+      }
+    }
+  }
+}
+
+/* flex */
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex {
+  flex: auto;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
