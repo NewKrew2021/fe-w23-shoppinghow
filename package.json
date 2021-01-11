@@ -1,0 +1,24 @@
+{
+  "name": "fe-w23-shoppinghow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puba5/fe-w23-shoppinghow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/puba5/fe-w23-shoppinghow/issues"
+  },
+  "homepage": "https://github.com/puba5/fe-w23-shoppinghow#readme",
+  "dependencies": {
+    "koa": "^2.13.1",
+    "koa-static": "^5.0.0"
+  }
+}
