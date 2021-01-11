@@ -44,21 +44,24 @@ function dfs_for_querySelectorAll(nodeList, node, target){
     return nodeList;
 }
 
-/* querySelector custom API */
+/* querySelector custom API (parameter : string, return : HTML element)*/
 function querySelector(element) {
     let elementName;
     let startPoint = window.document.body;
+    /* #이 맨 앞에 들어갈 경우 id 값으로 여기고 찾는다. */
     if (element[0] === '#') {
         elementName = element.replace('#', '');
         return dfs_for_querySelector(startPoint, elementName);
     }
     else {
+        /* className 으로 여기고 찾는다.
+          .을 기준으로 분리하고 맨 마지막 문자열을 넘긴다.*/
        let nameArray = element.split('.');
        elementName = nameArray[nameArray.length - 1];
        return dfs_for_querySelector(startPoint, elementName);
     }
 }
-/* querySelectorAll custom API */
+/* querySelectorAll custom API (parameter : string, return : Array) */
 function querySelectorAll(element) {
     let elementName;
     let startPoint = window.document.body;
