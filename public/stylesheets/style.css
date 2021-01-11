@@ -1,0 +1,12 @@
+body {
+  background: #dddddd;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+}
