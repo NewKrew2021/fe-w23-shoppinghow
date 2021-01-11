@@ -10,3 +10,14 @@ p {
 li {
   list-style-type: none;
 }
+.header__title {
+  height: 180px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__logo-image {
+  height: 60px;
+}
