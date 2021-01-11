@@ -1,0 +1,23 @@
+{
+  "name": "fe-w23-shoppinghow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gunhoflash/fe-w23-shoppinghow.git"
+  },
+  "author": "gunhoflash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gunhoflash/fe-w23-shoppinghow/issues"
+  },
+  "homepage": "https://github.com/gunhoflash/fe-w23-shoppinghow#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
