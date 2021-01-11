@@ -1,33 +1,31 @@
 class DOM {
-    constructor(root) {
-        this.root = root;
-        
+    constructor(document) {
+        // document는 matches 프로퍼티 없음
+        // 그래서 body가 root
+        this.body = document.body;
     }
-    getPropertyName(input) {
-        if(input[0] === ".") return "className";
-        else if(input[0] === "#") return "id";
-        else return "tagName";
-    }
-    dfs(element, target, pName) {
-        let selectors = [];
-        if(element[pName] !== undefined)
-        selectors = element[pName].split(" ");
-        for(let selector of selectors) {
-            if(selector === target) return element;
-        }
+    
+    dfs(element, selector) {
+        if(!!element.matches && element.matches(selector)) return element;
         for(let node of element.childNodes) {
-            const result = this.dfs(node, target, pName);
-            if(result !== null) return result;
+            const result = this.dfs(node, selector);
+            if(!!result) return result;
         }
         return null;
     }
-    querySelector(input) {
-        const pName = this.getPropertyName(input);
-        if(pName !== "tagName") input = input.substr(1);
-        else input = input.toUpperCase();
-        return this.dfs(this.root, input, pName);
+    dfsAll(element, selector) {
+        let matched = [];
+        if(!!element.matches && element.matches(selector)) matched.push(element);
+        for(let node of element.childNodes) {
+            let elements = this.dfsAll(node, selector);
+            matched = [...matched, ...elements];
+        }
+        return matched;
     }
-    querySelectorAll(input) {
-
+    querySelector(selector) {
+        return this.dfs(this.body, selector);
+    }
+    querySelectorAll(selector) {
+        return this.dfsAll(this.body, selector);
     }
 }
