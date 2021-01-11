@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/puba5/fe-w23-shoppinghow/issues"
   },
-  "homepage": "https://github.com/puba5/fe-w23-shoppinghow#readme"
+  "homepage": "https://github.com/puba5/fe-w23-shoppinghow#readme",
+  "dependencies": {
+    "koa": "^2.13.1"
+  }
 }
