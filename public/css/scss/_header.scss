@@ -1,0 +1,18 @@
+.header {
+  position: sticky;
+  top: 0;
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    margin: auto;
+    max-width: 36rem;
+  }
+
+  .header-nav {
+    border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+  }
+}
