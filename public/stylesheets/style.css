@@ -7,9 +7,20 @@ p {
   margin: 0;
 }
 
+button,
+input {
+  border: none;
+  background: none;
+}
+input:focus,
+button:focus {
+  outline: none;
+}
+
 li {
   list-style-type: none;
 }
+
 .header__title {
   height: 150px;
   background: #ffffff;
@@ -40,11 +51,11 @@ li {
   border: none;
 }
 
-.search-box__input:focus {
-  outline: none;
+.search-box__button {
+  width: fit-content;
+  height: fit-content;
 }
 
-.search-box__button {
+.search-box__button-icon {
   height: 30px;
-  width: 30px;
 }
