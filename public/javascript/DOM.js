@@ -1,3 +1,8 @@
+/*
+    
+*/
+
+
 class DOM {
     constructor(document) {
         // document는 matches 프로퍼티 없음
@@ -6,16 +11,16 @@ class DOM {
     }
     
     dfs(element, selector) {
-        if(!!element.matches && element.matches(selector)) return element;
+        if(element.matches && element.matches(selector)) return element;
         for(let node of element.childNodes) {
             const result = this.dfs(node, selector);
-            if(!!result) return result;
+            if(result) return result;
         }
         return null;
     }
     dfsAll(element, selector) {
         let matched = [];
-        if(!!element.matches && element.matches(selector)) matched.push(element);
+        if(element.matches && element.matches(selector)) matched.push(element);
         for(let node of element.childNodes) {
             let elements = this.dfsAll(node, selector);
             matched = [...matched, ...elements];
