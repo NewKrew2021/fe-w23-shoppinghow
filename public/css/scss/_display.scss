@@ -15,14 +15,14 @@ $display-values: (
 
 @each $property-name, $property-value in $display-values {
   .d-#{$property-name} {
-    display: $property-value !important;
+    display: $property-value;
   }
 }
 @each $breakpoint, $pixel in $screen-width-breakpoints {
   @media (min-width: $pixel) {
     @each $property-name, $property-value in $display-values {
       .d-#{$breakpoint}-#{$property-name} {
-        display: $property-value !important;
+        display: $property-value;
       }
     }
   }
