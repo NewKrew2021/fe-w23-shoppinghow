@@ -131,3 +131,7 @@ li {
       font-weight: bolder; }
     .more-product-text .more-product-text .more-product-text__total-count, .more-product-text .more-product-text-count .more-product-text__total-count {
       font-weight: bolder; }
+
+.category-product {
+  margin-top: 30px;
+  font-size: 25px; }
