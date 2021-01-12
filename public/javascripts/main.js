@@ -76,3 +76,7 @@ function querySelectorAll(element) {
     }
 }
 
+/* test */
+fetch('http://localhost:80/posts')
+    .then(res => res.json())
+    .then(data => console.log(data));
