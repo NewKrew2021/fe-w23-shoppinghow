@@ -1,4 +1,4 @@
-$main-background-color: #dddddd
+$main-background-color: #eeeeee
 $content-width : 1350px
 $product-item-width : 270px
 $tag-color : #e79924
@@ -77,11 +77,11 @@ li
     color: #888888
 
 .content__main
-  background: #ffffff
   width: $content-width
   margin: 0 auto
 
 .product-list
+  background: #ffffff
   display: flex
   padding: 0
 
@@ -115,3 +115,31 @@ li
   padding: 1px 4px
   color: $tag-color
   font-size: 12px
+
+.product-more-area
+  height: 100px
+  display: flex
+  align-items: center
+  justify-content: center
+  background: #cccccc
+  margin-top: 10px
+  &:hover
+    background: #dddddd
+    cursor: pointer
+
+.more-product-text__title
+  font-size: 20px
+  font-weight: bolder
+
+.more-product-text
+  display: flex
+
+  .more-product-text, .more-product-text-count
+
+    display: flex
+    column-gap: 5px
+    .more-product-text__count
+      color: #ff0000
+      font-weight: bolder
+    .more-product-text__total-count
+      font-weight: bolder
