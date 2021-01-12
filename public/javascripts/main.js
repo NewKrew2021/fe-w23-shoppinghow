@@ -69,7 +69,15 @@ const createProductListTemplate = productItemList => {
   return `<ul class="product-list__row">${productListContent}</ul>`;
 };
 
-$('.product-list').innerHTML = createProductListTemplate(productItemList);
-$('.product-more-area').addEventListener('click', () => {
-  $('.product-list').innerHTML += createProductListTemplate(productItemList);
-});
+const init = () => {
+  const productList = $('.product-list');
+  const productMoreArea = $('.product-more-area');
+
+  productList.innerHTML = createProductListTemplate(productItemList);
+
+  productMoreArea.addEventListener('click', () => {
+    productList.innerHTML += createProductListTemplate(productItemList);
+  });
+};
+
+init();
