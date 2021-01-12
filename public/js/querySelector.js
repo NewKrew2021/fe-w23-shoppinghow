@@ -1,4 +1,4 @@
-class querySelector{
+class QuerySelector{
 
     #dfs(base,selector){
         const childNodes=base.childNodes;
@@ -19,7 +19,7 @@ class querySelector{
 
 }
 
-class querySelectorAll{
+class QuerySelectorAll{
     #result;
     #dfsAll(base,selector,type){
         const childNodes=base.childNodes;
@@ -37,11 +37,11 @@ class querySelectorAll{
     }
 }
 /** [usage] :
-const qs = new querySelector();
+const qs = new QuerySelector();
 console.log(qs.query(document,"img"));
 console.log(qs.query(document,"#search-bar"));
 console.log(qs.query(document,".btn"));
-const qsa = new querySelectorAll();
+const qsa = new QuerySelectorAll();
 console.log(qsa.query(document,"img"));
 console.log(qsa.query(document,"#search-bar"));
 console.log(qsa.query(document,".btn"));
