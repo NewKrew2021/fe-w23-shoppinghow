@@ -38,13 +38,13 @@ const productItemList = [
   },
 ];
 
-const getTagListHTML = tagList => {
+const createTagListTemplate = tagList => {
   const tagReducer = (acc, tag) =>
     acc + `<div class="product-tag">${tag}</div>`;
   return tagList.reduce(tagReducer);
 };
 
-const getProductListHTML = productItemList => {
+const createProductListTemplate = productItemList => {
   const productListContent = productItemList.reduce(
     (acc, productItem) =>
       acc +
@@ -58,7 +58,9 @@ const getProductListHTML = productItemList => {
           ${productItem.description}
         </div>
         <div class="product-tag-list">
-          <div class="product-tag">${getTagListHTML(productItem.tagList)}</div>
+          <div class="product-tag">
+          ${createTagListTemplate(productItem.tagList)}
+          </div>
         </div>
       </li>`,
     ''
@@ -67,4 +69,4 @@ const getProductListHTML = productItemList => {
   return productListContent;
 };
 
-$('.product-list').innerHTML = getProductListHTML(productItemList);
+$('.product-list').innerHTML = createProductListTemplate(productItemList);
