@@ -1,23 +1,23 @@
 // append a simple image-carousel to the wrapper
 function appendImageCarousel(wrapper, id, items) {
   const carouselItemHtmlString = items.reduce((str, { href, src }) => str + `
-  <div class="carousel-item">
-    <a href="${href}">
-      <img src="${src}">
-    </a>
-  </div>
-  `, '')
+    <div class="carousel-item">
+      <a href="${href}">
+        <img src="${src}">
+      </a>
+    </div>
+    `, '')
 
   // append to wrapper
   wrapper.innerHTML += `
-  <div id="${id}" class="carousel">
-    <div class="carousel-inner">
-      ${carouselItemHtmlString}
+    <div id="${id}" class="carousel">
+      <div class="carousel-inner">
+        ${carouselItemHtmlString}
+      </div>
+      <button class="carousel-button-prev">&LT;</button>
+      <button class="carousel-button-next">&GT;</button>
     </div>
-    <button class="carousel-button-prev">&LT;</button>
-    <button class="carousel-button-next">&GT;</button>
-  </div>
-  `
+    `
 
   // initialize the carousel
   initCarousel(findOne(`#${id}`, wrapper))
@@ -36,11 +36,11 @@ function initCarousel(carousel) {
 
   // add click event listener to prev button
   findOne(`#${carouselId} .carousel-button-prev`)
-  .addEventListener('click', () => showNextCarouselItem(carouselInfo, true))
+    .addEventListener('click', () => showNextCarouselItem(carouselInfo, true))
 
   // add click event listener to next button
   findOne(`#${carouselId} .carousel-button-next`)
-  .addEventListener('click', () => showNextCarouselItem(carouselInfo))
+    .addEventListener('click', () => showNextCarouselItem(carouselInfo))
 
   // show first item
   showNextCarouselItem(carouselInfo)

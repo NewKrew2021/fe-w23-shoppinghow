@@ -5,10 +5,10 @@
     fetchItems('/best_promotion')
     .then(item => {
       findOne('#box_best_promotion').innerHTML = `
-      <a href="${item.href}">
-        <img src="${item.src}">
-      </a>
-      `
+        <a href="${item.href}">
+          <img src="${item.src}">
+        </a>
+        `
     })
   }
 
