@@ -1,9 +1,4 @@
-/*
-    
-*/
-
-
-class DOM {
+class DOMTreeSearch {
     constructor(document) {
         this.root = document;
     }

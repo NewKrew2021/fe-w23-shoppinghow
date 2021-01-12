@@ -4,9 +4,13 @@
 .margin-center {
     margin: 0 auto;
 }
+.margin-auto {
+    margin: 20px auto;
+}
 .border-gray {
-    border: solid 1px #ddd;
+    border: solid 1px #eee;
 }
 .horizontal {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
 }
