@@ -1,9 +1,9 @@
 // append a simple image-carousel to the wrapper
 function appendImageCarousel(wrapper, id, items) {
-  const carouselItemHtmlString = items.reduce((str, item) => str + `
+  const carouselItemHtmlString = items.reduce((str, { href, src }) => str + `
   <div class="carousel-item">
-    <a href="${item.href}">
-      <img src="${item.src}">
+    <a href="${href}">
+      <img src="${src}">
     </a>
   </div>
   `, '')
