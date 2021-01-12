@@ -14,6 +14,8 @@ function addHTML(node, text){
     node.innerHTML += text;
 }
 
+const getElementsClass = (className) => document.getElementsByClassName(className);
+
 /* DFS 함수 정의하기 */
 function dfs_for_querySelector(node, target) {
     let returnVal;
@@ -47,19 +49,7 @@ function dfs_for_querySelectorAll(nodeList, node, target){
 }
 
 /* querySelector custom API (parameter : string, return : HTML element)*/
-function querySelector(element) {
-    let startPoint = document.body;
-    return dfs_for_querySelector(startPoint, element);
-}
-/* querySelectorAll custom API (parameter : string, return : Array) */
-function querySelectorAll(element) {
-    let startPoint = document.body;
-    return dfs_for_querySelectorAll([],startPoint, element);
-}
+const querySelector = (element) => dfs_for_querySelector(document.body, element);
 
-/* test */
-/*
-fetch('http://localhost:80/posts')
-    .then(res => res.json())
-    .then(data => console.log(data));
-*/
+/* querySelectorAll custom API (parameter : string, return : Array) */
+const querySelectorAll = (element) => dfs_for_querySelectorAll([], document.body, element);

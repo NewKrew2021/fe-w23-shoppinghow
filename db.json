@@ -61,5 +61,9 @@
     "comments": [
       { "id": 1, "body": "some comment", "postId": 1 }
     ],
-    "profile": { "name": "typicode" }
+    "more": {
+      "title": "더보기",
+      "number": "(1/276건)",
+      "src": "/images/expand.svg"
+    }
 }

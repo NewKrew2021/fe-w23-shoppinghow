@@ -1,10 +1,8 @@
 /*
     slide.js
-    슬라이드쇼 기능을 구현하는 함수
+    슬라이드쇼 기능을 구현하는 함수 (함수 길이가 길어져서 수정 계획 중)
 */
 function addSlideShow() {
-    let slideIndex = 0;
-    let timer;
     let curSlideIndex = 0;
     const MAX_SLIDE_COUNT = 1;
     const SLIDE_SPEED = 300;
@@ -48,7 +46,12 @@ function addSlideShow() {
             }, AUTO_SLIDE_SPEED);
             curSlideIndex = slideLength;
         }
+
+        let pagination = querySelectorAll(".page");
+        pagination[(curSlideIndex === slideLength) ? 0 : curSlideIndex].classList.remove('active');
+
         curSlide = slideContent[--curSlideIndex];
+        pagination[curSlideIndex].classList.add('active');
     });
 
     slideNextBtn.addEventListener('click', () => {
@@ -64,11 +67,27 @@ function addSlideShow() {
             }, AUTO_SLIDE_SPEED);
             curSlideIndex = -1;
         }
+        let pagination = querySelectorAll(".page");
+        pagination[(curSlideIndex === -1) ? slideLength - 1 : curSlideIndex].classList.remove('active');
+
         curSlide = slideContent[++curSlideIndex];
+        pagination[curSlideIndex].classList.add('active');
     });
-}
 
-function pageSlideBtn(){
-    const pagebtn = querySelectorAll('page');
+    const targetList = querySelectorAll('.page');
+    targetList.forEach((element)=>{
+        element.addEventListener("mouseenter", function(){
+            let current = querySelector(".active");
+            current.className = current.className.replace(" active", "");
+            this.className += " active";
 
+            /* 배너 변화시키기 */
+            let index = Number(this.getAttribute("data"));
+            curSlide = slideContent[index];
+            slideList.style.transition = SLIDE_SPEED + "ms";
+            slideList.style.transform =
+            "translate3d(-" + (SLIDE_WIDTH)*(index + 1) + "px, 0px, 0px)";
+            curSlideIndex = index;
+        });
+    });
 }

@@ -65,6 +65,12 @@ input
 .bd-1-lg
     border: 1px solid lightgray
 
+.bg-color-gray
+    background-color: lightgray
+
+.text-center
+    text-align: center
+
 .pd-4
     padding: 4px
 .pd-40
@@ -133,12 +139,14 @@ input
     border-bottom: 1px solid #eee
 
 .row-0-bottom
-    border-top: 1px solid #eee
+    width: 1279px
+    display: block
+    float: left
     position: relative
+    border-bottom: 1px solid #eee
 
 /* Grid Banner Layout */
 .grid-ul
-    float: left
     width: 1280px
     list-style: none
 
@@ -162,6 +170,12 @@ input
 .theme-btn
     width: 31px
     margin-top: 10px
+
+.small
+    font-size: 12px
+
+.hidden
+    display: none
 /* ************** */
 
 .slide-box
@@ -207,7 +221,11 @@ input
     font-size: 0px
 
 .active
-    background-color: gray
+    background-color: black
+
+/** expand 영역 **/
+#expand
+    cursor: pointer
 
 $i: 1
 @while $i <= 5

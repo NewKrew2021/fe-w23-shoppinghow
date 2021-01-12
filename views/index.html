@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <!-- 컨텐츠 영역 -->
+        <!-- 컨텐츠 영역(row 0) -->
         <div class="content">
             <!-- 510px -->
             <div class="row-0-left">
@@ -67,9 +67,9 @@
 
                 <div class="slide-row">
                     <span class="paging">
-                        <span class="page active" data="first">1</span>
-                        <span class="page" data="second">2</span>
-                        <span class="page" data="third">3</span>
+                        <span class="page active" data=0>1</span>
+                        <span class="page" data=1>2</span>
+                        <span class="page" data=2>3</span>
                     </span>
                     <img class="prev" src="/images/prev_btn.png">
                     <img class="next" src="/images/next_btn.png">
@@ -77,9 +77,22 @@
             </div>
             <!-- 1280px -->
             <div class="row-0-bottom">
-                <ul class="grid-ul">
+                <ul id="grid-ul-1" class="grid-ul">
                 </ul>
             </div>
+            <!-- 1280px(hidden) -->
+            <div id="row-0-hidden" class="row-0-bottom hidden">
+                <ul id="grid-ul-2" class="grid-ul">
+                </ul>
+            </div>
+            <!-- 더보기 버튼이 보이는 영역 -->
+            <div id="expand" class="row-0-bottom text-center bg-color-gray pd-20">
+            </div>
+        </div>
+
+        <!-- 컨텐츠 영역 (row 1) -->
+        <div class='content mg-top-40'>
+
         </div>
 
     </div>
@@ -88,6 +101,7 @@
     <script src="/javascripts/util.js"></script>
     <script src="/javascripts/slide.js"></script>
     <script src="/javascripts/main.js"></script>
+    <script src="/javascripts/event.js"></script>
 </body>
 
 </html>
