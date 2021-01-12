@@ -66,7 +66,10 @@ const createProductListTemplate = productItemList => {
     ''
   );
 
-  return productListContent;
+  return `<ul class="product-list__row">${productListContent}</ul>`;
 };
 
 $('.product-list').innerHTML = createProductListTemplate(productItemList);
+$('.product-more-area').addEventListener('click', () => {
+  $('.product-list').innerHTML += createProductListTemplate(productItemList);
+});

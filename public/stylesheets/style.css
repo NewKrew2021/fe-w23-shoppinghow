@@ -14,12 +14,16 @@ input:focus,
 button:focus {
   outline: none; }
 
+ul {
+  margin: 0; }
+
 li {
   list-style-type: none; }
 
 .header {
   background: #ffffff;
-  border-bottom: 2px solid #cccccc; }
+  border-bottom: 2px solid #cccccc;
+  margin-bottom: 10px; }
   .header__title {
     height: 150px;
     display: flex;
@@ -70,10 +74,11 @@ li {
   width: 1350px;
   margin: 0 auto; }
 
-.product-list {
+.product-list__row {
   background: #ffffff;
   display: flex;
-  padding: 0; }
+  padding: 0;
+  border: 1px solid #eeeeee; }
 
 .product-item {
   height: 350px;
