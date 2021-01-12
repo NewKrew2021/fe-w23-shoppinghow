@@ -1,16 +1,35 @@
 $font_family: sans-serif;
-$font_size: 16px;
-
-body {
+header {
+  display: flex;
+  height:300px;
+  width:100%;
+  justify-content: center;
+  align-items: center;
+  #logo{
+    height:51px ;
+    width:110px;
+  }
+  #search-bar{
+    height: 54px;
+    width: 640px;
+    border-radius: 10px;
+    margin-left:10px;
+    border: 1px solid gainsboro;
+  }
   font: {
-    size: $font_size;
     family: $font_family;
   }
-}
-
-#header {
-  font: {
-    size: $font_size;
-    family: $font_family;
+  #search-button{
+    position: relative;
+    background-color: white;
+    top: 10px;
+    right: 54px;
+    border: none;
+    height: 26px;
+    width: 26px;
+  }
+  #search-img{
+    height: 26px;
+    width: 26px;
   }
 }

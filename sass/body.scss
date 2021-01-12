@@ -1,0 +1,9 @@
+$font_family: sans-serif;
+$font_size: 16px;
+
+body {
+  font: {
+    size: $font_size;
+    family: $font_family;
+  }
+}
