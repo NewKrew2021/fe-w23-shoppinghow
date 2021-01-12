@@ -1,4 +1,4 @@
-// append a simple image-carousel to the wrapper
+// append an item card to the wrapper
 function appendItemCard(wrapper, items) {
   const ItemCardHtmlString = items.reduce(
     (str, { href, src, title, subtitle, badge }) => str + `
