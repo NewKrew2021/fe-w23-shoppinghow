@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
     <link rel="stylesheet" href="/stylesheets/main.css">
     <title>쇼핑하우 by kakaocommerce</title>
 </head>
 <body>
     <div id="root">
-        <div id="header">
-            <div>
-                <img src = "/images/logo.png">
+        <div id="header" class="pd-40 flex">
+            <div class="inline-block">
+                <img class="logo-img" src="/images/logo.png">
             </div>
-            <div>
-                <div>
-                    <input type="text">
-                </div>
+            <div class="inline-block font-20 bd-1-lg bd-radius-12 pd-4">
+                <input type="text" size="60">
+                <img class="search-btn" src="/images/search_btn.png">
             </div>
         </div>
+    </div>
 
     </div>
     <script src="/javascripts/main.js"></script>

@@ -7,7 +7,6 @@
 function dfs_for_querySelector(node, target) {
     let returnVal;
     /* dfs 탐색 */
-    /* (참고) HTMLCollection type의 경우 for-of 문은 정상 작동, forEach는 동작하지 않았음*/
     for (element of node.children) {
         let elementId = element.getAttribute("id");
         let elementClassName = element.getAttribute("class");
@@ -28,7 +27,6 @@ function dfs_for_querySelector(node, target) {
 
 function dfs_for_querySelectorAll(nodeList, node, target){
     /* dfs 탐색 */
-    /* (참고) HTMLCollection type의 경우 for-of 문은 정상 작동, forEach는 동작하지 않았음*/
     for (element of node.children) {
         let elementId = element.getAttribute("id");
         let elementClassName = element.getAttribute("class");
@@ -47,7 +45,7 @@ function dfs_for_querySelectorAll(nodeList, node, target){
 /* querySelector custom API (parameter : string, return : HTML element)*/
 function querySelector(element) {
     let elementName;
-    let startPoint = window.document.body;
+    let startPoint = document.body;
     /* #이 맨 앞에 들어갈 경우 id 값으로 여기고 찾는다. */
     if (element[0] === '#') {
         elementName = element.replace('#', '');
@@ -64,7 +62,7 @@ function querySelector(element) {
 /* querySelectorAll custom API (parameter : string, return : Array) */
 function querySelectorAll(element) {
     let elementName;
-    let startPoint = window.document.body;
+    let startPoint = document.body;
     if (element[0] === '#') {
         elementName = element.replace('#', '');
         return dfs_for_querySelectorAll([],startPoint, elementName);
@@ -77,6 +75,8 @@ function querySelectorAll(element) {
 }
 
 /* test */
+/*
 fetch('http://localhost:80/posts')
     .then(res => res.json())
     .then(data => console.log(data));
+*/
