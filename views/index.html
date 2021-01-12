@@ -1,26 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/normalize.css">
-    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet" href="/stylesheets/css/normalize.css">
+    <link rel="stylesheet" href="/stylesheets/css/main.css">
     <title>쇼핑하우 by kakaocommerce</title>
 </head>
+
 <body>
     <div id="root">
-        <div id="header" class="pd-40 flex">
+        <div id="header" class="block">
             <div class="inline-block">
                 <img class="logo-img" src="/images/logo.png">
+                <div class="search-blank inline-block">
+                    <input class="font-20" type="text" size="55">
+                    <img class="search-btn" src="/images/search_btn.png">
+                </div>
             </div>
-            <div class="inline-block font-20 bd-1-lg bd-radius-12 pd-4">
-                <input type="text" size="60">
-                <img class="search-btn" src="/images/search_btn.png">
+            <!-- 내비게이션 -->
+            <div id="top-nav" class="mg-top-40 flex">
+                <div class="nav-wrap flex">
+                    <div class="flex">
+                        <img class="mg-right-6" src="/images/category_btn.png">
+                        카테고리
+                        <span class="line-bar">|</span>
+                    </div>
+                    <ul id="top-nav-ul">
+                        <li class="top-nav-li">핫딜</li>
+                        <li class="top-nav-li">베스트100</li>
+                        <li class="top-nav-li">할인특가</li>
+                        <li class="top-nav-li">기획전</li>
+                    </ul>
+                    <span class="line-bar">|</span>
+                    <ul id="top-nav-ul">
+                        <li class="top-nav-li font-gray">#마스크</li>
+                        <li class="top-nav-li font-gray">#스노우체인</li>
+                        <li class="top-nav-li font-gray">#DIY키트</li>
+                        <li class="top-nav-li font-gray">#비타민</li>
+                        <li class="top-nav-li font-gray">#2021팬톤가구</li>
+                    </ul>
+                    <div class="flex mg-left-40">
+                        <img class="mg-right-6" src="/images/profile_btn.png">
+                        MY 쇼핑
+                    </div>
+                    <div class="flex mg-left-10">
+                        <img class="mg-right-6" src="/images/recent_btn.png">
+                        최근본 상품
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- 컨텐츠 영역 -->
+        <div class="content">
+            <!-- 510px -->
+            <div class="row-1-left">
+
+            </div>
+            <!-- 770px -->
+            <div class="row-1-right">
+                <div class="slide-box">
+                    <div class="slide-list">
+
+
+
+                    </div>
+                </div>
+
+                <div class="slide-row">
+                    <span class="paging">
+                        <span class="page" data="first">1</span>
+                        <span class="page" data="second">2</span>
+                        <span class="page" data="third">3</span>
+                    </span>
+                    <img class="prev" src="/images/prev_btn.png">
+                    <img class="next" src="/images/next_btn.png">
+                </div>
+            </div>
+        </div>
+
     </div>
 
     </div>
+    <script src="/javascripts/util.js"></script>
+    <script src="/javascripts/slide.js"></script>
     <script src="/javascripts/main.js"></script>
 </body>
+
 </html>
