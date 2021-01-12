@@ -1,11 +1,16 @@
 @import 'normalize';
-@import 'size';
 @import 'text';
-@import 'display';
 
 // component
+@import 'badge';
 @import 'button';
+@import 'carousel';
 @import 'container';
 @import 'form';
 @import 'header';
 @import 'nav';
+
+@import 'flex';
+@import 'position';
+@import 'size';
+@import 'display';

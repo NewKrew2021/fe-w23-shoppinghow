@@ -1,0 +1,27 @@
+$position-values: (
+  "sticky",
+  "relative",
+  "absolute"
+);
+
+@each $position in $position-values {
+  .p-#{$position} {
+    position: #{$position};
+  }
+}
+
+$position-sides: (
+  "top",
+  "bottom",
+  "left",
+  "right"
+);
+
+@each $position-side in $position-sides {
+  .#{$position-side}-0 {
+    #{$position-side}: 0;
+  }
+  .#{$position-side}-100 {
+    #{$position-side}: 100%;
+  }
+}
