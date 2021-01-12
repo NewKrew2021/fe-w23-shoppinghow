@@ -51,6 +51,7 @@ class _Promise {
     }
 }
 
+/*
 const asyncJob = (f) => setTimeout(f, 3000);
 
 new _Promise((res, rej) => {
@@ -60,3 +61,4 @@ new _Promise((res, rej) => {
 }).then((e) => console.log("then", e));
 
 console.log("console log call");
+*/
