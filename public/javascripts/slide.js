@@ -14,7 +14,6 @@ function addSlideShow() {
     /* 슬라이드쇼 버튼 이벤트 추가하기 */
     const slideNextBtn = querySelector(".next");
     const slidePrevBtn = querySelector(".prev");
-    console.log(slidePrevBtn);
     const slideList = querySelector(".slide-list");
     const slideContent = querySelectorAll(".slide-content");
 
@@ -71,5 +70,5 @@ function addSlideShow() {
 
 function pageSlideBtn(){
     const pagebtn = querySelectorAll('page');
-    
+
 }

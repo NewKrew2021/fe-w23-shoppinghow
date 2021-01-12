@@ -149,25 +149,48 @@ input {
 }
 
 .content {
-  width: 1280px;
+  width: 1279px;
   background-color: #ffffff;
   border: 1px solid lightgray;
   margin: 0 auto;
   overflow: hidden;
 }
 
-.row-1-left {
-  width: 510px;
+.row-0-left {
+  width: 511px;
   float: left;
+  border-bottom: 1px solid #eee;
 }
 
-.row-1-right {
-  width: 769px;
+.row-0-right {
+  width: 767px;
   position: relative;
   margin: 0 auto;
   float: left;
   overflow: hidden;
   border-left: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.row-0-bottom {
+  border-top: 1px solid #eee;
+  position: relative;
+}
+
+.grid-ul {
+  float: left;
+  width: 1280px;
+  list-style: none;
+}
+
+.grid-banner {
+  float: left;
+  padding: 26px;
+  border-right: 1px solid #eee;
+}
+
+.grid-banner > img {
+  width: 203px;
 }
 
 .slide-box {
