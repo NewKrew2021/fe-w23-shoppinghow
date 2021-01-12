@@ -5,9 +5,7 @@
 
 class DOM {
     constructor(document) {
-        // document는 matches 프로퍼티 없음
-        // 그래서 body가 root
-        this.body = document.body;
+        this.root = document;
     }
     
     dfs(element, selector) {
@@ -28,9 +26,9 @@ class DOM {
         return matched;
     }
     querySelector(selector) {
-        return this.dfs(this.body, selector);
+        return this.dfs(this.root, selector);
     }
     querySelectorAll(selector) {
-        return this.dfsAll(this.body, selector);
+        return this.dfsAll(this.root, selector);
     }
 }
