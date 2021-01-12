@@ -10,6 +10,10 @@ function addImg(prefix, node, src, suffix){
     node.innerHTML += (prefix)+"<img src = "+src+">"+(suffix);
 }
 
+function addHTML(node, text){
+    node.innerHTML += text;
+}
+
 /* DFS 함수 정의하기 */
 function dfs_for_querySelector(node, target) {
     let returnVal;

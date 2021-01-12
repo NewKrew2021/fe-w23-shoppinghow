@@ -177,6 +177,7 @@ input {
   position: relative;
 }
 
+/* Grid Banner Layout */
 .grid-ul {
   float: left;
   width: 1280px;
@@ -185,14 +186,31 @@ input {
 
 .grid-banner {
   float: left;
-  padding: 26px;
+  padding: 20px 26px 20px 26px;
   border-right: 1px solid #eee;
 }
 
-.grid-banner > img {
+.banner-img {
   width: 203px;
 }
 
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+.subtext {
+  font-size: 12px;
+  color: gray;
+}
+
+.theme-btn {
+  width: 31px;
+  margin-top: 10px;
+}
+
+/* ************** */
 .slide-box {
   width: 485px;
   margin: 0 auto;

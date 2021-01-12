@@ -32,7 +32,11 @@
     fetch('http://localhost:80/topgrid')
         .then(res=> res.json())
         .then(json => json.forEach(element => {
-            addImg('<li class="grid-banner">',gridUL,element.src,"</div>")
+            addHTML(gridUL,
+            '<li class="grid-banner"><img class="banner-img" src='+element.src+'>'
+            +'<p class="title">'+element.title+'</p>'
+            +'<p class="subtext">'+element.text+'</p>'
+            +'<img class="theme-btn" src="/images/theme.png"></li>')
         }))
         .catch((error) => console.error(error))
 })();
