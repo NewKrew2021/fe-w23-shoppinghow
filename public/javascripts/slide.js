@@ -68,3 +68,8 @@ function addSlideShow() {
         curSlide = slideContent[++curSlideIndex];
     });
 }
+
+function pageSlideBtn(){
+    const pagebtn = querySelectorAll('page');
+    
+}
