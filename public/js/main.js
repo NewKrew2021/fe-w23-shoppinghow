@@ -35,11 +35,20 @@ const initPage = () => {
         const hots = data[2].items;
         const basics = data[3].items;
 
+        // carousel test
+        const c = new Carousel(containerDOM, carousels);
+        c.init();
+        c.render();
+        console.log(c);
+        setTimeout(() => {
+            c.next();
+        }, 1000);
+
         // default 10개 표시
         containerBasicItemDOM.appendChild(subject("모든 상품 품절주의!"));
         containerBasicItemDOM.appendChild(box(basics.slice(0, 5)));
         containerBasicItemDOM.appendChild(box(basics.slice(5, 10)));
-
+        
         const moreBtn = more();
         document.querySelector(".container--more").appendChild(moreBtn);
         moreBtn.addEventListener("click", () => {
