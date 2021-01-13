@@ -1,3 +1,3 @@
-import MyDomApi from "./myDomApi.js"
+import {myDomApi} from "./myDomApi.js"
 
-MyDomApi.myQuerySelector("div");
+myDomApi.myQuerySelector("div");

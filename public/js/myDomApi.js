@@ -1,9 +1,5 @@
-
-export default class MyDomApi {
-  constructor() {
-  }
-
-  static myQuerySelector(selector , element=document) {
+const myDomApi = {
+  myQuerySelector : (selector , element=document) => {
     let getElement;
     if(element.matches && element.matches(selector)){
       getElement = element;
@@ -11,25 +7,26 @@ export default class MyDomApi {
     else if(element.hasChildNodes()){
       element.childNodes.forEach( childNode => {
         if(getElement === undefined){
-          const ret = this.myQuerySelector(selector, childNode);
+          const ret = myDomApi.myQuerySelector(selector, childNode);
           if(ret) getElement = ret;
         }
       });
     }
     return getElement;
-  }
-  
-  static myQuerySelectorAll(selector, element=document) {
+  },
+  myQuerySelectorAll : (selector, element=document) => {
     let getElement = [];
     if(element.matches && element.matches(selector)){
       getElement.push(element);
     }
     else if(element.hasChildNodes()){
       element.childNodes.forEach( childNode => {
-        const ret = this.myQuerySelectorAll(selector, childNode);
+        const ret = myDomApi.myQuerySelectorAll(selector, childNode);
         if(ret) getElement.push(...ret);
       })
     }
-    return getElement;
-  }  
+    return getElement; 
+  }
 }
+
+export { myDomApi };

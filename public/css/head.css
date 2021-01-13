@@ -1,3 +1,7 @@
+body {
+  background-color: #f1f1f1;
+}
+
 .head {
   position: fixed;
   width: 100%;
@@ -21,7 +25,7 @@
   height: 55px;
   background-color: #ffffff;
   text-align: center;
-  border-top: 1px solid #d2d2d2;
+  border-top: 1px solid #ebebeb;
   border-bottom: 1px solid #d2d2d2;
 }
 
@@ -30,7 +34,7 @@
   font-size: 16px;
   font-weight: bold;
   margin-right: 10px;
-  margin-left: 10px;
+  margin-left: 8px;
   background-color: #ffffff;
   border: 0px;
   cursor: pointer;
@@ -42,7 +46,7 @@
 }
 
 .category-right {
-  margin-left: 100px;
+  margin-left: 90px;
 }
 
 .category-recent {
@@ -70,6 +74,7 @@
   height: 52px;
   margin-top: 23px;
   margin-left: -24%;
+  cursor: pointer;
 }
 
 .search-input {
