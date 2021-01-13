@@ -1,5 +1,5 @@
 import { $ } from './utils.js';
-import { productItemList, ProductList } from './productList.js';
+import { ProductList } from './productList.js';
 
 const init = () => {
   const productMoreArea = $('.product-more-area');
