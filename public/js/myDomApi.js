@@ -1,9 +1,5 @@
-
-export default class MyDomApi {
-  constructor() {
-  }
-
-  static myQuerySelector(selector , element=document) {
+const myDomApi = {
+  myQuerySelector : (selector , element=document) => {
     let getElement;
     if(element.matches && element.matches(selector)){
       getElement = element;
@@ -17,9 +13,8 @@ export default class MyDomApi {
       });
     }
     return getElement;
-  }
-  
-  static myQuerySelectorAll(selector, element=document) {
+  },
+  myQuerySelectorAll : (selector, element=document) => {
     let getElement = [];
     if(element.matches && element.matches(selector)){
       getElement.push(element);
@@ -30,6 +25,8 @@ export default class MyDomApi {
         if(ret) getElement.push(...ret);
       })
     }
-    return getElement;
-  }  
+    return getElement; 
+  }
 }
+
+export { myDomApi };
