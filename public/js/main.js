@@ -43,14 +43,3 @@
         }))
         .catch((error) => console.error(error))
 })();
-
-/* row-0-bottom-expand */
-(function(){
-    const expandDiv = DOM('#expand').querySelector();
-    fetch('http://localhost:80/more')
-        .then(res=> res.json())
-        .then(json=> {
-            addHTML(expandDiv,json.title+
-                '<span class="small">'+json.number+'</span><img src='+json.src+'>')
-        })
-})();
