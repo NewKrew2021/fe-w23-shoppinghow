@@ -40,6 +40,7 @@ const productItemList = [
 
 class ProductList {
   constructor() {
+    this.productListElement = $('.product-list');
     this.productItemList;
   }
 
@@ -80,9 +81,10 @@ class ProductList {
     });
 
   init() {
-    const productList = $('.product-list');
     this.fetchProductList().then(({ productItemList }) => {
-      productList.innerHTML = this.createProductListTemplate(productItemList);
+      this.productListElement.innerHTML = this.createProductListTemplate(
+        productItemList
+      );
     });
   }
 }

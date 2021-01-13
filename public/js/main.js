@@ -7,7 +7,7 @@ const init = () => {
   productList.init();
 
   productMoreArea.addEventListener('click', () => {
-    productList.innerHTML += productList.createProductListTemplate(
+    productList.productListElement.innerHTML += productList.createProductListTemplate(
       productItemList
     );
   });
