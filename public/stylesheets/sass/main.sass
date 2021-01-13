@@ -31,6 +31,8 @@ input
     background-color: #ffffff
     z-index: 200
     margin-bottom: 25px
+    position: fixed
+    width: 100%
 
 .flex
     display: flex
@@ -222,10 +224,20 @@ input
     width: 100%
     text-align: center
 
+.slide-row-2
+    position: absolute
+    text-align: center
+
 .prev
     position: absolute
     left: 40px
     top: -120px
+    cursor: pointer
+
+.prev-2
+    position: absolute
+    left: -2px
+    bottom: 160px
     cursor: pointer
 
 .next
@@ -233,6 +245,12 @@ input
     right: 40px
     top: -120px  
     cursor: pointer  
+
+.next-2
+    position: absolute
+    right: -1280px
+    bottom: 160px
+    cursor: pointer
 
 .paging
     display: inline-block
@@ -259,6 +277,17 @@ input
     margin: 0 auto
     font-size: 23px
     margin-top: 50px
+
+/* popup layer 영역 */
+.popup
+    display: absolute
+    position: fixed
+    top: 200px
+    right: 80px
+    background-color: #ffffff
+    border: 1px solid gray
+    width: 480px
+    z-index: 199
 
 $i: 1
 @while $i <= 5
@@ -292,3 +321,7 @@ $i: 1
     margin-top: 40px
 .mg-left-40
     margin-left: 40px
+.mg-bottom-40
+    margin-bottom: 40px
+.mg-top-210
+    margin-top: 210px
