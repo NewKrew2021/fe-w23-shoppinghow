@@ -1,7 +1,7 @@
 .contents {
   position: absolute;
   width: 1310px;
-  height: 1000px;
+  height: 1130px;
   margin-left: 245px;
   margin-top: 180px;
   border: #e4e4e4 solid 1px;
@@ -51,6 +51,7 @@
 }
 
 .theme-img {
+  margin-top: 10px;
   width: 80%;
 }
 
@@ -76,7 +77,7 @@
 }
 
 .border-white {
-  border : #ffffff solid 1px;
+  border : #ffffff solid 1px !important;
 }
 
 .fade {
@@ -156,7 +157,7 @@
   border-radius: 0%;
   display: inline-block;
   transition: background-color 0.6s ease;
-  z-index: 3;
+  z-index: 1;
 }
 
 .active, .dot:hover {
@@ -185,4 +186,52 @@
   font-weight: bold;
   color: #363636;
   cursor: pointer;
+}
+
+.trand-container {
+  position: absolute;
+  width: 1300px;
+  height : 320px;
+  margin-top: 770px;
+  margin-left: 5px;
+  background-color: #ffffff;
+  border: #e4e4e4 solid 1px;
+}
+
+.trand-caption {
+  text-align: left;
+  font-size: 20px;
+  padding-left: 8px;
+  padding-bottom: 6px;
+}
+
+.trand {
+  border-right: #e4e4e4 solid 1px;
+  cursor: pointer;
+}
+
+.trand-img {
+  margin-top: 10px;
+  width: 80%;
+}
+
+.trand-title {
+  text-align: left;
+  margin-top: 5px;
+  margin-left: 24px;
+  font-size: 14px;
+}
+
+.trand-info {
+  text-align: left;
+  margin-top: 3px;
+  margin-left: 24px;
+  font-size: 12px;
+  color: #9b9b9b;
+}
+
+.trand-icon {
+  margin-left: -168px;
+  margin-top: 8px;
+  width: 45px;
 }

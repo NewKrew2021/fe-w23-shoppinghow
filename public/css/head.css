@@ -1,3 +1,7 @@
+body {
+  height: 1400px;
+}
+
 .head {
   position: fixed;
   width: 100%;
