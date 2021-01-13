@@ -7,9 +7,7 @@ const init = () => {
   productList.init();
 
   productMoreArea.addEventListener('click', () => {
-    productList.productListElement.innerHTML += productList.createProductListTemplate(
-      productItemList
-    );
+    productList.addNewProductLine();
   });
 };
 

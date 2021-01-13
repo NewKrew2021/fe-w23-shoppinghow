@@ -44,6 +44,7 @@ class ProductList {
   constructor() {
     this.productListElement = $('.product-list');
     this.productItemList;
+    this.productItemLine = 0;
   }
 
   createTagListTemplate(tagList) {
@@ -82,8 +83,17 @@ class ProductList {
       return response.json();
     });
 
+  addNewProductLine() {
+    this.productItemLine += 1;
+    this.fetchProductList(this.productItemLine).then(productItemList => {
+      this.productListElement.innerHTML += this.createProductListTemplate(
+        productItemList
+      );
+    });
+  }
+
   init() {
-    this.fetchProductList(0).then(productItemList => {
+    this.fetchProductList(this.productItemLine).then(productItemList => {
       this.productListElement.innerHTML = this.createProductListTemplate(
         productItemList
       );
