@@ -1,6 +1,5 @@
 (function(){
     const nav=document.querySelector("#header-nav");
-    console.log(nav);
     let html="";
 
     const category=`<img src ="/image/category.png"></img>
@@ -40,8 +39,6 @@
                 <img src ="/image/recent_item.png"></img>
                 <span>최근본 상품</span>`;
     html+=sideNav;
-
-
 
     nav.innerHTML+=html;
 
