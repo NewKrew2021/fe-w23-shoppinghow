@@ -31,6 +31,8 @@ input
     background-color: #ffffff
     z-index: 200
     margin-bottom: 25px
+    position: fixed
+    width: 100%
 
 .flex
     display: flex
@@ -42,6 +44,11 @@ input
     justify-content: space-between
     align-items: center
     flex-flow: wrap
+
+.flex-left
+    display: flex
+    align-items: center
+    justify-content: left
 
 .fixed
     position: fixed
@@ -102,7 +109,7 @@ input
     float: left
     text-align: center
     font-weight: 700
-    margin-left: 25px
+    margin-left: 28px
     list-style: none
     line-height: 50px
     cursor: pointer
@@ -138,12 +145,19 @@ input
     border-left: 1px solid #eee
     border-bottom: 1px solid #eee
 
-.row-0-bottom
+/* bottom slide */
+.row-1-bottom
+    width: 1279px
+    position: relative
+    margin: 0 auto
+    float: left
+    overflow: hidden
+
+.row-bottom
     width: 1279px
     display: block
     float: left
     position: relative
-    border-bottom: 1px solid #eee
 
 /* Grid Banner Layout */
 .grid-ul
@@ -151,9 +165,12 @@ input
     list-style: none
 
 .grid-banner
+    list-style: none
+    width: 203px
     float: left
     padding: 20px 26px 20px 26px
     border-right: 1px solid #eee
+    border-bottom: 1px solid #eee
 
 .banner-img
     width: 203px
@@ -165,6 +182,9 @@ input
 
 .subtext
     font-size: 12px
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
     color: gray
 
 .theme-btn
@@ -183,12 +203,24 @@ input
     margin: 0 auto
     overflow-x: hidden
 
+.slide-box-2
+    width: 1279px
+    margin: 0 auto
+    overflow-x: hidden
+
 .slide-content
     float: left
     width: 485px
 
+.slide-content-2
+    float: left
+    width: 256px
+
 .slide-list
     width: 2445px
+
+.slide-list-2
+    width: 5116px
 
 .slide-row
     position: absolute
@@ -197,10 +229,20 @@ input
     width: 100%
     text-align: center
 
+.slide-row-2
+    position: absolute
+    text-align: center
+
 .prev
     position: absolute
     left: 40px
     top: -120px
+    cursor: pointer
+
+.prev-2
+    position: absolute
+    left: -2px
+    bottom: 160px
     cursor: pointer
 
 .next
@@ -208,6 +250,12 @@ input
     right: 40px
     top: -120px  
     cursor: pointer  
+
+.next-2
+    position: absolute
+    right: -1280px
+    bottom: 160px
+    cursor: pointer
 
 .paging
     display: inline-block
@@ -226,6 +274,47 @@ input
 /** expand 영역 **/
 #expand
     cursor: pointer
+    width: 100%
+
+/* row-1 영역 */
+.bannerTitle
+    width: 1279px
+    margin: 0 auto
+    font-size: 23px
+    margin-top: 50px
+
+/* popup layer 영역 */
+.inner-popup
+    background-color: #ffffff
+    position: absolute
+    top: 50px
+    right: 50px
+    padding: 25px
+    border: 1px solid gray
+    width: 385px
+    z-index: 199
+    text-align: left
+
+.inner-footer
+    font-size: 14px
+    color: gray
+    width: 250px
+
+.recent-count
+    font-weight: 900
+    font-size: 20px
+
+#recent-btn
+    cursor: pointer
+
+#recent-img
+    margin-top: 10px
+
+#recent-img>img
+    width: 124px
+
+.none
+    display: none
 
 $i: 1
 @while $i <= 5
@@ -259,3 +348,7 @@ $i: 1
     margin-top: 40px
 .mg-left-40
     margin-left: 40px
+.mg-bottom-40
+    margin-bottom: 40px
+.mg-top-210
+    margin-top: 210px

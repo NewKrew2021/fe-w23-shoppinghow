@@ -11,7 +11,7 @@
 
 <body>
     <div id="root">
-        <div id="header" class="block">
+        <div id="header">
             <div class="inline-block">
                 <img class="logo-img" src="/images/logo.png">
                 <div class="search-blank inline-block">
@@ -27,32 +27,38 @@
                         카테고리
                         <span class="line-bar">|</span>
                     </div>
-                    <ul id="top-nav-ul">
-                        <li class="top-nav-li">핫딜</li>
-                        <li class="top-nav-li">베스트100</li>
-                        <li class="top-nav-li">할인특가</li>
-                        <li class="top-nav-li">기획전</li>
-                    </ul>
+                    <ul id="top-nav-ul-1"></ul>
                     <span class="line-bar">|</span>
-                    <ul id="top-nav-ul">
-                        <li class="top-nav-li font-gray">#마스크</li>
-                        <li class="top-nav-li font-gray">#스노우체인</li>
-                        <li class="top-nav-li font-gray">#DIY키트</li>
-                        <li class="top-nav-li font-gray">#비타민</li>
-                        <li class="top-nav-li font-gray">#2021팬톤가구</li>
+                    <ul id="top-nav-ul-2"></ul>
+                    <ul class="flex mg-left-40">
+                        <li class="flex mg-left-40">
+                            <img class="mg-right-6" src="/images/profile_btn.png">
+                            MY 쇼핑
+                        </li>
+                        <li id="recent-btn" class="flex mg-left-10">
+                            <img class="mg-right-6" src="/images/recent_btn.png">
+                            최근본 상품
+                            <div class="inner-popup none">
+                                <div class="flex-left">
+                                    최근 본 상품
+                                    <div class="recent-count flex-left mg-left-10">
+                                    </div>
+                                </div>
+                                <!-- 사진이 들어가는 영역 -->
+                                <div id="recent-img" class="inline-block">
+                                </div>
+                                <div class="inner-footer mg-top-40">
+                                    로그인 하시면 더 많은 MY 쇼핑 정보를 확인 하실 수 있습니다.
+                                </div>
+                            </div>
+                        </li>
                     </ul>
-                    <div class="flex mg-left-40">
-                        <img class="mg-right-6" src="/images/profile_btn.png">
-                        MY 쇼핑
-                    </div>
-                    <div class="flex mg-left-10">
-                        <img class="mg-right-6" src="/images/recent_btn.png">
-                        최근본 상품
-                    </div>
                 </div>
             </div>
         </div>
 
+        <div class="mg-top-210 inline-block">
+        </div>
         <!-- 컨텐츠 영역(row 0) -->
         <div class="content">
             <!-- 510px -->
@@ -76,32 +82,43 @@
                 </div>
             </div>
             <!-- 1280px -->
-            <div class="row-0-bottom">
+            <div class="row-bottom">
                 <ul id="grid-ul-1" class="grid-ul">
                 </ul>
             </div>
             <!-- 1280px(hidden) -->
-            <div id="row-0-hidden" class="row-0-bottom hidden">
-                <ul id="grid-ul-2" class="grid-ul">
-                </ul>
+            <div id="row-more">
+
             </div>
             <!-- 더보기 버튼이 보이는 영역 -->
-            <div id="expand" class="row-0-bottom text-center bg-color-gray pd-20">
+            <div id="expand" class="inline-block text-center bg-color-gray pd-20">
+                더보기 <img src="/images/expand.svg">
             </div>
         </div>
 
         <!-- 컨텐츠 영역 (row 1) -->
-        <div class='content mg-top-40'>
-
+        <div class="bannerTitle">
+            지금 뜨는 테마 카테고리
         </div>
+        <div class='content mg-top-10 mg-bottom-40'>
+            <div class="slide-box-2">
+                <div class="slide-list-2">
+                </div>
+            </div>
 
+            <!-- 슬라이더 버튼 -->
+            <div class="slide-row-2">
+                <img class="prev-2" src="/images/prev2_btn.png">
+                <img class="next-2" src="/images/next2_btn.png">
+            </div>
+        </div>
     </div>
-
-    </div>
-    <script src="/javascripts/util.js"></script>
-    <script src="/javascripts/slide.js"></script>
-    <script src="/javascripts/main.js"></script>
-    <script src="/javascripts/event.js"></script>
+    
+    <script src="/js/util.js"></script>
+    <script src="/js/slide.js"></script>
+    <script src="/js/event.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/storage.js"></script>
 </body>
 
 </html>
