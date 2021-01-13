@@ -1,10 +1,13 @@
 $font_family: sans-serif;
 header {
-  display: flex;
-  height:300px;
-  width:100%;
-  justify-content: center;
-  align-items: center;
+  display:inline;
+  #banner{
+    display: flex;
+    height:100px;
+    width:100%;
+    justify-content: center;
+    align-items: center;  
+  }
   #logo{
     height:51px ;
     width:110px;
@@ -31,5 +34,22 @@ header {
   #search-img{
     height: 26px;
     width: 26px;
+  }
+  nav{
+    position: absolute;;
+    left:50%;
+    transform:translate(-50%);
+    display:inline;
+    width:100%;
+  }
+  .nav{
+    margin:20px
+  }
+  .hash{
+    color:gray
+  }
+  img{
+    position:relative;
+    top:10px;
   }
 }

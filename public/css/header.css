@@ -1,10 +1,13 @@
 header {
+  display: inline;
+  font-family: sans-serif;
+}
+header #banner {
   display: flex;
-  height: 300px;
+  height: 100px;
   width: 100%;
   justify-content: center;
   align-items: center;
-  font-family: sans-serif;
 }
 header #logo {
   height: 51px;
@@ -29,6 +32,23 @@ header #search-button {
 header #search-img {
   height: 26px;
   width: 26px;
+}
+header nav {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  display: inline;
+  width: 100%;
+}
+header .nav {
+  margin: 20px;
+}
+header .hash {
+  color: gray;
+}
+header img {
+  position: relative;
+  top: 10px;
 }
 
 /*# sourceMappingURL=header.css.map */
