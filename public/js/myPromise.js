@@ -11,7 +11,7 @@ export default class MyPromise {
 
   then(resFunc) {
     if(this.status === "pending") {
-      this.fulfilledFunc = resFunc(this.promiseResult);
+      this.fulfilledFunc = resFunc;
     }
     else if(this.status === "fulfilled") {
        addToTaskQueue(resFunc(this.promiseResult));
@@ -21,7 +21,7 @@ export default class MyPromise {
 
   catch(rejFunc) {
     if(this.status === "pending") {
-      this.rejectedFunc = rejFunc(this.promiseResult);
+      this.rejectedFunc = rejFunc;
     }
     else if(this.status === "rejected") {
       addToTaskQueue(rejFunc(this.promiseResult));
@@ -29,26 +29,27 @@ export default class MyPromise {
     return this;
   }
   
-  resolve(func) {
+  resolve(param) {
     if (this.status !== "pending") return this;
     this.status = "fulfilled";
-    this.promiseResult = func;
-    addToTaskQueue(this.fulfilledFunc);
+    this.promiseResult = param;
+    console.log(param, this.fulfilledFunc)
+    addToTaskQueue(this.fulfilledFunc(this.promiseResult));
   }
 
   reject(error) {
     if (this.status !== "pending") return this;
     this.status = "rejected";
     this.promiseResult = error;
-    addToTaskQueue(this.rejectedFunc);
+    addToTaskQueue(this.rejectedFunc(this.promiseResult));
   }
 }
 
 const addToTaskQueue = task => setTimeout(task, 0);
 
 const promiseTest = new MyPromise((resolve, reject) => {
-  setTimeout( resolve("kevin"), 3000);
-  // setTimeout( reject(new Error("Request is failded")), 3000);
+  setTimeout( () => resolve("kevin"), 3000);
+  setTimeout( () => reject(new Error("Request is failded")), 3000);
 });
 
 promiseTest
