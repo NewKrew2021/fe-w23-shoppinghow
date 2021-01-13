@@ -141,7 +141,7 @@ input {
   float: left;
   text-align: center;
   font-weight: 700;
-  margin-left: 25px;
+  margin-left: 28px;
   list-style: none;
   line-height: 50px;
   cursor: pointer;
@@ -352,12 +352,13 @@ input {
 .popup {
   display: absolute;
   position: fixed;
-  top: 200px;
-  right: 80px;
+  top: 193px;
+  right: 118px;
   background-color: #ffffff;
   border: 1px solid gray;
-  width: 480px;
+  width: 450px;
   z-index: 199;
+  padding: 25px;
 }
 
 .pd-5 {
