@@ -21,7 +21,7 @@ class Custom {
         let returnVal;
         /* dfs 탐색 */
         for (let element of node.children) {
-            if (element.matches(this.target)) 
+            if (element.matches(this.target))
                 return element;
             if (element.hasChildNodes()) {
                 let result = this.dfs_q(element);
@@ -33,9 +33,9 @@ class Custom {
     }
     dfs_q_all(nodeList, node) {
         for (let element of node.children) {
-            if (element.matches(this.target)) 
+            if (element.matches(this.target))
                 nodeList.push(element);
-            if (element.hasChildNodes()) 
+            if (element.hasChildNodes())
                 this.dfs_q_all(nodeList, element);
         }
         return nodeList;
