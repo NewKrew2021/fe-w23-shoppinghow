@@ -2,15 +2,18 @@ import {myDomApi} from "./myDomApi.js"
 
 let carouselIndex = 0;
 
-document.getElementById("carouselPrev").addEventListener("click", () => {
+
+const prevBtn = myDomApi.myQuerySelector("#carouselPrev");
+const nextBtn = myDomApi.myQuerySelector("#carouselNext");
+const dotBtns = myDomApi.myQuerySelectorAll("span.dot");
+
+
+prevBtn.addEventListener("click", () => {
   changeImg(carouselIndex += -1);
 });
-
-document.getElementById("carouselNext").addEventListener("click", () => {
+nextBtn.addEventListener("click", () => {
   changeImg(carouselIndex += 1);
 });
-
-const dotBtns = myDomApi.myQuerySelectorAll("span.dot");
 
 dotBtns.forEach( btn => {
   btn.addEventListener("click", () => {
