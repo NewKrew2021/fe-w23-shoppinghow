@@ -1,3 +1,5 @@
+import {myDomApi} from "./myDomApi.js"
+
 let carouselIndex = 0;
 
 document.getElementById("carouselPrev").addEventListener("click", () => {
@@ -8,7 +10,7 @@ document.getElementById("carouselNext").addEventListener("click", () => {
   changeImg(carouselIndex += 1);
 });
 
-const dotBtns = document.querySelectorAll("span.dot");
+const dotBtns = myDomApi.myQuerySelectorAll("span.dot");
 
 dotBtns.forEach( btn => {
   btn.addEventListener("click", () => {
@@ -18,8 +20,8 @@ dotBtns.forEach( btn => {
 });
 
 const changeImg = curImg => {
-  const imgs = document.querySelectorAll("div.carousel");
-  const dots = document.querySelectorAll("span.dot");
+  const imgs = myDomApi.myQuerySelectorAll("div.carousel");
+  const dots = myDomApi.myQuerySelectorAll("span.dot");
   imgs.forEach( img => img.className = "carousel fade non-display");
   dots.forEach( dot => dot.className = "dot");
   if (curImg > imgs.length) carouselIndex = 1;
@@ -29,8 +31,8 @@ const changeImg = curImg => {
 }
 
 const showimgs = () => {
-  const imgs = document.querySelectorAll("div.carousel");
-  const dots = document.querySelectorAll("span.dot");
+  const imgs = myDomApi.myQuerySelectorAll("div.carousel");
+  const dots = myDomApi.myQuerySelectorAll("span.dot");
   imgs.forEach( img => img.className = "carousel fade non-display");
   dots.forEach( dot => dot.className = "dot");
   carouselIndex++;
