@@ -10,7 +10,7 @@
     fetch('http://localhost:80/topleft')
         .then(res=> res.json())
         .then(json => {
-            addImg('',leftBanner, json[0].src,'')
+            addHTML(leftBanner, `<img src=${json[0].src}>`)
         })
         .catch((error) => console.error(error))
 })();
@@ -21,7 +21,8 @@
     fetch('http://localhost:80/topright')
         .then(res=> res.json())
         .then(json => json.forEach(element => {
-            addImg('<div class="slide-content">',slideList,element.src,"</div>")
+            addHTML(slideList, `<div class="slide-content">
+            <img src=${element.src}></div>`)
         }))
         .then(data => addSlideShow())
         .catch((error) => console.error(error))

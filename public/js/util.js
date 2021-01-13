@@ -6,10 +6,6 @@
 */
 
 /* 이미지 넣는 함수 */
-function addImg(prefix, node, src, suffix) {
-    node.innerHTML += (prefix) + "<img src = " + src + ">" + (suffix);
-}
-
 function addHTML(node, text) {
     node.innerHTML += text;
 }
