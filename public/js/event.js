@@ -25,6 +25,16 @@ function addMoreContent() {
 }
 addMoreContent();
 
+/* 로컬 스토리지로부터 값을 가져와 넣는 함수 */
+function getLocalStorage() {
+    const target = DOM('#recent-img').querySelector();
+    let text = "";
+    for (let [key, value] of Object.entries(localStorage)) {
+        text += `<img class="mg-left-4" src=${key}>`;
+        target.innerHTML = text;
+    }
+}
+
 /* 최근본 상품 탭 - 팝업 레이어 마우스 오버, 아웃 이벤트 함수 */
 function showPopupLayer() {
     const recentBtn = DOM('#recent-btn').querySelector();
@@ -32,6 +42,9 @@ function showPopupLayer() {
         let current = DOM('.inner-popup').querySelector();
         if (current.classList.contains("none"))
             current.classList.remove("none");
+
+        /* 마우스를 올릴 때, 로컬 스토리지의 모든 값을 가져와 출력한다. */
+        getLocalStorage();
     });
 }
 function hidePopupLayer() {
@@ -44,15 +57,13 @@ function hidePopupLayer() {
 showPopupLayer();
 hidePopupLayer();
 
-
 /* 배너 사진 클릭 시 로컬 스토리지에 담는 이벤트 함수 */
 function clickSaveStorage() {
     const bannerImage = DOM('.banner-img').querySelectorAll();
-    console.log(bannerImage);
     bannerImage.forEach(function (element) {
         element.addEventListener('click', function () {
             let imgsrc = this.getAttribute('src');
-            console.log(imgsrc);
+            localStorage.setItem(imgsrc, Date.now());
         });
     });
 }

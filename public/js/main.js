@@ -4,6 +4,23 @@
     기타 텍스트, 이미지 요소 넣기
 */
 
+/* nav 요소 innerHTML로 추가 */
+(function(){
+    const top_nav_UL_1 = DOM('#top-nav-ul-1').querySelector();
+    const top_nav_UL_2 = DOM('#top-nav-ul-2').querySelector();
+    addHTML(top_nav_UL_1,
+        `<li class="top-nav-li">핫딜</li>
+        <li class="top-nav-li">베스트100</li>
+        <li class="top-nav-li">할인특가</li>
+        <li class="top-nav-li">기획전</li>`)
+    addHTML(top_nav_UL_2,
+    `<li class="top-nav-li font-gray">#마스크</li>
+    <li class="top-nav-li font-gray">#스노우체인</li>
+    <li class="top-nav-li font-gray">#DIY키트</li>
+    <li class="top-nav-li font-gray">#비타민</li>
+    <li class="top-nav-li font-gray">#2021팬톤가구</li>`)
+})();
+
 /* row-0-leftBanner */
 (function () {
     const leftBanner = DOM('.row-0-left').querySelector();
