@@ -35,6 +35,7 @@ const initPage = () => {
         const hots = data[2].items;
         const basics = data[3].items;
 
+        // default 10개 표시
         containerBasicItemDOM.appendChild(subject("모든 상품 품절주의!"));
         containerBasicItemDOM.appendChild(box(basics.slice(0, 5)));
         containerBasicItemDOM.appendChild(box(basics.slice(5, 10)));
@@ -48,4 +49,4 @@ const initPage = () => {
     });
 }
 
-window.addEventListener("DOMContentLoaded", initPage());
+window.addEventListener("DOMContentLoaded", initPage);
