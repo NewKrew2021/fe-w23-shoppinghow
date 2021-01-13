@@ -10,10 +10,10 @@ function addSlideShow() {
     const SLIDE_WIDTH = 485;
 
     /* 슬라이드쇼 버튼 이벤트 추가하기 */
-    const slideNextBtn = querySelector(".next");
-    const slidePrevBtn = querySelector(".prev");
-    const slideList = querySelector(".slide-list");
-    const slideContent = querySelectorAll(".slide-content");
+    const slideNextBtn = new Custom('.next').querySelector();
+    const slidePrevBtn = new Custom('.prev').querySelector();
+    const slideList = new Custom('.slide-list').querySelector();
+    const slideContent = new Custom('.slide-content').querySelectorAll();
 
     const firstSlide = slideList.firstElementChild;
     const lastSlide = slideList.lastElementChild;
@@ -74,7 +74,7 @@ function addSlideShow() {
         pagination[curSlideIndex].classList.add('active');
     });
 
-    const targetList = querySelectorAll('.page');
+    const targetList = new Custom('.page').querySelectorAll();
     targetList.forEach((element)=>{
         element.addEventListener("mouseenter", function(){
             let current = querySelector(".active");
