@@ -35,6 +35,17 @@ function getLocalStorage() {
     }
 }
 
+/* 배너 사진 클릭 시 로컬 스토리지에 담는 이벤트 함수 */
+function clickSaveStorage() {
+    const bannerImage = DOM('.banner-img').querySelectorAll();
+    bannerImage.forEach(function (element) {
+        element.addEventListener('click', function () {
+            let imgsrc = this.getAttribute('src');
+            localStorage.setItem(imgsrc, Date.now());
+        });
+    });
+}
+
 /* 최근본 상품 탭 - 팝업 레이어 마우스 오버, 아웃 이벤트 함수 */
 function showPopupLayer() {
     const recentBtn = DOM('#recent-btn').querySelector();
@@ -56,14 +67,3 @@ function hidePopupLayer() {
 }
 showPopupLayer();
 hidePopupLayer();
-
-/* 배너 사진 클릭 시 로컬 스토리지에 담는 이벤트 함수 */
-function clickSaveStorage() {
-    const bannerImage = DOM('.banner-img').querySelectorAll();
-    bannerImage.forEach(function (element) {
-        element.addEventListener('click', function () {
-            let imgsrc = this.getAttribute('src');
-            localStorage.setItem(imgsrc, Date.now());
-        });
-    });
-}
