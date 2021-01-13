@@ -39,15 +39,17 @@ const productItemList = [
 ];
 
 class ProductList {
-  constructor() {}
+  constructor() {
+    this.productItemList;
+  }
 
-  createTagListTemplate = tagList => {
+  createTagListTemplate(tagList) {
     const tagReducer = (acc, tag) =>
       acc + `<div class="product-tag">${tag}</div>`;
     return tagList.reduce(tagReducer);
-  };
+  }
 
-  createProductListTemplate = productItemList => {
+  createProductListTemplate(productItemList) {
     const productListContent = productItemList.reduce(
       (acc, { image, title, description, tagList }) =>
         acc +
@@ -70,11 +72,18 @@ class ProductList {
     );
 
     return `<ul class="product-list__row">${productListContent}</ul>`;
-  };
+  }
+
+  fetchProductList = () =>
+    fetch('http://localhost:8000/api/product').then(response => {
+      return response.json();
+    });
 
   init() {
     const productList = $('.product-list');
-    productList.innerHTML = this.createProductListTemplate(productItemList);
+    this.fetchProductList().then(({ productItemList }) => {
+      productList.innerHTML = this.createProductListTemplate(productItemList);
+    });
   }
 }
 export { ProductList, productItemList };
