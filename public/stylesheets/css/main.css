@@ -181,7 +181,7 @@ input {
   border-bottom: 1px solid #eee;
 }
 
-.row-bottom {
+.row-0-bottom {
   width: 1279px;
   display: block;
   float: left;
@@ -196,9 +196,11 @@ input {
 }
 
 .grid-banner {
+  width: 203px;
   float: left;
   padding: 20px 26px 20px 26px;
   border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 
 .banner-img {
@@ -213,6 +215,9 @@ input {
 
 .subtext {
   font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   color: gray;
 }
 
@@ -287,6 +292,7 @@ input {
 /** expand 영역 **/
 #expand {
   cursor: pointer;
+  width: 100%;
 }
 
 .pd-5 {

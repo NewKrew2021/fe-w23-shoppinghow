@@ -151,9 +151,11 @@ input
     list-style: none
 
 .grid-banner
+    width: 203px
     float: left
     padding: 20px 26px 20px 26px
     border-right: 1px solid #eee
+    border-bottom: 1px solid #eee
 
 .banner-img
     width: 203px
@@ -165,6 +167,9 @@ input
 
 .subtext
     font-size: 12px
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
     color: gray
 
 .theme-btn
@@ -226,6 +231,7 @@ input
 /** expand 영역 **/
 #expand
     cursor: pointer
+    width: 100%
 
 $i: 1
 @while $i <= 5

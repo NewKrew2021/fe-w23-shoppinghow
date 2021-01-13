@@ -9,9 +9,9 @@
     const leftBanner = DOM('.row-0-left').querySelector();
     fetch('http://localhost:80/topleft')
         .then(res=> res.json())
-        .then(json => {
-            addHTML(leftBanner, `<img src=${json[0].src}>`)
-        })
+        .then(json => json.forEach(element=>{
+            addHTML(leftBanner, `<img src=${element.src}>`)
+        }))
         .catch((error) => console.error(error))
 })();
 
@@ -31,22 +31,6 @@
 /* row-0-bottom-1 Banner */
 (function(){
     const gridUL = DOM('#grid-ul-1').querySelector();
-    fetch('http://localhost:80/topgrid')
-        .then(res=> res.json())
-        .then(json => json.forEach(element => {
-            addHTML(gridUL,
-                `<li class="grid-banner">
-                <img class="banner-img" src=${element.src}>
-                <p class="title">${element.title}</p>
-                <p class="subtext">${element.text}</p>
-                <img class="theme-btn" src="/images/theme.png"></li>`)
-        }))
-        .catch((error) => console.error(error))
-})();
-
-/* row-0-bottom-2 Banner */
-(function(){
-    const gridUL = DOM('#grid-ul-2').querySelector();
     fetch('http://localhost:80/topgrid')
         .then(res=> res.json())
         .then(json => json.forEach(element => {
