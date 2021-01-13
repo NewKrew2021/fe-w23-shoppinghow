@@ -17,4 +17,9 @@ module.exports = function(app, fs) {
             res.end(data);
         });
     });
+    app.get("/basic", (req, res) => {
+        fs.readFile(__dirname + "/../data/basic.json", "utf8", function(err, data) {
+            res.end(data);
+        });
+    });
 }
