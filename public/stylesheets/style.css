@@ -142,6 +142,7 @@ li {
   font-size: 25px; }
 
 .recent-product {
+  position: relative;
   display: flex;
   align-items: center; }
   .recent-product .recent-product__icon {
@@ -152,6 +153,14 @@ li {
     margin-right: 10px; }
   .recent-product .recent-product__text {
     font-size: 16px; }
+  .recent-product .recent-product__pop-up {
+    top: 40px;
+    left: -300px;
+    position: absolute;
+    float: left;
+    width: 400px;
+    height: 500px;
+    background: red; }
 
 .carousel {
   position: relative; }
