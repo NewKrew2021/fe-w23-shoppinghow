@@ -1,4 +1,17 @@
-// args: items
+const more = (containerDOM) => {
+    const element = document.createElement("div");
+    element.setAttribute("class", "container__more");
+    element.innerHTML = `<div style="margin:0 auto">더보기</div>`;
+    return element;
+}
+
+const subject = (content) => {
+    const element = document.createElement("div");
+    element.setAttribute("class", "container__subject");
+    element.innerText = content;
+    return element;
+}
+
 function box() {
     const boxElement = document.createElement("div");
     boxElement.setAttribute("class", "container__box horizontal");

@@ -1,25 +1,47 @@
 module.exports = function(app, fs) {
+    let carouselData;
+    let bestData; 
+    let hotData;
+    let basicData;
+    fs.readFile(__dirname + "/../data/carousel_promotion.json", "utf8", function(err, data) {
+        carouselData = data;
+    });
+    fs.readFile(__dirname + "/../data/best_promotion.json", "utf8", function(err, data) {
+        bestData = data;
+    });
+    fs.readFile(__dirname + "/../data/hot.json", "utf8", function(err, data) {
+        hotData = data;
+    });
+    fs.readFile(__dirname + "/../data/basic.json", "utf8", function(err, data) {
+        basicData = data;
+    });
+
     app.get("/", function(req, res) {
         res.render("index.html");
     });
     app.get("/hot", (req, res) => {
-        fs.readFile(__dirname + "/../data/hot.json", "utf8", function(err, data) {
-            res.end(data);
-        });
+        res.end(hotData);
     });
     app.get("/carousel", (req, res) => {
-        fs.readFile(__dirname + "/../data/carousel_promotion.json", "utf8", function(err, data) {
-            res.end(data);
-        });
+        res.end(carouselData);
     });
     app.get("/best", (req, res) => {
-        fs.readFile(__dirname + "/../data/best_promotion.json", "utf8", function(err, data) {
-            res.end(data);
-        });
+        res.end(bestData);
     });
     app.get("/basic", (req, res) => {
-        fs.readFile(__dirname + "/../data/basic.json", "utf8", function(err, data) {
-            res.end(data);
-        });
+        const idx = +req.query.idx;
+        const cnt = +req.query.cnt;
+        
+        const items = JSON.parse(basicData).items;
+
+        const basicItems = {
+            items: []
+        }
+        
+        for(let i = idx; i < idx + cnt; i++) {
+            basicItems.items.push(items[i]);
+        }
+            
+        res.end(JSON.stringify(basicItems));
     });
 }
