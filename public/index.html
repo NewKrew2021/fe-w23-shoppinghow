@@ -4,7 +4,8 @@
     <meta charset="UTF-8"></meta>
     <title>쇼핑하우 by Kevin</title>
     <link rel="shortcut icon" href="/img/icon.ico">
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/head.css" />
+    <link rel="stylesheet" href="/css/best.css" />
   </head>
   <body>
     <div class="head">
@@ -41,14 +42,62 @@
             <img class="catemore-img" src="/img/recentBtn2.png">
           </button>
         <span>
-
-
       </div>
     </div>
-    <div>
+
+    <div class="best">
+      <div class="fashion-container"><img class="fashion-img" src="/img/fashion.png"></div>
+      <div class="carousel-container">
+        <div class="carousel fade"><img class="carousel-img" src="img/carousel1.png"></div>
+        <div class="carousel fade"><img class="carousel-img" src="img/carousel2.png"></div>
+        <div class="carousel fade"><img class="carousel-img" src="img/carousel3.png"></div>
+        <a class="prev" id="carouselPrev"><img class="carousel-btn" src="/img/prevBtn.png"></a>
+        <a class="next" id="carouselNext"><img class="carousel-btn" src="/img/nextBtn.png"></a>
+        <div class="dot-contatiner">
+          <span class="dot" id="img1"></span>
+          <span class="dot" id="img2"></span>
+          <span class="dot" id="img3"></span>
+        </div>
+      </div>
+      <table class="theme-container">
+        <th class="theme">
+          <img class="theme-img" src="img/theme1.jpeg">
+          <div class="theme-title">오늘 공기 상태는 어떨까?</div>
+          <div class="theme-info">내 눈으로 직접 확인하는 공기측정기</div>
+          <img class="theme-icon" src="img/themeIcon.png"></img>
+        </th>
+        <th class="theme">
+          <img class="theme-img" src="img/theme2.jpeg">
+          <div class="theme-title">오늘 공기 상태는 어떨까?</div>
+          <div class="theme-info">내 눈으로 직접 확인하는 공기측정기</div>
+          <img class="theme-icon" src="img/themeIcon.png"></img>
+        </th>
+        <th class="theme">
+          <img class="theme-img" src="img/theme3.jpeg">
+          <div class="theme-title">오늘 공기 상태는 어떨까?</div>
+          <div class="theme-info">내 눈으로 직접 확인하는 공기측정기</div>
+          <img class="theme-icon" src="img/themeIcon.png"></img>
+        </th>
+        <th class="theme">
+          <img class="theme-img" src="img/theme4.jpeg">
+          <div class="theme-title">오늘 공기 상태는 어떨까?</div>
+          <div class="theme-info">내 눈으로 직접 확인하는 공기측정기</div>
+          <img class="theme-icon" src="img/themeIcon.png"></img>
+        </th>
+        <th class="theme border-white">
+          <img class="theme-img" src="img/theme5.jpeg">
+          <div class="theme-title">오늘 공기 상태는 어떨까?</div>
+          <div class="theme-info">내 눈으로 직접 확인하는 공기측정기</div>
+          <img class="theme-icon" src="img/themeIcon.png"></img>
+        </th>
+      </table>
+
+      
+
     </div>
   </body>
   <script type="module" src="js/myDomApi.js"></script>
   <script type="module" src="js/myPromise.js"></script>
   <script type="module" src="js/index.js"></script>
+  <script type="module" src="js/carousel.js"></script>
 </html>

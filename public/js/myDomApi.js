@@ -7,7 +7,7 @@ const myDomApi = {
     else if(element.hasChildNodes()){
       element.childNodes.forEach( childNode => {
         if(getElement === undefined){
-          const ret = this.myQuerySelector(selector, childNode);
+          const ret = myDomApi.myQuerySelector(selector, childNode);
           if(ret) getElement = ret;
         }
       });
@@ -21,7 +21,7 @@ const myDomApi = {
     }
     else if(element.hasChildNodes()){
       element.childNodes.forEach( childNode => {
-        const ret = this.myQuerySelectorAll(selector, childNode);
+        const ret = myDomApi.myQuerySelectorAll(selector, childNode);
         if(ret) getElement.push(...ret);
       })
     }
