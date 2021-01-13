@@ -7,5 +7,5 @@ const prev = () => {
 }
 
 const next = () => {
-    
+
 }

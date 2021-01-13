@@ -33,6 +33,13 @@ body {
     width: 1300px;
     min-height: 1000px;
 }
+.container--basic-item {
+    width: 1300px;
+}
+.container--more {
+    width: 1300px;
+    height: 70px;
+}
 .container__margin {
     width: 100%;
     height: 15px;
@@ -118,4 +125,5 @@ body {
     height: 150px;
     background-color: #fff;
     border-top: 1px solid #ddd;
+    margin-top: 20px;
 }

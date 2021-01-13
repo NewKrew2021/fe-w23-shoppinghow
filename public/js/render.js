@@ -1,7 +1,7 @@
-const more = (containerDOM) => {
+const more = () => {
     const element = document.createElement("div");
     element.setAttribute("class", "container__more");
-    element.innerHTML = `<div style="margin:0 auto">더보기</div>`;
+    element.innerHTML = `<div class="margin-center">더보기</div>`;
     return element;
 }
 
@@ -12,10 +12,13 @@ const subject = (content) => {
     return element;
 }
 
-function box() {
+function box(infoArr) {
     const boxElement = document.createElement("div");
     boxElement.setAttribute("class", "container__box horizontal");
-    boxElement.innerHTML = `${[...arguments].join("")}`;
+
+    const result = infoArr.map(info => basicItem(info));
+    boxElement.innerHTML = result.join("");
+
     return boxElement;
 }
 
@@ -51,18 +54,9 @@ function basicItem(info) {
     return element;
 }
 
-function basicItemImg(imgSrc) {
-    return `<img class="container__item--basic__img" src=${imgSrc}>`;
-}
-function basicItemTitle(title) {
-    return `<div class="container__item--basic__title">${title}</div>`;
-}
-function basicItemSubTitle(subTitle) {
-    return `<div class="container__item--basic__sub-title">${subTitle}</div>`;
-}
-function basicItemPrice(price) {
-    return `<div class="container__item--basic__price">${price}원</div>`;
-}
-function basicItemCompany(company) {
-    return `<div class="container__item--basic__company">${company}</div>`;
-}
+// basic item 정보
+const basicItemImg = imgSrc => `<img class="container__item--basic__img" src=${imgSrc}>`;
+const basicItemTitle = title => `<div class="container__item--basic__title">${title}</div>`;
+const basicItemSubTitle = subTitle => `<div class="container__item--basic__sub-title">${subTitle}</div>`;
+const basicItemPrice = price => `<div class="container__item--basic__price">${price}원</div>`;
+const basicItemCompany = company => `<div class="container__item--basic__company">${company}</div>`;
