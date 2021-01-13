@@ -41,21 +41,28 @@
                         <li class="top-nav-li font-gray">#비타민</li>
                         <li class="top-nav-li font-gray">#2021팬톤가구</li>
                     </ul>
-                    <div class="flex mg-left-40">
-                        <img class="mg-right-6" src="/images/profile_btn.png">
-                        MY 쇼핑
-                    </div>
-                    <div id="recent-btn" class="flex mg-left-10">
-                        <img class="mg-right-6" src="/images/recent_btn.png">
-                        최근본 상품
-                    </div>
+                    <ul class="flex mg-left-40">
+                        <li class="flex mg-left-40">
+                            <img class="mg-right-6" src="/images/profile_btn.png">
+                            MY 쇼핑
+                        </li>
+                        <li id="recent-btn" class="flex mg-left-10">
+                            <img class="mg-right-6" src="/images/recent_btn.png">
+                            최근본 상품
+                            <div class="inner-popup none">
+                                <div class="flex-left">
+                                    최근 본 상품
+                                    <div class="recent-count flex-left mg-left-10">
+                                    </div>
+                                </div>
+                                <!-- 사진이 들어가는 영역 -->
+                                <div id="recent-img" class="inline-block">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-
-        <!-- Popup Layer(hidden) -->
-        <div class="popup">
-            dd
         </div>
 
         <div class="mg-top-210 inline-block">
@@ -93,7 +100,7 @@
             </div>
             <!-- 더보기 버튼이 보이는 영역 -->
             <div id="expand" class="inline-block text-center bg-color-gray pd-20">
-                더보기 <img src = "/images/expand.svg">
+                더보기 <img src="/images/expand.svg">
             </div>
         </div>
 
@@ -119,8 +126,9 @@
     </div>
     <script src="/js/util.js"></script>
     <script src="/js/slide.js"></script>
-    <script src="/js/main.js"></script>
     <script src="/js/event.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/storage.js"></script>
 </body>
 
 </html>

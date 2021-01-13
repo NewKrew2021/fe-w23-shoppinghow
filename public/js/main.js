@@ -57,5 +57,6 @@
                 <p class="subtext">${element.text}</p>
                 <img class="theme-btn" src="/images/theme.png"></li>`)
         }))
+        .then(data => clickSaveStorage())
         .catch((error) => console.error(error))
 })();

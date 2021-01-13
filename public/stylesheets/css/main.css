@@ -66,6 +66,18 @@ input {
       flex-flow: wrap;
 }
 
+.flex-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+}
+
 .fixed {
   position: fixed;
 }
@@ -349,16 +361,37 @@ input {
 }
 
 /* popup layer 영역 */
-.popup {
-  display: absolute;
-  position: fixed;
-  top: 193px;
-  right: 118px;
+.inner-popup {
   background-color: #ffffff;
-  border: 1px solid gray;
-  width: 450px;
-  z-index: 199;
+  position: absolute;
+  top: 50px;
+  right: 50px;
   padding: 25px;
+  border: 1px solid gray;
+  width: 385px;
+  z-index: 199;
+  text-align: left;
+}
+
+.recent-count {
+  font-weight: 900;
+  font-size: 20px;
+}
+
+#recent-btn {
+  cursor: pointer;
+}
+
+#recent-img {
+  margin-top: 10px;
+}
+
+#recent-img > img {
+  width: 124px;
+}
+
+.none {
+  display: none;
 }
 
 .pd-5 {
