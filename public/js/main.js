@@ -34,10 +34,11 @@
         .then(res=> res.json())
         .then(json => json.forEach(element => {
             addHTML(gridUL,
-            '<li class="grid-banner"><img class="banner-img" src='+element.src+'>'
-            +'<p class="title">'+element.title+'</p>'
-            +'<p class="subtext">'+element.text+'</p>'
-            +'<img class="theme-btn" src="/images/theme.png"></li>')
+                `<li class="grid-banner">
+                <img class="banner-img" src=${element.src}>
+                <p class="title">${element.title}</p>
+                <p class="subtext">${element.text}</p>
+                <img class="theme-btn" src="/images/theme.png"></li>`)
         }))
         .catch((error) => console.error(error))
 })();
@@ -49,10 +50,11 @@
         .then(res=> res.json())
         .then(json => json.forEach(element => {
             addHTML(gridUL,
-            '<li class="grid-banner"><img class="banner-img" src='+element.src+'>'
-            +'<p class="title">'+element.title+'</p>'
-            +'<p class="subtext">'+element.text+'</p>'
-            +'<img class="theme-btn" src="/images/theme.png"></li>')
+                `<li class="grid-banner">
+                <img class="banner-img" src=${element.src}>
+                <p class="title">${element.title}</p>
+                <p class="subtext">${element.text}</p>
+                <img class="theme-btn" src="/images/theme.png"></li>`)
         }))
         .catch((error) => console.error(error))
 })();
