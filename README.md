@@ -8,7 +8,11 @@
 
 ## Day2
 
-- [ ] 바디 부분 HTML, CSS 작성
-- [ ] SASS 적용
-- [ ] Carousel API 생성
+- [x] 바디 부분 HTML, CSS 작성
+- [x] SASS 적용
+- [x] Carousel API 생성
 - [ ] Carousel 구현
+
+## Day3
+
+- [x] Class 적용

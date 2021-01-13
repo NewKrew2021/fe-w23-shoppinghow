@@ -19,7 +19,7 @@ const deleteClassFromElement = (element, className) => {
   element.classList.remove(className);
 };
 
-export const _addBubbledEventListener = (
+const _addBubbledEventListener = (
   eventType,
   eventDelegatedElement,
   selector,

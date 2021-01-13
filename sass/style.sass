@@ -153,6 +153,7 @@ li
   font-size: 25px
 
 .recent-product
+  position: relative
   display: flex
   align-items: center
   .recent-product__icon
@@ -163,3 +164,54 @@ li
     margin-right: 10px
   .recent-product__text
     font-size: 16px
+  .recent-product__pop-up
+    top: 40px
+    left: -300px
+    position: absolute
+    float: left
+    width: 400px
+    height: 500px
+    background: #ffffff
+    border: solid 1px #000000
+
+.carousel
+  position: relative
+  .carousel__left-button
+    display: flex
+    align-items: center
+    justify-content: center
+    z-index: 10
+    color : #ffffff
+    position: absolute
+    top: 100px
+    float: left
+    width: 50px
+    height: 50px
+    background: #000000
+    opacity: 0.5
+  .carousel__right-button
+    display: flex
+    align-items: center
+    justify-content: center
+    z-index: 10
+    color : #ffffff
+    position: absolute
+    top: 100px
+    right: 0
+    float: left
+    width: 50px
+    height: 50px
+    background: #000000
+    opacity: 0.5
+
+.advertise-product
+  display: flex
+  background: #ffffff
+  .promotion-product
+    width: 540px
+    height: 300px
+    border: 1px solid $main-background-color
+  .best-product
+    width: 810px
+    height: 300px
+    border: 1px solid $main-background-color
