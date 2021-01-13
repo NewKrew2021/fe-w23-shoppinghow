@@ -1,5 +1,7 @@
 import { $ } from './utils.js';
 
+const HOST = 'http://localhost:8000';
+
 const productItemList = [
   {
     title: '블루투스 이어폰 모음',
@@ -75,13 +77,13 @@ class ProductList {
     return `<ul class="product-list__row">${productListContent}</ul>`;
   }
 
-  fetchProductList = () =>
-    fetch('http://localhost:8000/api/product').then(response => {
+  fetchProductList = productLineNumber =>
+    fetch(`${HOST}/api/product/?num=${productLineNumber}`).then(response => {
       return response.json();
     });
 
   init() {
-    this.fetchProductList().then(productItemList => {
+    this.fetchProductList(0).then(productItemList => {
       this.productListElement.innerHTML = this.createProductListTemplate(
         productItemList
       );
