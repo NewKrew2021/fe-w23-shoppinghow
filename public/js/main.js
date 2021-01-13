@@ -6,7 +6,7 @@
 
 /* row-0-leftBanner */
 (function(){
-    const leftBanner = new Custom('.row-0-left').querySelector();
+    const leftBanner = DOM('.row-0-left').querySelector();
     fetch('http://localhost:80/topleft')
         .then(res=> res.json())
         .then(json => {
@@ -17,7 +17,7 @@
 
 /* row-0-rightBanner */
 (function(){
-    const slideList = new Custom('.slide-list').querySelector();
+    const slideList = DOM('.slide-list').querySelector();
     fetch('http://localhost:80/topright')
         .then(res=> res.json())
         .then(json => json.forEach(element => {
@@ -29,7 +29,7 @@
 
 /* row-0-bottom-1 Banner */
 (function(){
-    const gridUL = new Custom('#grid-ul-1').querySelector();
+    const gridUL = DOM('#grid-ul-1').querySelector();
     fetch('http://localhost:80/topgrid')
         .then(res=> res.json())
         .then(json => json.forEach(element => {
@@ -44,7 +44,7 @@
 
 /* row-0-bottom-2 Banner */
 (function(){
-    const gridUL = new Custom('#grid-ul-2').querySelector();
+    const gridUL = DOM('#grid-ul-2').querySelector();
     fetch('http://localhost:80/topgrid')
         .then(res=> res.json())
         .then(json => json.forEach(element => {
@@ -59,7 +59,7 @@
 
 /* row-0-bottom-expand */
 (function(){
-    const expandDiv = new Custom('#expand').querySelector();
+    const expandDiv = DOM('#expand').querySelector();
     fetch('http://localhost:80/more')
         .then(res=> res.json())
         .then(json=> {

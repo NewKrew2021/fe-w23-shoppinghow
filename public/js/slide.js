@@ -10,10 +10,10 @@ function addSlideShow() {
     const SLIDE_WIDTH = 485;
 
     /* 슬라이드쇼 버튼 이벤트 추가하기 */
-    const slideNextBtn = new Custom('.next').querySelector();
-    const slidePrevBtn = new Custom('.prev').querySelector();
-    const slideList = new Custom('.slide-list').querySelector();
-    const slideContent = new Custom('.slide-content').querySelectorAll();
+    const slideNextBtn = DOM('.next').querySelector();
+    const slidePrevBtn = DOM('.prev').querySelector();
+    const slideList = DOM('.slide-list').querySelector();
+    const slideContent = DOM('.slide-content').querySelectorAll();
 
     const firstSlide = slideList.firstElementChild;
     const lastSlide = slideList.lastElementChild;
@@ -39,7 +39,6 @@ function addSlideShow() {
         }
         // 첫 번째 슬라이드에 도달했을 경우, 맨 끝으로 돌아가게 한다.
         if (curSlideIndex == 0) {
-            console.log(curSlideIndex);
             setTimeout(function () {
                 slideList.style.transition = "0ms";
                 slideList.style.transform = "translate3d(-" + (SLIDE_WIDTH * slideLength) + "px, 0px, 0px)";
@@ -67,17 +66,17 @@ function addSlideShow() {
             }, AUTO_SLIDE_SPEED);
             curSlideIndex = -1;
         }
-        let pagination = querySelectorAll(".page");
+        let pagination = DOM('.page').querySelectorAll();
         pagination[(curSlideIndex === -1) ? slideLength - 1 : curSlideIndex].classList.remove('active');
 
         curSlide = slideContent[++curSlideIndex];
         pagination[curSlideIndex].classList.add('active');
     });
 
-    const targetList = new Custom('.page').querySelectorAll();
+    const targetList = DOM('.page').querySelectorAll();
     targetList.forEach((element)=>{
         element.addEventListener("mouseenter", function(){
-            let current = querySelector(".active");
+            let current = DOM('.active').querySelector();
             current.className = current.className.replace(" active", "");
             this.className += " active";
 
