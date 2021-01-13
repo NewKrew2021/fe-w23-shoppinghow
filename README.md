@@ -32,3 +32,10 @@
     - 체이닝(then을 연속으로 사용하기 위한) 구현해야함
   - Layout(Header, Category) 구현
   
+## 2021-1-13
+  - myPromise 버그 수정 
+  - 지난 PR comments 반영
+    - MyDomApi 클래스 객체 리터럴로 변경
+  - Theme, Best, Carousel 화면 및 기능 구현
+    - MyDomApi 사용
+  
