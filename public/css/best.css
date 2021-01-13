@@ -1,11 +1,22 @@
+.contents {
+  position: absolute;
+  width: 1310px;
+  height: 1000px;
+  margin-left: 245px;
+  margin-top: 180px;
+  border: #e4e4e4 solid 1px;
+  background-color: #f1f1f1;
+}
+
 .best {
   position: absolute;
   width: 1300px;
   height: 660px;
-  margin-left: 250px;
-  margin-top: 200px;
+  margin-left: 5px;
+  margin-top: 20px;
   background-color: #ffffff;
   cursor: pointer;
+  border: #e4e4e4 solid 1px;
 }
 
 .fashion-container {
@@ -160,3 +171,18 @@
   display: none;
 }
 
+.more-container {
+  position: absolute;
+  width: 1300px;
+  height: 40px;
+  margin-left: -1px;
+  margin-top: 665px;
+  padding-top: 20px;
+  background-color: #c2c2c2;
+  cursor: pointer;
+  border: #e4e4e4 solid 1px;
+  text-align: center;
+  font-weight: bold;
+  color: #363636;
+  cursor: pointer;
+}

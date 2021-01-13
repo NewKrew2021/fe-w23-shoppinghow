@@ -8,6 +8,7 @@
   &nbsp;&nbsp;&nbsp;&nbsp;|- index.js  
   &nbsp;&nbsp;&nbsp;&nbsp;|- myDomApi.js  
   &nbsp;&nbsp;&nbsp;&nbsp;|- myPromise.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;|- carousel.js  
   &nbsp;&nbsp;|- css  
   &nbsp;&nbsp;&nbsp;&nbsp;|- style.css  
   &nbsp;&nbsp;|- api  
@@ -38,4 +39,3 @@
     - MyDomApi 클래스 객체 리터럴로 변경
   - Theme, Best, Carousel 화면 및 기능 구현
     - MyDomApi 사용
-  
