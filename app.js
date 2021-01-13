@@ -4,13 +4,12 @@ const port = 3000;
 
 const path = require('path');
 app.use(express.static(__dirname + '/public'));
-app.get('/', function(req, res) {
+app.get('/', (req, res)=> {
     res.sendFile(path.join(__dirname + '/view/index.html'));
 });
 
-app.get('/data', function(req, res) {
+app.get('/best', (req, res) =>{
     const data=require("./data/data.json"); // read data from json file
-    console.log("data read",data);
     res.json(data);
 });
 

@@ -1,5 +1,5 @@
 "use strict";
-(function fetchInitialData(){
+function fetchInitialData(){
     fetch("http://localhost:3000/data" ,{
         method: 'GET',
     }).then((response) => {
@@ -12,4 +12,4 @@
     }).catch((err)=>{
         console.log(err);
     });
-})();
+}
