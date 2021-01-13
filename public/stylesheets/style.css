@@ -1,37 +1,46 @@
 body {
-  background: #eeeeee; }
+  background: #eeeeee;
+}
 
 p {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+}
 
 button,
 input {
   border: none;
-  background: none; }
+  background: none;
+}
 
 input:focus,
 button:focus {
-  outline: none; }
+  outline: none;
+}
 
 ul {
-  margin: 0; }
+  margin: 0;
+}
 
 li {
-  list-style-type: none; }
+  list-style-type: none;
+}
 
 .header {
   background: #ffffff;
   border-bottom: 2px solid #cccccc;
-  margin-bottom: 10px; }
-  .header__title {
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #eeeeee; }
-  .header__logo-image {
-    height: 55px; }
+  margin-bottom: 10px;
+}
+.header__title {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #eeeeee;
+}
+.header__logo-image {
+  height: 55px;
+}
 
 .search-box {
   border: 1px solid #cccccc;
@@ -42,16 +51,20 @@ li {
   align-items: center;
   justify-content: center;
   column-gap: 10px;
-  padding: 5px 20px; }
-  .search-box__input {
-    width: 550px;
-    font-size: 25px;
-    border: none; }
-  .search-box__button {
-    width: fit-content;
-    height: fit-content; }
-  .search-box__button-icon {
-    height: 22px; }
+  padding: 5px 20px;
+}
+.search-box__input {
+  width: 550px;
+  font-size: 25px;
+  border: none;
+}
+.search-box__button {
+  width: fit-content;
+  height: fit-content;
+}
+.search-box__button-icon {
+  height: 22px;
+}
 
 .header-nav {
   margin: 0 auto;
@@ -59,26 +72,31 @@ li {
   align-items: center;
   justify-content: space-between;
   width: 1350px;
-  height: 60px; }
+  height: 60px;
+}
 
 .important-nav,
 .theme-nav {
   display: flex;
   column-gap: 20px;
-  font-weight: bolder; }
-  .important-nav,
-  .theme-nav {
-    color: #888888; }
+  font-weight: bolder;
+}
+.important-nav,
+.theme-nav {
+  color: #888888;
+}
 
 .content__main {
   width: 1350px;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 .product-list__row {
   background: #ffffff;
   display: flex;
   padding: 0;
-  border: 1px solid #eeeeee; }
+  border: 1px solid #eeeeee;
+}
 
 .product-item {
   height: 350px;
@@ -87,29 +105,35 @@ li {
   justify-content: center;
   align-items: center;
   width: 270px;
-  border-right: 1px solid #eeeeee; }
-  .product-item__image {
-    width: 220px;
-    margin-bottom: 12px; }
-  .product-item__title {
-    width: 220px;
-    font-size: 14px;
-    font-weight: bolder;
-    margin-bottom: 4px; }
-  .product-item__description {
-    width: 220px;
-    font-size: 11px; }
+  border-right: 1px solid #eeeeee;
+}
+.product-item__image {
+  width: 220px;
+  margin-bottom: 12px;
+}
+.product-item__title {
+  width: 220px;
+  font-size: 14px;
+  font-weight: bolder;
+  margin-bottom: 4px;
+}
+.product-item__description {
+  width: 220px;
+  font-size: 11px;
+}
 
 .product-tag-list {
   margin-top: 10px;
-  display: flex; }
+  display: flex;
+}
 
 .product-tag {
   border: 1px solid #e79924;
   border-radius: 2px;
   padding: 1px 4px;
   color: #e79924;
-  font-size: 12px; }
+  font-size: 12px;
+}
 
 .product-more-area {
   height: 100px;
@@ -117,68 +141,85 @@ li {
   align-items: center;
   justify-content: center;
   background: #cccccc;
-  margin-top: 10px; }
-  .product-more-area:hover {
-    background: #dddddd;
-    cursor: pointer; }
+  margin-top: 10px;
+}
+.product-more-area:hover {
+  background: #dddddd;
+  cursor: pointer;
+}
 
 .more-product-text__title {
   font-size: 20px;
-  font-weight: bolder; }
+  font-weight: bolder;
+}
 
 .more-product-text {
-  display: flex; }
-  .more-product-text .more-product-text, .more-product-text .more-product-text-count {
-    display: flex;
-    column-gap: 5px; }
-    .more-product-text .more-product-text .more-product-text__count, .more-product-text .more-product-text-count .more-product-text__count {
-      color: #ff0000;
-      font-weight: bolder; }
-    .more-product-text .more-product-text .more-product-text__total-count, .more-product-text .more-product-text-count .more-product-text__total-count {
-      font-weight: bolder; }
+  display: flex;
+}
+.more-product-text .more-product-text,
+.more-product-text .more-product-text-count {
+  display: flex;
+  column-gap: 5px;
+}
+.more-product-text .more-product-text .more-product-text__count,
+.more-product-text .more-product-text-count .more-product-text__count {
+  color: #ff0000;
+  font-weight: bolder;
+}
+.more-product-text .more-product-text .more-product-text__total-count,
+.more-product-text .more-product-text-count .more-product-text__total-count {
+  font-weight: bolder;
+}
 
 .category-product {
   margin-top: 30px;
-  font-size: 25px; }
+  font-size: 25px;
+}
 
 .recent-product {
   display: flex;
-  align-items: center; }
-  .recent-product .recent-product__icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    background: #000000;
-    margin-right: 10px; }
-  .recent-product .recent-product__text {
-    font-size: 16px; }
+  align-items: center;
+}
+.recent-product .recent-product__icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: #000000;
+  margin-right: 10px;
+}
+.recent-product .recent-product__text {
+  font-size: 16px;
+}
 
 .carousel {
-  position: relative; }
-  .carousel .carousel__left-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    color: #ffffff;
-    position: absolute;
-    top: 100px;
-    float: left;
-    width: 50px;
-    height: 50px;
-    background: #000000;
-    opacity: 0.5; }
-  .carousel .carousel__right-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    color: #ffffff;
-    position: absolute;
-    top: 100px;
-    right: 0;
-    float: left;
-    width: 50px;
-    height: 50px;
-    background: #000000;
-    opacity: 0.5; }
+  position: relative;
+}
+.carousel .carousel__left-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  color: #ffffff;
+  position: absolute;
+  top: 100px;
+  float: left;
+  width: 50px;
+  height: 50px;
+  background: #000000;
+  opacity: 0.5;
+}
+.carousel .carousel__right-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  color: #ffffff;
+  position: absolute;
+  top: 100px;
+  right: 0;
+  float: left;
+  width: 50px;
+  height: 50px;
+  background: #000000;
+  opacity: 0.5;
+}
