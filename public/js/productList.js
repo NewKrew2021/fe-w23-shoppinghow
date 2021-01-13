@@ -81,7 +81,7 @@ class ProductList {
     });
 
   init() {
-    this.fetchProductList().then(({ productItemList }) => {
+    this.fetchProductList().then(productItemList => {
       this.productListElement.innerHTML = this.createProductListTemplate(
         productItemList
       );
