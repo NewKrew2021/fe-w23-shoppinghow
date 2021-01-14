@@ -3,6 +3,29 @@
     슬라이드쇼 기능을 구현하는 함수 (함수 길이가 길어져서 수정 계획 중)
     클래스로 변경해 보기
 */
+
+class Slider{
+    constructor(){
+        /* 많은 DOM 요소들 */
+    }
+    
+    onEvents(){
+        /* 이벤트 핸들러 등록 */
+    }
+
+    prevBtnClickHandler(){
+
+    }
+
+    nextBtnClickHandler(){
+
+    }
+
+    init(){
+        /* 실행 메서드 */
+    }
+}
+
 function addSlideShow() {
     let curSlideIndex = 0;
     const MAX_SLIDE_COUNT = 1;
