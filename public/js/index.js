@@ -3,7 +3,7 @@ import {showImgs} from "./carousel.js"
 
 // myDomApi.myQuerySelector("div");
 
-let carouselData, trendData;
+let carouselData, trendData, themeData;
 
 window.onload = () => {
   bestContainer();
@@ -41,14 +41,44 @@ const carouselContainer = () => {
 }
 
 const themeContainer = () => {
+  let themeContainer = myDomApi.myQuerySelector("table.theme-container");
+  let newLayout = "";
+  for(let idx=0; idx<5; idx++) {
+    newLayout += `
+      <th class="theme">
+        <img class="theme-img">
+        <div class="theme-title"></div>
+        <div class="theme-info"></div>
+        <img class="theme-icon"></img>
+      </th>
+    `
+  }
+  themeContainer.innerHTML += newLayout;
 
+  let themeImg = myDomApi.myQuerySelectorAll("img.theme-img");
+  let themeTitle = myDomApi.myQuerySelectorAll("div.theme-title");
+  let themeInfo = myDomApi.myQuerySelectorAll("div.theme-info");
+
+  const request = new Request("https://c153d255-88c6-4bf4-829f-432a1f797c0c.mock.pstmn.io/theme");
+  fetch(request)
+  .then(response => response.text())
+  .then(result => {
+    themeData = JSON.parse(result)["items"]
+    for(let idx=0; idx<5; idx++){
+      themeImg[idx].src = themeData[idx].src;
+      themeTitle[idx].innerHTML = themeData[idx].title;
+      themeInfo[idx].innerHTML = themeData[idx].subtitle;
+    }
+  })
+  .catch(error => console.log('error', error));
+  
 }
 
 const trendContainer = () => {
   let trendContainer = myDomApi.myQuerySelector("table.trend-container");
   let newLayout = "";
   trendContainer.innerHTML += `<caption class="trend-caption">지금 뜨는 테마 카테고리</caption>`;
-  for(let idx=0; idx<5; idx++){
+  for(let idx=0; idx<5; idx++) {
     newLayout += `
       <th class="trend">
         <img class="trend-img"">
@@ -78,4 +108,4 @@ const trendContainer = () => {
   .catch(error => console.log('error', error));
 }
 
-export {carouselData, trendData};
+export {carouselData, trendData, themeData};
