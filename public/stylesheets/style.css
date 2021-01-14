@@ -176,7 +176,7 @@ li {
   .carousel .carousel-product-list {
     display: flex;
     position: relative;
-    right: 1350px;
+    right: 270px;
     transition: transform 1s; }
   .carousel .carousel__left-button {
     display: flex;

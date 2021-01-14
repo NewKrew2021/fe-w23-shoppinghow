@@ -2,7 +2,7 @@ import { $ } from './utils.js';
 import { ProductList } from './productList.js';
 import { Carousel } from './carousel.js';
 
-const CAROUSEL_LINE_NUMBER = 3;
+const CAROUSEL_LINE_NUMBER = 15;
 
 const init = () => {
   const productMoreArea = $('.product-more-area');

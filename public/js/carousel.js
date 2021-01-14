@@ -1,7 +1,8 @@
 import { $ } from './utils.js';
 
 const HOST = 'http://localhost:8000';
-const PRODUCT_NUMBER_IN_ONE_LINE = 5;
+const PRODUCT_NUMBER_IN_ONE_LINE = 7;
+const PRODUCT_ITEM_WIDTH = '270px';
 
 class Carousel {
   constructor(productTotalLineNumber) {
@@ -68,30 +69,18 @@ class Carousel {
     const startIndex =
       (index + this.productTotalLineNumber) % this.productTotalLineNumber;
     return carouselProductListData.slice(
-      PRODUCT_NUMBER_IN_ONE_LINE * startIndex,
-      PRODUCT_NUMBER_IN_ONE_LINE * (startIndex + 1)
+      startIndex,
+      startIndex + PRODUCT_NUMBER_IN_ONE_LINE
     );
   }
 
   createCarouselProductList = carouselProductListData => {
     return `
         <div class="carousel-product-list">
-            <div class="carousel-product-list__before">${this.createProductListTemplate(
-              this.parseProductListDataByIndex(
-                carouselProductListData,
-                this.currentIndex - 1
-              )
-            )}</div>
             <div class="carousel-product-list__current">${this.createProductListTemplate(
               this.parseProductListDataByIndex(
                 carouselProductListData,
                 this.currentIndex
-              )
-            )}</div>
-            <div class="carousel-product-list__after">${this.createProductListTemplate(
-              this.parseProductListDataByIndex(
-                carouselProductListData,
-                this.currentIndex + 1
               )
             )}</div>
         </div>
@@ -100,7 +89,9 @@ class Carousel {
 
   // 오른쪽으로 이동
   moveToRight() {
-    $('.carousel-product-list').style.transform = 'translate3d(-1350px,0,0)';
+    $(
+      '.carousel-product-list'
+    ).style.transform = `translate3d(-${PRODUCT_ITEM_WIDTH},0,0)`;
     this.currentIndex = (this.currentIndex + 1) % this.productTotalLineNumber;
 
     setTimeout(() => {
@@ -113,7 +104,9 @@ class Carousel {
   }
   // 왼쪽으로 이동
   moveToLeft() {
-    $('.carousel-product-list').style.transform = 'translate3d(1350px,0,0)';
+    $(
+      '.carousel-product-list'
+    ).style.transform = `translate3d(${PRODUCT_ITEM_WIDTH},0,0)`;
     this.currentIndex = (this.currentIndex - 1) % this.productTotalLineNumber;
 
     setTimeout(() => {
