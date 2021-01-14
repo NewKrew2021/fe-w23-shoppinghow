@@ -5,7 +5,7 @@
     margin: 0 auto;
 }
 .margin-auto {
-    margin: 20px auto;
+    margin: auto;
 }
 .border-gray {
     border: solid 1px #eee;
@@ -17,4 +17,29 @@
 
 .transparency {
     visibility: hidden;
+}
+.btn--prev {
+    position: relative;
+    left: 50px;
+    top: 50%;
+}
+.btn--next {
+    position: relative;
+    left: 650px;
+    top: 50%;
+}
+.page-box {
+    height: 15px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: 280px;
+    z-index: 2;
+}
+.page {
+    width: 20px;
+    height: 15px;
+    margin: auto 1px;
+    background-color: #ccc;
+    
 }

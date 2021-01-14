@@ -1,3 +1,6 @@
+const myStorage = window.localStorage;
+myStorage.clear();
+
 const more = () => {
     const element = document.createElement("div");
     element.setAttribute("class", "container__more");
@@ -12,12 +15,28 @@ const subject = (content) => {
     return element;
 }
 
+function promotionBox() {
+    const boxElement = document.createElement("div");
+    boxElement.setAttribute("class", "container__box horizontal");
+    boxElement.innerHTML = [...arguments].join("");
+    return boxElement;
+}
+
 function box(infoArr) {
     const boxElement = document.createElement("div");
     boxElement.setAttribute("class", "container__box horizontal");
 
     const result = infoArr.map(info => basicItem(info));
     boxElement.innerHTML = result.join("");
+
+    // 클릭 상품 저장을 위해 이벤트 등록
+    boxElement.addEventListener("click", (e) => {
+        const imgElement = e.target;
+        if(imgElement.tagName === "IMG") {
+            const key = imgElement.parentNode.childNodes[1].innerText;
+            myStorage.setItem(key, imgElement.src);
+        }
+    });
 
     return boxElement;
 }
@@ -29,16 +48,15 @@ function margin(height) {
     return marginElement;
 }
 
-function carousel(imgSrc) {
+function carousel() {
     let element = `<div class="container__item--carousel border-gray">
-    <img class="container__item--carousel__img margin-auto" src=${imgSrc}>
     </div>`;
     return element;
 }
 
-function bestItem(imgSrc) {
+function bestItem(src) {
     let element = `<div class="container__item--best border-gray">
-    <img class="container__item--best__img margin-auto" src="${imgSrc}">
+    <img src="${src}" class="margin-auto container__item--best__img">
     </div>`;
     return element;
 }
