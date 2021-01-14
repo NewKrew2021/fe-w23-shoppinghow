@@ -8,6 +8,7 @@ class Carousel {
     this.currentIndex = 0;
     this.productTotalLineNumber = productTotalLineNumber;
     this.carouselProductListData;
+    this.isCarouselChanging = false;
   }
 
   createTagListTemplate(tagList) {
@@ -107,6 +108,7 @@ class Carousel {
         this.createLeftButton() +
         this.createRightButton() +
         this.createCarouselProductList(this.carouselProductListData);
+      this.isCarouselChanging = false;
     }, 1000);
   }
   // 왼쪽으로 이동
@@ -119,6 +121,7 @@ class Carousel {
         this.createLeftButton() +
         this.createRightButton() +
         this.createCarouselProductList(this.carouselProductListData);
+      this.isCarouselChanging = false;
     }, 1000);
   }
   // 버튼 이벤트 등록
@@ -133,6 +136,8 @@ class Carousel {
         this.createCarouselProductList(this.carouselProductListData);
     });
     carouselElement.addEventListener('click', event => {
+      if (this.isCarouselChanging) return;
+      this.isCarouselChanging = true;
       if (event.target.className === 'carousel__right-button') {
         this.moveToRight();
       }
