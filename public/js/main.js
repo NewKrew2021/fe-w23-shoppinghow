@@ -24,6 +24,15 @@ const initPage = () => {
     const containerBasicItemDOM = document.querySelector(".container--basic-item");
     containerDOM.appendChild(margin(20));
 
+    // 팝업 레이어 이벤트 등록
+    const 최근본상품 = document.querySelector(".header__nav__menu");
+    const 팝업 = document.getElementById("popup");
+    최근본상품.addEventListener("mouseover", () => {
+        팝업.style.display = "block";
+    });
+    최근본상품.addEventListener("mouseout", () => {
+        팝업.style.display = "none";
+    });
     Promise.all([
         getItems("carousel"),
         getItems("best"),

@@ -1,3 +1,6 @@
+const myStorage = window.localStorage;
+myStorage.clear();
+
 const more = () => {
     const element = document.createElement("div");
     element.setAttribute("class", "container__more");
@@ -25,6 +28,13 @@ function box(infoArr) {
 
     const result = infoArr.map(info => basicItem(info));
     boxElement.innerHTML = result.join("");
+
+    // 클릭 상품 저장을 위해 이벤트 등록
+    boxElement.addEventListener("click", (e) => {
+        if(e.target.tagName === "IMG") {
+            myStorage.setItem(e.target.src, 1);
+        }
+    });
 
     return boxElement;
 }
