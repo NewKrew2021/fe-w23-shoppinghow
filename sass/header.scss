@@ -65,8 +65,24 @@ header {
             height:540px;
             background-color: white;
             border:1px solid black;
+            justify-content: start;
+            flex-wrap: wrap;
+            align-content: flex-start;
             z-index:0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            .popup-item{
+                display:inline-block;
+                margin:5px;
+                height: 124px;
+                width: 124px;
+            }
+            img{
+                height: 100%;
+                width: 100%;
+            }
         }
+        
     
     }
 

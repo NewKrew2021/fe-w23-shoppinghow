@@ -4,6 +4,8 @@
     let html="";
     let pageNum=0;
 
+    localStorage.setItem("popupData",JSON.stringify([]));
+
     function fetchPage(pNum){
         fetch("http://localhost:3000/item?" 
         + new URLSearchParams({page: pageNum}) ,{method: 'GET',})
@@ -12,7 +14,7 @@
                 throw new Error("Bad response from server");
             return response.json();
         }).then((data)=>{
-            const itemList=qs.query(section,"#item-list");
+            const itemList=section.querySelector("#item-list");
             li=data.items.reduce((acc,{href,src,title,subtitle,badge})=>{
                 return acc+`<span class="item">
                                 <img src=${src}></img>
@@ -23,6 +25,15 @@
             },"");
             pageNum++;
             itemList.innerHTML+=li;
+            const newItemList=document.querySelectorAll(".item");
+            newItemList.forEach(n=>{
+                n.addEventListener("click",(e)=>{
+                    const popupData=JSON.parse(localStorage.getItem("popupData"));
+                    popupData.push({src:e.target.src});
+                    localStorage.setItem("popupData",JSON.stringify(popupData));
+                });
+            })
+
         }).catch((err)=>{console.log(err)});
     }
     fetchPage(pageNum);

@@ -43,7 +43,6 @@
             <img src ="/image/recent_item.png"></img>
             <span>최근본 상품</span>
             <div id="recent-popup">
-                ejqhrl
             </div>
         </span>`;
     html+=sideNav;
@@ -55,7 +54,15 @@
     const recentItem=qs.query(document,"#recent-item");
     const popup=qs.query(document,"#recent-popup");
     recentItem.addEventListener("mouseenter",()=>{
-        popup.style.display="block";
+        const popupData=JSON.parse(localStorage.getItem("popupData"));
+        let html=popupData.reduce((acc,{src})=>{
+            return acc + `<div class="popup-item">
+                            <img src=${src}>
+                            </img>
+                         </div>`
+        },"");
+        popup.innerHTML=html;
+        popup.style.display="flex";
     });
     recentItem.addEventListener("mouseleave",()=>{
         popup.style.display="none";
