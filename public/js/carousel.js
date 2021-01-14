@@ -41,11 +41,13 @@ class Carousel {
   }
 
   fetchProductList = () =>
-    fetch(`${HOST}/api/carousel/?num=${this.productTotalLineNumber}`).then(
-      response => {
+    fetch(`${HOST}/api/carousel/?num=${this.productTotalLineNumber}`)
+      .then(response => {
         return response.json();
-      }
-    );
+      })
+      .then(res => {
+        this.carouselProductListData = res;
+      });
   createLeftButton() {
     return `
         <div class="carousel__left-button">
@@ -99,22 +101,36 @@ class Carousel {
   moveToRight() {
     $('.carousel-product-list').style.transform = 'translate3d(-1350px,0,0)';
     this.currentIndex = (this.currentIndex + 1) % this.productTotalLineNumber;
+
+    setTimeout(() => {
+      $('.carousel').innerHTML =
+        this.createLeftButton() +
+        this.createRightButton() +
+        this.createCarouselProductList(this.carouselProductListData);
+    }, 1000);
   }
   // 왼쪽으로 이동
   moveToLeft() {
     $('.carousel-product-list').style.transform = 'translate3d(1350px,0,0)';
     this.currentIndex = (this.currentIndex - 1) % this.productTotalLineNumber;
+
+    setTimeout(() => {
+      $('.carousel').innerHTML =
+        this.createLeftButton() +
+        this.createRightButton() +
+        this.createCarouselProductList(this.carouselProductListData);
+    }, 1000);
   }
   // 버튼 이벤트 등록
   addButtonEvent() {}
   // 생성
   init() {
     const carouselElement = $('.carousel');
-    this.fetchProductList().then(res => {
+    this.fetchProductList().then(() => {
       carouselElement.innerHTML =
         this.createLeftButton() +
         this.createRightButton() +
-        this.createCarouselProductList(res);
+        this.createCarouselProductList(this.carouselProductListData);
     });
     carouselElement.addEventListener('click', event => {
       if (event.target.className === 'carousel__right-button') {
