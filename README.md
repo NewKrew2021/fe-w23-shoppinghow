@@ -21,6 +21,13 @@
   - pm2 start app.js
   - url = localhost:3000
 
+## Mock server specification - Postman
+  - URL : https://c153d255-88c6-4bf4-829f-432a1f797c0c.mock.pstmn.io
+  - GET /best
+  - GET /carousel
+  - GET /theme
+  - GET /trend
+
 ## 2021-1-11
   - Node(npm), Express, pm2 설치, 로컬서버환경 구성
   - 디렉터리 구조, 화면 설계

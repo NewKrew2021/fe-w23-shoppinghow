@@ -33,7 +33,6 @@ export default class MyPromise {
     if (this.status !== "pending") return this;
     this.status = "fulfilled";
     this.promiseResult = param;
-    console.log(param, this.fulfilledFunc)
     addToTaskQueue(this.fulfilledFunc(this.promiseResult));
   }
 

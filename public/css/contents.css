@@ -19,7 +19,7 @@
   border: #e4e4e4 solid 1px;
 }
 
-.fashion-container {
+.best-container {
   position: absolute;
   width: 517px;
   height: 340px;
@@ -27,7 +27,7 @@
   border-bottom: #e4e4e4 solid 1px;
 }
 
-.fashion-img {
+.best-img {
   margin-left: 17px;
 }
 
@@ -188,7 +188,7 @@
   cursor: pointer;
 }
 
-.trand-container {
+.trend-container {
   position: absolute;
   width: 1300px;
   height : 320px;
@@ -198,31 +198,31 @@
   border: #e4e4e4 solid 1px;
 }
 
-.trand-caption {
+.trend-caption {
   text-align: left;
   font-size: 20px;
   padding-left: 8px;
   padding-bottom: 6px;
 }
 
-.trand {
+.trend {
   border-right: #e4e4e4 solid 1px;
   cursor: pointer;
 }
 
-.trand-img {
+.trend-img {
   margin-top: 10px;
   width: 80%;
 }
 
-.trand-title {
+.trend-title {
   text-align: left;
   margin-top: 5px;
   margin-left: 24px;
   font-size: 14px;
 }
 
-.trand-info {
+.trend-info {
   text-align: left;
   margin-top: 3px;
   margin-left: 24px;
@@ -230,13 +230,13 @@
   color: #9b9b9b;
 }
 
-.trand-icon {
+.trend-icon {
   margin-left: -168px;
   margin-top: 8px;
   width: 45px;
 }
 
-.trand-prev, .trand-next {
+.trend-prev, .trend-next {
   font-size: 30px;
   cursor: pointer;
   position: absolute;
@@ -255,6 +255,6 @@
   background-color: rgba(80, 80, 80, 0.8);
 }
 
-.trand-next {
+.trend-next {
   margin-left : 1259px;
 }
