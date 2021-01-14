@@ -42,13 +42,23 @@ function getLocalStorage() {
     target.innerHTML = text;
 }
 
+/* 이미 로컬 스토리지에 저장되어 있는 사진인지 판단하는 함수 */
+function isExist(target){
+    for (let [key, value] of Object.entries(localStorage)){
+        if (value === target)
+            return true;
+    }
+    return false;
+}
+
 /* 배너 사진 클릭 시 로컬 스토리지에 담는 이벤트 함수 */
 function clickSaveStorage() {
     const bannerImage = DOM('.banner-img').querySelectorAll();
     bannerImage.forEach(function (element) {
         element.addEventListener('click', function () {
             let imgsrc = this.getAttribute('src');
-            localStorage.setItem(Date.now(),imgsrc);
+            if (!isExist(imgsrc))
+                localStorage.setItem(Date.now(),imgsrc);
         });
     });
 }
