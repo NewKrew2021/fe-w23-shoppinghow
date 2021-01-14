@@ -31,8 +31,10 @@ function box(infoArr) {
 
     // 클릭 상품 저장을 위해 이벤트 등록
     boxElement.addEventListener("click", (e) => {
-        if(e.target.tagName === "IMG") {
-            myStorage.setItem(e.target.src, 1);
+        const imgElement = e.target;
+        if(imgElement.tagName === "IMG") {
+            const key = imgElement.parentNode.childNodes[1].innerText;
+            myStorage.setItem(key, imgElement.src);
         }
     });
 

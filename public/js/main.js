@@ -25,13 +25,17 @@ const initPage = () => {
     containerDOM.appendChild(margin(20));
 
     // 팝업 레이어 이벤트 등록
-    const 최근본상품 = document.querySelector(".header__nav__menu");
-    const 팝업 = document.getElementById("popup");
-    최근본상품.addEventListener("mouseover", () => {
-        팝업.style.display = "block";
+    const rvi = document.querySelector(".header__nav__menu");
+    const popupDOM = document.getElementById("popup");
+    rvi.addEventListener("mouseover", () => {
+        popupDOM.style.display = "block";
+        popupDOM.innerHTML = `<div class="popup__title">최근 본 상품 ${myStorage.length}개</div><br>`;
+        for(let i = 0; i < myStorage.length; i++) {
+            popupDOM.innerHTML += `<img class="popup__img" src="${myStorage.getItem(myStorage.key(i))}">`
+        }
     });
-    최근본상품.addEventListener("mouseout", () => {
-        팝업.style.display = "none";
+    rvi.addEventListener("mouseout", () => {
+        popupDOM.style.display = "none";
     });
     Promise.all([
         getItems("carousel"),
