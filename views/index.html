@@ -18,13 +18,15 @@
         <h1 class="mb-1">쇼핑하우</h1>
         <small class="gray">by kakaocommerce</small>
       </div>
+
       <!-- search bar -->
       <input type="text" name="search" id="input_search" class="flex ml-4 py-3">
     </div>
+
     <!-- header nav -->
     <nav class="header-nav">
       <div class="container d-flex flex-center p-relative">
-        <button data-hover-show-target="popup_category">☰ 카테고리</button>
+        <button data-hover-popup-target="#popup_category">☰ 카테고리</button>
         <span class="px-2 gray">|</span>
         <ul class="nav-list">
           <li class="nav-item">
@@ -60,27 +62,56 @@
         </ul>
         <div class="d-flex ml-auto">
           <button>MY 쇼핑</button>
-          <button data-hover-show-target="popup_recent">최근 본 상품</button>
+          <button data-hover-popup-target="#popup_recent">최근 본 상품</button>
         </div>
-        <div id="popup_category" class="d-flex p-absolute top-100 left-0 w-40 p-5 bg-dark"></div>
-        <div id="popup_recent" class="d-flex p-absolute top-100 right-0 w-40 p-5 bg-dark"></div>
+
+        <!-- category popup -->
+        <div id="popup_category" class="hover-popup top-100 left-0 w-40" data-hover-popup-target="#popup_category"></div>
+
+        <!-- recent popup -->
+        <div id="popup_recent" class="hover-popup top-100 right-0 w-40" data-hover-popup-target="#popup_recent">
+          <!-- recent popup nav -->
+          <nav>
+            <ul class="nav-list">
+              <li class="nav-item">최근 본 상품</li>
+              <li class="nav-item">내가 찜한 상품</li>
+            </ul>
+          </nav>
+          <!-- recent popup main section -->
+          <div id="recent_view" class="d-flex wrap my-3"></div>
+          <!-- recent popup footer -->
+          <div class="d-flex flex-center">
+            <div>
+              <strong>dewy.i</strong>
+            </div>
+            <button class="gray ml-auto">로그아웃이 왜 여기에</button>
+          </div>
+        </div>
         </div>
       </div>
     </nav>
   </header>
 
+  <!-- main view -->
   <div class="container pt-3">
     <div class="d-flex wrap">
       <div id="box_best_promotion" class="box w-40"></div>
       <div id="box_carousel_promotion" class="box w-60 px-10p"></div>
-      <div id="best_items" class="d-flex wrap"></div>
+      <div id="best_items" class="item-card-wrapper d-flex wrap" data-recent-view="#recent_view"></div>
       <button id="btn_load_best_items" class="w-100 py-3">더보기</button>
     </div>
   </div>
 
+  <script src="js/util.js"></script>
+  <script src="js/mypromise.js"></script>
+  <script src="js/myfetch.js"></script>
+  <script src="js/myqueryselector.js"></script>
+  <script src="js/local_storage.js"></script>
+  <script src="js/hover_popup.js"></script>
+
+  <script src="js/component/recent.js"></script>
   <script src="js/component/carousel.js"></script>
   <script src="js/component/item_card.js"></script>
-  <script src="js/util.js"></script>
   <script src="js/index.js"></script>
 </body>
 

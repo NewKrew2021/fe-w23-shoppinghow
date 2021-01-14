@@ -1,4 +1,6 @@
 @import 'normalize';
+
+@import 'common';
 @import 'text';
 
 // component
@@ -8,8 +10,11 @@
 @import 'container';
 @import 'form';
 @import 'header';
+@import 'hover_popup';
+@import 'image';
 @import 'nav';
 
+@import 'color';
 @import 'flex';
 @import 'position';
 @import 'size';

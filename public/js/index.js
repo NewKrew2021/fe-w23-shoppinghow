@@ -41,4 +41,7 @@
   initBestPromotionSection()
   initCarouselPromotionSection()
   initBestItems()
+  initItemCardWrapper()
+  initHoverPopup()
+  initRecent(findOne('#recent_view'))
 })()
