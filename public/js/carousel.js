@@ -1,3 +1,5 @@
+import { $ } from './utils.js';
+
 const HOST = 'http://localhost:8000';
 const PRODUCT_NUMBER_IN_ONE_LINE = 5;
 
@@ -100,7 +102,15 @@ class Carousel {
   // 버튼 이벤트 등록
   addButtonEvent() {}
   // 생성
-  init() {}
+  init() {
+    const carouselElement = $('.carousel');
+    this.fetchProductList().then(res => {
+      carouselElement.innerHTML =
+        this.createLeftButton() +
+        this.createRightButton() +
+        this.createCarouselProductList(res);
+    });
+  }
 }
 
 export { Carousel };
