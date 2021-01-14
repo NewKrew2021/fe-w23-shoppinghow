@@ -22,7 +22,6 @@ class Carousel {
             </li>`,
       ''
     );
-
     return `<ul class="product-list__row">${productListContent}</ul>`;
   }
 

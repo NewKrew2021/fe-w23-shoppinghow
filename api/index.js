@@ -1,12 +1,17 @@
 const Router = require('koa-router');
-const carouselData = require('../data/carousel.json');
+
 const productItemListData = require('../data/product-item-list.json');
 
 const api = new Router();
+
 const PRODUCT_NUMBER_IN_LINE = 5;
+const CAROUSEL_PRODUCT_NUMBER = 15;
 
 api.get('/carousel', (ctx, next) => {
-  ctx.body = carouselData;
+  ctx.body = productItemListData.productItemList.slice(
+    0,
+    CAROUSEL_PRODUCT_NUMBER
+  );
 });
 
 api.get('/product', (ctx, next) => {
