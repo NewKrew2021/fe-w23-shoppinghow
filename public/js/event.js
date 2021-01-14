@@ -66,20 +66,19 @@ function clickSaveStorage() {
 /* 최근본 상품 탭 - 팝업 레이어 마우스 오버, 아웃 이벤트 함수 */
 function showPopupLayer() {
     const recentBtn = DOM('#recent-btn').querySelector();
+    const innerPopup = DOM('#popup-layer').querySelector();
     recentBtn.addEventListener('mouseover', () => {
-        let current = DOM('.inner-popup').querySelector();
-        if (current.classList.contains("none"))
-            current.classList.remove("none");
+        innerPopup.style.display = "block";
 
         /* 마우스를 올릴 때, 로컬 스토리지의 모든 값을 가져와 출력한다. */
         getLocalStorage();
     });
 }
 function hidePopupLayer() {
-    const recentBtn = DOM('#recent-btn').querySelector();
-    recentBtn.addEventListener('mouseout', () => {
-        let current = DOM('.inner-popup').querySelector();
-        current.classList.add("none");
+    const recentDiv = DOM('#recent-btn').querySelector();
+    const innerPopup = DOM('#popup-layer').querySelector();
+    recentDiv.addEventListener('mouseout', () => {
+        innerPopup.style.display = "none";
     });
 }
 showPopupLayer();
