@@ -5,13 +5,13 @@
     <title>쇼핑하우 by Kevin</title>
     <link rel="shortcut icon" href="/img/icon.ico">
     <link rel="stylesheet" href="/css/head.css" />
-    <link rel="stylesheet" href="/css/best.css" />
+    <link rel="stylesheet" href="/css/contents.css" />
   </head>
   <body>
     <div class="head">
       <div class="header">
         <span><img class= "shw-logo" src="img/shwLogo.png"></span>
-        <span><input class="search-input" type=text></input></span>
+        <span><input class="search-input" type="text" value="1   부라타치즈"></input></span>
         <span>
           <button class="search-button">
             <img class="search-img" src="/img/searchBtn.png">
@@ -41,63 +41,51 @@
             <img class="category-img" src="/img/recentBtn1.png">최근본 상품
             <img class="catemore-img" src="/img/recentBtn2.png">
           </button>
-        <span>
+          <div class="recent-container non-display">
+            <div class="recent-title">
+              최근 본 상품
+            </div>
+            <div class="img-container"></div>
+            <img class="recent-login" src="img/recentLogin.png">
+          </div>
+        </span>
       </div>
     </div>
-
-    <div class="best">
-      <div class="fashion-container"><img class="fashion-img" src="/img/fashion.png"></div>
-      <div class="carousel-container">
-        <div class="carousel fade"><img class="carousel-img" src="img/carousel1.png"></div>
-        <div class="carousel fade"><img class="carousel-img" src="img/carousel2.png"></div>
-        <div class="carousel fade"><img class="carousel-img" src="img/carousel3.png"></div>
-        <a class="prev" id="carouselPrev"><img class="carousel-btn" src="/img/prevBtn.png"></a>
-        <a class="next" id="carouselNext"><img class="carousel-btn" src="/img/nextBtn.png"></a>
-        <div class="dot-contatiner">
-          <span class="dot" id="img1"></span>
-          <span class="dot" id="img2"></span>
-          <span class="dot" id="img3"></span>
+    <div class="contents">
+      <div class="best">
+        <div class="best-container"><img class="best-img"></div>
+        <div class="carousel-container">
+          <div class="carousel fade"><img class="carousel-img"></div>
+          <div class="carousel fade"><img class="carousel-img"></div>
+          <div class="carousel fade"><img class="carousel-img"></div>
+          <a class="carousel-prev" id="carouselPrev"><img class="carousel-btn" src="/img/prevBtn.png"></a>
+          <a class="carousel-next" id="carouselNext"><img class="carousel-btn" src="/img/nextBtn.png"></a>
+          <div class="dot-contatiner">
+            <span class="dot" id="img1"></span>
+            <span class="dot" id="img2"></span>
+            <span class="dot" id="img3"></span>
+          </div>
+        </div>
+        <div>
+          <table class="theme-container"></table>
+        </div>
+        <div class="more-container" id="more">
+          더보기 ( <red> 1 </red> / 837건 )
+        </div>
+        <table class="trend-container"></table>
+        <div class="btn-container">
+          <a class="trend-prev" id="trendPrev">&#10094;</a>
+          <a class="trend-next" id="trendNext">&#10095;</a>
         </div>
       </div>
-      <table class="theme-container">
-        <th class="theme">
-          <img class="theme-img" src="img/theme1.jpeg">
-          <div class="theme-title">오늘 공기 상태는 어떨까?</div>
-          <div class="theme-info">내 눈으로 직접 확인하는 공기측정기</div>
-          <img class="theme-icon" src="img/themeIcon.png"></img>
-        </th>
-        <th class="theme">
-          <img class="theme-img" src="img/theme2.jpeg">
-          <div class="theme-title">오늘 공기 상태는 어떨까?</div>
-          <div class="theme-info">내 눈으로 직접 확인하는 공기측정기</div>
-          <img class="theme-icon" src="img/themeIcon.png"></img>
-        </th>
-        <th class="theme">
-          <img class="theme-img" src="img/theme3.jpeg">
-          <div class="theme-title">오늘 공기 상태는 어떨까?</div>
-          <div class="theme-info">내 눈으로 직접 확인하는 공기측정기</div>
-          <img class="theme-icon" src="img/themeIcon.png"></img>
-        </th>
-        <th class="theme">
-          <img class="theme-img" src="img/theme4.jpeg">
-          <div class="theme-title">오늘 공기 상태는 어떨까?</div>
-          <div class="theme-info">내 눈으로 직접 확인하는 공기측정기</div>
-          <img class="theme-icon" src="img/themeIcon.png"></img>
-        </th>
-        <th class="theme border-white">
-          <img class="theme-img" src="img/theme5.jpeg">
-          <div class="theme-title">오늘 공기 상태는 어떨까?</div>
-          <div class="theme-info">내 눈으로 직접 확인하는 공기측정기</div>
-          <img class="theme-icon" src="img/themeIcon.png"></img>
-        </th>
-      </table>
-
-      
-
     </div>
+    
   </body>
   <script type="module" src="js/myDomApi.js"></script>
   <script type="module" src="js/myPromise.js"></script>
   <script type="module" src="js/index.js"></script>
   <script type="module" src="js/carousel.js"></script>
+  <script type="module" src="js/trend.js"></script>
+  <script type="module" src="js/best.js"></script>
+  <script type="module" src="js/recent.js"></script>
 </html>

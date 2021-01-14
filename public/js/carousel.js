@@ -2,7 +2,6 @@ import {myDomApi} from "./myDomApi.js"
 
 let carouselIndex = 0;
 
-
 const prevBtn = myDomApi.myQuerySelector("#carouselPrev");
 const nextBtn = myDomApi.myQuerySelector("#carouselNext");
 const dotBtns = myDomApi.myQuerySelectorAll("span.dot");
@@ -16,7 +15,7 @@ nextBtn.addEventListener("click", () => {
 });
 
 dotBtns.forEach( btn => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("mouseover", () => {
     carouselIndex = Number(btn.id[3])-1;
     changeImg(carouselIndex += 1);
   });
@@ -33,7 +32,7 @@ const changeImg = curImg => {
   dots[carouselIndex-1].className = "dot active";
 }
 
-const showimgs = () => {
+const showImgs = () => {
   const imgs = myDomApi.myQuerySelectorAll("div.carousel");
   const dots = myDomApi.myQuerySelectorAll("span.dot");
   imgs.forEach( img => img.className = "carousel fade non-display");
@@ -42,7 +41,7 @@ const showimgs = () => {
   if (carouselIndex > imgs.length) carouselIndex = 1;
   imgs[carouselIndex-1].className = "carousel fade display";
   dots[carouselIndex-1].className = "dot active";
-  setTimeout(showimgs, 3000);
+  setTimeout(showImgs, 3000);
 }
 
-showimgs();
+export {showImgs};
