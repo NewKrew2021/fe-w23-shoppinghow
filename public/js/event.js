@@ -33,10 +33,12 @@ addMoreContent();
 /* 로컬 스토리지로부터 값을 가져와 넣는 함수 */
 function getLocalStorage() {
     const target = DOM('#recent-img').querySelector();
+    const cntTarget = DOM('.recent-count').querySelector();
     let text = "";
     for (let [key, value] of Object.entries(localStorage).sort()) {
         text += `<img class='mg-left-4' src=${value}>`
     }
+    cntTarget.innerHTML = localStorage.length;
     target.innerHTML = text;
 }
 
