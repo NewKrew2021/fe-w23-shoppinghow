@@ -42,5 +42,5 @@
   initCarouselPromotionSection()
   initBestItems()
   initItemCardWrapper()
-  initHoverShow()
+  initHoverPopup()
 })()

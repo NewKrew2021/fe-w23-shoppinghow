@@ -485,7 +485,7 @@ input {
   border-bottom: 1px solid #efefef;
 }
 
-[data-hover-show-target].show {
+[data-hover-popup-target].show {
   display: initial;
 }
 
