@@ -8,9 +8,10 @@ const PRODUCT_NUMBER_IN_LINE = 5;
 const CAROUSEL_PRODUCT_NUMBER = 15;
 
 api.get('/carousel', (ctx, next) => {
+  const productNumber = Number(ctx.query.num);
   ctx.body = productItemListData.productItemList.slice(
     0,
-    CAROUSEL_PRODUCT_NUMBER
+    PRODUCT_NUMBER_IN_LINE * productNumber
   );
 });
 

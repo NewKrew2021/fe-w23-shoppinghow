@@ -1,5 +1,11 @@
+const HOST = 'http://localhost:8000';
+
 class Carousel {
-  constructor() {}
+  constructor(productTotalLineNumber) {
+    this.currentIndex = 0;
+    this.productTotalLineNumber = productTotalLineNumber;
+    this.carousel;
+  }
 
   createProductListTemplate(productItemList) {
     const productListContent = productItemList.reduce(
@@ -25,8 +31,14 @@ class Carousel {
     return `<ul class="product-list__row">${productListContent}</ul>`;
   }
 
+  fetchProductList = () =>
+    fetch(`${HOST}/api/carousel/?num=${this.productTotalLineNumber}`).then(
+      response => {
+        return response.json();
+      }
+    );
+
   createCarouselProductList = () => {
-    this;
     return `
         <div class="carousel-product-list">
             <div class="carousel-product-list__before">${this.createProductListTemplate()}</div>
