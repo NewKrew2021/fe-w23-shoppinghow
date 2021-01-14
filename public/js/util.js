@@ -10,8 +10,6 @@ function addHTML(node, text) {
     node.innerHTML += text;
 }
 
-const getElementsClass = (className) => document.getElementsByClassName(className);
-
 /* Custom API Class */
 class Custom {
     constructor(target) {
