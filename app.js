@@ -8,9 +8,12 @@ app.get('/', (req, res)=> {
     res.sendFile(path.join(__dirname + '/view/index.html'));
 });
 
-app.get('/best', (req, res) =>{
-    const data=require("./data/data.json"); // read data from json file
-    res.json(data);
+app.get('/item', (req, res) =>{
+    const pageNum=req.query.page;
+    const start=pageNum*5;
+    const data=require("./data/item.json"); // read data from json file
+    const sliced=data.items.slice(start,start+5);
+    res.json({items:sliced});
 });
 
 app.listen(port, () => {

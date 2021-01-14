@@ -4,6 +4,9 @@ header {
   width:100%;
   height:150px;
   background-color: white;
+  font-family: sans-serif;
+  z-index:10000000;
+
   #banner{
     display: flex;
     height:100px;
@@ -21,9 +24,6 @@ header {
     border-radius: 10px;
     margin-left:10px;
     border: 1px solid gainsboro;
-  }
-  font: {
-    family: $font_family;
   }
   #search-button{
     position: relative;
@@ -44,15 +44,48 @@ header {
     transform:translate(-50%);
     display:inline;
     width:100%;
+    .nav{
+      margin:20px
+    }
+    .hash{
+      color:gray
+    }
+    img{
+      position:relative;
+      top:10px;
+    }
+    #recent-item{
+        display: inline-block;
+        #recent-popup{
+            display: none;
+            position:absolute;
+            right:5%;
+            top:110%;
+            width:420px;
+            height:540px;
+            background-color: white;
+            border:1px solid black;
+            justify-content: start;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            z-index:0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            .popup-item{
+                display:inline-block;
+                margin:5px;
+                height: 124px;
+                width: 124px;
+            }
+            img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+        
+    
+    }
+
   }
-  .nav{
-    margin:20px
-  }
-  .hash{
-    color:gray
-  }
-  img{
-    position:relative;
-    top:10px;
-  }
+  
 }

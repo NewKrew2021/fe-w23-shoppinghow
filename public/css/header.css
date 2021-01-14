@@ -4,6 +4,7 @@ header {
   height: 150px;
   background-color: white;
   font-family: sans-serif;
+  z-index: 10000000;
 }
 header #banner {
   display: flex;
@@ -43,15 +44,44 @@ header nav {
   display: inline;
   width: 100%;
 }
-header .nav {
+header nav .nav {
   margin: 20px;
 }
-header .hash {
+header nav .hash {
   color: gray;
 }
-header img {
+header nav img {
   position: relative;
   top: 10px;
+}
+header nav #recent-item {
+  display: inline-block;
+}
+header nav #recent-item #recent-popup {
+  display: none;
+  position: absolute;
+  right: 5%;
+  top: 110%;
+  width: 420px;
+  height: 540px;
+  background-color: white;
+  border: 1px solid black;
+  justify-content: start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  z-index: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+header nav #recent-item #recent-popup .popup-item {
+  display: inline-block;
+  margin: 5px;
+  height: 124px;
+  width: 124px;
+}
+header nav #recent-item #recent-popup img {
+  height: 100%;
+  width: 100%;
 }
 
 /*# sourceMappingURL=header.css.map */
