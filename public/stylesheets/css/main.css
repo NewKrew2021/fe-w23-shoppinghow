@@ -365,7 +365,7 @@ input {
   background-color: #ffffff;
   position: absolute;
   top: 50px;
-  right: 50px;
+  right: 100px;
   padding: 25px;
   border: 1px solid gray;
   width: 385px;
@@ -398,6 +398,10 @@ input {
 
 .none {
   display: none;
+}
+
+.banner-img {
+  cursor: pointer;
 }
 
 .pd-5 {

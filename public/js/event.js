@@ -29,10 +29,10 @@ addMoreContent();
 function getLocalStorage() {
     const target = DOM('#recent-img').querySelector();
     let text = "";
-    for (let [key, value] of Object.entries(localStorage)) {
-        text += `<img class="mg-left-4" src=${key}>`;
-        target.innerHTML = text;
+    for (let [key, value] of Object.entries(localStorage).sort()) {
+        text += `<img class='mg-left-4' src=${value}>`
     }
+    target.innerHTML = text;
 }
 
 /* 배너 사진 클릭 시 로컬 스토리지에 담는 이벤트 함수 */
@@ -41,7 +41,7 @@ function clickSaveStorage() {
     bannerImage.forEach(function (element) {
         element.addEventListener('click', function () {
             let imgsrc = this.getAttribute('src');
-            localStorage.setItem(imgsrc, Date.now());
+            localStorage.setItem(Date.now(),imgsrc);
         });
     });
 }

@@ -1,6 +1,7 @@
 /*
     slide.js
     슬라이드쇼 기능을 구현하는 함수 (함수 길이가 길어져서 수정 계획 중)
+    클래스로 변경해 보기
 */
 function addSlideShow() {
     let curSlideIndex = 0;
@@ -46,7 +47,7 @@ function addSlideShow() {
             curSlideIndex = slideLength;
         }
 
-        let pagination = querySelectorAll(".page");
+        let pagination = DOM('.page').querySelectorAll();
         pagination[(curSlideIndex === slideLength) ? 0 : curSlideIndex].classList.remove('active');
 
         curSlide = slideContent[--curSlideIndex];
