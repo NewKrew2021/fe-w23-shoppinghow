@@ -31,12 +31,14 @@ class HotSlide{
 
     onEvents() {
         /* 이벤트 핸들러 등록 */
-        this.slidePrevBtn.addEventListener('mouseup', ()=>this.PrevBtnPressHandler());
-        this.slidePrevBtn.addEventListener('mousedown', ()=> {
+        this.slidePrevBtn.addEventListener('mouseup', (e)=>this.PrevBtnPressHandler(e));
+        this.slidePrevBtn.addEventListener('mousedown', (e)=> {
+            e.target.src='/images/prev2_press_btn.png';
             this.mousedownTime = new Date().getTime();
         })   
-        this.slideNextBtn.addEventListener('mouseup', ()=>this.nextBtnPressHandler());
-        this.slideNextBtn.addEventListener('mousedown', ()=> {
+        this.slideNextBtn.addEventListener('mouseup', (e)=>this.nextBtnPressHandler(e));
+        this.slideNextBtn.addEventListener('mousedown', (e)=> {
+            e.target.src='/images/next2_press_btn.png';
             this.mousedownTime = new Date().getTime();
         });
         //this.slidePrevBtn.addEventListener('click', ()=> this.prevBtnClickHandler());
@@ -61,11 +63,14 @@ class HotSlide{
         this.curSlide = this.slideContent[--h_curSlideIndex];
     }
 
-    PrevBtnPressHandler(){
+    PrevBtnPressHandler(e){
         let mouseupTime = new Date().getTime(),
               timeDifference = mouseupTime - this.mousedownTime;
         console.log(timeDifference);
         /* 2초(임시 : 1.5초)보다 짧게 눌렀으면 한 칸만, 아니면 두 칸을 이동하게 함 */
+
+        /* 버튼 이미지 변경 */
+        e.target.src='/images/prev2_btn.png';
 
         if(timeDifference < 1500){
             this.slideList.style.transition = SLIDE_SPEED + "ms";
@@ -120,10 +125,13 @@ class HotSlide{
     }
 
     /* 다음 버튼을 2초 누를 시 발생하는 이벤트 핸들러 */
-    nextBtnPressHandler(){
+    nextBtnPressHandler(e){
         let mouseupTime = new Date().getTime(),
               timeDifference = mouseupTime - this.mousedownTime;
         console.log(timeDifference);
+
+        e.target.src='/images/next2_btn.png';
+
         /* 2초(임시 : 1.5초)보다 짧게 눌렀으면 한 칸만, 아니면 두 칸을 이동하게 함 */
         if (timeDifference < 1500){
             if (h_curSlideIndex <= this.slideLength - 1) {
