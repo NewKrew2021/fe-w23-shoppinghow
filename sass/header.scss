@@ -5,6 +5,8 @@ header {
   height:150px;
   background-color: white;
   font-family: sans-serif;
+  z-index:10000000;
+
   #banner{
     display: flex;
     height:100px;
@@ -42,15 +44,32 @@ header {
     transform:translate(-50%);
     display:inline;
     width:100%;
+    .nav{
+      margin:20px
+    }
+    .hash{
+      color:gray
+    }
+    img{
+      position:relative;
+      top:10px;
+    }
+    #recent-item{
+        display: inline-block;
+        #recent-popup{
+            display: none;
+            position:absolute;
+            right:5%;
+            top:110%;
+            width:420px;
+            height:540px;
+            background-color: white;
+            border:1px solid black;
+            z-index:0;
+        }
+    
+    }
+
   }
-  .nav{
-    margin:20px
-  }
-  .hash{
-    color:gray
-  }
-  img{
-    position:relative;
-    top:10px;
-  }
+  
 }

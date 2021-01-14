@@ -34,12 +34,32 @@
         html+=navData;
     })();
 
-    const sideNav=`<img src ="/image/login.png"></img>
-                <span>로그인</span>
-                <img src ="/image/recent_item.png"></img>
-                <span>최근본 상품</span>`;
+    const sideNav=`
+        <span>
+            <img src ="/image/login.png"></img>
+            <span>로그인</span>
+        </span>
+        <span id="recent-item">
+            <img src ="/image/recent_item.png"></img>
+            <span>최근본 상품</span>
+            <div id="recent-popup">
+                ejqhrl
+            </div>
+        </span>`;
     html+=sideNav;
 
+   
     nav.innerHTML+=html;
+
+    const qs=new QuerySelector();
+    const recentItem=qs.query(document,"#recent-item");
+    const popup=qs.query(document,"#recent-popup");
+    recentItem.addEventListener("mouseenter",()=>{
+        popup.style.display="block";
+    });
+    recentItem.addEventListener("mouseleave",()=>{
+        popup.style.display="none";
+    });
+
 
 })();

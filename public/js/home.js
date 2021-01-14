@@ -12,7 +12,7 @@
             { position: "prev", src: "/image/promotion3.png" },
         ];
 
-        const promotion = dataList.reduce((acc, { position,src }) => {
+        const promotion = dataList.reduce((acc, { position, src }) => {
             return acc + `<span class="promotion-item ${position}"><img src=${src}></img></span>`
         }, '');
 
