@@ -41,4 +41,5 @@
   initBestPromotionSection()
   initCarouselPromotionSection()
   initBestItems()
+  initItemCardWrapper()
 })()

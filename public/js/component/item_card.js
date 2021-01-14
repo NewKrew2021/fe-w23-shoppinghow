@@ -2,7 +2,11 @@
 function appendItemCard(wrapper, items) {
   const ItemCardHtmlString = items.reduce(
     (str, { href, src, title, subtitle, badge }) => str + `
-    <div class="box w-20 p-3">
+    <div
+      class="item-card box w-20 p-3"
+      data-href="${href}"
+      data-src="${src}"
+    >
       <a href="#">
         <img src="${src}">
         <small class="d-block mt-3">
@@ -16,4 +20,17 @@ function appendItemCard(wrapper, items) {
 
   // append to wrapper
   wrapper.innerHTML += ItemCardHtmlString
+}
+
+// initialize item card wrapper to handle click event for items
+function initItemCardWrapper() {
+  findOne('.item-card-wrapper')
+    .addEventListener('click', event => {
+      // find the item card
+      const itemCard = event.target.closest('.item-card')
+      if (itemCard) {
+        // save data into the recent-viewed item list
+        saveRecent(itemCard.dataset)
+      }
+  })
 }
