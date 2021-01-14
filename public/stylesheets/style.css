@@ -142,6 +142,7 @@ li {
   font-size: 25px; }
 
 .recent-product {
+  height: 100%;
   position: relative;
   display: flex;
   align-items: center; }
@@ -154,7 +155,8 @@ li {
   .recent-product .recent-product__text {
     font-size: 16px; }
   .recent-product .recent-product__pop-up {
-    top: 40px;
+    display: none;
+    top: 60px;
     left: -300px;
     position: absolute;
     float: left;
@@ -162,6 +164,10 @@ li {
     height: 500px;
     background: #ffffff;
     border: solid 1px #000000; }
+    .recent-product .recent-product__pop-up:hover {
+      display: block; }
+  .recent-product:hover .recent-product__pop-up {
+    display: block; }
 
 .carousel {
   position: relative; }
