@@ -8,6 +8,12 @@ class Carousel {
     this.carouselProductListData;
   }
 
+  createTagListTemplate(tagList) {
+    const tagReducer = (acc, tag) =>
+      acc + `<div class="product-tag">${tag}</div>`;
+    return tagList.reduce(tagReducer);
+  }
+
   createProductListTemplate(productItemList) {
     const productListContent = productItemList.reduce(
       (acc, { image, title, description, tagList }) =>
@@ -65,9 +71,24 @@ class Carousel {
   createCarouselProductList = carouselProductListData => {
     return `
         <div class="carousel-product-list">
-            <div class="carousel-product-list__before">${this.createProductListTemplate()}</div>
-            <div class="carousel-product-list__current">${this.createProductListTemplate()}</div>
-            <div class="carousel-product-list__after">${this.createProductListTemplate()}</div>
+            <div class="carousel-product-list__before">${this.createProductListTemplate(
+              this.parseProductListDataByIndex(
+                carouselProductListData,
+                this.currentIndex - 1
+              )
+            )}</div>
+            <div class="carousel-product-list__current">${this.createProductListTemplate(
+              this.parseProductListDataByIndex(
+                carouselProductListData,
+                this.currentIndex
+              )
+            )}</div>
+            <div class="carousel-product-list__after">${this.createProductListTemplate(
+              this.parseProductListDataByIndex(
+                carouselProductListData,
+                this.currentIndex + 1
+              )
+            )}</div>
         </div>;
         `;
   };
