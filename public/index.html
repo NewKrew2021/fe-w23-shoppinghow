@@ -11,7 +11,7 @@
     <div class="head">
       <div class="header">
         <span><img class= "shw-logo" src="img/shwLogo.png"></span>
-        <span><input class="search-input" type=text></input></span>
+        <span><input class="search-input" type="text" value="1   부라타치즈"></input></span>
         <span>
           <button class="search-button">
             <img class="search-img" src="/img/searchBtn.png">
@@ -41,7 +41,14 @@
             <img class="category-img" src="/img/recentBtn1.png">최근본 상품
             <img class="catemore-img" src="/img/recentBtn2.png">
           </button>
-        <span>
+          <div class="recent-container non-display">
+            <div class="recent-title">
+              최근 본 상품
+            </div>
+            <div class="img-container"></div>
+            <img class="recent-login" src="img/recentLogin.png">
+          </div>
+        </span>
       </div>
     </div>
     <div class="contents">
@@ -59,14 +66,18 @@
             <span class="dot" id="img3"></span>
           </div>
         </div>
-        <table class="theme-container"></table>
-        <div class="more-container">
-          더보기(1/276건)
+        <div>
+          <table class="theme-container"></table>
+        </div>
+        <div class="more-container" id="more">
+          더보기 ( <red> 1 </red> / 837건 )
+        </div>
+        <table class="trend-container"></table>
+        <div class="btn-container">
+          <a class="trend-prev" id="trendPrev">&#10094;</a>
+          <a class="trend-next" id="trendNext">&#10095;</a>
         </div>
       </div>
-      <table class="trend-container"></table>
-      <a class="trend-prev" id="trendPrev">&#10094;</a>
-      <a class="trend-next" id="trendNext">&#10095;</a>
     </div>
     
   </body>
@@ -75,4 +86,6 @@
   <script type="module" src="js/index.js"></script>
   <script type="module" src="js/carousel.js"></script>
   <script type="module" src="js/trend.js"></script>
+  <script type="module" src="js/best.js"></script>
+  <script type="module" src="js/recent.js"></script>
 </html>

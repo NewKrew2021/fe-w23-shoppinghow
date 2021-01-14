@@ -1,4 +1,4 @@
-export default class MyPromise {
+export class MyPromise {
   constructor(callback) {
     this.status = "pending";
     this.promiseResult = undefined;
@@ -45,12 +45,3 @@ export default class MyPromise {
 }
 
 const addToTaskQueue = task => setTimeout(task, 0);
-
-const promiseTest = new MyPromise((resolve, reject) => {
-  setTimeout( () => resolve("kevin"), 3000);
-  setTimeout( () => reject(new Error("Request is failded")), 3000);
-});
-
-promiseTest
-.then( name => console.log("I'm", name))
-.catch( error => console.log(error));

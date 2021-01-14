@@ -1,5 +1,6 @@
 import {myDomApi} from "./myDomApi.js"
 import {trendData} from "./index.js"
+import {MyPromise} from "./myPromise.js"
 
 let trendFirstIndex = 0;
 
@@ -8,12 +9,18 @@ let isMouseUp = false;
 const prevBtn = myDomApi.myQuerySelector("#trendPrev");
 const nextBtn = myDomApi.myQuerySelector("#trendNext");
 
+const mySetTimeout = new MyPromise((resolve, reject) => {
+  setTimeout(() => resolve(), 2000);
+});
+
 prevBtn.addEventListener("mousedown", () => {
   clickStartTime = new Date();
   const checkPrevClick = setInterval((clickStartTime => {
     if(isMouseUp) {
       clearInterval(checkPrevClick);
-      setTimeout(()=>isMouseUp=false, 2000);
+      mySetTimeout
+      .then(() => isMouseUp=false)
+      .catch(error => console.log(error));
     }
     else changeImg(trendFirstIndex += -2);
   }),2000);
@@ -30,7 +37,9 @@ nextBtn.addEventListener("mousedown", () => {
   const checkPrevClick = setInterval((clickStartTime => {
     if(isMouseUp) {
       clearInterval(checkPrevClick);
-      setTimeout(()=>isMouseUp=false, 2000);
+      mySetTimeout
+      .then(() => isMouseUp=false)
+      .catch(error => console.log(error));
     }
     else changeImg(trendFirstIndex += 2);
   }),2000);
@@ -55,3 +64,17 @@ const changeImg = curImg => {
     if (trendIdx < 0) trendIdx = imgsLength-1;
   }
 }
+
+const trendClickListener = () => {
+  const trendImgList = myDomApi.myQuerySelectorAll("img.trend-img");
+  trendImgList.forEach( trendImg => {
+    trendImg.addEventListener("click", () => {
+      let shoppingList = JSON.parse(localStorage.getItem("shopping"));
+      shoppingList[trendImg.src] = "";
+      localStorage.removeItem("shopping");
+      localStorage.setItem("shopping", JSON.stringify(shoppingList));
+    });
+  });
+}
+
+export {trendClickListener};

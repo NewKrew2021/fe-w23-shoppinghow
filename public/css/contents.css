@@ -1,17 +1,18 @@
+red {
+  color: #ff0000;
+}
+
 .contents {
   position: absolute;
-  width: 1310px;
-  height: 1130px;
+
   margin-left: 245px;
   margin-top: 180px;
-  border: #e4e4e4 solid 1px;
   background-color: #f1f1f1;
 }
 
 .best {
-  position: absolute;
   width: 1300px;
-  height: 660px;
+  height: 341px;
   margin-left: 5px;
   margin-top: 20px;
   background-color: #ffffff;
@@ -21,10 +22,11 @@
 
 .best-container {
   position: absolute;
-  width: 517px;
+  width: 515px;
   height: 340px;
-  border-right: #e4e4e4 solid 1px;
+  border-collapse:collapse;
   border-bottom: #e4e4e4 solid 1px;
+
 }
 
 .best-img {
@@ -33,21 +35,27 @@
 
 .carousel-container {
   position: absolute;
-  width: 783px;
+  width: 780px;
   height: 340px;
   margin-left: 517px;
+  border-left: #e4e4e4 solid 1px;
   border-bottom: #e4e4e4 solid 1px;
 }
 
 .theme-container {
-  position: absolute;
-  width: 100%;
-  height : 320px;
+  width: 1302px;
+  height : 280px;
   margin-top: 339px;
+  margin-left: -1px;
+  border-left: #e4e4e4 solid 1px;
+  border-right: #e4e4e4 solid 1px;
+  background-color: #ffffff;
 }
 
 .theme {
+  background-color: #ffffff;
   border-right: #e4e4e4 solid 1px;
+  border-bottom: #e4e4e4 solid 1px;
 }
 
 .theme-img {
@@ -173,11 +181,9 @@
 }
 
 .more-container {
-  position: absolute;
   width: 1300px;
   height: 40px;
-  margin-left: -1px;
-  margin-top: 665px;
+  margin-top: 5px;
   padding-top: 20px;
   background-color: #c2c2c2;
   cursor: pointer;
@@ -189,11 +195,9 @@
 }
 
 .trend-container {
-  position: absolute;
-  width: 1300px;
+  width: 1302px;
   height : 320px;
-  margin-top: 770px;
-  margin-left: 5px;
+  margin-top: 30px;
   background-color: #ffffff;
   border: #e4e4e4 solid 1px;
 }
@@ -243,8 +247,8 @@
   top: 50%;
   width: 30px;
   height: 40px;
-  margin-top: 340px;
-  margin-left: 6px;
+  margin-top: -220px;
+  margin-left: 2px;
   padding-top: 5px;
   padding-left: 15px;
   color: white;
@@ -256,5 +260,46 @@
 }
 
 .trend-next {
-  margin-left : 1259px;
+  margin-left : 1255px;
+}
+
+.btn-container {
+  position: relative
+}
+
+.recent-container {
+  width: 400px;
+  height: 520px;
+  margin-left : 1150px;
+  border: 1px solid #8a8a8a;
+  background-color: #ffffff;
+}
+
+.recent-title {
+  width: 360px;
+  height: 30px;
+  margin-top: 20px;
+  margin-left: 20px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.img-container {
+  width: 360px;
+  height: 390px;
+  margin-left: 20px;
+}
+
+.recent-img {
+  width: 32%;
+  height: 120px;
+  border: 1px solid #ffffff;
+  float: left;
+  cursor: pointer;
+}
+
+.recent-login {
+  width: 400px;
+  margin-top: 13px;
 }
