@@ -54,8 +54,9 @@ function carousel() {
     return element;
 }
 
-function bestItem() {
+function bestItem(src) {
     let element = `<div class="container__item--best border-gray">
+    <img src="${src}" class="margin-auto container__item--best__img">
     </div>`;
     return element;
 }

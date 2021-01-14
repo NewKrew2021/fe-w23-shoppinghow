@@ -49,7 +49,7 @@ const initPage = () => {
         const basics = data[3].items;
         
         // best, carousel box
-        containerDOM.appendChild(promotionBox(carousel(), bestItem()));
+        containerDOM.appendChild(promotionBox(carousel(), bestItem(bests[0].src)));
         const c = new Carousel(containerDOM.lastChild.firstChild, carousels);
         c.init();
         c.render();

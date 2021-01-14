@@ -106,6 +106,8 @@ body {
 .container__item--best__img {
     width: 485px;
     height: 340px;
+    position: relative;
+    top:20px;
     display: block;
 }
 .container__item--carousel__box {
@@ -114,6 +116,7 @@ body {
     display: block;
     position: relative;
     overflow: hidden;
+    bottom: 40px;
 }
 .container__item--carousel__img {
     width: 485px;
