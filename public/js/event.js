@@ -30,7 +30,7 @@ function addMoreContent() {
 }
 addMoreContent();
 
-/* 로컬 스토리지로부터 값을 가져와 넣는 함수 */
+/* 로컬 스토리지로부터 값을 가져와 이미지 태그에 넣는 함수 */
 function getLocalStorage() {
     const target = DOM('#recent-img').querySelector();
     const cntTarget = DOM('.recent-count').querySelector();

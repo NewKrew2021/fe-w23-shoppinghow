@@ -23,7 +23,7 @@ class Slider {
         /* 이벤트 등록 전 레이아웃 준비 */
         this.slideList.appendChild(this.copyFirstSlide);
         this.slideList.insertBefore(this.copyLastSlide, this.slideList.firstElementChild);
-        this.slideList.style.width = (SLIDE_WIDTH + 160) * (this.slideLength + 2) + "px";
+        this.slideList.style.width = (SLIDE_WIDTH) * (this.slideLength + 2) + "px";
         this.slideList.style.transform = "translate3d(-" + ((SLIDE_WIDTH) * (curSlideIndex + 1)) + "px, 0px, 0px)";
     }
 
@@ -52,7 +52,6 @@ class Slider {
             }, AUTO_SLIDE_SPEED);
             curSlideIndex = this.slideLength;
         }
-        console.log(curSlideIndex);
         this.pagination[(curSlideIndex === this.slideLength) ? 0 :
             curSlideIndex].classList.remove('active');
 

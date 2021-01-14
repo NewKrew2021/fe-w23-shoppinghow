@@ -1,7 +1,7 @@
 /*
     main.js
-    fetch API 활용해서 이미지 넣기
-    기타 텍스트, 이미지 요소 넣기
+    - fetch API 활용해서 이미지 넣기
+    - 기타 텍스트, 이미지 요소 넣기
 */
 
 /* nav 요소 innerHTML로 추가 */
@@ -72,12 +72,17 @@
         .then(res => res.json())
         .then(json => json.forEach(element => {
             addHTML(slideList,
-                `<li class="grid-banner">
+                `<li class="slide-content-2">
                 <img class="banner-img" src=${element.src}>
                 <p class="title">${element.title}</p>
                 <p class="subtext">${element.text}</p>
                 <img class="theme-btn" src="/images/theme.png"></li>`)
         }))
         .then(data => clickSaveStorage())
+        .then(data => {
+            const tests = new HotSlide(h_curSlideIndex = 0, SLIDE_SPEED = 300,
+                AUTO_SLIDE_SPEED = 300, HOT_SLIDE_WIDTH = 256)
+            tests.init();
+        })
         .catch((error) => console.error(error))
 })();
