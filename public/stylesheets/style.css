@@ -178,8 +178,6 @@ li {
     position: relative;
     right: 1350px;
     transition: transform 1s; }
-    .carousel .carousel-product-list:hover {
-      transform: translate3d(-1350px, 0, 0); }
   .carousel .carousel__left-button {
     display: flex;
     align-items: center;

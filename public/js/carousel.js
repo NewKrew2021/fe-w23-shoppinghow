@@ -91,14 +91,20 @@ class Carousel {
                 this.currentIndex + 1
               )
             )}</div>
-        </div>;
+        </div>
         `;
   };
 
   // 오른쪽으로 이동
-  moveToRight() {}
+  moveToRight() {
+    $('.carousel-product-list').style.transform = 'translate3d(-1350px,0,0)';
+    this.currentIndex = (this.currentIndex + 1) % this.productTotalLineNumber;
+  }
   // 왼쪽으로 이동
-  moveToLeft() {}
+  moveToLeft() {
+    $('.carousel-product-list').style.transform = 'translate3d(1350px,0,0)';
+    this.currentIndex = (this.currentIndex - 1) % this.productTotalLineNumber;
+  }
   // 버튼 이벤트 등록
   addButtonEvent() {}
   // 생성
@@ -109,6 +115,14 @@ class Carousel {
         this.createLeftButton() +
         this.createRightButton() +
         this.createCarouselProductList(res);
+    });
+    carouselElement.addEventListener('click', event => {
+      if (event.target.className === 'carousel__right-button') {
+        this.moveToRight();
+      }
+      if (event.target.className === 'carousel__left-button') {
+        this.moveToLeft();
+      }
     });
   }
 }
