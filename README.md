@@ -1,5 +1,9 @@
 # fe-w23-shoppinghow
 
+## 구현 화면
+![shw](https://user-images.githubusercontent.com/26708382/104601795-02761480-56be-11eb-8d7f-764624b2d73e.png)
+
+
 ## 구조
   app.js : Express
   public  
