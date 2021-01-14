@@ -10,6 +10,7 @@ class Carousel {
     this.productTotalLineNumber = productTotalLineNumber;
     this.carouselProductListData;
     this.isCarouselChanging = false;
+    this.carouselElement = $('.carousel');
   }
 
   createTagListTemplate(tagList) {
@@ -95,13 +96,14 @@ class Carousel {
     this.currentIndex = (this.currentIndex + 1) % this.productTotalLineNumber;
 
     setTimeout(() => {
-      $('.carousel').innerHTML =
+      this.carouselElement.innerHTML =
         this.createLeftButton() +
         this.createRightButton() +
         this.createCarouselProductList(this.carouselProductListData);
       this.isCarouselChanging = false;
     }, 1000);
   }
+
   // 왼쪽으로 이동
   moveToLeft() {
     $(
@@ -110,25 +112,17 @@ class Carousel {
     this.currentIndex = (this.currentIndex - 1) % this.productTotalLineNumber;
 
     setTimeout(() => {
-      $('.carousel').innerHTML =
+      this.carouselElement.innerHTML =
         this.createLeftButton() +
         this.createRightButton() +
         this.createCarouselProductList(this.carouselProductListData);
       this.isCarouselChanging = false;
     }, 1000);
   }
+
   // 버튼 이벤트 등록
-  addButtonEvent() {}
-  // 생성
-  init() {
-    const carouselElement = $('.carousel');
-    this.fetchProductList().then(() => {
-      carouselElement.innerHTML =
-        this.createLeftButton() +
-        this.createRightButton() +
-        this.createCarouselProductList(this.carouselProductListData);
-    });
-    carouselElement.addEventListener('click', event => {
+  addButtonEvent() {
+    this.carouselElement.addEventListener('click', event => {
       if (this.isCarouselChanging) return;
       this.isCarouselChanging = true;
       if (event.target.className === 'carousel__right-button') {
@@ -138,6 +132,16 @@ class Carousel {
         this.moveToLeft();
       }
     });
+  }
+  // 생성
+  init() {
+    this.fetchProductList().then(() => {
+      this.carouselElement.innerHTML =
+        this.createLeftButton() +
+        this.createRightButton() +
+        this.createCarouselProductList(this.carouselProductListData);
+    });
+    this.addButtonEvent();
   }
 }
 
