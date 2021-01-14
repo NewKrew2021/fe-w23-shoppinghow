@@ -8,7 +8,7 @@ const init = () => {
 
   const carousel = new Carousel(3);
   carousel.fetchProductList().then(res => {
-    console.log(carousel.parseProductListDataByIndex(res));
+    console.log(carousel.parseProductListDataByIndex(res, 0));
   });
   productList.init();
 

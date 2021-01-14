@@ -53,10 +53,9 @@ class Carousel {
         `;
   }
 
-  parseProductListDataByIndex(carouselProductListData) {
+  parseProductListDataByIndex(carouselProductListData, index) {
     const startIndex =
-      (this.currentIndex + this.productTotalLineNumber) %
-      this.productTotalLineNumber;
+      (index + this.productTotalLineNumber) % this.productTotalLineNumber;
     return carouselProductListData.slice(
       PRODUCT_NUMBER_IN_ONE_LINE * startIndex,
       PRODUCT_NUMBER_IN_ONE_LINE * (startIndex + 1)
