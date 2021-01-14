@@ -6,7 +6,7 @@ class ProductList {
   constructor() {
     this.productListElement = $('.product-list');
     this.productItemList;
-    this.productItemLine = 0;
+    this.productItemLine = 1;
   }
 
   createTagListTemplate(tagList) {
@@ -52,6 +52,7 @@ class ProductList {
         productItemList
       );
     });
+    $('.more-product-text__count').innerText = this.productItemLine;
   }
 
   init() {
