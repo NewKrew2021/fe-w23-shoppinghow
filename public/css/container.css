@@ -17,14 +17,14 @@
   width: 977px;
   transform: translate(-50%);
 }
-#container span {
+#container #section1 span {
   display: inline-block;
 }
-#container #best {
+#container #section1 #best {
   width: 485px;
   height: 340px;
 }
-#container #promotion-carousel {
+#container #section1 #promotion-carousel {
   display: inline-block;
   position: absolute;
   top: 0%;
@@ -32,29 +32,29 @@
   height: 340px;
   overflow: hidden;
 }
-#container #promotion-carousel .current {
+#container #section1 #promotion-carousel .current {
   position: absolute;
   transform: translateX(0%);
   top: 0%;
 }
-#container #promotion-carousel .next {
+#container #section1 #promotion-carousel .next {
   position: absolute;
   transform: translateX(100%);
   top: 0%;
 }
-#container #promotion-carousel .prev {
+#container #section1 #promotion-carousel .prev {
   position: absolute;
   transform: translateX(-100%);
   top: 0%;
 }
-#container #promotion-carousel #dots {
+#container #section1 #promotion-carousel #dots {
   position: absolute;
   bottom: 10%;
   text-align: center;
   left: 50%;
   transform: translate(-50%);
 }
-#container #promotion-carousel .dot {
+#container #section1 #promotion-carousel .dot {
   cursor: pointer;
   height: 8px;
   width: 15px;
@@ -64,10 +64,10 @@
   display: inline-block;
   transition: background-color 0.6s ease;
 }
-#container #promotion-carousel .active, #container #promotion-carousel .dot:hover {
+#container #section1 #promotion-carousel .active, #container #section1 #promotion-carousel .dot:hover {
   background-color: #717171;
 }
-#container #promotion-carousel .prev-btn, #container #promotion-carousel .next-btn {
+#container #section1 #promotion-carousel .prev-btn, #container #section1 #promotion-carousel .next-btn {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -82,9 +82,46 @@
   user-select: none;
   z-index: 1;
 }
-#container #promotion-carousel .next-btn {
+#container #section1 #promotion-carousel .next-btn {
   right: 0;
   border-radius: 3px 0 0 3px;
+}
+#container #section2 {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  top: 340px;
+  width: 977px;
+  flex-wrap: wrap;
+}
+#container #section2 .item {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#container #section2 img {
+  width: 180px;
+  height: 180;
+}
+#container #section2 .title {
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: bold;
+}
+#container #section2 .subtitle {
+  font-size: 12px;
+  color: gray;
+  margin-top: 4px;
+}
+#container #section2 .badge {
+  padding: 2px;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  border: 1px solid orange;
+  color: orange;
+  border-radius: 10%;
 }
 
 /*# sourceMappingURL=container.css.map */

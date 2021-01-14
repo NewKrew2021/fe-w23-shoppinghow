@@ -28,6 +28,7 @@
                 </span>`;
     })();
     html=`<div id="section1">${html}</div>`;
+    html+=`<div id="section2"></div>`;
     container.innerHTML += html;
 
 })();
