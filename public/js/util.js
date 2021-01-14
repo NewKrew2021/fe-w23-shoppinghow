@@ -15,8 +15,8 @@ function fetchItems(route, data = {}) {
     route += '?' + objectToQueryString(data)
   }
 
-  return fetch(`/items${route}`)
-    .then(response => response.json())
+  return myFetch(`/items${route}`)
+    .then(response => JSON.parse(response))
 }
 
 // convert object to query-string
