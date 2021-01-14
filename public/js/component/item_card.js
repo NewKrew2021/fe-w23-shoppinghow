@@ -24,13 +24,27 @@ function appendItemCard(wrapper, items) {
 
 // initialize item card wrapper to handle click event for items
 function initItemCardWrapper() {
-  findOne('.item-card-wrapper')
-    .addEventListener('click', event => {
+  find('.item-card-wrapper').forEach(wrapper => {
+    // add click event listener
+    wrapper.addEventListener('click', event => {
       // find the item card
       const itemCard = event.target.closest('.item-card')
-      if (itemCard) {
-        // save data into the recent-viewed item list
-        saveRecent(itemCard.dataset)
+
+      // handle exception: item card not found
+      if (!itemCard) {
+        return
       }
-  })
+
+      // save data into the recent-viewed item list
+      saveRecent(itemCard.dataset)
+
+      // init recent view
+      if (wrapper.dataset.recentView) {
+        const recentView = findOne(wrapper.dataset.recentView)
+        if (recentView) {
+          initRecent(recentView)
+        }
+      }
+    })
+  });
 }

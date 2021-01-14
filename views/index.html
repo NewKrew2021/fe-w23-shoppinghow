@@ -62,8 +62,29 @@
           <button>MY 쇼핑</button>
           <button data-hover-popup-target="#popup_recent">최근 본 상품</button>
         </div>
-        <div id="popup_category" class="d-none p-absolute top-100 left-0 w-40 p-5 bg-dark" data-hover-popup-target="#popup_category"></div>
-        <div id="popup_recent" class="d-none p-absolute top-100 right-0 w-40 p-3 bg-white" data-hover-popup-target="#popup_recent">
+
+        <!-- category popup -->
+        <div id="popup_category" class="hover-popup top-100 left-0 w-40" data-hover-popup-target="#popup_category"></div>
+
+        <!-- recent popup -->
+        <div id="popup_recent" class="hover-popup top-100 right-0 w-40" data-hover-popup-target="#popup_recent">
+          <!-- recent popup nav -->
+          <nav>
+            <ul class="nav-list">
+              <li class="nav-item">최근 본 상품</li>
+              <li class="nav-item">내가 찜한 상품</li>
+            </ul>
+          </nav>
+          <!-- recent popup main section -->
+          <div id="recent_view" class="d-flex wrap my-3"></div>
+          <!-- recent popup footer -->
+          <div class="d-flex flex-center">
+            <div>
+              <strong>dewy.i</strong>
+            </div>
+            <button class="gray ml-auto">로그아웃이 왜 여기에</button>
+          </div>
+        </div>
         </div>
       </div>
     </nav>
@@ -73,7 +94,7 @@
     <div class="d-flex wrap">
       <div id="box_best_promotion" class="box w-40"></div>
       <div id="box_carousel_promotion" class="box w-60 px-10p"></div>
-      <div id="best_items" class="item-card-wrapper d-flex wrap"></div>
+      <div id="best_items" class="item-card-wrapper d-flex wrap" data-recent-view="#recent_view"></div>
       <button id="btn_load_best_items" class="w-100 py-3">더보기</button>
     </div>
   </div>
@@ -83,6 +104,7 @@
   <script src="js/local_storage.js"></script>
   <script src="js/hover_popup.js"></script>
 
+  <script src="js/component/recent.js"></script>
   <script src="js/component/carousel.js"></script>
   <script src="js/component/item_card.js"></script>
   <script src="js/index.js"></script>
