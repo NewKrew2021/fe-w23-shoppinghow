@@ -1,4 +1,5 @@
 import {myDomApi} from "./myDomApi.js"
+import {trendData} from "./index.js"
 
 let trendFirstIndex = 0;
 
@@ -42,15 +43,15 @@ nextBtn.addEventListener("mouseup", () => {
 });
 
 const changeImg = curImg => {
-  const imgs = myDomApi.myQuerySelectorAll("th.trend");
-  const imgsLength = imgs.length;
-  imgs.forEach( img => img.className = "trend non-display");
-  if (curImg > imgs.length) trendFirstIndex = 1;
-  if (curImg < 1) trendFirstIndex = imgsLength-1;
-  let idx=trendFirstIndex;
-  for(let cnt=0; cnt<5; cnt++){
-    if(idx>imgsLength-1) idx=0;
-    imgs[idx].className = "trend fade";
-    idx += 1;
+  let trendImg = myDomApi.myQuerySelectorAll("img.trend-img");
+  const imgsLength = trendData.length;
+  if (curImg >= imgsLength) trendFirstIndex = 0;
+  if (curImg < 0) trendFirstIndex = imgsLength-1;
+  let trendIdx = trendFirstIndex;
+  for(let idx=0; idx<5; idx++){
+    trendImg[idx].src = trendData[trendIdx].src;
+    trendIdx+=1;
+    if (trendIdx >= imgsLength) trendIdx = 0;
+    if (trendIdx < 0) trendIdx = imgsLength-1;
   }
 }

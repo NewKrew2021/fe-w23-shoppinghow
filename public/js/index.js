@@ -3,6 +3,8 @@ import {showImgs} from "./carousel.js"
 
 // myDomApi.myQuerySelector("div");
 
+let carouselData, trendData;
+
 window.onload = () => {
   bestContainer();
   carouselContainer();
@@ -29,9 +31,9 @@ const carouselContainer = () => {
   .then(response => response.text())
   .then(result => {
     let idx=0;
-    const data = JSON.parse(result)["items"]
+    carouselData = JSON.parse(result)["items"]
     carouselImg.forEach( img => {
-      img.src = data[idx].src;
+      img.src = carouselData[idx].src;
     })
   })
   .catch(error => console.log('error', error));   
@@ -56,16 +58,6 @@ const trendContainer = () => {
       </th>
     `
   }
-  for(let idx=0; idx<5; idx++){
-    newLayout += `
-      <th class="trend non-display">
-        <img class="trend-img">
-        <div class="trend-title"></div>
-        <div class="trend-info"></div>
-        <img class="trend-icon"></img>
-      </th>
-    `
-  }
   trendContainer.innerHTML += newLayout;
 
   let trendImg = myDomApi.myQuerySelectorAll("img.trend-img");
@@ -76,12 +68,14 @@ const trendContainer = () => {
   fetch(request)
   .then(response => response.text())
   .then(result => {
-    const data = JSON.parse(result)["items"]
-    for(let idx=0; idx<10; idx++){
-      trendImg[idx].src = data[idx].src;
-      trendTitle[idx].innerHTML = data[idx].title;
-      trendInfo[idx].innerHTML = data[idx].subtitle;
+    trendData = JSON.parse(result)["items"]
+    for(let idx=0; idx<5; idx++){
+      trendImg[idx].src = trendData[idx].src;
+      trendTitle[idx].innerHTML = trendData[idx].title;
+      trendInfo[idx].innerHTML = trendData[idx].subtitle;
     }
   })
   .catch(error => console.log('error', error));
 }
+
+export {carouselData, trendData};
