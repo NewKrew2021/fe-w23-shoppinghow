@@ -41,7 +41,11 @@
             addHTML(slideList, `<div class="slide-content">
             <img src=${element.src}></div>`)
         }))
-        .then(data => addSlideShow())
+        .then(data => {
+            const slideObject = new Slider(curSlideIndex = 0, SLIDE_SPEED = 300,
+                AUTO_SLIDE_SPEED = 300, SLIDE_WIDTH = 485);
+            slideObject.init();
+        })
         .catch((error) => console.error(error))
 })();
 
