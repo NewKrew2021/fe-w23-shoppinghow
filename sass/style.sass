@@ -168,6 +168,7 @@ li
   .recent-product__text
     font-size: 16px
   .recent-product__pop-up
+    box-sizing: border-box
     display: none
     top: 60px
     left: -300px
@@ -177,8 +178,18 @@ li
     height: 500px
     background: #ffffff
     border: solid 1px #000000
+    padding: 20px
     &:hover
       display: block
+    .pop-up
+      &__title
+        font-weight: bolder
+        margin-bottom: 10px
+      &__item-list
+        height: 400px
+      &__item-image
+        width: 110px
+
   &:hover
     .recent-product__pop-up
       display: block
