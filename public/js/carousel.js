@@ -1,10 +1,11 @@
 const HOST = 'http://localhost:8000';
+const PRODUCT_NUMBER_IN_ONE_LINE = 5;
 
 class Carousel {
   constructor(productTotalLineNumber) {
     this.currentIndex = 0;
     this.productTotalLineNumber = productTotalLineNumber;
-    this.carousel;
+    this.carouselProductListData;
   }
 
   createProductListTemplate(productItemList) {
@@ -37,8 +38,32 @@ class Carousel {
         return response.json();
       }
     );
+  createLeftButton() {
+    return `
+        <div class="carousel__left-button">
+            <p>&#10094;</p>
+        </div>
+        `;
+  }
+  createRightButton() {
+    return `
+        <div class="carousel__right-button">
+            <p>&#10095;</p>
+        </div>
+        `;
+  }
 
-  createCarouselProductList = () => {
+  parseProductListDataByIndex(carouselProductListData) {
+    const startIndex =
+      (this.currentIndex + this.productTotalLineNumber) %
+      this.productTotalLineNumber;
+    return carouselProductListData.slice(
+      PRODUCT_NUMBER_IN_ONE_LINE * startIndex,
+      PRODUCT_NUMBER_IN_ONE_LINE * (startIndex + 1)
+    );
+  }
+
+  createCarouselProductList = carouselProductListData => {
     return `
         <div class="carousel-product-list">
             <div class="carousel-product-list__before">${this.createProductListTemplate()}</div>
