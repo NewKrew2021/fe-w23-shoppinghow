@@ -184,6 +184,17 @@ li
 
 .carousel
   position: relative
+  width: $content-width
+  overflow: hidden
+  .carousel-product-list
+    display: flex
+    position: relative
+    right: $content-width
+    transition: transform 1s
+    &:hover
+
+      transform: translate3d(-1350px,0,0)
+
   .carousel__left-button
     display: flex
     align-items: center
@@ -215,6 +226,7 @@ li
 .advertise-product
   display: flex
   background: #ffffff
+
   .promotion-product
     width: 540px
     height: 300px
