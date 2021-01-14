@@ -4,8 +4,7 @@ import {trendClickListener} from "./trend.js"
 import {themeClickListener} from "./best.js"
 
 let carouselData, trendData, themeData;
-// const url = "https://7aebe337-b81c-42de-b89f-8c268823df03.mock.pstmn.io";
-const url = "123";
+const url = "https://7aebe337-b81c-42de-b89f-8c268823df03.mock.pstmn.io";
 window.onload = () => {
   bestContainer();
   carouselContainer();
