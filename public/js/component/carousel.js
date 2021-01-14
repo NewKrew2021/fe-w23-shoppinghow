@@ -14,8 +14,8 @@ function appendImageCarousel(wrapper, id, items) {
       <div class="carousel-inner">
         ${carouselItemHtmlString}
       </div>
-      <button class="carousel-button-prev">&LT;</button>
-      <button class="carousel-button-next">&GT;</button>
+      <button class="carousel-button-prev">&#10094;</button>
+      <button class="carousel-button-next">&#10095;</button>
     </div>
     `
 
