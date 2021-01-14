@@ -34,15 +34,16 @@ const initPage = () => {
         const bests = data[1].items;
         const hots = data[2].items;
         const basics = data[3].items;
-
-        // carousel test
-        const c = new Carousel(containerDOM, carousels);
+        
+        // best, carousel box
+        containerDOM.appendChild(promotionBox(carousel(), bestItem()));
+        const c = new Carousel(containerDOM.lastChild.firstChild, carousels);
         c.init();
         c.render();
-        console.log(c);
-        setTimeout(() => {
-            c.next();
-        }, 1000);
+        containerDOM.appendChild(box(hots.slice(0, 5)));
+        
+        // carousel test
+        
 
         // default 10개 표시
         containerBasicItemDOM.appendChild(subject("모든 상품 품절주의!"));

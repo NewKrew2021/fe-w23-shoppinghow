@@ -18,3 +18,12 @@
 .transparency {
     visibility: hidden;
 }
+.btn--prev {
+    float: left;
+    position: absolute;
+    top: 50%;
+}
+.btn--next {
+    float: right;
+    top: 50px;
+}

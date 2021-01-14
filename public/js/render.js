@@ -12,6 +12,13 @@ const subject = (content) => {
     return element;
 }
 
+function promotionBox() {
+    const boxElement = document.createElement("div");
+    boxElement.setAttribute("class", "container__box horizontal");
+    boxElement.innerHTML = [...arguments].join("");
+    return boxElement;
+}
+
 function box(infoArr) {
     const boxElement = document.createElement("div");
     boxElement.setAttribute("class", "container__box horizontal");
@@ -29,16 +36,14 @@ function margin(height) {
     return marginElement;
 }
 
-function carousel(imgSrc) {
+function carousel() {
     let element = `<div class="container__item--carousel border-gray">
-    <img class="container__item--carousel__img margin-auto" src=${imgSrc}>
     </div>`;
     return element;
 }
 
-function bestItem(imgSrc) {
+function bestItem() {
     let element = `<div class="container__item--best border-gray">
-    <img class="container__item--best__img margin-auto" src="${imgSrc}">
     </div>`;
     return element;
 }
