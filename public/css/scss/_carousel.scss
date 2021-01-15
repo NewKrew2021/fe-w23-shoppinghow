@@ -27,30 +27,18 @@
       }
 
       // transition
-      &:not(.reverse) {
-        &.active {
-          transition: transform 0.3s ease-in-out;
-          transform: translateX(100%);
-        }
-        &.next {
+      &.prev {
+        &.reverse {
           transition: none;
-          transform: translateX(200%);
         }
       }
-
-      // reverse transition
-      &.reverse {
-        &.prev {
+      &.active {
+        transform: translateX(100%);
+      }
+      &.next {
+        transform: translateX(200%);
+        &:not(.reverse) {
           transition: none;
-          transform: translateX(0%);
-        }
-        &.active {
-          transition: transform 0.3s ease-in-out;
-          transform: translateX(100%);
-        }
-        &.next {
-          transition: transform 0.3s ease-in-out;
-          transform: translateX(200%);
         }
       }
     }
