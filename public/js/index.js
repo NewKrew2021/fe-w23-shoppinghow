@@ -38,9 +38,18 @@
     loadBestItems()
   }
 
+  // init the hot item carousel
+  function initHotItem() {
+    const carouselWrapper = findOne('#box_carousel_hot')
+    fetchItems('/hot')
+      .then(items => appendImageCarousel(carouselWrapper, 'carousel_hot', items, 5))
+  }
+
   initBestPromotionSection()
   initCarouselPromotionSection()
   initBestItems()
+  initHotItem()
+
   initItemCardWrapper()
   initHoverPopup()
   initRecent(findOne('#recent_view'))
