@@ -64,7 +64,7 @@ const tests = new MyPromise(function(resolve, reject){
 });
 tests.then((res)=>(console.log(res)));
 
-/*
+/* // test
 const test2 = new Promise(function(resolve, reject){
     setTimeout(function(){
         resolve('success3');

@@ -42,8 +42,9 @@
             <img src=${element.src}></div>`)
         }))
         .then(data => {
-            const slideObject = new Slider(curSlideIndex = 0, SLIDE_SPEED = 300,
-                AUTO_SLIDE_SPEED = 300, SLIDE_WIDTH = 485);
+            const slideObject = new Slider(
+                '.prev','.next','.slide-list','.slide-content','.page',
+                485, 1, 0, 300, 300);
             slideObject.init();
         })
         .catch((error) => console.error(error))
@@ -80,7 +81,8 @@
         }))
         .then(data => clickSaveStorage())
         .then(data => {
-            const tests = new HotSlide(h_curSlideIndex = 0, SLIDE_SPEED = 300,
+            const tests = new HotSlider(h_curSlideIndex = 0,
+                SHOW_LENGTH = 5, JUMP = 2, PRESSED_TIME = 1500, SLIDE_SPEED = 300,
                 AUTO_SLIDE_SPEED = 300, HOT_SLIDE_WIDTH = 256)
             tests.init();
         })

@@ -83,3 +83,12 @@ function hidePopupLayer() {
 }
 showPopupLayer();
 hidePopupLayer();
+
+/* 로그인 버튼 누르면 로컬 스토리지 비우기 */
+function removeLocalStorage(){
+    const loginBtn = DOM('#login').querySelector();
+    loginBtn.addEventListener('click',()=>{
+        localStorage.clear();
+    })
+}
+removeLocalStorage();
