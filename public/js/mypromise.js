@@ -17,6 +17,7 @@ class MyPromise {
     this.status = PromiseStatus.PENDING
     this.reason = undefined
     this.value = undefined
+    this.nextType = undefined
 
     // call the callback with this
     callback(
@@ -26,11 +27,29 @@ class MyPromise {
   }
 
   // add task into the task queue
-  #addToTaskQueue(task, arg) {
+  #addToTaskQueue(type, task, arg) {
+    this.status = PromiseStatus.PENDING
+
     setTimeout(function () {
       try {
-        const value = task(arg)
-        this.#resolve(value)
+        if (type === PromiseNextType.FINALLY) {
+          // handle finally
+
+          // do task
+          task()
+
+          switch (this.nextType) {
+            case PromiseNextType.CATCH:
+              this.#reject(this.reason)
+              break
+            case PromiseNextType.THEN:
+              this.#resolve(this.value)
+              break
+          }
+        } else {
+          // handle non-finally
+          this.#resolve(task(arg))
+        }
       } catch (err) {
         this.#reject(err)
       }
@@ -38,31 +57,31 @@ class MyPromise {
   }
 
   #makeNext(type, next) {
-    return {
-      type: type,
-      next: next || (() => {})
-    }
+    return { type, next }
   }
 
   #addCatch(next) {
     this.nexts.push(this.#makeNext(PromiseNextType.CATCH, next))
   }
 
+  #addFinally(next) {
+    this.nexts.push(this.#makeNext(PromiseNextType.FINALLY, next))
+  }
+
   #addThen(next) {
     this.nexts.push(this.#makeNext(PromiseNextType.THEN, next))
   }
 
-  #doNext(typeToDo, arg) {
+  #doNext(arg) {
     while (this.nexts.length) {
       // pop the first
       const { type, next } = this.nexts.shift()
 
-      // do next
-      if (type === typeToDo) {
-        this.status = PromiseStatus.PENDING
+      // do next (include finally)
+      if (type === this.nextType || type === PromiseNextType.FINALLY) {
 
         // add the next into the task queue
-        this.#addToTaskQueue(next, arg)
+        this.#addToTaskQueue(type, next, arg)
         break
       }
     }
@@ -83,7 +102,8 @@ class MyPromise {
     this.reason = reason
 
     // do next
-    this.#doNext(PromiseNextType.CATCH, this.reason)
+    this.nextType = PromiseNextType.CATCH
+    this.#doNext(this.reason)
   }
 
   #resolve(value) {
@@ -97,7 +117,8 @@ class MyPromise {
     this.value = value
 
     // do next
-    this.#doNext(PromiseNextType.THEN, this.value)
+    this.nextType = PromiseNextType.THEN
+    this.#doNext(this.value)
   }
 
   catch(next) {
@@ -111,7 +132,29 @@ class MyPromise {
         break
 
       case PromiseStatus.REJECTED:
-        this.#addToTaskQueue(next, this.reason)
+        this.#addToTaskQueue(PromiseNextType.CATCH, next, this.reason)
+        break
+
+      default:
+        // unknown status
+        break
+    }
+
+    return this
+  }
+
+  finally(next) {
+    switch (this.status) {
+      case PromiseStatus.PENDING:
+        this.#addFinally(next)
+        break
+
+      case PromiseStatus.FULFILLED:
+        this.#addToTaskQueue(PromiseNextType.FINALLY, next, this.value)
+        break
+
+      case PromiseStatus.REJECTED:
+        this.#addToTaskQueue(PromiseNextType.FINALLY, next, this.reason)
         break
 
       default:
@@ -129,7 +172,7 @@ class MyPromise {
         break
 
       case PromiseStatus.FULFILLED:
-        this.#addToTaskQueue(next, this.value)
+        this.#addToTaskQueue(PromiseNextType.THEN, next, this.value)
         break
 
       case PromiseStatus.REJECTED:
@@ -143,6 +186,4 @@ class MyPromise {
 
     return this
   }
-
-  finally() {}
 }
