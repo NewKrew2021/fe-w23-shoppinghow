@@ -30,8 +30,8 @@ class Carousel {
         this.vOn(this.itemDOMs[0]);
 
         // 버튼 렌더링
-        this.parentDOM.innerHTML += `<img src="image/prev_btn.svg" class="btn--prev">`;
-        this.parentDOM.innerHTML += `<img src="image/next_btn.svg" class="btn--next">`;
+        this.parentDOM.innerHTML += `<img src="image/prev_btn.svg" class="btn--prev">;
+        <img src="image/next_btn.svg" class="btn--next">`;
 
         // 막대 렌더링
         this.pageDOMs = [];
@@ -51,7 +51,6 @@ class Carousel {
         for(let i = 0; i < this.pageDOMs.length; i++) {
             const DOM = this.pageDOMs[i];
             DOM.addEventListener("mouseover", () => {
-                console.log(i);
                 this.pageDOMs[this.centerIdx].style.backgroundColor="#ccc";
                 this.vOff(this.itemDOMs[this.centerIdx]);
                 this.pageDOMs[i].style.backgroundColor="#333";
@@ -90,20 +89,18 @@ class Carousel {
         this.pageDOMs[this.centerIdx].style.backgroundColor="#ccc";
         this.pageDOMs[this.leftIdx].style.backgroundColor="#333";
 
-        this.move(left, -1, 0.01);
         left.addEventListener("transitionend", () => {
-            
             this.vOn(left);
             this.move(left, 0, 0.5);
-            this.move(center, 1, 0.5);
-
-            center.addEventListener("transitionend", () => {
-                this.vOff(center);
-                this.move(center, 0, 0.01);
-
-            }, {once: true});
         }, {once: true})
-        
+        center.addEventListener("transitionend", () => {
+            this.vOff(center);
+            this.move(center, 0, 0.01);
+        }, {once: true});
+
+        this.move(left, -1, 0.01);
+        this.move(center, 1, 0.5);   
+
         let n = this.centerIdx - 1;
         if(n == -1) n = this.items.length - 1;
         this.refreshIndex(n);
@@ -115,21 +112,18 @@ class Carousel {
         this.pageDOMs[this.centerIdx].style.backgroundColor="#ccc";
         this.pageDOMs[this.rightIdx].style.backgroundColor="#333";
 
+        center.addEventListener("transitionend", () => {
+            this.vOff(center);
+            this.move(center, 0, 0.01);
+        }, {once: true});
         right.addEventListener("transitionend", () => {
-            
             this.vOn(right);
             this.move(right, 0, 0.5);
-            this.move(center, -1, 0.5);
-
-            center.addEventListener("transitionend", () => {
-                this.vOff(center);
-                this.move(center, 0, 0.01);
-
-
-            }, {once: true});
         }, {once: true})
-        this.move(right, 1, 0.01);
         
+        this.move(right, 1, 0.01);
+        this.move(center, -1, 0.5);
+
         let n = this.centerIdx + 1;
         if(n == this.items.length) n = 0;
         this.refreshIndex(n);
