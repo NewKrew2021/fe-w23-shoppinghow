@@ -1,7 +1,7 @@
 // append a simple image-carousel to the wrapper
-function appendImageCarousel(wrapper, id, items) {
+function appendImageCarousel(wrapper, id, items, pageSize = 1) {
   const carouselItemHtmlString = items.reduce((str, { href, src }) => str + `
-    <div class="carousel-item">
+    <div class="carousel-item w-${Math.floor(100 / pageSize)}">
       <a href="${href}">
         <img src="${src}">
       </a>
@@ -10,7 +10,7 @@ function appendImageCarousel(wrapper, id, items) {
 
   // append to wrapper
   wrapper.innerHTML += `
-    <div id="${id}" class="carousel">
+    <div id="${id}" class="carousel" data-page-size="${pageSize}">
       <div class="carousel-inner">
         ${carouselItemHtmlString}
       </div>
@@ -18,9 +18,6 @@ function appendImageCarousel(wrapper, id, items) {
       <button class="carousel-button-next">&#10095;</button>
     </div>
     `
-
-  // initialize the carousel
-  initCarousel(findOne(`#${id}`, wrapper))
 }
 
 // initialize a carousel
@@ -29,6 +26,7 @@ function initCarousel(carousel) {
   const items = find(`#${carouselId} .carousel-item`)
   const carouselInfo = {
     index: 0,
+    pageSize: parseInt(carousel.dataset.pageSize) || 1,
     items: items,
     nItems: items.length,
     isOnTransition: false,
@@ -51,7 +49,7 @@ function initCarousel(carousel) {
 
 // show next carousel item (also support reverse order)
 function showNextCarouselItem(carouselInfo, isReversed = false) {
-  const { items, nItems, isOnTransition } = carouselInfo
+  const { pageSize, items, nItems, isOnTransition } = carouselInfo
   let { index } = carouselInfo
 
   // prevent duplicated transition
@@ -68,28 +66,41 @@ function showNextCarouselItem(carouselInfo, isReversed = false) {
 
   // find items to transit
   const prevItem = items[(index - 1 + nItems) % nItems]
-  const nowItem = items[index]
-  const nextItem = items[(index + 1) % nItems]
+  const nowItems = []
+  const nextItem = items[(index + pageSize) % nItems]
 
-  // remove all prev/active/next classes
+  // find all items to be active
+  for (let i = 0; i < pageSize; i++) {
+    nowItems.push(items[(index + i) % nItems])
+  }
+
+  // remove all prev/active/next classes and translateX setting
   items.forEach(item => {
     item.classList.remove('prev')
     item.classList.remove('active')
     item.classList.remove('next')
     item.classList.remove('reverse')
+    delete item.dataset.carouselItemTranslateX
   })
 
   // add prev/active/next class
   prevItem.classList.add('prev')
-  nowItem.classList.add('active')
+  nowItems.forEach(item => item.classList.add('active'))
   nextItem.classList.add('next')
 
   // add reverse class
   if (isReversed) {
     prevItem.classList.add('reverse')
-    nowItem.classList.add('reverse')
+    nowItems.forEach(item => item.classList.add('reverse'))
     nextItem.classList.add('reverse')
   }
+
+  // set translateX for items
+  prevItem.dataset.carouselItemTranslateX = pageSize - 1
+  for (let i = 0; i < pageSize; i++) {
+    nowItems[i].dataset.carouselItemTranslateX = pageSize + i
+  }
+  nextItem.dataset.carouselItemTranslateX = pageSize * 2
 
   // end of transition
   setTimeout(() => {

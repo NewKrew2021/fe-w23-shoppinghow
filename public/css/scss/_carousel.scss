@@ -14,7 +14,6 @@
       display: none;
       position: relative;
       float: left;
-      width: 100%;
       margin-left: -100%;
       transition: transform 0.3s ease-in-out;
       transform: translateX(0%);
@@ -27,30 +26,20 @@
       }
 
       // transition
-      &:not(.reverse) {
-        &.active {
-          transition: transform 0.3s ease-in-out;
-          transform: translateX(100%);
-        }
-        &.next {
+      &.prev {
+        &.reverse {
           transition: none;
-          transform: translateX(200%);
+        }
+      }
+      &.next {
+        &:not(.reverse) {
+          transition: none;
         }
       }
 
-      // reverse transition
-      &.reverse {
-        &.prev {
-          transition: none;
-          transform: translateX(0%);
-        }
-        &.active {
-          transition: transform 0.3s ease-in-out;
-          transform: translateX(100%);
-        }
-        &.next {
-          transition: transform 0.3s ease-in-out;
-          transform: translateX(200%);
+      @for $i from 0 to 15 {
+        &[data-carousel-item-translate-x="#{$i}"] {
+          transform: translateX(calc(100% * #{$i}));
         }
       }
     }
