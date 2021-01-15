@@ -1,10 +1,11 @@
 import { $ } from '../utils.js';
 
 const HOST = 'http://localhost:8000';
-const PRODUCT_NUMBER_IN_ONE_LINE = 7;
+const PRODUCT_NUMBER_IN_ONE_LINE = 9;
 const PRODUCT_ITEM_WIDTH = '270px';
-const CAROUSEL_RIGHT_BUTTON_CLASS_NAME = 'carousel__right-button';
-const CAROUSEL_LEFT_BUTTON_CLASS_NAME = 'carousel__left-button';
+const CAROUSEL_RIGHT_BUTTON_CLASS_NAME =
+  'carousel-button carousel-button__right';
+const CAROUSEL_LEFT_BUTTON_CLASS_NAME = 'carousel-button carousel-button__left';
 
 class Carousel {
   constructor(productTotalLineNumber = 15) {
@@ -65,7 +66,7 @@ class Carousel {
 
   createProductListTemplate(productItemList, startItemIndex, endItemIndex) {
     let productListContent = '';
-    for (let index = startItemIndex; index <= endItemIndex; index++) {
+    for (let index = startItemIndex; index < endItemIndex; index++) {
       const convertedIndex =
         (index + this.productTotalLineNumber) % this.productTotalLineNumber;
       productListContent += this.createProductItemTemplate(
@@ -154,11 +155,13 @@ class Carousel {
   addButtonEvent() {
     this.carouselElement.addEventListener('click', event => {
       if (this.isCarouselChanging) return;
-      this.isCarouselChanging = true;
+
       if (event.target.className === CAROUSEL_RIGHT_BUTTON_CLASS_NAME) {
+        this.isCarouselChanging = true;
         this.moveToRight();
       }
       if (event.target.className === CAROUSEL_LEFT_BUTTON_CLASS_NAME) {
+        this.isCarouselChanging = true;
         this.moveToLeft();
       }
     });
