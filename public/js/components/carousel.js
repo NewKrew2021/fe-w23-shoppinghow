@@ -68,7 +68,7 @@ class Carousel {
     for (let index = startItemIndex; index <= endItemIndex; index++) {
       const convertedIndex =
         (index + this.productTotalLineNumber) % this.productTotalLineNumber;
-      productListContent += createProductItemTemplate(
+      productListContent += this.createProductItemTemplate(
         productItemList[convertedIndex]
       );
     }
@@ -110,10 +110,9 @@ class Carousel {
     return `
         <div class="carousel-product-list">
             <div class="carousel-product-list__current">${this.createProductListTemplate(
-              this.parseProductListDataByIndex(
-                carouselProductListData,
-                this.currentIndex
-              )
+              carouselProductListData,
+              this.currentIndex,
+              this.currentIndex + PRODUCT_NUMBER_IN_ONE_LINE
             )}</div>
         </div>
         `;
