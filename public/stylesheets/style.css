@@ -180,7 +180,8 @@ li {
 
 .carousel {
   position: relative;
-  width: 1350px; }
+  width: 1350px;
+  overflow: hidden; }
   .carousel .carousel-product-list {
     display: flex;
     position: relative;
