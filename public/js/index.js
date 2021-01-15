@@ -11,15 +11,15 @@ const themeImgCnt = 5;
 
 const url = "https://7aebe337-b81c-42de-b89f-8c268823df03.mock.pstmn.io";
 window.onload = () => {
-  bestContainer();
-  carouselContainer();
-  themeContainer();
-  trendContainer();
-  recentContainer();
-  inputContainer();
+  showBestContainer();
+  showCarouselContainer();
+  showThemeContainer();
+  showTrendContainer();
+  showRecentContainer();
+  showInputContainer();
 }
 
-const bestContainer = () => {
+const showBestContainer = () => {
   let bestImg = myDomApi.myQuerySelector("img.best-img");
   const request = new Request(url + "/best");
   fetch(request)
@@ -31,7 +31,7 @@ const bestContainer = () => {
   .catch(error => console.log('error', error));
 }
 
-const carouselContainer = () => {
+const showCarouselContainer = () => {
   let carouselImg = myDomApi.myQuerySelectorAll("img.carousel-img");
   const request = new Request(url + "/carousel");
   fetch(request)
@@ -45,7 +45,7 @@ const carouselContainer = () => {
   showImgs();
 }
 
-const themeContainer = () => {
+const showThemeContainer = () => {
   let themeContainer = myDomApi.myQuerySelector("table.theme-container");
   let newLayout = "<tbody style='display:inline-block'>";
   for(let idx=0; idx<themeImgCnt; idx++) {
@@ -79,7 +79,7 @@ const themeContainer = () => {
   themeClickListener();
 }
 
-const trendContainer = () => {
+const showTrendContainer = () => {
   let trendContainer = myDomApi.myQuerySelector("table.trend-container");
   let newLayout = "";
   trendContainer.innerHTML += `<caption class="trend-caption">지금 뜨는 테마 카테고리</caption>`;
@@ -114,7 +114,7 @@ const trendContainer = () => {
   trendClickListener();
 }
 
-const recentContainer = () => {
+const showRecentContainer = () => {
   let recentContainer = myDomApi.myQuerySelector("div.img-container");
   let shoppingList = JSON.parse(localStorage.getItem("shopping"));
   let imgList = Object.keys(shoppingList);
@@ -123,7 +123,7 @@ const recentContainer = () => {
   }
 }
 
-const inputContainer = () => {
+const showInputContainer = () => {
   let time=1;
   const inputDefault = ["1   부라타치즈","2   무스탕코트","3   오덴세시손느","4   구강세척기","5   게이밍의자",
                   "6   현관코일매트","7   여성등산화","8   에어프라이어","9   접이식욕조","10   글라스텐다지기"]
