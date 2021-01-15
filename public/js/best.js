@@ -4,16 +4,13 @@ import {themeData} from "./index.js"
 const moreBtn = myDomApi.myQuerySelector("#more");
 
 let themeLength = 5;
-
-moreBtn.addEventListener("click", () => {
-  extendLayout();
-});
+const extendCnt = 5;
 
 const extendLayout = () => {
   let themeContainer = myDomApi.myQuerySelector("table.theme-container");
   let best = myDomApi.myQuerySelector("div.best");
   let newLayout = "<tbody style='display:inline-block'>";
-  for(let idx=0; idx<5; idx++) {
+  for(let idx = 0; idx < extendCnt; idx++) {
     newLayout += `
       <th class="theme">
         <img class="theme-img">
@@ -24,7 +21,7 @@ const extendLayout = () => {
     `
   }
   themeContainer.innerHTML += newLayout + "</tbody>";
-  themeLength += 5;
+  themeLength += extendCnt;
 
   let themeImg = myDomApi.myQuerySelectorAll("img.theme-img");
   let themeTitle = myDomApi.myQuerySelectorAll("div.theme-title");
@@ -35,7 +32,7 @@ const extendLayout = () => {
     themeInfo[idx].innerHTML = themeData[idx].subtitle;
   }
   moreBtn.innerHTML = `
-      더보기 ( <red>${themeLength/5}</red> / ${Math.floor(themeData.length/5)} 건 ) 
+      더보기 ( <red>${themeLength/extendCnt}</red> / ${Math.floor(themeData.length/extendCnt)} 건 ) 
   `
 }
 
@@ -50,5 +47,7 @@ const themeClickListener = () => {
     });
   });
 }
+
+moreBtn.addEventListener("click", extendLayout);
 
 export {themeClickListener};
