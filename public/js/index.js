@@ -4,6 +4,11 @@ import {trendClickListener} from "./trend.js"
 import {themeClickListener} from "./best.js"
 
 let carouselData, trendData, themeData;
+const inputCycleTime = 1500; //ms
+const carouselImgCnt = 3;
+const trendImgCnt = 5;
+const themeImgCnt = 5;
+
 const url = "https://7aebe337-b81c-42de-b89f-8c268823df03.mock.pstmn.io";
 window.onload = () => {
   bestContainer();
@@ -43,7 +48,7 @@ const carouselContainer = () => {
 const themeContainer = () => {
   let themeContainer = myDomApi.myQuerySelector("table.theme-container");
   let newLayout = "<tbody style='display:inline-block'>";
-  for(let idx=0; idx<5; idx++) {
+  for(let idx=0; idx<themeImgCnt; idx++) {
     newLayout += `
       <th class="theme">
         <img class="theme-img">
@@ -64,7 +69,7 @@ const themeContainer = () => {
   .then(response => response.text())
   .then(result => {
     themeData = JSON.parse(result)["items"];
-    for(let idx=0; idx<5; idx++){
+    for(let idx=0; idx<themeImgCnt; idx++){
       themeImg[idx].src = themeData[idx].src;
       themeTitle[idx].innerHTML = themeData[idx].title;
       themeInfo[idx].innerHTML = themeData[idx].subtitle;
@@ -78,7 +83,7 @@ const trendContainer = () => {
   let trendContainer = myDomApi.myQuerySelector("table.trend-container");
   let newLayout = "";
   trendContainer.innerHTML += `<caption class="trend-caption">지금 뜨는 테마 카테고리</caption>`;
-  for(let idx=0; idx<5; idx++) {
+  for(let idx=0; idx<trendImgCnt; idx++) {
     newLayout += `
       <th class="trend">
         <img class="trend-img"">
@@ -99,7 +104,7 @@ const trendContainer = () => {
   .then(response => response.text())
   .then(result => {
     trendData = JSON.parse(result)["items"]
-    for(let idx=0; idx<5; idx++){
+    for(let idx=0; idx<trendImgCnt; idx++){
       trendImg[idx].src = trendData[idx].src;
       trendTitle[idx].innerHTML = trendData[idx].title;
       trendInfo[idx].innerHTML = trendData[idx].subtitle;
@@ -127,11 +132,11 @@ const inputContainer = () => {
     input.value = inputDefault[time];
     time += 1;
     if(time>=10) time=0;
-  }, 1500);
+  }, inputCycleTime);
   input.addEventListener("click", () => {
     clearInterval(changeInput);
     input.value="";
   });
 }
 
-export {carouselData, trendData, themeData};
+export {carouselData, trendData, themeData, carouselImgCnt, trendImgCnt, themeImgCnt};

@@ -1,16 +1,16 @@
 import {myDomApi} from "./myDomApi.js"
-import {trendData} from "./index.js"
+import {trendData, trendImgCnt} from "./index.js"
 import {MyPromise} from "./myPromise.js"
 
 let trendFirstIndex = 0;
-
 let clickStartTime;
 let isMouseUp = false;
+const changTime = 2000; //ms
 const prevBtn = myDomApi.myQuerySelector("#trendPrev");
 const nextBtn = myDomApi.myQuerySelector("#trendNext");
 
 const mySetTimeout = new MyPromise((resolve, reject) => {
-  setTimeout(() => resolve(), 2000);
+  setTimeout(() => resolve(), changTime);
 });
 
 prevBtn.addEventListener("mousedown", () => {
@@ -23,13 +23,13 @@ prevBtn.addEventListener("mousedown", () => {
       .catch(error => console.log(error));
     }
     else changeImg(trendFirstIndex += -2);
-  }),2000);
+  }),changTime);
 });
 
 prevBtn.addEventListener("mouseup", () => {
   const clickTime = new Date() - clickStartTime;
   isMouseUp = true;
-  if(clickTime < 2000) changeImg(trendFirstIndex += -1);
+  if(clickTime < changTime) changeImg(trendFirstIndex += -1);
 });
 
 nextBtn.addEventListener("mousedown", () => {
@@ -42,13 +42,13 @@ nextBtn.addEventListener("mousedown", () => {
       .catch(error => console.log(error));
     }
     else changeImg(trendFirstIndex += 2);
-  }),2000);
+  }),changTime);
 });
 
 nextBtn.addEventListener("mouseup", () => {
   const clickTime = new Date() - clickStartTime;
   isMouseUp = true;
-  if(clickTime < 2000) changeImg(trendFirstIndex += 1);
+  if(clickTime < changTime) changeImg(trendFirstIndex += 1);
 });
 
 const changeImg = curImg => {
@@ -57,7 +57,7 @@ const changeImg = curImg => {
   if (curImg >= imgsLength) trendFirstIndex = 0;
   if (curImg < 0) trendFirstIndex = imgsLength-1;
   let trendIdx = trendFirstIndex;
-  for(let idx=0; idx<5; idx++){
+  for(let idx=0; idx<trendImgCnt; idx++){
     trendImg[idx].src = trendData[trendIdx].src;
     trendIdx+=1;
     if (trendIdx >= imgsLength) trendIdx = 0;
