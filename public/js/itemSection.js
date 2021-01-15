@@ -17,7 +17,7 @@
             const itemList=section.querySelector("#item-list");
             li=data.items.reduce((acc,{href,src,title,subtitle,badge})=>{
                 return acc+`<span class="item">
-                                <img src=${src}></img>
+                                <img src=${src} href=${href}></img>
                                 <div class="title">${title}</div>
                                 <div class="subtitle">${subtitle}</div>
                                 <div class="badge">${badge}</div>
@@ -25,15 +25,6 @@
             },"");
             pageNum++;
             itemList.innerHTML+=li;
-            const newItemList=document.querySelectorAll(".item");
-            newItemList.forEach(n=>{
-                n.addEventListener("click",(e)=>{
-                    const popupData=JSON.parse(localStorage.getItem("popupData"));
-                    popupData.push({src:e.target.src});
-                    localStorage.setItem("popupData",JSON.stringify(popupData));
-                });
-            })
-
         }).catch((err)=>{console.log(err)});
     }
     fetchPage(pageNum);
@@ -43,6 +34,18 @@
         <button id="load">더 보기 ↓</button>`;
     
     section.innerHTML=html;
+
+    const itemList=qs.query(document,"#item-list");
+    itemList.addEventListener("click",(e)=>{
+        const item=e.target.closest(".item");
+        const img=qs.query(item,"img");
+        const src=img.src;
+        const href=img.attributes.href.value;
+
+        const popupData=JSON.parse(localStorage.getItem("popupData"));
+        popupData.push({src:src,href:href});
+        localStorage.setItem("popupData",JSON.stringify(popupData));
+    });
 
     const loadBtn=qs.query(section,"#load");
     loadBtn.addEventListener("click",(e)=>{
