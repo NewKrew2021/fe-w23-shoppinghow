@@ -1,7 +1,6 @@
 /*
-    slide.js
-    슬라이드쇼 기능을 구현하는 함수 (함수 길이가 길어져서 수정 계획 중)
-    클래스로 변경해 보기
+    slider.js
+    슬라이드쇼 기능을 구현하는 클래스
 */
 class Slider {
     constructor(prevBtn, nextBtn, wrapper, content,
