@@ -1,11 +1,14 @@
-import { $ } from './utils.js';
+import { $ } from '../utils.js';
 
 const HOST = 'http://localhost:8000';
-const PRODUCT_NUMBER_IN_ONE_LINE = 7;
+const PRODUCT_NUMBER_IN_ONE_LINE = 9;
 const PRODUCT_ITEM_WIDTH = '270px';
+const CAROUSEL_RIGHT_BUTTON_CLASS_NAME =
+  'carousel-button carousel-button__right';
+const CAROUSEL_LEFT_BUTTON_CLASS_NAME = 'carousel-button carousel-button__left';
 
 class Carousel {
-  constructor(productTotalLineNumber) {
+  constructor(productTotalLineNumber = 15) {
     this.currentIndex = 0;
     this.productTotalLineNumber = productTotalLineNumber;
     this.carouselProductListData;
@@ -42,25 +45,54 @@ class Carousel {
     );
     return `<ul class="product-list__row">${productListContent}</ul>`;
   }
+  createProductItemTemplate(productItem) {
+    const { image, title, description, tagList } = productItem;
+    return `<li class="product-item">
+    <img
+      class="product-item__image"
+      src="${image}"
+    />
+    <div class="product-item__title">${title}</div>
+    <div class="product-item__description">
+      ${description}
+    </div>
+    <div class="product-tag-list">
+      <div class="product-tag">
+      ${this.createTagListTemplate(tagList)}
+      </div>
+    </div>
+  </li>`;
+  }
+
+  createProductListTemplate(productItemList, startItemIndex, endItemIndex) {
+    let productListContent = '';
+    for (let index = startItemIndex; index < endItemIndex; index++) {
+      const convertedIndex =
+        (index + this.productTotalLineNumber) % this.productTotalLineNumber;
+      productListContent += this.createProductItemTemplate(
+        productItemList[convertedIndex]
+      );
+    }
+
+    return `<ul class="product-list__row">${productListContent}</ul>`;
+  }
 
   fetchProductList = () =>
     fetch(`${HOST}/api/carousel/?num=${this.productTotalLineNumber}`)
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(res => {
         this.carouselProductListData = res;
       });
   createLeftButton() {
     return `
-        <div class="carousel__left-button">
+        <div class="${CAROUSEL_LEFT_BUTTON_CLASS_NAME}">
             <p>&#10094;</p>
         </div>
         `;
   }
   createRightButton() {
     return `
-        <div class="carousel__right-button">
+        <div class="${CAROUSEL_RIGHT_BUTTON_CLASS_NAME}">
             <p>&#10095;</p>
         </div>
         `;
@@ -79,10 +111,9 @@ class Carousel {
     return `
         <div class="carousel-product-list">
             <div class="carousel-product-list__current">${this.createProductListTemplate(
-              this.parseProductListDataByIndex(
-                carouselProductListData,
-                this.currentIndex
-              )
+              carouselProductListData,
+              this.currentIndex,
+              this.currentIndex + PRODUCT_NUMBER_IN_ONE_LINE
             )}</div>
         </div>
         `;
@@ -124,11 +155,13 @@ class Carousel {
   addButtonEvent() {
     this.carouselElement.addEventListener('click', event => {
       if (this.isCarouselChanging) return;
-      this.isCarouselChanging = true;
-      if (event.target.className === 'carousel__right-button') {
+
+      if (event.target.className === CAROUSEL_RIGHT_BUTTON_CLASS_NAME) {
+        this.isCarouselChanging = true;
         this.moveToRight();
       }
-      if (event.target.className === 'carousel__left-button') {
+      if (event.target.className === CAROUSEL_LEFT_BUTTON_CLASS_NAME) {
+        this.isCarouselChanging = true;
         this.moveToLeft();
       }
     });

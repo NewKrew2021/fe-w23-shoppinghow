@@ -1,6 +1,6 @@
 import { $ } from './utils.js';
-import { ProductList } from './productList.js';
-import { Carousel } from './carousel.js';
+import { ProductList } from './components/productList.js';
+import { Carousel } from './components/carousel.js';
 
 const CAROUSEL_LINE_NUMBER = 15;
 

@@ -201,10 +201,10 @@ li
   .carousel-product-list
     display: flex
     position: relative
-    right: $product-item-width
+    right: $product-item-width*2
     transition: transform 1s
 
-  .carousel__left-button
+  .carousel-button
     display: flex
     align-items: center
     justify-content: center
@@ -217,20 +217,11 @@ li
     height: 50px
     background: #000000
     opacity: 0.5
-  .carousel__right-button
-    display: flex
-    align-items: center
-    justify-content: center
-    z-index: 10
-    color : #ffffff
-    position: absolute
-    top: 100px
-    right: 0
-    float: left
-    width: 50px
-    height: 50px
-    background: #000000
-    opacity: 0.5
+    &__right
+      right: 0
+    &:hover
+      cursor: pointer
+      opacity: 0.7
 
 .advertise-product
   display: flex

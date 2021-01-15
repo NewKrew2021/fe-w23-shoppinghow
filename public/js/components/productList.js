@@ -1,4 +1,4 @@
-import { $ } from './utils.js';
+import { $ } from '../utils.js';
 
 const HOST = 'http://localhost:8000';
 
