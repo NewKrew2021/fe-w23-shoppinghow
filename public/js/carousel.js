@@ -5,7 +5,7 @@ const PRODUCT_NUMBER_IN_ONE_LINE = 7;
 const PRODUCT_ITEM_WIDTH = '270px';
 
 class Carousel {
-  constructor(productTotalLineNumber) {
+  constructor(productTotalLineNumber = 15) {
     this.currentIndex = 0;
     this.productTotalLineNumber = productTotalLineNumber;
     this.carouselProductListData;
