@@ -1,33 +1,40 @@
 class MyPromise {
     constructor(func) {
         this.func = func;
-        this.err = null;
+        this.status = "pending";
+        this.onFulfilledTasks = [];
+        this.onRejectedTasks = [];
+    }
+    resolve(data) {
+        if(this.status !== "pending") return;
+        this.status = "fulfilled";    
     }
     reject(error) {
-        //this.err = error;
+        if(this.status !== "pending") return;
+        this.status = "rejected";
     }
     then(onFulfilled) {
-        this.func(resolve, this.reject);
-        function resolve() {
-            onFulfilled(...arguments);
-        }
-        return this;
+        let returnValue = new MyPromise();
     }
     catch(onRejected) {
-        console.log("catch");
-        if(this.err) onRejected(err);
+        
     }
 }
 
-let promise = new MyPromise(function(resolve, reject) {
+let i = 0;
+const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-        console.log("1초지남");
-        reject("errrrr");
+        console.log("function");
+        resolve();
     }, 1000);
-    
 });
-promise.then(function() {
-    console.log("then");
-}).catch(function(err) {
-    console.log(err);
+
+promise.then(() => {
+    console.log(i++);
+    return promise;
+}).then(() => {
+    console.log(i++);
+    return promise;
+}).then(() => {
+    console.log(i);
 });
