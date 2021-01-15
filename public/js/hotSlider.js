@@ -2,7 +2,7 @@
     hotSlide.js
     지금 뜨는 테마 카테고리 슬라이드 클래스
 */
-class HotSlide{
+class HotSlider{
     constructor() {
         /* 많은 DOM 요소들 */
         this.slideNextBtn = DOM('.next-2').querySelector();
@@ -110,7 +110,7 @@ class HotSlide{
             this.curSlide = this.slideContent[++h_curSlideIndex];
         }
         else if (timeDifference >= 1500){
-            console.log('진입');
+            //console.log('진입');
             if (h_curSlideIndex <= this.slideLength - 1) {
                 this.slideList.style.transition = SLIDE_SPEED + "ms";
                 this.slideList.style.transform =
