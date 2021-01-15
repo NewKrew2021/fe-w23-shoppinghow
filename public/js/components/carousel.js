@@ -44,6 +44,37 @@ class Carousel {
     );
     return `<ul class="product-list__row">${productListContent}</ul>`;
   }
+  createProductItemTemplate(productItem) {
+    const { image, title, description, tagList } = productItem;
+    return `<li class="product-item">
+    <img
+      class="product-item__image"
+      src="${image}"
+    />
+    <div class="product-item__title">${title}</div>
+    <div class="product-item__description">
+      ${description}
+    </div>
+    <div class="product-tag-list">
+      <div class="product-tag">
+      ${this.createTagListTemplate(tagList)}
+      </div>
+    </div>
+  </li>`;
+  }
+
+  createProductListTemplate(productItemList, startItemIndex, endItemIndex) {
+    let productListContent = '';
+    for (let index = startItemIndex; index <= endItemIndex; index++) {
+      const convertedIndex =
+        (index + this.productTotalLineNumber) % this.productTotalLineNumber;
+      productListContent += createProductItemTemplate(
+        productItemList[convertedIndex]
+      );
+    }
+
+    return `<ul class="product-list__row">${productListContent}</ul>`;
+  }
 
   fetchProductList = () =>
     fetch(`${HOST}/api/carousel/?num=${this.productTotalLineNumber}`)
