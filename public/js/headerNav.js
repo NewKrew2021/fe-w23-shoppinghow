@@ -55,10 +55,11 @@
     const popup=qs.query(document,"#recent-popup");
     recentItem.addEventListener("mouseenter",()=>{
         const popupData=JSON.parse(localStorage.getItem("popupData"));
-        let html=popupData.reduce((acc,{src})=>{
+        let html=popupData.reduce((acc,{src,href})=>{
             return acc + `<div class="popup-item">
-                            <img src=${src}>
-                            </img>
+                            <a href=${href}>
+                                <img src=${src}></img>
+                            </a>
                          </div>`
         },"");
         popup.innerHTML=html;

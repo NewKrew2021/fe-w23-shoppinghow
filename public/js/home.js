@@ -29,6 +29,7 @@
     })();
     html=`<div id="section1">${html}</div>`;
     html+=`<div id="section2"></div>`;
+    html+=`<div id="section3"></div>`;
     container.innerHTML += html;
 
 })();
