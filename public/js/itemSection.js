@@ -6,8 +6,9 @@
 
     localStorage.setItem("popupData",JSON.stringify([]));
 
+    //버튼 클릭시 동작하는 5개 추가 fetch 함수
     function fetchPage(pNum){
-        fetch("http://localhost:3000/item?" 
+        fetch("http://localhost:3000/items?" 
         + new URLSearchParams({page: pageNum}) ,{method: 'GET',})
         .then((response) => {
             if (response.status >= 400) 
@@ -35,6 +36,7 @@
     
     section.innerHTML=html;
 
+    //리스트 전체에 item에 대한 클릭 이벤트 추가
     const itemList=qs.query(document,"#item-list");
     itemList.addEventListener("click",(e)=>{
         const item=e.target.closest(".item");
@@ -47,6 +49,7 @@
         localStorage.setItem("popupData",JSON.stringify(popupData));
     });
 
+    //더보기 클릭시 동작하는 리스너
     const loadBtn=qs.query(section,"#load");
     loadBtn.addEventListener("click",(e)=>{
         fetchPage(pageNum);

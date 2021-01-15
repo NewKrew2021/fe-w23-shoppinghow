@@ -140,4 +140,74 @@
         }
 
     }
+    #section3{
+        position: relative;
+        //왜 section1바로 아래에 안달릴까?
+        top: 340px;
+        width:977px;
+        background-color: white;
+        z-index:0;
+        #hot-carousel{
+            height: 270px;
+            width: 100%;
+
+            #hot-carousel-list{          
+                display:block;
+                position:absolute;
+                left:10px;
+                overflow: hidden;
+                width:99%;
+                height: 300px;
+                .item{
+                    position:absolute;
+                    display: inline-block;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                img{
+                    width:180px;
+                    height:180;
+                }  
+                .title{
+                    margin-top:4px;
+                    font-size:13px;
+                    font-weight: bold;
+                }
+                .subtitle{
+                    font-size:12px;
+                    color:gray;
+                    margin-top:4px;
+
+                }.badge{
+                    padding:2px;
+                    font-size:12px;
+                    margin-top:10px;
+                    margin-bottom:10px;
+                    display: inline-block;
+                    border: 1px solid orange;
+                    color:orange;
+                    border-radius: 10%;
+                }
+            }
+            .prev-btn, .next-btn {
+                    cursor: pointer;
+                    position: absolute;
+                    top: 50%;
+                    width: auto;
+                    margin-top: -22px;
+                    padding: 16px;
+                    color: black;
+                    font-weight: bold;
+                    font-size: 18px;
+                    transition: 0.6s ease;
+                    border-radius: 0 3px 3px 0;
+                    user-select: none;
+                    z-index: 2;
+            }
+            .next-btn {
+                right: 0;
+                border-radius: 3px 0 0 3px;
+            }
+        }
+    }
 }
