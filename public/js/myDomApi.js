@@ -1,5 +1,5 @@
 const myDomApi = {
-  myQuerySelector : (selector , element=document) => {
+  myQuerySelector(selector , element=document) {
     let getElement;
     if(element.matches && element.matches(selector)){
       getElement = element;
@@ -14,7 +14,7 @@ const myDomApi = {
     }
     return getElement;
   },
-  myQuerySelectorAll : (selector, element=document) => {
+  myQuerySelectorAll(selector, element=document) {
     let getElement = [];
     if(element.matches && element.matches(selector)){
       getElement.push(element);
