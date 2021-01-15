@@ -45,9 +45,7 @@ class Carousel {
 
   fetchProductList = () =>
     fetch(`${HOST}/api/carousel/?num=${this.productTotalLineNumber}`)
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(res => {
         this.carouselProductListData = res;
       });
