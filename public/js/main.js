@@ -80,7 +80,8 @@
         }))
         .then(data => clickSaveStorage())
         .then(data => {
-            const tests = new HotSlider(h_curSlideIndex = 0, SLIDE_SPEED = 300,
+            const tests = new HotSlider(h_curSlideIndex = 0,
+                SHOW_LENGTH = 5, JUMP = 2, SLIDE_SPEED = 300,
                 AUTO_SLIDE_SPEED = 300, HOT_SLIDE_WIDTH = 256)
             tests.init();
         })
