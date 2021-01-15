@@ -3,6 +3,8 @@ import { $ } from './utils.js';
 const HOST = 'http://localhost:8000';
 const PRODUCT_NUMBER_IN_ONE_LINE = 7;
 const PRODUCT_ITEM_WIDTH = '270px';
+const CAROUSEL_RIGHT_BUTTON_CLASS_NAME = 'carousel__right-button';
+const CAROUSEL_LEFT_BUTTON_CLASS_NAME = 'carousel__left-button';
 
 class Carousel {
   constructor(productTotalLineNumber = 15) {
@@ -51,14 +53,14 @@ class Carousel {
       });
   createLeftButton() {
     return `
-        <div class="carousel__left-button">
+        <div class="${CAROUSEL_LEFT_BUTTON_CLASS_NAME}">
             <p>&#10094;</p>
         </div>
         `;
   }
   createRightButton() {
     return `
-        <div class="carousel__right-button">
+        <div class="${CAROUSEL_RIGHT_BUTTON_CLASS_NAME}">
             <p>&#10095;</p>
         </div>
         `;
@@ -123,10 +125,10 @@ class Carousel {
     this.carouselElement.addEventListener('click', event => {
       if (this.isCarouselChanging) return;
       this.isCarouselChanging = true;
-      if (event.target.className === 'carousel__right-button') {
+      if (event.target.className === CAROUSEL_RIGHT_BUTTON_CLASS_NAME) {
         this.moveToRight();
       }
-      if (event.target.className === 'carousel__left-button') {
+      if (event.target.className === CAROUSEL_LEFT_BUTTON_CLASS_NAME) {
         this.moveToLeft();
       }
     });
