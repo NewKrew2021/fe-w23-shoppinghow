@@ -20,8 +20,8 @@ class MyPromise {
 
     // call the callback with this
     callback(
-      value => this.resolve(value),
-      reason => this.reject(reason)
+      value => this.#resolve(value),
+      reason => this.#reject(reason)
     )
   }
 
@@ -30,9 +30,9 @@ class MyPromise {
     setTimeout(function () {
       try {
         const value = task(arg)
-        this.resolve(value)
+        this.#resolve(value)
       } catch (err) {
-        this.reject(err)
+        this.#reject(err)
       }
     }.bind(this), 0)
   }
@@ -72,7 +72,7 @@ class MyPromise {
   // allSettled = function() {}
   // race = function() {}
 
-  reject(reason) {
+  #reject(reason) {
     // handle exception
     if (this.status !== PromiseStatus.PENDING) {
       return this
@@ -86,7 +86,7 @@ class MyPromise {
     this.#doNext(PromiseNextType.CATCH, this.reason)
   }
 
-  resolve(value) {
+  #resolve(value) {
     // handle exception
     if (this.status !== PromiseStatus.PENDING) {
       return this
