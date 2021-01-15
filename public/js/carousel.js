@@ -7,12 +7,8 @@ const nextBtn = myDomApi.myQuerySelector("#carouselNext");
 const dotBtns = myDomApi.myQuerySelectorAll("span.dot");
 
 
-prevBtn.addEventListener("click", () => {
-  changeImg(carouselIndex += -1);
-});
-nextBtn.addEventListener("click", () => {
-  changeImg(carouselIndex += 1);
-});
+prevBtn.addEventListener("click", changeImg(carouselIndex += -1));
+nextBtn.addEventListener("click", changeImg(carouselIndex += 1));
 
 dotBtns.forEach( btn => {
   btn.addEventListener("mouseover", () => {

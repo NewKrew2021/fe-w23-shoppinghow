@@ -34,9 +34,7 @@ const carouselContainer = () => {
   .then(result => {
     let idx=0;
     carouselData = JSON.parse(result)["items"]
-    carouselImg.forEach( img => {
-      img.src = carouselData[idx].src;
-    })
+    carouselImg.forEach( img => img.src = carouselData[idx].src)
   })
   .catch(error => console.log('error', error));   
   showImgs();
@@ -65,7 +63,7 @@ const themeContainer = () => {
   fetch(request)
   .then(response => response.text())
   .then(result => {
-    themeData = JSON.parse(result)["items"]
+    themeData = JSON.parse(result)["items"];
     for(let idx=0; idx<5; idx++){
       themeImg[idx].src = themeData[idx].src;
       themeTitle[idx].innerHTML = themeData[idx].title;

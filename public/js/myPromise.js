@@ -5,7 +5,8 @@ export class MyPromise {
     this.fulfilledFunc = () => {};
     this.rejectedFunc = () => {};
     callback(
-      resFunc => this.resolve(resFunc), rejFunc => this.reject(rejFunc)
+      resFunc => this.resolve(resFunc), 
+      rejFunc => this.reject(rejFunc)
     );
   }
 

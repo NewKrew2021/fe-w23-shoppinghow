@@ -5,9 +5,7 @@ const moreBtn = myDomApi.myQuerySelector("#more");
 
 let themeLength = 5;
 
-moreBtn.addEventListener("click", () => {
-  extendLayout();
-});
+moreBtn.addEventListener("click", extendLayout);
 
 const extendLayout = () => {
   let themeContainer = myDomApi.myQuerySelector("table.theme-container");
