@@ -15,8 +15,13 @@
   // init the carousel-promotion section
   function initCarouselPromotionSection() {
     const carouselWrapper = findOne('#box_carousel_promotion')
+    const carouselID = 'carousel_promotion'
     fetchItems('/carousel_promotion')
-      .then(items => appendImageCarousel(carouselWrapper, 'carousel_promotion', items))
+      .then(items => appendImageCarousel(carouselWrapper, carouselID, items))
+      .then(() => {
+        // initialize the carousel
+        initCarousel(findOne(`#${carouselID}`, carouselWrapper))
+      })
   }
 
   // init the carousel-promotion section
@@ -41,8 +46,13 @@
   // init the hot item carousel
   function initHotItem() {
     const carouselWrapper = findOne('#box_carousel_hot')
+    const carouselID = 'carousel_hot'
     fetchItems('/hot')
-      .then(items => appendImageCarousel(carouselWrapper, 'carousel_hot', items, 5))
+      .then(items => appendImageCarousel(carouselWrapper, carouselID, items, 5))
+      .then(() => {
+        // initialize the carousel
+        initCarousel(findOne(`#${carouselID}`, carouselWrapper))
+      })
   }
 
   initBestPromotionSection()

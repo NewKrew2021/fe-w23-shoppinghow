@@ -18,9 +18,6 @@ function appendImageCarousel(wrapper, id, items, pageSize = 1) {
       <button class="carousel-button-next">&#10095;</button>
     </div>
     `
-
-  // initialize the carousel
-  initCarousel(findOne(`#${id}`, wrapper))
 }
 
 // initialize a carousel
