@@ -18,7 +18,7 @@ class HotSlider{
         const SLIDE_LENGTH = this.slideLength;
         /* 이벤트 등록 전 레이아웃 준비 */
         /* 5,6,7,8,9 번째 인덱스는 맨 앞에 차례대로 붙이고, 0,1,2,3,4 번째 인덱스는 맨 뒤에 붙인다. */
-        for(let i = 0; i < SLIDE_LENGTH/ 2; i++){
+        for(let i = 0; i < SLIDE_LENGTH / 2; i++){
             this.slideList.appendChild(this.slideContent[i].cloneNode(true));
         }
         for(let i = SLIDE_LENGTH - 1; i >= SLIDE_LENGTH / 2; i--){
@@ -53,7 +53,7 @@ class HotSlider{
         /* 버튼 이미지 변경 */
         e.target.src='/images/prev2_btn.png';
 
-        if(timeDifference < 1500){
+        if(timeDifference < PRESSED_TIME){
             this.slideList.style.transition = SLIDE_SPEED + "ms";
             this.slideList.style.transform =
                 "translate3d(-" + (HOT_SLIDE_WIDTH * (h_curSlideIndex + (SHOW_LENGTH - 1))) + "px, 0px, 0px)";
@@ -70,7 +70,7 @@ class HotSlider{
             this.curSlide = this.slideContent[--h_curSlideIndex];
         }
 
-        else if(timeDifference >= 1500){
+        else if(timeDifference >= PRESSED_TIME){
             this.slideList.style.transition = SLIDE_SPEED + "ms";
             this.slideList.style.transform =
                 "translate3d(-" +
@@ -96,7 +96,7 @@ class HotSlider{
               timeDifference = mouseupTime - this.mousedownTime;
         e.target.src='/images/next2_btn.png';
 
-        if (timeDifference < 1500){
+        if (timeDifference < PRESSED_TIME){
             if (h_curSlideIndex <= SLIDE_LENGTH - 1) {
                 this.slideList.style.transition = SLIDE_SPEED + "ms";
                 this.slideList.style.transform =
@@ -113,7 +113,7 @@ class HotSlider{
             }
             this.curSlide = this.slideContent[++h_curSlideIndex];
         }
-        else if (timeDifference >= 1500){
+        else if (timeDifference >= PRESSED_TIME){
             if (h_curSlideIndex <= this.slideLength - 1) {
                 this.slideList.style.transition = SLIDE_SPEED + "ms";
                 this.slideList.style.transform =
