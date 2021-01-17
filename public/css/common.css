@@ -43,3 +43,9 @@
     background-color: #ccc;
     
 }
+.d-off {
+    display: none;
+}
+.d-on {
+    display: block;
+}

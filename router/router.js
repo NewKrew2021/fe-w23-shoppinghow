@@ -33,15 +33,10 @@ module.exports = function(app, fs) {
         const cnt = +req.query.cnt;
         
         const items = JSON.parse(basicData).items;
-
-        const basicItems = {
+        const basic = {
             items: []
         }
-        
-        for(let i = idx; i < idx + cnt; i++) {
-            basicItems.items.push(items[i]);
-        }
-            
-        res.end(JSON.stringify(basicItems));
+        basic.items = items.slice(idx, idx + cnt);
+        res.end(JSON.stringify(basic));
     });
 }
