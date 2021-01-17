@@ -30,7 +30,7 @@ class Carousel {
         this.vOn(this.itemDOMs[0]);
 
         // 버튼 렌더링
-        this.parentDOM.innerHTML += `<img src="image/prev_btn.svg" class="btn--prev">;
+        this.parentDOM.innerHTML += `<img src="image/prev_btn.svg" class="btn--prev">
         <img src="image/next_btn.svg" class="btn--next">`;
 
         // 막대 렌더링
