@@ -23,7 +23,9 @@ class Carousel {
         this.box = document.createElement("div");
         this.box.setAttribute("style", `width: ${this.itemWidth * cnt}px;height: ${this.itemHeight}px;
             overflow: hidden; margin: auto; position:relative`);
+        
         this.duration = duration;
+        this.durationZero = 0.001;
 
         this.itemDOMs.forEach((item) => {
             this.offVisibility(item);
@@ -76,12 +78,13 @@ class Carousel {
         box.innerHTML = html;
 
         this.pageDOMs = [...box.childNodes];
-        this.pageDOMs[this.center[0]].style.backgroundColor = this.curColor;
+        this.changeClass(this.pageDOMs[this.center[0]], "page-btn-normal", "page-btn-picked");
         this.pageDOMs.forEach((item, idx) => {
             item.addEventListener("mouseover", () => {
-                this.pageDOMs[this.center[0]].style.backgroundColor = this.pageColor;
+                this.changeClass(this.pageDOMs[this.center[0]], "page-btn-picked", "page-btn-normal");
                 this.offVisibility(this.itemDOMs[this.center[0]]);
-                this.pageDOMs[idx].style.backgroundColor = this.curColor;
+
+                this.changeClass(this.pageDOMs[idx], "page-btn-normal", "page-btn-picked");
                 this.onVisibility(this.itemDOMs[idx]);
                 
                 this.center[0] = idx;
@@ -93,6 +96,10 @@ class Carousel {
         });
 
         this.pageBoxDOM = box;
+    }
+    changeClass(element, target, className) {
+        element.classList.remove(target);
+        element.classList.add(className);
     }
     onVisibility(element) {
         element.style.visibility = "visible";
@@ -106,13 +113,13 @@ class Carousel {
     }
     prev() {
         if(this.cnt === 1) {
-            this.pageDOMs[this.center[0]].style.backgroundColor = this.pageColor;
-            this.pageDOMs[this.left].style.backgroundColor = this.curColor;
+            this.changeClass(this.pageDOMs[this.center[0]], "page-btn-picked", "page-btn-normal");
+            this.changeClass(this.pageDOMs[this.left], "page-btn-normal", "page-btn-picked");
         }   
     
         this.itemDOMs[this.center[this.cnt - 1]].addEventListener("transitionend", () => {
             this.offVisibility(this.itemDOMs[this.center[this.cnt - 1]]);
-            this.move(this.itemDOMs[this.center[this.cnt - 1]], 0, 0.01);
+            this.move(this.itemDOMs[this.center[this.cnt - 1]], 0, this.durationZero);
 
             this.right = this.center[this.cnt - 1];
             this.center.pop();
@@ -128,17 +135,17 @@ class Carousel {
         this.center.forEach((itemIdx, idx) => {
             this.move(this.itemDOMs[itemIdx], idx + 1, this.duration);
         });
-        this.move(this.itemDOMs[this.left], -1, 0.001);
+        this.move(this.itemDOMs[this.left], -1, this.durationZero);
     }
     next() {
         if(this.cnt === 1) {
-            this.pageDOMs[this.center[0]].style.backgroundColor = this.pageColor;
-            this.pageDOMs[this.right].style.backgroundColor = this.curColor;
+            this.changeClass(this.pageDOMs[this.center[0]], "page-btn-picked", "page-btn-normal");
+            this.changeClass(this.pageDOMs[this.right], "page-btn-normal", "page-btn-picked");
         }
         
         this.itemDOMs[this.center[0]].addEventListener("transitionend", () => {
             this.offVisibility(this.itemDOMs[this.center[0]]);
-            this.move(this.itemDOMs[this.center[0]], 0, 0.01);
+            this.move(this.itemDOMs[this.center[0]], 0, this.durationZero);
 
             this.left = this.center[0];
             this.center.shift();
@@ -154,7 +161,7 @@ class Carousel {
         this.center.forEach((itemIdx, idx) => {
             this.move(this.itemDOMs[itemIdx], idx - 1, this.duration);
         });
-        this.move(this.itemDOMs[this.right], this.cnt, 0.001);
+        this.move(this.itemDOMs[this.right], this.cnt, this.durationZero);
     }
     render() {
         this.parentDOM.appendChild(this.box);

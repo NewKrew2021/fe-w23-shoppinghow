@@ -52,3 +52,11 @@
 .d-on {
     display: block;
 }
+
+.page-btn-normal {
+    background-color: #ccc;
+}
+
+.page-btn-picked {
+    background-color: #333;
+}
