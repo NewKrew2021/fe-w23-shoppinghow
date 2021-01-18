@@ -1,5 +1,7 @@
+import { find } from "../util";
+
 // append an item card to the wrapper
-function appendItemCard(wrapper, items) {
+export function appendItemCard(wrapper, items) {
   const ItemCardHtmlString = items.reduce(
     (str, { href, src, title, subtitle, badge }) => str + `
     <div
@@ -23,7 +25,7 @@ function appendItemCard(wrapper, items) {
 }
 
 // initialize item card wrapper to handle click event for items
-function initItemCardWrapper() {
+export function initItemCardWrapper() {
   find('.item-card-wrapper').forEach(wrapper => {
     // add click event listener
     wrapper.addEventListener('click', event => {

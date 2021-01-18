@@ -1,6 +1,8 @@
+import { find, findOne } from "../util"
+
 const POPUP_HIDE_DELAY = 250
 
-function initHoverPopup() {
+export function initHoverPopup() {
   find('[data-hover-popup-target]')
     .forEach(element => {
       const popupTarget = findOne(element.dataset.hoverPopupTarget)
