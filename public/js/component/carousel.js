@@ -81,10 +81,7 @@ export function showNextCarouselItem(carouselInfo, isReversed = false) {
 
   // remove all prev/active/next classes and translateX setting
   items.forEach(item => {
-    item.classList.remove('prev')
-    item.classList.remove('active')
-    item.classList.remove('next')
-    item.classList.remove('reverse')
+    item.classList.remove('prev', 'active', 'next', 'reverse')
     delete item.dataset.carouselItemTranslateX
   })
 
