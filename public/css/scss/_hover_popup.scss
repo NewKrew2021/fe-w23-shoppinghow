@@ -1,11 +1,11 @@
 .hover-popup {
   background-color: #ffffff;
   border: 1px solid #979797;
-  display: none;
+  overflow: hidden;
   padding: 1rem 1.5rem;
   position: absolute;
 }
 
-[data-hover-popup-target].show {
-  display: initial;
+.hover-popup-target:not(.show) {
+  display: none;
 }
