@@ -13,7 +13,7 @@ import Storage from './storage.js';
 
 export default class MainLayout {
     constructor(){
-        /* ** */
+        /* 객체를 전달받아 dom을 다룰 예정 */
     }
 
     addNav() {
