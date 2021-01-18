@@ -4,7 +4,8 @@ const mainContainerDOM = domAPI.querySelector(".container");
 const basicContainerDOM = domAPI.querySelector(".container--basic-item");
 const moreBtnDOM = domAPI.querySelector(".container__more");
 const myStorage = window.localStorage;
-let basicItemCnt = 10;
+const marginHeight = 20;
+let basicItemCnt = 0;
 
 const getItemData = async function (itemType) {
     let url = `${URL}/${itemType}`;
@@ -20,24 +21,35 @@ const initPage = function (data) {
     const bests = data[1].items;
     const hots = data[2].items;
     const basics = data[3].items;
+    
+    mainContainerDOM.appendChild(getMarginDOM(marginHeight));
+    mainContainerDOM.appendChild(getBoxDOM(getCarouselBoxHTML(), getBestItemHTML(bests[0])));
+    const bigCarousel = new Carousel(mainContainerDOM.lastChild.firstChild, carousels, 485, 340);
+    bigCarousel.init(1, 0.3);
+    bigCarousel.render();
 
-    const mainContainerDOM = domAPI.querySelector(".container");
-    const basicContainerDOM = domAPI.querySelector(".container--basic-item");
+    mainContainerDOM.appendChild(getBoxDOM());
+    const hotDOMs = hots.map(item => {
+        return getBasicItemDOM(item);
+    });
+    const smallCarousel = new C(mainContainerDOM.lastChild, hotDOMs, 260, 380);
+    smallCarousel.init(1, 0.3);
+    smallCarousel.render();
 
-    mainContainerDOM.appendChild(getBoxDOM(getCarouselItemHTML(), getBestItemHTML(bests[0])));
-    const c = new Carousel(mainContainerDOM.lastChild.firstChild, carousels);
-    c.init();
-    c.render();
-    mainContainerDOM.appendChild(getBoxDOM(getBasicItemHTMLs(hots.slice(0, 5))));
 
-    // default 10개 표시
+
+    mainContainerDOM.appendChild(getMarginDOM(marginHeight));
+
+    // default 10개 표시    
     basicContainerDOM.appendChild(getSubjectDOM("모든 상품 품절주의!"));  
-    basicContainerDOM.appendChild(getBoxDOM(getBasicItemHTMLs(basics.slice(0, 5))));
-    basicContainerDOM.appendChild(getBoxDOM(getBasicItemHTMLs(basics.slice(5, 10))));
+    basicContainerDOM.appendChild(getBoxDOM(getBasicItemHTMLs(basics.slice(basicItemCnt, basicItemCnt + 5))));
+    basicItemCnt += 5;
+    basicContainerDOM.appendChild(getBoxDOM(getBasicItemHTMLs(basics.slice(basicItemCnt, basicItemCnt + 5))));
+    basicItemCnt += 5;
 }
 
 const initEventListener = function () {
-    const rviDOM = domAPI.querySelector(".header__nav__menu");
+    const rviDOM = domAPI.querySelector("#lvi");
     const popupDOM = domAPI.querySelector(".popup");
     rviDOM.addEventListener("mouseover", () => {
         popupDOM.style.display = "block";

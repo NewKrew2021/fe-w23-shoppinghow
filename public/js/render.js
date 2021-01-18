@@ -15,6 +15,18 @@ const getBasicItemHTMLs = function(infos) {
     }, "");
 }
 
+const getBasicItemDOM = function(info) {
+    const element = document.createElement("div");
+    element.setAttribute("class", "container__item--basic border-gray");
+    element.setAttribute("style", "position: absolute; top: 0; left: 0");
+    element.innerHTML = `<img class="container__item--basic__img" src=${info.src}>
+        <div class="container__item--basic__title">${info.title}</div>
+        <div class="container__item--basic__sub-title">${info.subtitle}</div>
+        <div class="container__item--basic__price">${info.price}원</div>
+        <div class="container__item--basic__company">${info.company}</div>`;
+    return element;
+}
+
 const getBestItemHTML = function (info) {
     let html = `<div class="container__item--best border-gray">
         <img src="${info.src}" class="margin-auto container__item--best__img">
@@ -22,7 +34,7 @@ const getBestItemHTML = function (info) {
     return html;
 }
 
-const getCarouselItemHTML = function () {
+const getCarouselBoxHTML = function () {
     let html = `<div class="container__item--carousel border-gray">
         </div>`;
     return html;

@@ -19,14 +19,15 @@
     visibility: hidden;
 }
 .btn--prev {
-    position: relative;
-    left: 50px;
+    position: absolute;
     top: 50%;
+    cursor: pointer;
 }
 .btn--next {
-    position: relative;
-    left: 650px;
+    position: absolute;
+    right: 0;
     top: 50%;
+    cursor: pointer;
 }
 .page-box {
     height: 15px;
