@@ -1,46 +1,41 @@
 /*
     storage.js
-    로컬 스토리지 관련 함수
+    
+    로컬 스토리지 관련 기능을 담은 클래스
 */
+import { dom } from './util.js';
 
-/* 로컬 스토리지로부터 값을 가져와 이미지 태그에 넣는 함수 */
-function getLocalStorage() {
-    const target = dom('#recent-img').querySelector();
-    const cntTarget = dom('.recent-count').querySelector();
-    let text = "";
-    for (let [key, value] of Object.entries(localStorage).sort()) {
-        text += `<img class='mg-left-4' src=${value}>`
+export default class Storage {
+    constructor() {
+        this.target = dom('#recent-img').querySelector();
+        this.cntTarget = dom('.recent-count').querySelector();
+        this.bannerImage = dom('.banner-img').querySelectorAll();
+        this.loginBtn = dom('#login').querySelector();
     }
-    cntTarget.innerHTML = localStorage.length;
-    target.innerHTML = text;
-}
 
-/* 이미 로컬 스토리지에 저장되어 있는 사진인지 판단하는 함수 */
-function isExist(target){
-    for (let [key, value] of Object.entries(localStorage)){
-        if (value === target)
-            return true;
+    getLocalStorage() {
+        let text = "";
+        for (let [key, value] of Object.entries(localStorage).sort()) {
+            text += `<img class='mg-left-4' src=${value}>`
+        }
+        this.cntTarget.innerHTML = localStorage.length;
+        this.target.innerHTML = text;
     }
-    return false;
-}
 
-/* 배너 사진 클릭 시 로컬 스토리지에 담는 이벤트 함수 */
-function clickSaveStorage() {
-    const bannerImage = dom('.banner-img').querySelectorAll();
-    bannerImage.forEach(function (element) {
-        element.addEventListener('click', function () {
-            let imgsrc = this.getAttribute('src');
-            if (!isExist(imgsrc))
-                localStorage.setItem(Date.now(),imgsrc);
+    clickSaveHandler() {
+        function isExist(target){
+            for (let [key, value] of Object.entries(localStorage)) {
+                if (value === target)
+                    return true;
+            }
+            return false;
+        }
+        this.bannerImage.forEach(function (element) {
+            element.addEventListener('click', function () {
+                let imgsrc = this.getAttribute('src');
+                if (!isExist(imgsrc))
+                    localStorage.setItem(Date.now(), imgsrc);
+            });
         });
-    });
+    }
 }
-
-/* 로그인 버튼 누르면 로컬 스토리지 비우기 */
-function removeLocalStorage(){
-    const loginBtn = dom('#login').querySelector();
-    loginBtn.addEventListener('click',()=>{
-        localStorage.clear();
-    })
-}
-removeLocalStorage();

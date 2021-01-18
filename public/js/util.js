@@ -1,17 +1,14 @@
 /*
     util.js
-    - 직접 정의한 Promise 객체
-    - 유틸성 함수
-    - querySelector 기능을 직접 구현한 함수
+    
+    유틸성 기능을 정의한 모듈
 */
 
-/* 이미지 넣는 함수 */
-function addHTML(node, text) {
+export function addHTML(node, text) {
     node.innerHTML += text;
 }
-
 /* Custom API Class */
-class Custom {
+export class Custom {
     constructor(target) {
         this.target = target;
     }
@@ -46,4 +43,4 @@ class Custom {
     }
 }
 
-const dom = (element) => new Custom(element);
+export const dom = (element) => new Custom(element);

@@ -1,9 +1,11 @@
 /*
     slider.js
+
     슬라이드쇼 기능을 구현하는 클래스
 */
+import { dom } from './util.js'
 
-class Slider {
+export default class Slider {
     constructor(target) {
         /* 많은 dom 요소들 */
         this.slidePrevBtn = dom(target.prevBtn).querySelector();

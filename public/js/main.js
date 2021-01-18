@@ -1,100 +1,118 @@
 /*
     main.js
-    - fetch API 활용해서 이미지 넣기
-    - 기타 텍스트, 이미지 요소 넣기
+    
+    초기 레이아웃을 구성하기 위한 클래스
+    (1) 상단 헤더 부분
+    (2) 첫번째 row의 grid 배너 사진 및 텍스트
+    (3) 두번째 row(bottom)의 배너 사진 및 텍스트
 */
+import { dom, addHTML } from './util.js';
+import Slider from './slider.js';
+import HotSlider from './hotslider.js';
+import Storage from './storage.js';
 
-/* nav 요소 innerHTML로 추가 */
-(function () {
-    const top_nav_UL_1 = dom('#top-nav-ul-1').querySelector();
-    const top_nav_UL_2 = dom('#top-nav-ul-2').querySelector();
-    addHTML(top_nav_UL_1,
-        `<li class="top-nav-li">핫딜</li>
+export default class MainLayout {
+    constructor(){
+        /* ** */
+    }
+
+    addNav() {
+        const top_nav_UL_1 = dom('#top-nav-ul-1').querySelector();
+        const top_nav_UL_2 = dom('#top-nav-ul-2').querySelector();
+        addHTML(top_nav_UL_1,
+            `<li class="top-nav-li">핫딜</li>
         <li class="top-nav-li">베스트100</li>
         <li class="top-nav-li">할인특가</li>
         <li class="top-nav-li">기획전</li>`)
-    addHTML(top_nav_UL_2,
-        `<li class="top-nav-li font-gray">#마스크</li>
+        addHTML(top_nav_UL_2,
+            `<li class="top-nav-li font-gray">#마스크</li>
         <li class="top-nav-li font-gray">#스노우체인</li>
         <li class="top-nav-li font-gray">#DIY키트</li>
         <li class="top-nav-li font-gray">#비타민</li>
         <li class="top-nav-li font-gray">#2021팬톤가구</li>`)
-})();
+    }
 
-/* row-0-leftBanner */
-(function () {
-    const leftBanner = dom('.row-0-left').querySelector();
-    fetch('http://localhost:80/topleft')
-        .then(res => res.json())
-        .then(json => json.forEach(element => {
-            addHTML(leftBanner, `<img src=${element.src}>`)
-        }))
-        .catch((error) => console.error(error))
-})();
+    addLeftBanner() {
+        const leftBanner = dom('.row-0-left').querySelector();
+        fetch('http://localhost:80/topleft')
+            .then(res => res.json())
+            .then(json => json.forEach(element => {
+                addHTML(leftBanner, `<img src=${element.src}>`)
+            }))
+            .catch((error) => console.error(error))
+    }
 
-/* row-0-rightBanner */
-(function () {
-    const slideList = dom('.slide-list').querySelector();
-    const target = {
-        prevBtn : '.prev',
-        nextBtn : '.next',
-        wrapper : '.slide-list',
-        content : '.slide-content',
-        pagination : '.page',
-        slideWidth : 485,
-        showLength : 1,
-        curSlideIndex : 0,
-        slideSpeed : 300,
-        auto_slideSpeed : 300
-    };
-    fetch('http://localhost:80/topright')
-        .then(res => res.json())
-        .then(json => json.forEach(element => {
-            addHTML(slideList, `<div class="slide-content">
+    addRightBanner() {
+        const slideList = dom('.slide-list').querySelector();
+        const target = {
+            prevBtn: '.prev',
+            nextBtn: '.next',
+            wrapper: '.slide-list',
+            content: '.slide-content',
+            pagination: '.page',
+            slideWidth: 485,
+            showLength: 1,
+            curSlideIndex: 0,
+            slideSpeed: 300,
+            auto_slideSpeed: 300
+        };
+        fetch('http://localhost:80/topright')
+            .then(res => res.json())
+            .then(json => json.forEach(element => {
+                addHTML(slideList, `<div class="slide-content">
             <img src=${element.src}></div>`)
-        }))
-        .then(data => {
-            const slideObject = new Slider(target);
-            slideObject.init();
-        })
-        .catch((error) => console.error(error))
-})();
+            }))
+            .then(data => {
+                const slideObject = new Slider(target);
+                slideObject.init();
+            })
+            .catch((error) => console.error(error))
+    }
 
-/* row-0-bottom-1 Banner */
-(function () {
-    const gridUL = dom('#grid-ul-1').querySelector();
-    fetch('http://localhost:80/topgrid')
-        .then(res => res.json())
-        .then(json => json.forEach(element => {
-            addHTML(gridUL,
-                `<li class="grid-banner">
+    addBottom() {
+        const slideList = dom('.slide-list-2').querySelector();
+        const target = {
+            curSlideIndex: 0,
+            showLength: 5,
+            slideSpeed: 300,
+            auto_slideSpeed: 300,
+            slideWidth: 256,
+            slideLength: 5,
+            pressedTime: 1500
+        };
+        let storages;
+
+        fetch('http://localhost:80/hot')
+            .then(res => res.json())
+            .then(json => json.forEach(element => {
+                addHTML(slideList,
+                    `<li class="slide-content-2">
                 <img class="banner-img" src=${element.src}>
                 <p class="title">${element.title}</p>
                 <p class="subtext">${element.text}</p>
                 <img class="theme-btn" src="/images/theme.png"></li>`)
-        }))
-        .catch((error) => console.error(error))
-})();
+            }))
+            .then(data => { storages = new Storage(); })
+            .then(data => storages.clickSaveHandler())
+            .then(data => {
+                const tests = new HotSlider(target)
+                tests.init();
+            })
+            .catch((error) => console.error(error))
+    }
 
-/* row-1-bottom Banner (x10) */
-(function () {
-    const slideList = dom('.slide-list-2').querySelector();
-    fetch('http://localhost:80/hot')
-        .then(res => res.json())
-        .then(json => json.forEach(element => {
-            addHTML(slideList,
-                `<li class="slide-content-2">
-                <img class="banner-img" src=${element.src}>
-                <p class="title">${element.title}</p>
-                <p class="subtext">${element.text}</p>
-                <img class="theme-btn" src="/images/theme.png"></li>`)
-        }))
-        .then(data => clickSaveStorage())
-        .then(data => {
-            const tests = new HotSlider(h_curSlideIndex = 0,
-                SHOW_LENGTH = 5, JUMP = 2, PRESSED_TIME = 1500, SLIDE_SPEED = 300,
-                AUTO_SLIDE_SPEED = 300, HOT_SLIDE_WIDTH = 256)
-            tests.init();
-        })
-        .catch((error) => console.error(error))
-})();
+    addGrid(){
+        const gridUL = dom('#grid-ul-1').querySelector();
+        fetch('http://localhost:80/topgrid')
+            .then(res => res.json())
+            .then(json => json.forEach(element => {
+                addHTML(gridUL,
+                    `<li class="grid-banner">
+                    <img class="banner-img" src=${element.src}>
+                    <p class="title">${element.title}</p>
+                    <p class="subtext">${element.text}</p>
+                    <img class="theme-btn" src="/images/theme.png"></li>`)
+            }))
+            .catch((error) => console.error(error))
+    }
+}
