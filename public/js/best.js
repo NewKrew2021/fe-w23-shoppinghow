@@ -1,4 +1,4 @@
-import {myDomApi} from "./myDomApi.js"
+import {myDomApi} from "./mydomapi.js"
 import {themeData} from "./index.js"
 
 const moreBtn = myDomApi.myQuerySelector("#more");

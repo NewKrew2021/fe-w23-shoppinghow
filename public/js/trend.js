@@ -1,6 +1,6 @@
-import {myDomApi} from "./myDomApi.js"
+import {myDomApi} from "./mydomapi.js"
 import {trendData, trendImgCnt} from "./index.js"
-import {MyPromise} from "./myPromise.js"
+import {MyPromise} from "./mypromise.js"
 
 let trendFirstIndex = 0;
 let clickStartTime;
