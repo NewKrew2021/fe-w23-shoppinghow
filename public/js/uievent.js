@@ -7,9 +7,9 @@
 let index = 0;
 let jsonArr;
 function addMoreContent(col) {
-    const clickedElement = DOM('#expand').querySelector();
+    const clickedElement = dom('#expand').querySelector();
     clickedElement.addEventListener('click', () => {
-        let expanded = DOM('#row-more').querySelector();
+        let expanded = dom('#row-more').querySelector();
         fetch('http://localhost:80/best')
             .then(res => res.json())
             .then(json => json.slice(index, index + col))
@@ -32,8 +32,8 @@ addMoreContent(5);
 
 /* 최근본 상품 탭 - 팝업 레이어 마우스 오버, 아웃 이벤트 함수 */
 function showPopupLayer() {
-    const recentBtn = DOM('#recent-btn').querySelector();
-    const innerPopup = DOM('#popup-layer').querySelector();
+    const recentBtn = dom('#recent-btn').querySelector();
+    const innerPopup = dom('#popup-layer').querySelector();
     recentBtn.addEventListener('mouseover', () => {
         innerPopup.style.display = "block";
 
@@ -42,8 +42,8 @@ function showPopupLayer() {
     });
 }
 function hidePopupLayer() {
-    const recentDiv = DOM('#recent-btn').querySelector();
-    const innerPopup = DOM('#popup-layer').querySelector();
+    const recentDiv = dom('#recent-btn').querySelector();
+    const innerPopup = dom('#popup-layer').querySelector();
     recentDiv.addEventListener('mouseout', () => {
         innerPopup.style.display = "none";
     });

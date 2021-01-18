@@ -46,4 +46,4 @@ class Custom {
     }
 }
 
-const DOM = (element) => new Custom(element);
+const dom = (element) => new Custom(element);

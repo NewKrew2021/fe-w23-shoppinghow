@@ -4,11 +4,11 @@
 */
 class HotSlider{
     constructor() {
-        /* 많은 DOM 요소들 */
-        this.slideNextBtn = DOM('.next-2').querySelector();
-        this.slidePrevBtn = DOM('.prev-2').querySelector();
-        this.slideList = DOM('.slide-list-2').querySelector();
-        this.slideContent = DOM('.slide-content-2').querySelectorAll();
+        /* 많은 dom 요소들 */
+        this.slideNextBtn = dom('.next-2').querySelector();
+        this.slidePrevBtn = dom('.prev-2').querySelector();
+        this.slideList = dom('.slide-list-2').querySelector();
+        this.slideContent = dom('.slide-content-2').querySelectorAll();
         this.slideLength = this.slideContent.length;
         this.curSlide = this.slideContent[0];
         this.mousedownTime;

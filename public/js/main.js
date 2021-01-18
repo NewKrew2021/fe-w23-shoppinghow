@@ -6,8 +6,8 @@
 
 /* nav 요소 innerHTML로 추가 */
 (function () {
-    const top_nav_UL_1 = DOM('#top-nav-ul-1').querySelector();
-    const top_nav_UL_2 = DOM('#top-nav-ul-2').querySelector();
+    const top_nav_UL_1 = dom('#top-nav-ul-1').querySelector();
+    const top_nav_UL_2 = dom('#top-nav-ul-2').querySelector();
     addHTML(top_nav_UL_1,
         `<li class="top-nav-li">핫딜</li>
         <li class="top-nav-li">베스트100</li>
@@ -23,7 +23,7 @@
 
 /* row-0-leftBanner */
 (function () {
-    const leftBanner = DOM('.row-0-left').querySelector();
+    const leftBanner = dom('.row-0-left').querySelector();
     fetch('http://localhost:80/topleft')
         .then(res => res.json())
         .then(json => json.forEach(element => {
@@ -34,7 +34,19 @@
 
 /* row-0-rightBanner */
 (function () {
-    const slideList = DOM('.slide-list').querySelector();
+    const slideList = dom('.slide-list').querySelector();
+    const target = {
+        prevBtn : '.prev',
+        nextBtn : '.next',
+        wrapper : '.slide-list',
+        content : '.slide-content',
+        pagination : '.page',
+        slideWidth : 485,
+        showLength : 1,
+        curSlideIndex : 0,
+        slideSpeed : 300,
+        auto_slideSpeed : 300
+    };
     fetch('http://localhost:80/topright')
         .then(res => res.json())
         .then(json => json.forEach(element => {
@@ -42,9 +54,7 @@
             <img src=${element.src}></div>`)
         }))
         .then(data => {
-            const slideObject = new Slider(
-                '.prev','.next','.slide-list','.slide-content','.page',
-                485, 1, 0, 300, 300);
+            const slideObject = new Slider(target);
             slideObject.init();
         })
         .catch((error) => console.error(error))
@@ -52,7 +62,7 @@
 
 /* row-0-bottom-1 Banner */
 (function () {
-    const gridUL = DOM('#grid-ul-1').querySelector();
+    const gridUL = dom('#grid-ul-1').querySelector();
     fetch('http://localhost:80/topgrid')
         .then(res => res.json())
         .then(json => json.forEach(element => {
@@ -68,7 +78,7 @@
 
 /* row-1-bottom Banner (x10) */
 (function () {
-    const slideList = DOM('.slide-list-2').querySelector();
+    const slideList = dom('.slide-list-2').querySelector();
     fetch('http://localhost:80/hot')
         .then(res => res.json())
         .then(json => json.forEach(element => {

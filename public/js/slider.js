@@ -3,24 +3,21 @@
     슬라이드쇼 기능을 구현하는 클래스
 */
 class Slider {
-    constructor(prevBtn, nextBtn, wrapper, content,
-        pagination = undefined, slidewidth, showlength,
-        curSlideIndex, slidespeed, auto_slidespeed) {
-
-        /* 많은 DOM 요소들 */
-        this.slidePrevBtn = DOM(prevBtn).querySelector();
-        this.slideNextBtn = DOM(nextBtn).querySelector();
-        this.slideList = DOM(wrapper).querySelector();
-        this.slideContent = DOM(content).querySelectorAll();
-        this.pagination = DOM(pagination).querySelectorAll();
+    constructor(target) {
+        /* 많은 dom 요소들 */
+        this.slidePrevBtn = dom(target.prevBtn).querySelector();
+        this.slideNextBtn = dom(target.nextBtn).querySelector();
+        this.slideList = dom(target.wrapper).querySelector();
+        this.slideContent = dom(target.content).querySelectorAll();
+        this.pagination = dom(target.pagination).querySelectorAll();
         this.curSlide = this.slideContent[0];
 
         this.SLIDE_LENGTH = this.slideContent.length;
-        this.SLIDE_WIDTH = slidewidth;
-        this.SHOW_LENGTH = showlength;
-        this.SLIDE_SPEED = slidespeed;
-        this.AUTO_SLIDE_SPEED = auto_slidespeed;
-        this.curSlideIndex = curSlideIndex;
+        this.SLIDE_WIDTH = target.slideWidth;
+        this.SHOW_LENGTH = target.showLength;
+        this.SLIDE_SPEED = target.slideSpeed;
+        this.AUTO_SLIDE_SPEED = target.auto_slideSpeed;
+        this.curSlideIndex = target.curSlideIndex;
     }
 
     onReady() {
@@ -105,7 +102,7 @@ class Slider {
 
     /* (필요할 경우에만) 내비게이터 마우스 오버 이벤트 */
     paginationHandler(e) {
-        DOM('.active').querySelector().classList.remove('active');
+        dom('.active').querySelector().classList.remove('active');
         e.target.className += " active";
 
         /* 배너 변화시키기 */
