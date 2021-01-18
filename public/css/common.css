@@ -19,21 +19,24 @@
     visibility: hidden;
 }
 .btn--prev {
-    position: relative;
-    left: 50px;
+    position: absolute;
     top: 50%;
+    cursor: pointer;
 }
 .btn--next {
-    position: relative;
-    left: 650px;
+    position: absolute;
+    right: 0;
     top: 50%;
+    cursor: pointer;
 }
 .page-box {
+    width: 100%;
     height: 15px;
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
-    top: 280px;
+    top: 90%;
+
     z-index: 2;
 }
 .page {
@@ -42,4 +45,18 @@
     margin: auto 1px;
     background-color: #ccc;
     
+}
+.d-off {
+    display: none;
+}
+.d-on {
+    display: block;
+}
+
+.page-btn-normal {
+    background-color: #ccc;
+}
+
+.page-btn-picked {
+    background-color: #333;
 }

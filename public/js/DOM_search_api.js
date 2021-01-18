@@ -1,4 +1,4 @@
-class DOMTreeSearchAPI {
+class DOMSearchAPI {
     constructor(document) {
         this.root = document;
     }

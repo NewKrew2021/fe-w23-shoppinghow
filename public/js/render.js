@@ -1,80 +1,81 @@
-const myStorage = window.localStorage;
-myStorage.clear();
+const getBasicItemHTML = function (info) {
+    let html = `<div class="container__item--basic border-gray">
+        <img class="container__item--basic__img" src=${info.src}>
+        <div class="container__item--basic__title">${info.title}</div>
+        <div class="container__item--basic__sub-title">${info.subtitle}</div>
+        <div class="container__item--basic__price">${info.price}원</div>
+        <div class="container__item--basic__company">${info.company}</div>
+        </div>`;
+    return html;
+}
 
-const more = () => {
+const getBasicItemHTMLs = function(infos) {
+    return infos.reduce((acc, cur) => {
+        return acc + getBasicItemHTML(cur);
+    }, "");
+}
+
+const getBasicItemDOM = function(info) {
     const element = document.createElement("div");
-    element.setAttribute("class", "container__more");
-    element.innerHTML = `<div class="margin-center">더보기</div>`;
+    element.setAttribute("class", "container__item--basic border-gray");
+    element.setAttribute("style", "position: absolute; top: 0; left: 0");
+    element.innerHTML = `<img class="container__item--basic__img" src=${info.src}>
+        <div class="container__item--basic__title">${info.title}</div>
+        <div class="container__item--basic__sub-title">${info.subtitle}</div>
+        <div class="container__item--basic__price">${info.price}원</div>
+        <div class="container__item--basic__company">${info.company}</div>`;
     return element;
 }
 
-const subject = (content) => {
-    const element = document.createElement("div");
-    element.setAttribute("class", "container__subject");
-    element.innerText = content;
+const getBestItemHTML = function (info) {
+    let html = `<div class="container__item--best border-gray">
+        <img src="${info.src}" class="margin-auto container__item--best__img">
+        </div>`;
+    return html;
+}
+
+const getCarouselItemDOM = function(src) {
+    const element = document.createElement("img");
+    element.setAttribute("src", src);
+    element.setAttribute("class", "container__item--carousel__img");
     return element;
 }
 
-function promotionBox() {
-    const boxElement = document.createElement("div");
-    boxElement.setAttribute("class", "container__box horizontal");
-    boxElement.innerHTML = [...arguments].join("");
-    return boxElement;
+const getCarouselBoxHTML = function () {
+    let html = `<div class="container__item--carousel border-gray">
+        </div>`;
+    return html;
 }
 
-function box(infoArr) {
-    const boxElement = document.createElement("div");
-    boxElement.setAttribute("class", "container__box horizontal");
+// box: 화면의 한 행
+const getBoxDOM = function() {
+    const dom = document.createElement("div");
+    dom.setAttribute("class", "container__box horizontal");
+    
+    let html = [...arguments].join("");
+    dom.innerHTML = html;
 
-    const result = infoArr.map(info => basicItem(info));
-    boxElement.innerHTML = result.join("");
-
-    // 클릭 상품 저장을 위해 이벤트 등록
-    boxElement.addEventListener("click", (e) => {
-        const imgElement = e.target;
-        if(imgElement.tagName === "IMG") {
-            const key = imgElement.parentNode.childNodes[1].innerText;
-            myStorage.setItem(key, imgElement.src);
-        }
-    });
-
-    return boxElement;
+    return dom;
 }
 
-function margin(height) {
-    const marginElement = document.createElement("div");
-    marginElement.setAttribute("class", "container__margin");
-    marginElement.setAttribute("style", `height:${height}px`);
-    return marginElement;
+// margin: 화면 가로 여백
+const getMarginDOM = function (height) {
+    const dom = document.createElement("div");
+    dom.setAttribute("class", "container__margin");
+    dom.setAttribute("style", `height:${height}px`);
+    return dom;
 }
 
-function carousel() {
-    let element = `<div class="container__item--carousel border-gray">
-    </div>`;
-    return element;
+const getMoreBtnDOM = function() {
+    const dom = document.createElement("div");
+    dom.setAttribute("class", "container__more");
+    dom.innerHTML = `<div class="margin-center">더보기</div>`;
+    return dom;
 }
 
-function bestItem(src) {
-    let element = `<div class="container__item--best border-gray">
-    <img src="${src}" class="margin-auto container__item--best__img">
-    </div>`;
-    return element;
+const getSubjectDOM = function(content) {
+    const dom = document.createElement("div");
+    dom.setAttribute("class", "container__subject");
+    dom.innerText = content;
+    return dom;
 }
-
-function basicItem(info) {
-    let element = `<div class="container__item--basic border-gray">`;
-    element += basicItemImg(info.src);
-    element += basicItemTitle(info.title);
-    element += basicItemSubTitle(info.subtitle);
-    element += basicItemPrice(info.price);
-    element += basicItemCompany(info.company);
-    element += `</div>`;
-    return element;
-}
-
-// basic item 정보
-const basicItemImg = imgSrc => `<img class="container__item--basic__img" src=${imgSrc}>`;
-const basicItemTitle = title => `<div class="container__item--basic__title">${title}</div>`;
-const basicItemSubTitle = subTitle => `<div class="container__item--basic__sub-title">${subTitle}</div>`;
-const basicItemPrice = price => `<div class="container__item--basic__price">${price}원</div>`;
-const basicItemCompany = company => `<div class="container__item--basic__company">${company}</div>`;

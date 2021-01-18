@@ -1,75 +1,97 @@
 const URL = "http://localhost:3000";
-let basicItemCnt = 10;
+const domAPI = new DOMSearchAPI(document);
+const mainContainerDOM = domAPI.querySelector(".container");
+const basicContainerDOM = domAPI.querySelector(".container--basic-item");
+const moreBtnDOM = domAPI.querySelector(".container__more");
+const myStorage = window.localStorage;
 
-// carousel, best, hot items
-function getItems(type) {
-    return new Promise((resolve, reject) => {
-        fetch(`${URL}/${type}`).then((response) => {
-            resolve(response.json());
-        });
-    });
+const marginHeight = 20;
+let basicItemCnt = 0; // 현재 화면에 노출된 기본 상품 개수
+
+const getItemData = async function (itemType) {
+    let url = `${URL}/${itemType}`;
+    if (itemType === "basic") url += `?idx=${arguments[1]}&cnt=${arguments[2]}`;
+    const res = await fetch(url);
+    const resData = await res.json();
+    return resData;
 }
 
-// basic items
-const getBasicItems = (idx, cnt) => {
-    return new Promise((resolve, reject) => {
-        fetch(`${URL}/basic?idx=${idx}&cnt=${cnt}`).then((response) => {
-            resolve(response.json());
-        });
+// 기본 페이지 렌더링
+const initPage = function (data) {
+    const carousels = data[0].items;
+    const bests = data[1].items;
+    const hots = data[2].items;
+    const basics = data[3].items;
+    
+    // 한 행씩 렌더링
+    mainContainerDOM.appendChild(getMarginDOM(marginHeight));
+    mainContainerDOM.appendChild(getBoxDOM(getCarouselBoxHTML(), getBestItemHTML(bests[0])));
+
+    const carouselDOMs = carousels.map((item) => getCarouselItemDOM(item.src));
+    const bigCarousel = new Carousel(mainContainerDOM.lastChild.firstChild, carouselDOMs, 485, 340);
+    bigCarousel.init(1, 0.3);
+    bigCarousel.render();
+
+    mainContainerDOM.appendChild(getBoxDOM());
+    const hotDOMs = hots.map(item => {
+        return getBasicItemDOM(item);
     });
+    const smallCarousel = new Carousel(mainContainerDOM.lastChild, hotDOMs, 260, 380);
+    smallCarousel.init(5, 0.3);
+    smallCarousel.render();
+
+    mainContainerDOM.appendChild(getMarginDOM(marginHeight));
+
+    // default 10개 표시    
+    basicContainerDOM.appendChild(getSubjectDOM("모든 상품 품절주의!"));  
+    basicContainerDOM.appendChild(getBoxDOM(getBasicItemHTMLs(basics.slice(basicItemCnt, basicItemCnt + 5))));
+    basicItemCnt += 5;
+    basicContainerDOM.appendChild(getBoxDOM(getBasicItemHTMLs(basics.slice(basicItemCnt, basicItemCnt + 5))));
+    basicItemCnt += 5;
 }
 
-const initPage = () => {
-    const containerDOM = document.querySelector(".container");
-    const containerBasicItemDOM = document.querySelector(".container--basic-item");
-    containerDOM.appendChild(margin(20));
-
-    // 팝업 레이어 이벤트 등록
-    const rvi = document.querySelector(".header__nav__menu");
-    const popupDOM = document.getElementById("popup");
-    rvi.addEventListener("mouseover", () => {
+const initEventListener = function () {
+    const rviDOM = domAPI.querySelector("#lvi");
+    const popupDOM = domAPI.querySelector(".popup");
+    rviDOM.addEventListener("mouseover", () => {
         popupDOM.style.display = "block";
-        popupDOM.innerHTML = `<div class="popup__title">최근 본 상품 ${myStorage.length}개</div><br>`;
-        for(let i = 0; i < myStorage.length; i++) {
-            popupDOM.innerHTML += `<img class="popup__img" src="${myStorage.getItem(myStorage.key(i))}">`
+        let html = `<div class="popup__title">최근 본 상품 ${myStorage.length}개</div><br>`;
+        for (let i = 0; i < myStorage.length; i++) {
+            html += `<img class="popup__img" src="${myStorage.getItem(myStorage.key(i))}">`;
         }
+        popupDOM.innerHTML = html;
     });
-    rvi.addEventListener("mouseout", () => {
+    rviDOM.addEventListener("mouseout", () => {
         popupDOM.style.display = "none";
     });
-    Promise.all([
-        getItems("carousel"),
-        getItems("best"),
-        getItems("hot"),
-        getBasicItems(0, 10)
-    ]).then(data => {
-        const carousels = data[0].items;
-        const bests = data[1].items;
-        const hots = data[2].items;
-        const basics = data[3].items;
-        
-        // best, carousel box
-        containerDOM.appendChild(promotionBox(carousel(), bestItem(bests[0].src)));
-        const c = new Carousel(containerDOM.lastChild.firstChild, carousels);
-        c.init();
-        c.render();
-        containerDOM.appendChild(box(hots.slice(0, 5)));
-        
-        // carousel test
-        
 
-        // default 10개 표시
-        containerBasicItemDOM.appendChild(subject("모든 상품 품절주의!"));
-        containerBasicItemDOM.appendChild(box(basics.slice(0, 5)));
-        containerBasicItemDOM.appendChild(box(basics.slice(5, 10)));
-        
-        const moreBtn = more();
-        document.querySelector(".container--more").appendChild(moreBtn);
-        moreBtn.addEventListener("click", () => {
-            getBasicItems(basicItemCnt, 5).then(data => containerBasicItemDOM.appendChild(box(data.items)));
-            basicItemCnt += 5;
-        });
+    // basic item 이벤트
+    basicContainerDOM.addEventListener("click", (e) => {
+        const imgElement = e.target;
+        if(imgElement.tagName === "IMG") {
+            const key = imgElement.nextElementSibling.innerText;
+            myStorage.setItem(key, imgElement.src);
+        }
+    });
+
+    // 더보기 버튼
+    moreBtnDOM.addEventListener("click", () => {
+        getItemData("basic", basicItemCnt, 5).then(data => 
+            basicContainerDOM.appendChild(getBoxDOM(getBasicItemHTMLs(data.items)))
+        );
+        basicItemCnt += 5;
     });
 }
 
-window.addEventListener("DOMContentLoaded", initPage);
+window.addEventListener("DOMContentLoaded", (e) => {
+    Promise.all([
+        getItemData("carousel"),
+        getItemData("best"),
+        getItemData("hot"),
+        getItemData("basic", 0, 10)
+    ]).then(data => {
+        myStorage.clear();
+        initPage(data);
+        initEventListener();
+    });
+});

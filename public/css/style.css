@@ -34,6 +34,9 @@ body {
     width: 1300px;
     padding-left: 0;
     list-style:none;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
 .header__nav__menu {
     height: 38px;
@@ -45,7 +48,6 @@ body {
 }
 .container {
     width: 1300px;
-    min-height: 850px;
 }
 .container--basic-item {
     width: 1300px;
@@ -62,16 +64,19 @@ body {
     width: 100%;
     height: 380px;
     background-color: #fff;
+    position: relative;
 }
 .container__item--carousel {
     width: 780px;
     height: 380px;
     box-sizing: border-box;
+    position: relative;
 }
 .container__item--basic {
     width: 260px;
     height: 380px;
     box-sizing: border-box;
+    
 }
 .container__item--best {
     width: 520px;
@@ -116,7 +121,6 @@ body {
     display: block;
     position: relative;
     overflow: hidden;
-    bottom: 40px;
 }
 .container__item--carousel__img {
     width: 485px;
@@ -163,6 +167,7 @@ body {
     padding-left: 20px;
     position: absolute;
     top: 100%;
+    right: 0%;
     background-color: #fff;
     border: 1px solid #999;
     z-index: 3;
