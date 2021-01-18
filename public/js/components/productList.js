@@ -40,10 +40,13 @@ class ProductList {
     return `<ul class="product-list__row">${productListContent}</ul>`;
   }
 
-  fetchProductList = productLineNumber =>
-    fetch(`${HOST}/api/product/?num=${productLineNumber}`).then(response => {
-      return response.json();
-    });
+  fetchProductList(productLineNumber) {
+    return fetch(`${HOST}/api/product/?num=${productLineNumber}`).then(
+      response => {
+        return response.json();
+      }
+    );
+  }
 
   addNewProductLine() {
     this.productItemLine += 1;

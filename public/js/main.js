@@ -1,6 +1,7 @@
 import { $ } from './utils.js';
 import { ProductList } from './components/productList.js';
 import { Carousel } from './components/carousel.js';
+require('../sass/style.sass');
 
 const CAROUSEL_LINE_NUMBER = 15;
 

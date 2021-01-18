@@ -77,12 +77,14 @@ class Carousel {
     return `<ul class="product-list__row">${productListContent}</ul>`;
   }
 
-  fetchProductList = () =>
-    fetch(`${HOST}/api/carousel/?num=${this.productTotalLineNumber}`)
+  fetchProductList() {
+    return fetch(`${HOST}/api/carousel/?num=${this.productTotalLineNumber}`)
       .then(response => response.json())
       .then(res => {
         this.carouselProductListData = res;
       });
+  }
+
   createLeftButton() {
     return `
         <div class="${CAROUSEL_LEFT_BUTTON_CLASS_NAME}">
@@ -90,6 +92,7 @@ class Carousel {
         </div>
         `;
   }
+
   createRightButton() {
     return `
         <div class="${CAROUSEL_RIGHT_BUTTON_CLASS_NAME}">
@@ -107,7 +110,7 @@ class Carousel {
     );
   }
 
-  createCarouselProductList = carouselProductListData => {
+  createCarouselProductList(carouselProductListData) {
     return `
         <div class="carousel-product-list">
             <div class="carousel-product-list__current">${this.createProductListTemplate(
@@ -117,7 +120,7 @@ class Carousel {
             )}</div>
         </div>
         `;
-  };
+  }
 
   // 오른쪽으로 이동
   moveToRight() {
