@@ -22,6 +22,10 @@ input {
   height: 54px;
 }
 
+.search-blank:focus-within {
+  border: 1px solid red;
+}
+
 .logo-img {
   width: 119px;
   height: auto;
