@@ -7,3 +7,9 @@ select, textarea {margin: 0; padding: 0; border: 0 none; }
 body{
     background-color:#eee;
 }
+button{
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 0;
+}

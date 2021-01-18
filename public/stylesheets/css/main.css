@@ -17,9 +17,41 @@ input {
 }
 
 .search-blank {
+  position: relative;
   border: 1px solid lightgray;
   border-radius: 12px;
   height: 54px;
+}
+
+.search-blank:focus-within {
+  border: 1px solid #f95139;
+  display: block;
+}
+
+.search-box {
+  position: relative;
+  width: 600px;
+  padding: 8px 10px 5px 5px;
+}
+
+.keyword {
+  display: none;
+  z-index: 202;
+  width: 100%;
+  border: 1px solid #f95139;
+  border-radius: 10px;
+  background-color: #ffffff;
+  text-align: left;
+  top: 54px;
+  left: 0;
+}
+
+.keyword-inner {
+  padding: 2em;
+}
+
+.auto-complete {
+  display: none;
 }
 
 .logo-img {
@@ -29,9 +61,11 @@ input {
 }
 
 .search-btn {
-  width: 28px;
-  height: auto;
-  padding: 8px 9px 0 2px;
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  top: 0;
+  right: 0;
 }
 
 #header {
