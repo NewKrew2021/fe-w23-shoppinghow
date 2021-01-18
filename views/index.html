@@ -20,7 +20,7 @@
       </div>
 
       <!-- search bar -->
-      <input type="text" name="search" id="input_search" class="flex ml-4 py-3">
+      <input type="text" name="search" id="input_search" class="flex-auto ml-4 py-3">
     </div>
 
     <!-- header nav -->
@@ -29,36 +29,18 @@
         <button data-hover-popup-target="#popup_category">☰ 카테고리</button>
         <span class="px-2 gray">|</span>
         <ul class="nav-list">
-          <li class="nav-item">
-            <a href="#">핫딜</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">베스트100</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">할인특가</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">기획전</a>
-          </li>
+          <li role="button" class="nav-item">핫딜</li>
+          <li role="button" class="nav-item">베스트100</li>
+          <li role="button" class="nav-item">할인특가</li>
+          <li role="button" class="nav-item">기획전</li>
         </ul>
         <span class="d-none d-xl-inline px-2 gray">|</span>
         <ul class="d-none d-xl-inline-flex nav-list gray">
-          <li class="nav-item">
-            <a href="#">#마스크</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">#스노우체인</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">#DIY키트</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">#비타민</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">#2021팬톤가구</a>
-          </li>
+          <li role="button" class="nav-item">#마스크</li>
+          <li role="button" class="nav-item">#스노우체인</li>
+          <li role="button" class="nav-item">#DIY키트</li>
+          <li role="button" class="nav-item">#비타민</li>
+          <li role="button" class="nav-item">#2021팬톤가구</li>
         </ul>
         <div class="d-flex ml-auto">
           <button>MY 쇼핑</button>
@@ -66,10 +48,86 @@
         </div>
 
         <!-- category popup -->
-        <div id="popup_category" class="hover-popup top-100 left-0 w-40" data-hover-popup-target="#popup_category"></div>
+        <div id="popup_category" class="hover-popup hover-popup-target top-100 left-0 w-40 p-0" data-hover-popup-target="#popup_category">
+          <div class="d-flex">
+            <!-- main category nav -->
+            <nav class="flex-1 bg-light">
+              <ul class="nav-list nav-vertical">
+                <li role="button" class="nav-item" data-hover-popup-target="#popup_category_fashion">패션/뷰티</li>
+                <li role="button" class="nav-item" data-hover-popup-target="#popup_category_electric">가전/컴퓨터</li>
+                <li role="button" class="nav-item" data-hover-popup-target="#popup_category_furniture">가구/생활/건강</li>
+                <li role="button" class="nav-item" data-hover-popup-target="#popup_category_food">식품/유아동</li>
+                <li role="button" class="nav-item" data-hover-popup-target="#popup_category_travel">여행/레저/자동차</li>
+              </ul>
+            </nav>
+
+            <!-- sub category nav -->
+              <nav class="flex-1">
+                <ul id="popup_category_fashion" class="nav-list nav-vertical hover-popup-target bg-white h-100">
+                  <li class="nav-list" data-hover-popup-target="x">여성의류</li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                </ul>
+                <ul id="popup_category_electric" class="nav-list nav-vertical hover-popup-target bg-white h-100">
+                  <li class="nav-list" data-hover-popup-target="x">휴대폰/액세서리</li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                </ul>
+                <ul id="popup_category_furniture" class="nav-list nav-vertical hover-popup-target bg-white h-100">
+                  <li class="nav-list" data-hover-popup-target="x">침실가구</li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                </ul>
+                <ul id="popup_category_food" class="nav-list nav-vertical hover-popup-target bg-white h-100">
+                  <li class="nav-list" data-hover-popup-target="x">쌀/과일/농축수산물</li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                </ul>
+                <ul id="popup_category_travel" class="nav-list nav-vertical hover-popup-target bg-white h-100">
+                  <li class="nav-list" data-hover-popup-target="x">해외여행</li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                  <li class="nav-list" data-hover-popup-target="x"></li>
+                </ul>
+              </nav>
+
+            <!-- sub sub category nav -->
+            <div class="flex-1">
+            </div>
+          </div>
+        </div>
 
         <!-- recent popup -->
-        <div id="popup_recent" class="hover-popup top-100 right-0 w-40" data-hover-popup-target="#popup_recent">
+        <div id="popup_recent" class="hover-popup hover-popup-target top-100 right-0 w-40" data-hover-popup-target="#popup_recent">
           <!-- recent popup nav -->
           <nav>
             <ul class="nav-list">
