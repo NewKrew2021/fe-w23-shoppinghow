@@ -83,5 +83,47 @@ header nav #recent-item #recent-popup img {
   height: 100%;
   width: 100%;
 }
+header #menu {
+  position: absolute;
+  top: 120%;
+  left: 5%;
+  background-color: white;
+  display: inline-block;
+}
+header #menu #first-layer {
+  height: 100%;
+  background-color: #f7f7f7;
+  display: inline-block;
+  vertical-align: top;
+}
+header #menu #second-layer {
+  height: 100%;
+  width: 200px;
+  display: inline-block;
+  vertical-align: top;
+}
+header #menu #third-layer {
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+header #menu .first-layer {
+  width: 180px;
+  font-size: 18px;
+  margin: 20px;
+  list-style: none;
+}
+header #menu .second-layer {
+  width: 180px;
+  font-size: 14px;
+  margin: 20px;
+  list-style: none;
+}
+header #menu .third-layer {
+  width: 180px;
+  font-size: 12px;
+  margin: 20px;
+  list-style: none;
+}
 
 /*# sourceMappingURL=header.css.map */

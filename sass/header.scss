@@ -87,5 +87,48 @@ header {
     }
 
   }
+  #menu{
+      position:absolute;
+      top:120%;
+      left:5%;
+      background-color: white;
+      display: inline-block;
+      
+    #first-layer{
+        height: 100%;
+        background-color: rgb(247,247,247);
+        display:inline-block;
+        vertical-align: top;
+    }
+    #second-layer{
+        height: 100%;
+        width: 200px;
+        display:inline-block;
+        vertical-align: top;
+    }
+    #third-layer{
+        height: 100%;
+        display:inline-block;
+        vertical-align: top;
+    }
+    .first-layer{
+        width:180px;
+        font-size:18px;
+        margin:20px;
+        list-style: none;
+    }
+    .second-layer{
+        width:180px;
+        font-size:14px;
+        margin:20px;
+        list-style: none;
+    }
+    .third-layer{
+        width:180px;
+        font-size:12px;
+        margin:20px;
+        list-style: none;
+    }
+  }
   
 }
