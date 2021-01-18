@@ -30,11 +30,13 @@
     cursor: pointer;
 }
 .page-box {
+    width: 100%;
     height: 15px;
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
-    top: 280px;
+    top: 90%;
+
     z-index: 2;
 }
 .page {

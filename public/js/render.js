@@ -34,6 +34,13 @@ const getBestItemHTML = function (info) {
     return html;
 }
 
+const getCarouselItemDOM = function(src) {
+    const element = document.createElement("img");
+    element.setAttribute("src", src);
+    element.setAttribute("class", "container__item--carousel__img");
+    return element;
+}
+
 const getCarouselBoxHTML = function () {
     let html = `<div class="container__item--carousel border-gray">
         </div>`;

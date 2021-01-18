@@ -1,139 +1,168 @@
 class Carousel {
-    constructor(parentDOM, items) {
+    /* 
+        items [DOM, DOM, ...] 
+        <style>
+        position: absolute;
+        top: 0;
+        left: 0;
+    */
+    constructor(parentDOM, itemDOMs, itemWidth, itemHeight) {
         this.parentDOM = parentDOM;
-        this.items = items;
+
+        this.itemDOMs = itemDOMs;
+        this.totalCnt = itemDOMs.length;
+
+        this.itemWidth = itemWidth;
+        this.itemHeight = itemHeight;
     }
 
-    init() {
-        this.itemDOMs = [];
+    // cnt: 한번에 표시될 요소의 개수, duration: 애니메이션 시간
+    init(cnt, duration) {
+        this.cnt = cnt;
 
-        // image size
-        this.width = 485;
-        this.height = 340;
+        this.box = document.createElement("div");
+        this.box.setAttribute("style", `width: ${this.itemWidth * cnt}px;height: ${this.itemHeight}px;
+            overflow: hidden; margin: auto; position:relative`);
+        this.duration = duration;
 
-        // left - center - right index 초기화
-        this.centerIdx = 0;
-        this.leftIdx = this.items.length - 1;
-        this.rightIdx = 1;
+        this.itemDOMs.forEach((item) => {
+            this.offVisibility(item);
+            this.box.appendChild(item);
+        });
 
-        // center 이미지가 보일 박스
-        this.boxDOM = document.createElement("div");
-        this.boxDOM.setAttribute("class", "container__item--carousel__box margin-auto");
+        this.initIndex();
+        this.center.forEach((itemIdx, idx) => {
+            const item = this.itemDOMs[itemIdx];
+            this.onVisibility(item);
+            this.move(item, idx, 0.01);
+        });
 
-        // boxDOM에 다 넣음
-        this.boxDOM.innerHTML = this.items.reduce((acc, cur) => {
-            return acc + this.makeImgElement(cur.src);
-        }, "");
+        this.initArrowBtn();
 
-        // 각 image DOM element 저장해둠
-        for (let child of this.boxDOM.childNodes) this.itemDOMs.push(child);
-        this.vOn(this.itemDOMs[0]);
-
-        // 버튼 렌더링
-        this.parentDOM.innerHTML += `<img src="image/prev_btn.svg" class="btn--prev">
-        <img src="image/next_btn.svg" class="btn--next">`;
-
-        // 막대 렌더링
-        this.pageDOMs = [];
-        this.parentDOM.innerHTML += `<div class="page-box margin-center horizontal"></div>`;
-        for(let i = 0; i < this.items.length; i++) {
-            const element = this.makePageElement();
-            this.pageDOMs.push(element);
-            this.parentDOM.lastChild.appendChild(element);
+        if(this.cnt === 1) {
+            this.pageColor = "#ccc";
+            this.curColor = "#333";
+            this.initPage();
         }
-        // 디폴트 맨 처음 항목
-        this.pageDOMs[0].style.backgroundColor="#333";
-        
-        // 막대 이벤트 등록
-        this.addPageEvent();
     }
-    addPageEvent() {
-        for(let i = 0; i < this.pageDOMs.length; i++) {
-            const DOM = this.pageDOMs[i];
-            DOM.addEventListener("mouseover", () => {
-                this.pageDOMs[this.centerIdx].style.backgroundColor="#ccc";
-                this.vOff(this.itemDOMs[this.centerIdx]);
-                this.pageDOMs[i].style.backgroundColor="#333";
-                this.vOn(this.itemDOMs[i]);
-                this.refreshIndex(i);
+    
+    initIndex() {
+        this.left = this.totalCnt - 1;
+        this.center = [];
+        for (let i = 0; i < this.cnt; i++) this.center.push(i);
+        this.right = this.cnt;
+    }
+    initArrowBtn() {
+        this.prevBtnDOM = document.createElement("img");
+        this.prevBtnDOM.setAttribute("src", "image/prev_btn.svg");
+        this.prevBtnDOM.setAttribute("class", "btn--prev");
+        this.prevBtnDOM.addEventListener("click", (e) => {
+            this.prev();
+        }, { once: true });
+
+        this.nextBtnDOM = document.createElement("img");
+        this.nextBtnDOM.setAttribute("src", "image/next_btn.svg");
+        this.nextBtnDOM.setAttribute("class", "btn--next");
+        this.nextBtnDOM.addEventListener("click", (e) => {
+            this.next();
+        }, { once: true });
+    }
+    initPage() {
+        const box = document.createElement("div");
+        box.setAttribute("class", "page-box margin-center horizontal");
+
+        let html = "";
+        for(let i = 0; i < this.totalCnt; i++) html += `<div class="page"></div>`;
+        box.innerHTML = html;
+
+        this.pageDOMs = [...box.childNodes];
+        this.pageDOMs[this.center[0]].style.backgroundColor = this.curColor;
+        this.pageDOMs.forEach((item, idx) => {
+            item.addEventListener("mouseover", () => {
+                this.pageDOMs[this.center[0]].style.backgroundColor = this.pageColor;
+                this.offVisibility(this.itemDOMs[this.center[0]]);
+                this.pageDOMs[idx].style.backgroundColor = this.curColor;
+                this.onVisibility(this.itemDOMs[idx]);
+                
+                this.center[0] = idx;
+                this.left = idx - 1;
+                if(this.left === -1) this.left = this.totalCnt - 1;
+                this.right = idx + 1;
+                if(this.right === this.totalCnt) this.right = 0;
             });
-        }
+        });
+
+        this.pageBoxDOM = box;
     }
-    makeImgElement(src) {
-        return `<img src="${src}" class="container__item--carousel__img transparency">`;
-    }
-    makePageElement() {
-        const element = document.createElement("div");
-        element.setAttribute("class", "page");
-        return element;
-    }
-    render() {
-        this.parentDOM.appendChild(this.boxDOM);
-        document.querySelector(".btn--prev").addEventListener("click", () => this.prev());
-        document.querySelector(".btn--next").addEventListener("click", () => this.next());
-    }
-    vOn(element) {
+    onVisibility(element) {
         element.style.visibility = "visible";
     }
-    vOff(element) {
+    offVisibility(element) {
         element.style.visibility = "hidden";
     }
     move(element, n, duration) {
         element.style.transitionDuration = `${duration}s`;
-        element.style.transform = `translate(${n * this.width}px)`;
+        element.style.transform = `translate(${n * this.itemWidth}px)`;
     }
     prev() {
-        const left = this.itemDOMs[this.leftIdx];
-        const center = this.itemDOMs[this.centerIdx];
+        if(this.cnt === 1) {
+            this.pageDOMs[this.center[0]].style.backgroundColor = this.pageColor;
+            this.pageDOMs[this.left].style.backgroundColor = this.curColor;
+        }   
+    
+        this.itemDOMs[this.center[this.cnt - 1]].addEventListener("transitionend", () => {
+            this.offVisibility(this.itemDOMs[this.center[this.cnt - 1]]);
+            this.move(this.itemDOMs[this.center[this.cnt - 1]], 0, 0.01);
 
-        this.pageDOMs[this.centerIdx].style.backgroundColor="#ccc";
-        this.pageDOMs[this.leftIdx].style.backgroundColor="#333";
+            this.right = this.center[this.cnt - 1];
+            this.center.pop();
+            this.center.unshift(this.left--);
+            if (this.left === -1) this.left = this.totalCnt - 1;
 
-        left.addEventListener("transitionend", () => {
-            this.vOn(left);
-            this.move(left, 0, 0.5);
-        }, {once: true})
-        center.addEventListener("transitionend", () => {
-            this.vOff(center);
-            this.move(center, 0, 0.01);
-        }, {once: true});
-
-        this.move(left, -1, 0.01);
-        this.move(center, 1, 0.5);   
-
-        let n = this.centerIdx - 1;
-        if(n == -1) n = this.items.length - 1;
-        this.refreshIndex(n);
+            this.prevBtnDOM.addEventListener("click", () => this.prev(), { once: true });
+        }, { once: true });
+        this.itemDOMs[this.left].addEventListener("transitionend", () => {
+            this.onVisibility(this.itemDOMs[this.left]);
+            this.move(this.itemDOMs[this.left], 0, this.duration);
+        }, { once: true });
+        this.center.forEach((itemIdx, idx) => {
+            this.move(this.itemDOMs[itemIdx], idx + 1, this.duration);
+        });
+        this.move(this.itemDOMs[this.left], -1, 0.001);
     }
     next() {
-        const right = this.itemDOMs[this.rightIdx];
-        const center = this.itemDOMs[this.centerIdx];
-
-        this.pageDOMs[this.centerIdx].style.backgroundColor="#ccc";
-        this.pageDOMs[this.rightIdx].style.backgroundColor="#333";
-
-        center.addEventListener("transitionend", () => {
-            this.vOff(center);
-            this.move(center, 0, 0.01);
-        }, {once: true});
-        right.addEventListener("transitionend", () => {
-            this.vOn(right);
-            this.move(right, 0, 0.5);
-        }, {once: true})
+        if(this.cnt === 1) {
+            this.pageDOMs[this.center[0]].style.backgroundColor = this.pageColor;
+            this.pageDOMs[this.right].style.backgroundColor = this.curColor;
+        }
         
-        this.move(right, 1, 0.01);
-        this.move(center, -1, 0.5);
+        this.itemDOMs[this.center[0]].addEventListener("transitionend", () => {
+            this.offVisibility(this.itemDOMs[this.center[0]]);
+            this.move(this.itemDOMs[this.center[0]], 0, 0.01);
 
-        let n = this.centerIdx + 1;
-        if(n == this.items.length) n = 0;
-        this.refreshIndex(n);
+            this.left = this.center[0];
+            this.center.shift();
+            this.center.push(this.right++);
+            if (this.right === this.totalCnt) this.right = 0;
+
+            this.nextBtnDOM.addEventListener("click", () => this.next(), { once: true });
+        }, { once: true });
+        this.itemDOMs[this.right].addEventListener("transitionend", () => {
+            this.onVisibility(this.itemDOMs[this.right]);
+            this.move(this.itemDOMs[this.right], this.cnt - 1, this.duration);
+        }, { once: true });
+        this.center.forEach((itemIdx, idx) => {
+            this.move(this.itemDOMs[itemIdx], idx - 1, this.duration);
+        });
+        this.move(this.itemDOMs[this.right], this.cnt, 0.001);
     }
-    refreshIndex(n) {
-        this.centerIdx = n;
-        if(this.centerIdx === this.items.length) this.centerIdx = 0;
-        this.leftIdx = this.centerIdx - 1;
-        this.rightIdx = this.centerIdx + 1;
-        if(this.leftIdx === -1) this.leftIdx = this.items.length - 1;
-        if(this.rightIdx === this.items.length) this.rightIdx = 0;
+    render() {
+        this.parentDOM.appendChild(this.box);
+        this.parentDOM.appendChild(this.prevBtnDOM);
+        this.parentDOM.appendChild(this.nextBtnDOM);
+
+        if(this.cnt === 1) {
+            this.parentDOM.appendChild(this.pageBoxDOM);
+        }
     }
 }

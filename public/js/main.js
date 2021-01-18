@@ -25,7 +25,9 @@ const initPage = function (data) {
     
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));
     mainContainerDOM.appendChild(getBoxDOM(getCarouselBoxHTML(), getBestItemHTML(bests[0])));
-    const bigCarousel = new Carousel(mainContainerDOM.lastChild.firstChild, carousels, 485, 340);
+
+    const carouselDOMs = carousels.map((item) => getCarouselItemDOM(item.src));
+    const bigCarousel = new Carousel(mainContainerDOM.lastChild.firstChild, carouselDOMs, 485, 340);
     bigCarousel.init(1, 0.3);
     bigCarousel.render();
 
@@ -33,8 +35,8 @@ const initPage = function (data) {
     const hotDOMs = hots.map(item => {
         return getBasicItemDOM(item);
     });
-    const smallCarousel = new C(mainContainerDOM.lastChild, hotDOMs, 260, 380);
-    smallCarousel.init(1, 0.3);
+    const smallCarousel = new Carousel(mainContainerDOM.lastChild, hotDOMs, 260, 380);
+    smallCarousel.init(5, 0.3);
     smallCarousel.render();
 
 

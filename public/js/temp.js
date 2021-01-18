@@ -38,6 +38,12 @@ class C {
         });
 
         this.initArrowBtn();
+
+        if(this.cnt === 1) {
+            this.pageColor = "#ccc";
+            this.curColor = "#333";
+            this.initPage();
+        }
     }
     
     initIndex() {
@@ -61,6 +67,33 @@ class C {
             this.next();
         }, { once: true });
     }
+    initPage() {
+        const box = document.createElement("div");
+        box.setAttribute("class", "page-box margin-center horizontal");
+
+        let html = "";
+        for(let i = 0; i < this.totalCnt; i++) html += `<div class="page"></div>`;
+        box.innerHTML = html;
+
+        this.pageDOMs = [...box.childNodes];
+        this.pageDOMs[this.center[0]].style.backgroundColor = this.curColor;
+        this.pageDOMs.forEach((item, idx) => {
+            item.addEventListener("mouseover", () => {
+                this.pageDOMs[this.center[0]].style.backgroundColor = this.pageColor;
+                this.offVisibility(this.itemDOMs[this.center[0]]);
+                this.pageDOMs[idx].style.backgroundColor = this.curColor;
+                this.onVisibility(this.itemDOMs[idx]);
+                
+                this.center[0] = idx;
+                this.left = idx - 1;
+                if(this.left === -1) this.left = this.totalCnt - 1;
+                this.right = idx + 1;
+                if(this.right === this.totalCnt) this.right = 0;
+            });
+        });
+
+        this.pageBoxDOM = box;
+    }
     onVisibility(element) {
         element.style.visibility = "visible";
     }
@@ -72,6 +105,9 @@ class C {
         element.style.transform = `translate(${n * this.itemWidth}px)`;
     }
     prev() {
+        this.pageDOMs[this.center[0]].style.backgroundColor = this.pageColor;
+        this.pageDOMs[this.left].style.backgroundColor = this.curColor;
+
         this.itemDOMs[this.center[this.cnt - 1]].addEventListener("transitionend", () => {
             this.offVisibility(this.itemDOMs[this.center[this.cnt - 1]]);
             this.move(this.itemDOMs[this.center[this.cnt - 1]], 0, 0.01);
@@ -93,6 +129,9 @@ class C {
         this.move(this.itemDOMs[this.left], -1, 0.001);
     }
     next() {
+        this.pageDOMs[this.center[0]].style.backgroundColor = this.pageColor;
+        this.pageDOMs[this.right].style.backgroundColor = this.curColor;
+
         this.itemDOMs[this.center[0]].addEventListener("transitionend", () => {
             this.offVisibility(this.itemDOMs[this.center[0]]);
             this.move(this.itemDOMs[this.center[0]], 0, 0.01);
@@ -117,5 +156,9 @@ class C {
         this.parentDOM.appendChild(this.box);
         this.parentDOM.appendChild(this.prevBtnDOM);
         this.parentDOM.appendChild(this.nextBtnDOM);
+
+        if(this.cnt === 1) {
+            this.parentDOM.appendChild(this.pageBoxDOM);
+        }
     }
 }
