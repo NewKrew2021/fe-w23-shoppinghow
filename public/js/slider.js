@@ -1,7 +1,7 @@
 /*
     slider.js
 
-    슬라이드쇼 기능을 구현하는 클래스
+    슬라이드쇼 모듈
 */
 import { dom } from './util.js'
 

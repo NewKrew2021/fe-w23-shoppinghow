@@ -1,6 +1,7 @@
 import MainLayout from './main.js';
 import { dom } from './util.js';
 import UIevent from './uievent.js';
+import SearchBox from './searchbox.js';
 
 /* 레이아웃 초기 구성 */
 const initLayout = new MainLayout();
@@ -15,3 +16,7 @@ const eventController = new UIevent(0);
 eventController.addMoreContent(5);
 eventController.hidePopupLayer();
 eventController.showPopupLayer();
+
+/* 검색창 모듈 */
+const searchBox = new SearchBox();
+searchBox.showKeywordBox();
