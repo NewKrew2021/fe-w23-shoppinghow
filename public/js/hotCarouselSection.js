@@ -58,7 +58,7 @@
 function next(){
     const carousel=document.querySelector("#hot-carousel");
     const slides = carousel.querySelectorAll(".item");
-
+    const XDISTANCE=195;
     const SPEED="300ms";
     for(let i = 0 ; i < slides.length;i++){
         const s=slides[i];
@@ -69,7 +69,7 @@ function next(){
             speed="0ms";
         }
         s.style.transition = speed;
-        s.style.transform= `translateX(${195*nextPos}px)`;
+        s.style.transform= `translateX(${XDISTANCE*nextPos}px)`;
         s.attributes.pos.value=nextPos;
     }
 }
@@ -87,7 +87,7 @@ function prev(){
             speed="0ms";
         }
         s.style.transition = speed;
-        s.style.transform= `translateX(${195*nextPos}px)`;
+        s.style.transform= `translateX(${XDISTANCE*nextPos}px)`;
         s.attributes.pos.value=nextPos;
     }
 }
