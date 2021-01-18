@@ -10,7 +10,7 @@ const PromiseNextType = {
   THEN: Symbol("then"),
 }
 
-class MyPromise {
+export default class MyPromise {
   // callback: (resolve, reject) => { ... }
   constructor(callback) {
     this.nexts = []

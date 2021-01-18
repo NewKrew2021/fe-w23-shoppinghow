@@ -1,5 +1,8 @@
+import { appendImageCarousel, appendItemCard, initCarousel, initHoverPopup, initItemCardWrapper, initRecentWrapper } from './component'
+import { fetchItems, findOne } from './util'
+
 // initialize the page
-(function initPage() {
+function initPage() {
   // init the best-promotion section
   function initBestPromotionSection() {
     fetchItems('/best_promotion')
@@ -28,6 +31,7 @@
   function initBestItems() {
     let pageIndex = 0
     let pageSize = 5
+
     function loadBestItems() {
       const cardItemsWrapper = findOne('#best_items')
       fetchItems('/best', { pageIndex: pageIndex, pageSize: pageSize })
@@ -62,5 +66,7 @@
 
   initItemCardWrapper()
   initHoverPopup()
-  initRecent(findOne('#recent_view'))
-})()
+  initRecentWrapper(findOne('#recent_view'))
+}
+
+initPage()

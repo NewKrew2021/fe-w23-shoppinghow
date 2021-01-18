@@ -1,5 +1,10 @@
+import { find, findOne } from "../util"
+
+const CAROUSEL_TRANSITION_INTERVAL = 5000
+const CAROUSEL_TRANSITION_DELAY = 300
+
 // append a simple image-carousel to the wrapper
-function appendImageCarousel(wrapper, id, items, pageSize = 1) {
+export function appendImageCarousel(wrapper, id, items, pageSize = 1) {
   const carouselItemHtmlString = items.reduce((str, { href, src }) => str + `
     <div class="carousel-item w-${Math.floor(100 / pageSize)}">
       <a href="${href}">
@@ -21,7 +26,7 @@ function appendImageCarousel(wrapper, id, items, pageSize = 1) {
 }
 
 // initialize a carousel
-function initCarousel(carousel) {
+export function initCarousel(carousel) {
   const carouselId = carousel.getAttribute('id')
   const items = find(`#${carouselId} .carousel-item`)
   const carouselInfo = {
@@ -44,11 +49,11 @@ function initCarousel(carousel) {
   showNextCarouselItem(carouselInfo)
 
   // set interval event
-  setInterval(() => showNextCarouselItem(carouselInfo), 5000)
+  setInterval(() => showNextCarouselItem(carouselInfo), CAROUSEL_TRANSITION_INTERVAL)
 }
 
 // show next carousel item (also support reverse order)
-function showNextCarouselItem(carouselInfo, isReversed = false) {
+export function showNextCarouselItem(carouselInfo, isReversed = false) {
   const { pageSize, items, nItems, isOnTransition } = carouselInfo
   let { index } = carouselInfo
 
@@ -76,10 +81,7 @@ function showNextCarouselItem(carouselInfo, isReversed = false) {
 
   // remove all prev/active/next classes and translateX setting
   items.forEach(item => {
-    item.classList.remove('prev')
-    item.classList.remove('active')
-    item.classList.remove('next')
-    item.classList.remove('reverse')
+    item.classList.remove('prev', 'active', 'next', 'reverse')
     delete item.dataset.carouselItemTranslateX
   })
 
@@ -105,5 +107,5 @@ function showNextCarouselItem(carouselInfo, isReversed = false) {
   // end of transition
   setTimeout(() => {
     carouselInfo.isOnTransition = false
-  }, 300)
+  }, CAROUSEL_TRANSITION_DELAY)
 }

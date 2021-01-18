@@ -30,12 +30,16 @@ function findElements(selector, findAll) {
   return elements
 }
 
+// find the first node that matches selector
 // return element or null
-function myQuerySelector(selector) {
+export function findOne(selector) {
   return findElements(selector, false)
 }
+export { findOne as myQuerySelector }
 
+// find all nodes that match selector
 // return array of element (not a NodeList!)
-function myQuerySelectorAll(selector) {
+export function find(selector) {
   return findElements(selector, true)
 }
+export { find as myQuerySelectorAll }

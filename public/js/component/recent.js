@@ -1,4 +1,6 @@
-function initRecent(wrapper) {
+import { loadRecent } from "../util"
+
+export function initRecentWrapper(wrapper) {
   const recent = loadRecent()
   let recentItemHtmlString
 
