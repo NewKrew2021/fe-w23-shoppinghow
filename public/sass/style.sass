@@ -1,0 +1,240 @@
+$main-background-color: #eeeeee
+
+$content-width : 1350px
+$product-item-width : 270px
+$tag-color : #e79924
+
+body
+  background: $main-background-color
+
+p
+  padding: 0
+  margin: 0
+
+button,
+input
+  border: none
+  background: none
+
+input:focus,
+button:focus
+  outline: none
+ul
+  margin: 0
+
+li
+  list-style-type: none
+
+.header
+  background: #ffffff
+  border-bottom: 2px solid #cccccc
+  margin-bottom: 10px
+
+  &__title
+    height: 150px
+    display: flex
+    align-items: center
+    justify-content: center
+    border-bottom: 1px solid #eeeeee
+
+  &__logo-image
+    height: 55px
+
+.search-box
+  border: 1px solid #cccccc
+  height: 40px
+  border-radius: 10px
+  margin-left: 30px
+  display: flex
+  align-items: center
+  justify-content: center
+  column-gap: 10px
+  padding: 5px 20px
+
+  &__input
+    width: 550px
+    font-size: 25px
+    border: none
+
+  &__button
+    width: fit-content
+    height: fit-content
+
+  &__button-icon
+    height: 22px
+
+.header-nav
+  margin: 0 auto
+  display: flex
+  align-items: center
+  justify-content: space-between
+  width: $content-width
+  height: 60px
+
+.important-nav,
+.theme-nav
+  display: flex
+  column-gap: 20px
+  font-weight: bolder
+
+  &
+    color: #888888
+
+.content__main
+  width: $content-width
+  margin: 0 auto
+
+.product-list__row
+  background: #ffffff
+  display: flex
+  padding: 0
+  border: 1px solid $main-background-color
+
+.product-item
+  height: 350px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  width: $product-item-width
+  border-right: 1px solid $main-background-color
+  &__image
+    width: 220px
+    margin-bottom: 12px
+  &__title
+    width: 220px
+    font-size: 14px
+    font-weight: bolder
+    margin-bottom: 4px
+  &__description
+    width: 220px
+    font-size: 11px
+
+.product-tag-list
+  margin-top: 10px
+  display: flex
+
+.product-tag
+  border: 1px solid $tag-color
+  border-radius: 2px
+  padding: 1px 4px
+  color: $tag-color
+  font-size: 12px
+
+.product-more-area
+  height: 100px
+  display: flex
+  align-items: center
+  justify-content: center
+  background: #cccccc
+  margin-top: 10px
+  &:hover
+    background: #dddddd
+    cursor: pointer
+
+.more-product-text__title
+  font-size: 20px
+  font-weight: bolder
+
+.more-product-text
+  display: flex
+
+  .more-product-text, .more-product-text-count
+
+    display: flex
+    column-gap: 5px
+    .more-product-text__count
+      color: #ff0000
+      font-weight: bolder
+    .more-product-text__total-count
+      font-weight: bolder
+
+.category-product
+  margin-top: 30px
+  font-size: 25px
+
+.recent-product
+  height: 100%
+  position: relative
+  display: flex
+  align-items: center
+
+  .recent-product__icon
+    width: 20px
+    height: 20px
+    border-radius: 10px
+    background: #000000
+    margin-right: 10px
+  .recent-product__text
+    font-size: 16px
+  .recent-product__pop-up
+    box-sizing: border-box
+    display: none
+    top: 60px
+    left: -300px
+    position: absolute
+    float: left
+    width: 400px
+    height: 500px
+    background: #ffffff
+    border: solid 1px #000000
+    padding: 20px
+    &:hover
+      display: block
+    .pop-up
+      &__title
+        font-weight: bolder
+        margin-bottom: 10px
+      &__item-list
+        height: 400px
+      &__item-image
+        width: 110px
+
+  &:hover
+    .recent-product__pop-up
+      display: block
+
+.carousel
+  position: relative
+  width: $content-width
+  overflow: hidden
+  .carousel-product-list
+    display: flex
+    position: relative
+    right: $product-item-width*2
+    transition: transform 1s
+
+  .carousel-button
+    display: flex
+    align-items: center
+    justify-content: center
+    z-index: 10
+    color : #ffffff
+    position: absolute
+    top: 100px
+    float: left
+    width: 50px
+    height: 50px
+    background: #000000
+    opacity: 0.5
+    &__right
+      right: 0
+    &:hover
+      cursor: pointer
+      opacity: 0.7
+
+.advertise-product
+  display: flex
+  background: #ffffff
+
+  .promotion-product
+    width: 540px
+    height: 300px
+    border: 1px solid $main-background-color
+  .best-product
+    width: 810px
+    height: 300px
+    border: 1px solid $main-background-color
+
+.footer
+  height: 300px
