@@ -4,6 +4,7 @@ const mainContainerDOM = domAPI.querySelector(".container");
 const basicContainerDOM = domAPI.querySelector(".container--basic-item");
 const moreBtnDOM = domAPI.querySelector(".container__more");
 const myStorage = window.localStorage;
+
 const marginHeight = 20;
 let basicItemCnt = 0;
 
