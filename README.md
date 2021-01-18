@@ -1,5 +1,13 @@
 # fe-w23-shoppinghow
 
+## 실행방법
+
+```
+npm install
+npx webpack
+node index.js
+```
+
 ## Day1
 
 - [x] 프로젝트 세팅
@@ -30,8 +38,9 @@
 
 ## Day6
 
-- [ ] Webpack 적용
-- [ ] BABEL 적용
+- [x] Webpack 적용
+- [x] BABEL 적용
+- [x] boilerplate 생성
 - [ ] Client 라우팅 구현
 
 ## Day7
