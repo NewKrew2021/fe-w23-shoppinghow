@@ -8,4 +8,3 @@ module.exports = {
     filename: 'bundle.js',
   },
 };
-코드복사;
