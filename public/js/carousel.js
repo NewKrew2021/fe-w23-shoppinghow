@@ -7,7 +7,7 @@ class Carousel {
         left: 0;
     */
     constructor(parentDOM, itemDOMs, itemWidth, itemHeight) {
-        this.parentDOM = parentDOM;
+        this.parentDOM = parentDOM; // carousel이 자식으로 들어갈 부모요소
 
         this.itemDOMs = itemDOMs;
         this.totalCnt = itemDOMs.length;
@@ -16,9 +16,8 @@ class Carousel {
         this.itemHeight = itemHeight;
     }
 
-    // cnt: 한번에 표시될 요소의 개수, duration: 애니메이션 시간
     init(cnt, duration) {
-        this.cnt = cnt;
+        this.cnt = cnt; // 한번에 보여지는 요소의 개수
 
         this.box = document.createElement("div");
         this.box.setAttribute("style", `width: ${this.itemWidth * cnt}px;height: ${this.itemHeight}px;
@@ -27,34 +26,41 @@ class Carousel {
         this.duration = duration;
         this.durationZero = 0.001;
 
+        // 모든 요소 안보이게 하고 왼쪽 끝에 겹쳐놓음
         this.itemDOMs.forEach((item) => {
             this.offVisibility(item);
             this.box.appendChild(item);
         });
 
-        this.initIndex();
+        this.initIndex(); // left, center, right 초기화, center는 배열(한번에 여러개 보여질 때)
+        
+        // 현재 보여질 요소들을 보이게 하고 자기 자리로 이동시킴
         this.center.forEach((itemIdx, idx) => {
             const item = this.itemDOMs[itemIdx];
             this.onVisibility(item);
             this.move(item, idx, 0.01);
         });
 
-        this.initArrowBtn();
+        // 좌우 버튼 초기화
+        this.initBtn();
 
+        // 한번에 보여지는 요소가 여러개라면 막대페이지 불가능 
         if(this.cnt === 1) {
-            this.pageColor = "#ccc";
-            this.curColor = "#333";
             this.initPage();
         }
     }
     
+    // 왼쪽, 중간, 오른쪽 가리키는 포인터(인덱스) 초기화
     initIndex() {
         this.left = this.totalCnt - 1;
         this.center = [];
         for (let i = 0; i < this.cnt; i++) this.center.push(i);
         this.right = this.cnt;
     }
-    initArrowBtn() {
+
+    // 좌 우 버튼
+    initBtn() {
+        // {once:true} 옵션은 transition이 끝나기 전에 눌릴 경우 대비, transition이 끝나면 다시 버튼에 이벤트 등록
         this.prevBtnDOM = document.createElement("img");
         this.prevBtnDOM.setAttribute("src", "image/prev_btn.svg");
         this.prevBtnDOM.setAttribute("class", "btn--prev");
@@ -69,6 +75,8 @@ class Carousel {
             this.next();
         }, { once: true });
     }
+
+    // 막대 페이지
     initPage() {
         const box = document.createElement("div");
         box.setAttribute("class", "page-box margin-center horizontal");
@@ -97,6 +105,8 @@ class Carousel {
 
         this.pageBoxDOM = box;
     }
+
+    // element에서 target 제거, className 추가
     changeClass(element, target, className) {
         element.classList.remove(target);
         element.classList.add(className);
@@ -113,6 +123,7 @@ class Carousel {
     }
     prev() {
         if(this.cnt === 1) {
+            // 막대 페이지
             this.changeClass(this.pageDOMs[this.center[0]], "page-btn-picked", "page-btn-normal");
             this.changeClass(this.pageDOMs[this.left], "page-btn-normal", "page-btn-picked");
         }   
@@ -139,6 +150,7 @@ class Carousel {
     }
     next() {
         if(this.cnt === 1) {
+            // 막대 페이지
             this.changeClass(this.pageDOMs[this.center[0]], "page-btn-picked", "page-btn-normal");
             this.changeClass(this.pageDOMs[this.right], "page-btn-normal", "page-btn-picked");
         }
@@ -163,6 +175,8 @@ class Carousel {
         });
         this.move(this.itemDOMs[this.right], this.cnt, this.durationZero);
     }
+
+    // DOM트리에 연결
     render() {
         this.parentDOM.appendChild(this.box);
         this.parentDOM.appendChild(this.prevBtnDOM);

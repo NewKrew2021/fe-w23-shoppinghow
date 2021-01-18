@@ -6,7 +6,7 @@ const moreBtnDOM = domAPI.querySelector(".container__more");
 const myStorage = window.localStorage;
 
 const marginHeight = 20;
-let basicItemCnt = 0;
+let basicItemCnt = 0; // 현재 화면에 노출된 기본 상품 개수
 
 const getItemData = async function (itemType) {
     let url = `${URL}/${itemType}`;
@@ -23,6 +23,7 @@ const initPage = function (data) {
     const hots = data[2].items;
     const basics = data[3].items;
     
+    // 한 행씩 렌더링
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));
     mainContainerDOM.appendChild(getBoxDOM(getCarouselBoxHTML(), getBestItemHTML(bests[0])));
 
@@ -38,8 +39,6 @@ const initPage = function (data) {
     const smallCarousel = new Carousel(mainContainerDOM.lastChild, hotDOMs, 260, 380);
     smallCarousel.init(5, 0.3);
     smallCarousel.render();
-
-
 
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));
 
