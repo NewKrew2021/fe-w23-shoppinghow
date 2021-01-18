@@ -1,4 +1,4 @@
-import {myDomApi} from "./myDomApi.js"
+import {myDomApi} from "./mydomapi.js"
 import {carouselImgCnt} from "./index.js"
 
 let carouselIndex = 0;
