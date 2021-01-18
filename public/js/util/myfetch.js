@@ -1,5 +1,7 @@
 import MyPromise from './mypromise'
 
+const XHR_READY_STATE_DONE = 4
+
 export function myFetch(url, init = {}) {
   return new MyPromise((resolve, reject) => {
     try {
@@ -27,7 +29,7 @@ export function myFetch(url, init = {}) {
 
       request.onreadystatechange = () => {
         // only handle when state is 'DONE'
-        if (request.readyState !== 4) return
+        if (request.readyState !== XHR_READY_STATE_DONE) return
 
         resolve(request.response)
       }

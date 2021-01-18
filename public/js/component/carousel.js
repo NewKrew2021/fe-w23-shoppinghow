@@ -1,5 +1,8 @@
 import { find, findOne } from "../util"
 
+const CAROUSEL_TRANSITION_INTERVAL = 5000
+const CAROUSEL_TRANSITION_DELAY = 300
+
 // append a simple image-carousel to the wrapper
 export function appendImageCarousel(wrapper, id, items, pageSize = 1) {
   const carouselItemHtmlString = items.reduce((str, { href, src }) => str + `
@@ -46,7 +49,7 @@ export function initCarousel(carousel) {
   showNextCarouselItem(carouselInfo)
 
   // set interval event
-  setInterval(() => showNextCarouselItem(carouselInfo), 5000)
+  setInterval(() => showNextCarouselItem(carouselInfo), CAROUSEL_TRANSITION_INTERVAL)
 }
 
 // show next carousel item (also support reverse order)
@@ -107,5 +110,5 @@ export function showNextCarouselItem(carouselInfo, isReversed = false) {
   // end of transition
   setTimeout(() => {
     carouselInfo.isOnTransition = false
-  }, 300)
+  }, CAROUSEL_TRANSITION_DELAY)
 }
