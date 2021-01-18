@@ -12,11 +12,22 @@
 <body>
     <div id="root">
         <div id="header">
-            <div class="inline-block">
-                <img class="logo-img" src="/images/logo.png">
-                <div class="search-blank inline-block">
-                    <input class="font-20" type="text" size="55">
-                    <img class="search-btn" src="/images/search_btn.png">
+            <div class="search-wrapper inline-block">
+                <div class="float-left">
+                    <img class="logo-img" src="/images/logo.png">
+                </div>
+                <div class="search-blank float-left relative">
+                    <div class="search-box">
+                        <input class="search-input font-20" type="text" size="55">
+                        <button class="search-btn">
+                            <img src="/images/search_btn.png">
+                        </button>
+                    </div>
+                    <div class="keyword absolute">
+                        <div class="keyword-inner">
+                            ddd
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 내비게이션 -->
@@ -46,7 +57,7 @@
                                 <div id="recent-img" class="inline-block"></div>
                                 <div class="block inner-footer mg-top-40">
                                     로그인 하시면 더 많은 MY 쇼핑 정보를 확인 하실 수 있습니다.
-                                    
+
                                 </div>
                                 <div id="login" class="block float-right mg-top-30 mg-left-40">
                                     로그인하기
@@ -113,6 +124,7 @@
     <script src="/js/uievent.js"></script>
     <script src="/js/storage.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/keyword.js"></script>
     <script src="/js/mypromise.js"></script>
 </body>
 
