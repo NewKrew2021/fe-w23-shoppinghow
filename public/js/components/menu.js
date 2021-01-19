@@ -89,7 +89,6 @@ class Menu {
       this.toggleTabActivation();
       this.activatedTab = event.target;
       this.toggleTabActivation();
-      // this.renderMenu(this.menuData);
     }
 
     this.currentX = event.clientX;
