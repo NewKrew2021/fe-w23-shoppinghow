@@ -1,4 +1,5 @@
-import { find } from "../util";
+import { find, saveRecent, findOne } from "../util";
+import { initRecentWrapper } from "./recent";
 
 // append an item card to the wrapper
 export function appendItemCard(wrapper, items) {
@@ -44,7 +45,7 @@ export function initItemCardWrapper() {
       if (wrapper.dataset.recentView) {
         const recentView = findOne(wrapper.dataset.recentView)
         if (recentView) {
-          initRecent(recentView)
+          initRecentWrapper(recentView)
         }
       }
     })
