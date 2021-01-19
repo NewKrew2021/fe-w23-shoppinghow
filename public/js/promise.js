@@ -1,7 +1,7 @@
 /*
     참고 링크 : https://p-iknow.netlify.app/js/custom-promise
 */
-class MyPromise {
+export class MyPromise {
     constructor(func) {
         this.state = "pending";
         func(this.resolve.bind(this), this.reject.bind(this));
@@ -25,14 +25,3 @@ class MyPromise {
         
     }
 }
-
-
-// 테스트용
-const promise = new Promise((resolve, reject) => {
-    console.log("function");
-    setTimeout(() => {
-        resolve("data");
-    }, 1000);
-}).then((data) => {
-    console.log("then", data);
-});

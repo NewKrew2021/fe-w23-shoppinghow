@@ -1,3 +1,11 @@
+import { Carousel } from "./carousel.js";
+import { DOMSearchAPI } from "./DOM_search_api.js";
+import { getBasicItemHTML, getBasicItemHTMLs, getBasicItemDOM, getBestItemHTML, 
+    getCarouselItemDOM, getCarouselBoxHTML, getBoxDOM, getMarginDOM, getMoreBtnDOM, getSubjectDOM } from "./render.js";
+import { MyPromise } from "./promise.js";
+import "../css/common.css";
+import "../css/style.css";
+
 const URL = "http://localhost:3000";
 const domAPI = new DOMSearchAPI(document);
 const mainContainerDOM = domAPI.querySelector(".container");
@@ -37,7 +45,7 @@ const initPage = function (data) {
         return getBasicItemDOM(item);
     });
     const smallCarousel = new Carousel(mainContainerDOM.lastChild, hotDOMs, 260, 380);
-    smallCarousel.init(5, 0.3);
+    smallCarousel.init(1, 0.3);
     smallCarousel.render();
 
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));
@@ -84,6 +92,7 @@ const initEventListener = function () {
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {
+    console.log("wwww");
     Promise.all([
         getItemData("carousel"),
         getItemData("best"),

@@ -16,9 +16,9 @@ module.exports = function(app, fs) {
         basicData = data;
     });
 
-    app.get("/", function(req, res) {
+    /* app.get("/", function(req, res) {
         res.render("index.html");
-    });
+    }); */
     app.get("/hot", (req, res) => {
         res.end(hotData);
     });

@@ -4,3 +4,5 @@
 - main.js, render.js 코드 정리
 - carousel.js 재사용 가능하게 수정
 - webpack, babel 학습
+
+**1.19(화)**
