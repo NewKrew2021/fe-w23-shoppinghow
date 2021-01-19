@@ -1,17 +1,53 @@
-import {myDomApi} from "./mydomapi.js"
-import {trendData, trendImgCnt} from "./index.js"
-import {MyPromise} from "./mypromise.js"
+import {myDomApi} from "../util/mydomapi.js"
+import {URL} from "../url.js"
+import {MyPromise} from "../util/mypromise.js"
 
 let trendFirstIndex = 0;
-let clickStartTime;
+let clickStartTime, trendData;
 let isMouseUp = false;
 const changTime = 2000; //ms
+const trendImgCnt = 5;
 const prevBtn = myDomApi.myQuerySelector("#trendPrev");
 const nextBtn = myDomApi.myQuerySelector("#trendNext");
 
 const mySetTimeout = new MyPromise((resolve, reject) => {
   setTimeout(() => resolve(), changTime);
 });
+
+const createTrendContainer = () => {
+  let trendContainer = myDomApi.myQuerySelector("table.trend-container");
+  let newLayout = "";
+  trendContainer.innerHTML += `<caption class="trend-caption">지금 뜨는 테마 카테고리</caption>`;
+  for(let idx=0; idx<trendImgCnt; idx++) {
+    newLayout += `
+      <th class="trend">
+        <img class="trend-img"">
+        <div class="trend-title"></div>
+        <div class="trend-info"></div>
+        <img class="trend-icon" src="img/themeIcon.png"></img>
+      </th>
+    `
+  }
+  trendContainer.innerHTML += newLayout;
+
+  let trendImg = myDomApi.myQuerySelectorAll("img.trend-img");
+  let trendTitle = myDomApi.myQuerySelectorAll("div.trend-title");
+  let trendInfo = myDomApi.myQuerySelectorAll("div.trend-info");
+
+  const request = new Request(URL + "/trend");
+  fetch(request)
+  .then(response => response.text())
+  .then(result => {
+    trendData = JSON.parse(result)["items"]
+    for(let idx=0; idx<trendImgCnt; idx++){
+      trendImg[idx].src = trendData[idx].src;
+      trendTitle[idx].innerHTML = trendData[idx].title;
+      trendInfo[idx].innerHTML = trendData[idx].subtitle;
+    }
+  })
+  .catch(error => console.log('error', error));
+  trendClickListener();
+}
 
 prevBtn.addEventListener("mousedown", () => {
   clickStartTime = new Date();
@@ -77,4 +113,4 @@ const trendClickListener = () => {
   });
 }
 
-export {trendClickListener};
+export {createTrendContainer};
