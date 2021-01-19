@@ -41,12 +41,12 @@ export default class HotSlider{
 
     onEvents() {
         /* 이벤트 핸들러 등록 */
-        this.slidePrevBtn.addEventListener('mouseup', (e)=>this.PrevBtnPressHandler(e));
+        this.slidePrevBtn.addEventListener('mouseup', this.PrevBtnPressHandler(e).bind(this));
         this.slidePrevBtn.addEventListener('mousedown', (e)=> {
             e.target.src='/images/prev2_press_btn.png';
             this.mousedownTime = new Date().getTime();
         })   
-        this.slideNextBtn.addEventListener('mouseup', (e)=>this.nextBtnPressHandler(e));
+        this.slideNextBtn.addEventListener('mouseup', this.nextBtnPressHandler(e).bind(this));
         this.slideNextBtn.addEventListener('mousedown', (e)=> {
             e.target.src='/images/next2_press_btn.png';
             this.mousedownTime = new Date().getTime();
