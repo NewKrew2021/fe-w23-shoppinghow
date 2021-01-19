@@ -33,7 +33,11 @@ const initPage = function (data) {
     const basics = data[3].items;
     const categories = data[4].data;
 
-    console.log(initCategory(categories));
+    const categoryInfo = initCategory(categories);
+    domAPI.querySelector("#category").appendChild(categoryInfo.boxDOM);
+    domAPI.querySelector(".category--large").style.display="block";
+    domAPI.querySelector(".category--medium").style.display="block";
+    domAPI.querySelector(".category--small").style.display="block";
 
     // 한 행씩 렌더링
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));

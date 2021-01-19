@@ -3,16 +3,12 @@
      large: ["패션/뷰티", "가전/컴퓨터", "가구/생활/건강" ...]
     medium: [["여성의류", "남성의류", "테마의류/잡화" ...], [], [], ...]
      small: [[["니트/스웨터", "티셔츠", "가디건", ...], [], [], ...], [], ...]
-
-    
-    # Array(HTML) 형태
-
-
     
     # CSS class
     category--box
     category--large, category--medium, category--small
-    category--large__item, category--medium__item, category--small__item 
+    category--large__item, category--medium__item, category--small__item
+    category--large__item--picked, category--medium__item--picked, category--small__item--picked 
 */
 
 const transJsonToString = function(data) {
@@ -45,17 +41,17 @@ const transStringToHTML = function(data) {
     };
 
     data.large.forEach((largeItem, i) => {
-        ret.large += `<div class="category--large__item">${largeItem}</div>`;
-        let mediumHTML = `<div class="category--medium">`
+        ret.large += `<div name="${i}"class="category--large__item">${largeItem}</div>`;
+        let mediumHTML = `<div name="${i}" class="category--medium">`
+        ret.small.push([]);
         data.medium[i].forEach((mediumItem, j) => {
-            mediumHTML +=  `<div class="category--medium__item">${mediumItem}</div>`;
-            ret.small.push([]);
-            let smallHTML = `<div class="category--small">`;
-            data.small[i][j].forEach((smallItem) => {
-                smallHTML += `<div class="category--small__item">${smallItem}</div>`;
+            mediumHTML +=  `<div name="${i}-${j}" class="category--medium__item">${mediumItem}</div>`;
+            let smallHTML = `<div name="${i}-${j}" class="category--small">`;
+            data.small[i][j].forEach((smallItem, k) => {
+                smallHTML += `<div name="${i}-${j}-${k}" class="category--small__item">${smallItem}</div>`;
             })
             smallHTML += "</div>";
-            ret.small[j].push(smallHTML);
+            ret.small[i].push(smallHTML);
         })
         mediumHTML += "</div>";
         ret.medium.push(mediumHTML);
@@ -66,7 +62,54 @@ const transStringToHTML = function(data) {
 }
 
 const transHTMLToDOM = function(data) {
-    return null;
+    const ret = document.createElement("div");
+    ret.setAttribute("class", "category--box horizontal");
+    ret.innerHTML = data.large;
+    ret.innerHTML += data.medium.reduce((acc, cur) => acc + cur, "");
+    data.small.forEach((arr) => {
+        ret.innerHTML += arr.reduce((acc, cur) => acc + cur, "");
+    });
+    return ret;
+}
+
+const setInfo = function(data) {
+    const ret = {
+        boxDOM: data,
+        lIdx: 0,
+        mIdx: 0,
+        sIdx: 0,
+        
+    }
+}
+
+const addEventHandler = function(data) {
+    const ret = {
+        boxDOM: data,
+        lIdx: 0,
+        mIdx: 0,
+        sIdx: 0,
+        refreshIdx(i, j, k) {
+            
+        }      
+    }
+    data.addEventListener("mouseover", (e) => {
+        const number = e.target.getAttribute("name"); // i-j-k
+        switch(e.target.className) {
+            case "category--large__item":
+                ret.lIdx = idx;
+                ret.mIdx = 0;
+                ret.sIdx = 0;
+                break;
+            case "category--medium__item":
+                ret.mIdx = idx;
+                ret.sIdx = 0;
+                break;
+            case "category--small__item":
+                ret.sIdx = 0;
+                break;
+        }
+    });
+    return ret;
 }
 
 const pipe = (...funcs) => data => {
@@ -79,6 +122,8 @@ export const initCategory = function(data) {
     return pipe(
         transJsonToString,
         transStringToHTML,
-        transHTMLToDOM
+        transHTMLToDOM,
+        setInfo,
+        addEventHandler,
     )(data);
 };
