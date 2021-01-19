@@ -70,15 +70,14 @@ const extendLayout = () => {
 }
 
 const themeClickListener = () => {
-  const themeImgList = myDomApi.myQuerySelectorAll("img.theme-img");
-  themeImgList.forEach( themeImg => {
-    themeImg.addEventListener("click", () => {
-      let shoppingList = JSON.parse(localStorage.getItem("shopping"));
-      shoppingList[themeImg.src] = "";
-      localStorage.removeItem("shopping");
-      localStorage.setItem("shopping", JSON.stringify(shoppingList));
-    });
-  });
+  const themeTable = myDomApi.myQuerySelector("table.theme-container");
+  themeTable.addEventListener("click", event=> {
+    let shoppingList = JSON.parse(localStorage.getItem("shopping"));
+    if(shoppingList===null) shoppingList={};
+    shoppingList[event.target.src] = "";
+    localStorage.removeItem("shopping");
+    localStorage.setItem("shopping", JSON.stringify(shoppingList));
+  })
 }
 
 moreBtn.addEventListener("click", extendLayout);

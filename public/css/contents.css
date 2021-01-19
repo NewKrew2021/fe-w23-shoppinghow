@@ -303,3 +303,12 @@ red {
   width: 400px;
   margin-top: 13px;
 }
+
+.category-layer {
+  position: absolute;
+  width: 570px;
+  height: 520px;
+  margin-left : 250px;
+  border: 1px solid #8a8a8a;
+  background-color: #ffffff;
+}

@@ -1,5 +1,5 @@
-import {myDomApi} from "./util/mydomapi.js"
-import {URL} from "./url.js"
+import {myDomApi} from "../util/mydomapi.js"
+import {URL} from "../url.js"
 
 let carouselIndex = 0;
 const carouselImgCnt = 3;

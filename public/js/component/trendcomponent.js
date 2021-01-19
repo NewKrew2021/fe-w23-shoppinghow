@@ -89,16 +89,15 @@ const changeImg = curImg => {
   }
 }
 
-const trendClickListener = () => {
-  const trendImgList = myDomApi.myQuerySelectorAll("img.trend-img");
-  trendImgList.forEach( trendImg => {
-    trendImg.addEventListener("click", () => {
-      let shoppingList = JSON.parse(localStorage.getItem("shopping"));
-      shoppingList[trendImg.src] = "";
-      localStorage.removeItem("shopping");
-      localStorage.setItem("shopping", JSON.stringify(shoppingList));
-    });
-  });
+const trendClickListener = () => {  
+  const trendTable = myDomApi.myQuerySelector("table.trend-container");
+  trendTable.addEventListener("click", event=> {
+    let shoppingList = JSON.parse(localStorage.getItem("shopping"));
+    if(shoppingList===null) shoppingList={};
+    shoppingList[event.target.src] = "";
+    localStorage.removeItem("shopping");
+    localStorage.setItem("shopping", JSON.stringify(shoppingList));
+  })
 }
 
 export {createTrendContainer};
