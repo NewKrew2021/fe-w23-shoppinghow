@@ -38,25 +38,28 @@ class Menu {
     this.mediumCategoryElement = $('.medium-category');
     this.smallCategoryElement = $('.small-category');
     this.activatedTab = $('.large-category').children[0];
+    this.largeCategoryIndex = 0;
+    this.mediumCategoryIndex = 0;
+    this.smallCategoryIndex = 0;
     this.currentX = 0;
     this.currentY = 0;
   }
 
-  createLargeCategoryElement() {
-    return LARGE_CATEGORY.reduce((acc, largeCategory) => {
-      return acc + `<li class="large-category__tab">${largeCategory}</li>`;
+  createLargeCategoryElement(menuData) {
+    return menuData.reduce((acc, { title }) => {
+      return acc + `<li class="large-category__tab">${title}</li>`;
     }, '');
   }
 
-  createMediumCategoryElement() {
-    return MEDIUM_CATEGORY.reduce((acc, largeCategory) => {
-      return acc + `<li class="medium-category__tab">${largeCategory}</li>`;
+  createMediumCategoryElement(mediumCategoryData) {
+    return mediumCategoryData.reduce((acc, { title }) => {
+      return acc + `<li class="medium-category__tab">${title}</li>`;
     }, '');
   }
 
-  createSmallCategoryElement() {
-    return SMALL_CATEGORY.reduce((acc, largeCategory) => {
-      return acc + `<li class="small-category__tab">${largeCategory}</li>`;
+  createSmallCategoryElement(smallCategoryData) {
+    return smallCategoryData.reduce((acc, { title }) => {
+      return acc + `<li class="small-category__tab">${title}</li>`;
     }, '');
   }
 
@@ -124,12 +127,19 @@ class Menu {
   }
 
   init() {
-    this.largeCategoryElement.innerHTML = this.createLargeCategoryElement();
-    this.mediumCategoryElement.innerHTML = this.createMediumCategoryElement();
-    this.smallCategoryElement.innerHTML = this.createSmallCategoryElement();
+    this.fetchMenuData().then(res => {
+      this.largeCategoryElement.innerHTML = this.createLargeCategoryElement(
+        res.data
+      );
+      this.mediumCategoryElement.innerHTML = this.createMediumCategoryElement(
+        res.data[this.largeCategoryIndex].data
+      );
+      this.smallCategoryElement.innerHTML = this.createSmallCategoryElement(
+        res.data[this.largeCategoryIndex].data[this.mediumCategoryIndex].data
+      );
+    });
 
     this.addCurrentTabEvent();
-    this.fetchMenuData();
   }
 }
 
