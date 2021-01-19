@@ -8,6 +8,7 @@ const MOUSE_MAX_SPEED = 5;
 
 class Menu {
   constructor() {
+    this.menuData = null;
     this.largeCategoryElement = $('.large-category');
     this.mediumCategoryElement = $('.medium-category');
     this.smallCategoryElement = $('.small-category');
@@ -68,6 +69,7 @@ class Menu {
         break;
       case 'small-category__tab':
         this.activatedTab.classList.add('small-category__tab--activated');
+        this.smallCategoryIndex = getIndexFromParent(this.activatedTab);
         break;
       case 'small-category__tab small-category__tab--activated':
         deleteClassFromElement(
@@ -87,6 +89,7 @@ class Menu {
       this.toggleTabActivation();
       this.activatedTab = event.target;
       this.toggleTabActivation();
+      // this.renderMenu(this.menuData);
     }
 
     this.currentX = event.clientX;
@@ -102,13 +105,15 @@ class Menu {
   fetchMenuData() {
     return fetch(`${HOST}:${PORT}/api/menu`).then(res => res.json());
   }
-  renderMenu(menuData) {
-    const mediumCategoryData = menuData.data[this.largeCategoryIndex];
-    const smallCategoryData =
-      menuData.data[this.largeCategoryIndex].data[this.mediumCategoryIndex];
+
+  renderMenu() {
+    const mediumCategoryData = this.menuData.data[this.largeCategoryIndex];
+    const smallCategoryData = this.menuData.data[this.largeCategoryIndex].data[
+      this.mediumCategoryIndex
+    ];
 
     this.largeCategoryElement.innerHTML = this.createLargeCategoryElement(
-      menuData.data
+      this.menuData.data
     );
     this.mediumCategoryElement.innerHTML = this.createMediumCategoryElement(
       mediumCategoryData.data
@@ -119,9 +124,11 @@ class Menu {
   }
 
   init() {
-    this.fetchMenuData().then(res => {
-      this.renderMenu(res);
-    });
+    this.fetchMenuData()
+      .then(res => {
+        this.menuData = res;
+      })
+      .then(() => this.renderMenu());
 
     this.addCurrentTabEvent();
   }
