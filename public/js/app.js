@@ -12,10 +12,8 @@ initLayout.addGrid();
 initLayout.addBottom();
 
 /* 필요한 기능을 위한 이벤트 추가 - 최근 본 상품, 더보기 버튼, ...(추가) ... */
-const eventController = new UIevent(0);
-eventController.addMoreContent(5);
-eventController.hidePopupLayer();
-eventController.showPopupLayer();
+const eventController = new UIevent({ COL : 5, MORE_INDEX : 0});
+eventController.init();
 
 /* 검색창 모듈 */
 const searchBox = new SearchBox();

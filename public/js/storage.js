@@ -38,4 +38,8 @@ export default class Storage {
             });
         });
     }
+
+    removeStorage(){
+        localStorage.clear();
+    }
 }

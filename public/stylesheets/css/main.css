@@ -276,6 +276,7 @@ input {
 
 .banner-img {
   width: 203px;
+  cursor: pointer;
 }
 
 .title {
