@@ -1,17 +1,15 @@
-const express = require('express')
-const app = express()
-const port = 3000
+import { Products } from './public/js/products.js';
+import { initSlideshow } from './public/js/slideshow.js';
+import './public/css/normalize.css';
+import './public/css/index.css';
+import './public/css/card.css';
+import './public/css/products.css';
+import './public/css/slideshow.css';
+import './public/images';
 
-app.use(express.static(__dirname + '/public'));
+function initProject() {
+    initSlideshow();
+    const products = new Products();
+}
 
-app.set('views', __dirname + '/views')
-app.set('view engine', 'ejs')
-app.engine('html', require('ejs').renderFile)
-
-app.get('/', (req, res) => {
-    res.render('./index.html')
-})
-
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+initProject();

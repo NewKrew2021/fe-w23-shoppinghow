@@ -1,5 +1,7 @@
-const recentProductsEle = q.querySelector('.recent-products-panel');
-const recentProductsButton=q.querySelector(".main-navbar--right__recent-products");
+import CustomDomAPI from "../utils/CustomDomAPI";
+
+const recentProductsEle = CustomDomAPI.querySelector('.recent-products-panel');
+const recentProductsButton = CustomDomAPI.querySelector(".main-navbar--right__recent-products");
 
 recentProductsButton.addEventListener('mouseenter', () => {
     getRecentProducts();

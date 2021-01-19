@@ -1,13 +1,19 @@
+import API from '../utils/api.js';
+import CustomDomAPI from '../utils/CustomDomAPI.js';
+import * as Card from './card.js';
+
 class Products {
-    startIdx = 0
     constructor() {
-        this.htmlElement = q.querySelector('.products');
-        this.button = q.querySelector('.more-button');
+        this.startIdx = 0
+        this.htmlElement = CustomDomAPI.querySelector('.products');
+        this.button = CustomDomAPI.querySelector('.more-button');
+        this.onClickMoreButton = this.onClickMoreButton.bind(this);
+        this.getMoreProducts = this.getMoreProducts.bind(this);
         this.getProducts();
         this.htmlElement.addEventListener('click', (e) => {
             this.onClickElement(e.target);
         })
-        this.button.addEventListener('click', this.onClickMoreButton());
+        this.button.addEventListener('click', this.onClickMoreButton);
     }
     
     getMoreProducts() {
@@ -16,7 +22,7 @@ class Products {
         API.getMoreItems(this.startIdx).then((res)=> {
             const innerHtml = res.data.reduce((acc, item) => {
                 count ++;
-                return acc + Card.render(item, 'card-' + (this.startIdx + count).toString());
+                return acc + Card.getCardTemplate(item, 'card-' + (this.startIdx + count).toString());
             }, '')
             this.htmlElement.innerHTML = String(this.htmlElement.innerHTML) + innerHtml;
         });
@@ -26,7 +32,7 @@ class Products {
             let count = 0;
             const innerHtml = res.data.reduce((acc, item) => {
                 count ++;
-                return acc + Card.render(item, 'card-' + count.toString());
+                return acc + Card.getCardTemplate(item, 'card-' + count.toString());
             }, '')
             this.htmlElement.innerHTML = innerHtml;
         });
@@ -35,7 +41,7 @@ class Products {
     getProductsNum () { }
     
     onClickMoreButton() {
-        return () => {this.getMoreProducts()};
+        this.getMoreProducts();
     }
     onClickElement(target) {
         target = target.closest('.card');
@@ -52,4 +58,4 @@ class Products {
 
 };
 
-const products = new Products();
+export default Products;

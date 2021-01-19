@@ -1,7 +1,6 @@
-const API = {}
 const API_URL = 'http://localhost:5000'; // temp
 
-(function(){
+function initAPI(){
     /**
      * Make GET request to api server.
      * @param {String} path 
@@ -89,12 +88,8 @@ const API_URL = 'http://localhost:5000'; // temp
         });
     }
 
-    API.getCarouselImages = getCarouselImages;
-    API.getBannerData = getBannerData;
-    API.getBannerCarouselData = getBannerCarouselData;
-    API.getItems = getItems;
-    API.getItemNum = getItemNum;
-    API.getMoreItems = getMoreItems;
-    API.getItemImg = getItemImg;
+    return {getCarouselImages, getBannerData, getBannerCarouselData, getItems, getItemNum, getMoreItems, getItemImg}
+}
 
-})()
+const API = initAPI();
+export default API;
