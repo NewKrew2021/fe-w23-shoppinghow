@@ -1,8 +1,8 @@
-import {myDomApi} from "./mydomapi.js"
-import {carouselImgCnt} from "./index.js"
+import {myDomApi} from "../util/mydomapi.js"
+import {URL} from "../url.js"
 
 let carouselIndex = 0;
-
+const carouselImgCnt = 3;
 const carouselCycleTime = 3000; // ms
 const prevBtn = myDomApi.myQuerySelector("#carouselPrev");
 const nextBtn = myDomApi.myQuerySelector("#carouselNext");
@@ -50,4 +50,23 @@ const showImgs = () => {
   setTimeout(showImgs, carouselCycleTime);
 }
 
-export {showImgs};
+const createCarouselContainer = () => {
+  const request = new Request(URL + "/carousel");
+  fetch(request)
+  .then(response => response.text())
+  .then(result => { putCarouselImage(result) })
+  .then(showImgs())
+  .catch(error => console.log('error', error));   
+}
+
+const putCarouselImage = (result) => {
+  let idx=0;
+  let carouselImg = myDomApi.myQuerySelectorAll("img.carousel-img");
+  let carouselData = JSON.parse(result)["items"]
+  carouselImg.forEach( img => {
+    img.src = carouselData[idx].src
+    idx+=1;
+  })
+}
+
+export {createCarouselContainer};
