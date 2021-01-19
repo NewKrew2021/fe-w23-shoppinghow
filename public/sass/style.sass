@@ -3,6 +3,7 @@ $main-background-color: #eeeeee
 $content-width : 1350px
 $product-item-width : 270px
 $tag-color : #e79924
+$header-nav-height : 60px
 
 body
   background: $main-background-color
@@ -69,7 +70,7 @@ li
   align-items: center
   justify-content: space-between
   width: $content-width
-  height: 60px
+  height: $header-nav-height
 
 .important-nav,
 .theme-nav
@@ -238,3 +239,14 @@ li
 
 .footer
   height: 300px
+
+.menu
+  display: flex
+  align-items: center
+  justify-content: center
+  &__icon
+    width: 30px
+    height: 30px
+    border-radius: 15px
+    background: #000000
+    margin-right: 10px
