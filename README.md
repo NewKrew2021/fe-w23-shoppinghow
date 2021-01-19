@@ -6,3 +6,6 @@
 - webpack, babel 학습
 
 **1.19(화)**
+- webpack 설치
+webpack-dev-middleware, webpack-hot-middleware 설치
+css-loader추가
