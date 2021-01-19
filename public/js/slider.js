@@ -35,11 +35,11 @@ export default class Slider {
 
     onEvents() {
         /* 이벤트 핸들러 등록 (하단 페이지 내비게이터는 옵션으로 부여) */
-        this.slidePrevBtn.addEventListener('click', () => this.prevBtnClickHandler());
-        this.slideNextBtn.addEventListener('click', () => this.nextBtnClickHandler());
+        this.slidePrevBtn.addEventListener('click', this.prevBtnClickHandler.bind(this));
+        this.slideNextBtn.addEventListener('click', this.nextBtnClickHandler.bind(this));
         if (this.pagination !== undefined) {
             this.pagination.forEach((element) => {
-                element.addEventListener('mouseenter', (e) => this.paginationHandler(e));
+                element.addEventListener('mouseenter', this.paginationHandler.bind(this));
             })
         }
     }
