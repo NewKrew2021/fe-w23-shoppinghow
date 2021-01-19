@@ -1,4 +1,4 @@
-import { appendImageCarousel, appendItemCard, initCarousel, initHoverPopup, initItemCardWrapper, initRecentWrapper } from './component'
+import { appendImageCarousel, appendItemCard, appendMultiNav, initCarousel, initHoverPopup, initItemCardWrapper, initRecentWrapper } from './component'
 import { fetchItems, findOne } from './util'
 
 // initialize the page
@@ -25,6 +25,10 @@ function initPage() {
         // initialize the carousel
         initCarousel(findOne(`#${carouselID}`, carouselWrapper))
       })
+  }
+
+  function initCategoryMultiNav() {
+    appendMultiNav(findOne('#popup_category'))
   }
 
   // init the carousel-promotion section
@@ -61,6 +65,7 @@ function initPage() {
 
   initBestPromotionSection()
   initCarouselPromotionSection()
+  initCategoryMultiNav()
   initBestItems()
   initHotItem()
 
