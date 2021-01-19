@@ -20,8 +20,9 @@ export default class MainLayout {
         const keyword = dom('.keyword-content').querySelector();
         const keyleft = dom('.keyword-list-left').querySelector();
         const keyright = dom('.keyword-list-right').querySelector();
-        console.log(keyleft);
+        const rolled = dom('#rolled-list').querySelector();
         
+        /* 5개씩 분리해서 각각 가져오고 있지만 10개로 합칠 예정 */
         fetch('http://localhost:80/topkey1')
             .then(res => res.json())
             .then(json => json.forEach(element => {
@@ -41,6 +42,17 @@ export default class MainLayout {
                 )
             }))
             .catch(console.error);
+
+        fetch('http://localhost:80/topkeyword')
+            .then(res => res.json())
+            .then(json => json.forEach((element, idx) => {
+                addHTML(rolled,
+                    `<li class="rolled-content font-20">${element.id}위 ${element.name}</li>`);
+                if (idx === json.length - 1){
+                    addHTML(rolled,
+                        `<li class="rolled-content font-20">${json[0].id}위 ${json[0].name}</li>`) 
+                }
+            }))
     }
 
     addNav() {

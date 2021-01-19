@@ -13,5 +13,5 @@ const eventController = new UIevent({ COL : 5, MORE_INDEX : 0});
 eventController.init();
 
 /* 검색창 모듈 */
-const searchBox = new SearchBox();
+const searchBox = new SearchBox({ COUNT : 10, SPEED : 600, HEIGHT : 32 });
 searchBox.init();
