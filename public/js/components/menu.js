@@ -27,6 +27,8 @@ const SMALL_CATEGORY = [
   '가구 / 생활 / 건강',
 ];
 
+const SQUARED = 2;
+
 class Menu {
   constructor() {
     this.largeCategoryElement = $('.large-category');
@@ -57,7 +59,8 @@ class Menu {
 
   calculateMouseMovement(newX, newY) {
     return (
-      Math.pow(newX - this.currentX, 2) + Math.pow(newY - this.currentY, 2)
+      Math.pow(newX - this.currentX, SQUARED) +
+      Math.pow(newY - this.currentY, SQUARED)
     );
   }
 
