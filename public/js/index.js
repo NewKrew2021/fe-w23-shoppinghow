@@ -1,7 +1,7 @@
 import {myDomApi} from "./mydomapi.js"
 import {showImgs} from "./carousel.js"
-import {trendClickListener} from "./trend.js"
-import {themeClickListener} from "./best.js"
+import {trendClickListener} from "./trendcomponent.js"
+import {themeClickListener} from "./bestcomponent.js"
 
 let carouselData, trendData, themeData;
 const inputCycleTime = 1500; //ms

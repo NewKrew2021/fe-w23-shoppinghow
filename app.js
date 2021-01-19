@@ -1,5 +1,5 @@
 import "./public/js/index.js"
-import "./public/js/recent.js"
+import "./public/js/recentcomponent.js"
 import "./public/css/head.css"
 import "./public/css/contents.css"
 import "./public/img"
