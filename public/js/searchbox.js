@@ -37,18 +37,21 @@ export default class SearchBox {
 
     autoComplete() {
         this.search_input.addEventListener('input', (e) => {
-            const value = e.target.value.trim(); // 공백 제거
             function getCorrect(word) {
                 if (word.includes(value.replace(/(\s*)/g, "")) ||
                     word.replace(/(\s*)/g, "").includes(value.replace(/(\s*)/g, "")))
                     return word;
             }
+            const value = e.target.value.trim(); // 공백 제거
             const resultList = words.filter(getCorrect); // 공백 포함 일치하는 input 문자열 모두 저장
             let resultHtml = '';
+
             resultList.forEach((word) => {
                 const valueLength = value.length;
                 const startPos = word.indexOf(value[0]);
-                const endPos = word.indexOf(value[valueLength - 1]);
+
+                // startPos 이후부터 확인(2번째 파라미터)
+                const endPos = word.indexOf(value[valueLength - 1], startPos);
                 word =
                     word.slice(0, startPos)
                     + "<span class='accent'>"
