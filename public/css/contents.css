@@ -306,9 +306,30 @@ red {
 
 .category-layer {
   position: absolute;
-  width: 570px;
+  width: 573px;
   height: 520px;
   margin-left : 250px;
   border: 1px solid #8a8a8a;
   background-color: #ffffff;
+}
+
+.depth1 {
+  float: left;
+  width: 190px;
+  height: 520px;
+  border-right: 1px solid #bbbbbb;
+  background-color: #f5f5f5d0;
+}
+
+.depth2 {
+  float: left;
+  width: 190px;
+  height: 520px;
+  border-right: 1px solid #bbbbbb;
+}
+
+.depth3 {
+  float: left;
+  width: 190px;
+  height: 520px;
 }

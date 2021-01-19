@@ -59,7 +59,7 @@ const extendLayout = () => {
   let themeImg = myDomApi.myQuerySelectorAll("img.theme-img");
   let themeTitle = myDomApi.myQuerySelectorAll("div.theme-title");
   let themeInfo = myDomApi.myQuerySelectorAll("div.theme-info");
-  for(let idx=0; idx<themeLength; idx++){
+  for(let idx=themeLength-extendCnt; idx<themeLength; idx++){
     themeImg[idx].src = themeData[idx].src;
     themeTitle[idx].innerHTML = themeData[idx].title;
     themeInfo[idx].innerHTML = themeData[idx].subtitle;
