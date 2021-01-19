@@ -14,5 +14,4 @@ eventController.init();
 
 /* 검색창 모듈 */
 const searchBox = new SearchBox();
-searchBox.showKeywordBox();
-searchBox.autoComplete();
+searchBox.init();
