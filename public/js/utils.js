@@ -30,10 +30,22 @@ const _addBubbledEventListener = (
   });
 };
 
+const getIndexFromParent = element => {
+  let elementIndex = 0;
+
+  while (element !== null && element.previousSibling !== null) {
+    element = element.previousSibling;
+    elementIndex += 1;
+  }
+
+  return elementIndex;
+};
+
 export {
   _$,
   $,
   createNewElement,
   deleteClassFromElement,
   _addBubbledEventListener,
+  getIndexFromParent,
 };

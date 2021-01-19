@@ -1,4 +1,4 @@
-import { $, deleteClassFromElement } from '../utils.js';
+import { $, deleteClassFromElement, getIndexFromParent } from '../utils.js';
 
 const HOST = 'http://localhost';
 const PORT = 8000;
