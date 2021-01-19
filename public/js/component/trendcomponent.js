@@ -7,7 +7,6 @@ const [changeTime, trendImgCnt] = [2000, 5];
 const prevBtn = myDomApi.myQuerySelector("#trendPrev");
 const nextBtn = myDomApi.myQuerySelector("#trendNext");
 
-
 const mySetTimeout = new MyPromise((resolve, reject) => {
   setTimeout(resolve, changeTime);
 });
@@ -27,24 +26,30 @@ const createTrendContainer = () => {
     `
   }
   trendContainer.innerHTML += newLayout;
+  requestTrendItem();
+}
 
-  let trendImg = myDomApi.myQuerySelectorAll("img.trend-img");
-  let trendTitle = myDomApi.myQuerySelectorAll("div.trend-title");
-  let trendInfo = myDomApi.myQuerySelectorAll("div.trend-info");
-
+const requestTrendItem = () => {
   const request = new Request(URL + "/trend");
   fetch(request)
   .then(response => response.text())
   .then(result => {
-    trendData = JSON.parse(result)["items"]
-    for(let idx=0; idx<trendImgCnt; idx++){
-      trendImg[idx].src = trendData[idx].src;
-      trendTitle[idx].innerHTML = trendData[idx].title;
-      trendInfo[idx].innerHTML = trendData[idx].subtitle;
-    }
+    trendData = JSON.parse(result)["items"];
+    putTrendItem();
   })
+  .then(trendClickListener())
   .catch(error => console.log('error', error));
-  trendClickListener();
+}
+
+const putTrendItem = () => {
+  let trendImg = myDomApi.myQuerySelectorAll("img.trend-img");
+  let trendTitle = myDomApi.myQuerySelectorAll("div.trend-title");
+  let trendInfo = myDomApi.myQuerySelectorAll("div.trend-info");
+  for(let idx=0; idx<trendImgCnt; idx++){
+    trendImg[idx].src = trendData[idx].src;
+    trendTitle[idx].innerHTML = trendData[idx].title;
+    trendInfo[idx].innerHTML = trendData[idx].subtitle;
+  }
 }
 
 prevBtn.addEventListener("mousedown", () => {
