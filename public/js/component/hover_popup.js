@@ -17,7 +17,9 @@ export function initHoverPopup() {
         }
 
         // show the target
-        popupTarget.classList.add('show')
+        setTimeout(() => {
+          popupTarget.classList.add('show')
+        }, 0)
       })
 
       // add mouse-leave event listener
