@@ -102,18 +102,21 @@ class Menu {
   fetchMenuData() {
     return fetch(`${HOST}:${PORT}/api/menu`).then(res => res.json());
   }
+  renderMenu(menuData) {
+    this.largeCategoryElement.innerHTML = this.createLargeCategoryElement(
+      menuData.data
+    );
+    this.mediumCategoryElement.innerHTML = this.createMediumCategoryElement(
+      menuData.data[this.largeCategoryIndex].data
+    );
+    this.smallCategoryElement.innerHTML = this.createSmallCategoryElement(
+      menuData.data[this.largeCategoryIndex].data[this.mediumCategoryIndex].data
+    );
+  }
 
   init() {
     this.fetchMenuData().then(res => {
-      this.largeCategoryElement.innerHTML = this.createLargeCategoryElement(
-        res.data
-      );
-      this.mediumCategoryElement.innerHTML = this.createMediumCategoryElement(
-        res.data[this.largeCategoryIndex].data
-      );
-      this.smallCategoryElement.innerHTML = this.createSmallCategoryElement(
-        res.data[this.largeCategoryIndex].data[this.mediumCategoryIndex].data
-      );
+      this.renderMenu(res);
     });
 
     this.addCurrentTabEvent();
