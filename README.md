@@ -9,3 +9,6 @@
 - webpack 설치
 webpack-dev-middleware, webpack-hot-middleware 설치
 css-loader추가
+- MyPromise 구현
+- category 작성중
+pipe사용해서 구현해보려 함
