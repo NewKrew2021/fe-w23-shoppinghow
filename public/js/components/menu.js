@@ -61,13 +61,50 @@ class Menu {
     );
   }
 
+  toggleTabActivation() {
+    const targetClassName = this.activatedTab.className;
+
+    switch (targetClassName) {
+      case 'large-category__tab':
+        this.activatedTab.classList.add('large-category__tab--activated');
+        break;
+      case 'large-category__tab large-category__tab--activated':
+        deleteClassFromElement(
+          this.activatedTab,
+          'large-category__tab--activated'
+        );
+        break;
+      case 'medium-category__tab':
+        this.activatedTab.classList.add('medium-category__tab--activated');
+        break;
+      case 'medium-category__tab medium-category__tab--activated':
+        deleteClassFromElement(
+          this.activatedTab,
+          'medium-category__tab--activated'
+        );
+        break;
+      case 'small-category__tab':
+        this.activatedTab.classList.add('small-category__tab--activated');
+        break;
+      case 'small-category__tab small-category__tab--activated':
+        deleteClassFromElement(
+          this.activatedTab,
+          'small-category__tab--activated'
+        );
+        break;
+    }
+
+    return;
+  }
+
   addCurrentTabEvent() {
     $('.menu__pop-up').addEventListener('mousemove', event => {
       if (this.calculateMouseMovement(event.clientX, event.clientY) < 5) {
-        deleteClassFromElement(this.activatedTab, 'tab__activated');
+        this.toggleTabActivation();
         this.activatedTab = event.target;
-        this.activatedTab.classList.add('tab__activated');
+        this.toggleTabActivation();
       }
+
       this.currentX = event.clientX;
       this.currentY = event.clientY;
     });
@@ -77,7 +114,7 @@ class Menu {
     this.largeCategoryElement.innerHTML = this.createLargeCategoryElement();
     this.mediumCategoryElement.innerHTML = this.createMediumCategoryElement();
     this.smallCategoryElement.innerHTML = this.createSmallCategoryElement();
-    console.log(this.activatedTab);
+
     this.addCurrentTabEvent();
   }
 }
