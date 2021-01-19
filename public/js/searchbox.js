@@ -2,7 +2,7 @@
     searchbox.js
     쇼핑하우 검색창 관련 모듈
 */
-import { dom, addHTML, innerHTML } from './util.js';
+import { dom, addHTML, getCorrect, innerHTML } from './util.js';
 import { words } from '../data/keyword.js';
 
 export default class SearchBox {
@@ -52,11 +52,8 @@ export default class SearchBox {
 
                 // startPos 이후부터 확인(2번째 파라미터)
                 const endPos = word.indexOf(value[valueLength - 1], startPos);
-                word =
-                    word.slice(0, startPos)
-                    + "<span class='accent'>"
-                    + word.slice(startPos, endPos + 1) + "</span>"
-                    + word.slice(endPos + 1);
+                word = word.slice(0, startPos) + "<span class='accent'>"
+                    + word.slice(startPos, endPos + 1) + "</span>" + word.slice(endPos + 1);
                 resultHtml += `<li class="auto-list">${word}</li>`
             });
             innerHTML(this.autoInner, resultHtml);

@@ -12,8 +12,35 @@ import HotSlider from './hotslider.js';
 import Storage from './storage.js';
 
 export default class MainLayout {
-    constructor(){
+    constructor() {
         /* 객체를 전달받아 dom을 다룰 예정 */
+    }
+
+    addKeyword() {
+        const keyword = dom('.keyword-content').querySelector();
+        const keyleft = dom('.keyword-list-left').querySelector();
+        const keyright = dom('.keyword-list-right').querySelector();
+        console.log(keyleft);
+        
+        fetch('http://localhost:80/topkey1')
+            .then(res => res.json())
+            .then(json => json.forEach(element => {
+                addHTML(keyleft,
+                    `<li class="auto-list">
+                    <span class='bold mg-right-8'>${element.id}</span>${element.name}</li>`
+                )
+            }))
+            .catch(console.error);
+
+        fetch('http://localhost:80/topkey2')
+            .then(res => res.json())
+            .then(json => json.forEach(element => {
+                addHTML(keyright,
+                    `<li class="auto-list">
+                    <span class='bold mg-right-8'>${element.id}</span>${element.name}</li>`
+                )
+            }))
+            .catch(console.error);
     }
 
     addNav() {
@@ -101,7 +128,7 @@ export default class MainLayout {
             .catch((error) => console.error(error))
     }
 
-    addGrid(){
+    addGrid() {
         const gridUL = dom('#grid-ul-1').querySelector();
         fetch('http://localhost:80/topgrid')
             .then(res => res.json())
@@ -116,7 +143,8 @@ export default class MainLayout {
             .catch((error) => console.error(error))
     }
 
-    init(){
+    init() {
+        this.addKeyword();
         this.addNav();
         this.addLeftBanner();
         this.addRightBanner();
