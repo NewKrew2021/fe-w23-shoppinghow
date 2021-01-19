@@ -3,6 +3,7 @@ module.exports = function(app, fs) {
     let bestData; 
     let hotData;
     let basicData;
+    let categoryData;
     fs.readFile(__dirname + "/../data/carousel_promotion.json", "utf8", function(err, data) {
         carouselData = data;
     });
@@ -15,10 +16,14 @@ module.exports = function(app, fs) {
     fs.readFile(__dirname + "/../data/basic.json", "utf8", function(err, data) {
         basicData = data;
     });
-
-    app.get("/", function(req, res) {
-        res.render("index.html");
+    fs.readFile(__dirname + "/../data/category.json", "utf8", function(err, data) {
+        categoryData = data;
     });
+
+    /* app.get("/", function(req, res) {
+        res.render("index.html");
+    }); */
+    
     app.get("/hot", (req, res) => {
         res.end(hotData);
     });
@@ -38,5 +43,8 @@ module.exports = function(app, fs) {
         }
         basic.items = items.slice(idx, idx + cnt);
         res.end(JSON.stringify(basic));
+    });
+    app.get("/category", (req, res) => {
+        res.end(categoryData);
     });
 }

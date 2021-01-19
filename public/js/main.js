@@ -1,3 +1,12 @@
+import { Carousel } from "./carousel.js";
+import { DOMSearchAPI } from "./DOM_search_api.js";
+import { getBasicItemHTML, getBasicItemHTMLs, getBasicItemDOM, getBestItemHTML, 
+    getCarouselItemDOM, getCarouselBoxHTML, getBoxDOM, getMarginDOM, getMoreBtnDOM, getSubjectDOM } from "./render.js";
+import { MyPromise } from "./promise.js";
+import { initCategory } from "./category.js";
+import "../css/common.css";
+import "../css/style.css";
+
 const URL = "http://localhost:3000";
 const domAPI = new DOMSearchAPI(document);
 const mainContainerDOM = domAPI.querySelector(".container");
@@ -22,7 +31,14 @@ const initPage = function (data) {
     const bests = data[1].items;
     const hots = data[2].items;
     const basics = data[3].items;
-    
+    const categories = data[4].data;
+
+    const categoryInfo = initCategory(categories);
+    domAPI.querySelector("#category").appendChild(categoryInfo.boxDOM);
+    domAPI.querySelector(".category--large").style.display="block";
+    domAPI.querySelector(".category--medium").style.display="block";
+    domAPI.querySelector(".category--small").style.display="block";
+
     // 한 행씩 렌더링
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));
     mainContainerDOM.appendChild(getBoxDOM(getCarouselBoxHTML(), getBestItemHTML(bests[0])));
@@ -37,7 +53,7 @@ const initPage = function (data) {
         return getBasicItemDOM(item);
     });
     const smallCarousel = new Carousel(mainContainerDOM.lastChild, hotDOMs, 260, 380);
-    smallCarousel.init(5, 0.3);
+    smallCarousel.init(1, 0.3);
     smallCarousel.render();
 
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));
@@ -88,7 +104,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
         getItemData("carousel"),
         getItemData("best"),
         getItemData("hot"),
-        getItemData("basic", 0, 10)
+        getItemData("basic", 0, 10),
+        getItemData("category")
     ]).then(data => {
         myStorage.clear();
         initPage(data);
