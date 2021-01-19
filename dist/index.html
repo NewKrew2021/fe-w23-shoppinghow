@@ -18,18 +18,25 @@
                 </div>
                 <div class="search-blank float-left relative">
                     <div class="search-box">
-                        <input class="search-input font-20" type="text" size="55">
+                        <input class="search-input block font-20" type="text" size="55">
                         <button class="search-btn">
                             <img src="/images/search_btn.png">
                         </button>
                     </div>
                     <div class="keyword absolute">
-                        <div class="keyword-inner">
-                            상위 랭크 10
+                        <div class="keyword-content keyword-inner">
+                            <p class="font-20 bold gray mg-bottom-20">인기 쇼핑 키워드</p>
+                            <ol class="keyword-list-left mg-bottom-20"></ol>
+                            <ol class="keyword-list-right mg-bottom-20"></ol>
                         </div>
                         <div class="auto-complete keyword-inner">
                         </div>
                     </div>
+                    <div class="rolled-box">
+                        <ol id="rolled-list" class="absolute">
+                        </ol>
+                    </div>
+                    
                 </div>
             </div>
             <!-- 내비게이션 -->
