@@ -99,18 +99,21 @@ class Menu {
 
     return;
   }
+  handleMouseMove(event) {
+    if (this.calculateMouseMovement(event.clientX, event.clientY) < 5) {
+      this.toggleTabActivation();
+      this.activatedTab = event.target;
+      this.toggleTabActivation();
+    }
+
+    this.currentX = event.clientX;
+    this.currentY = event.clientY;
+  }
 
   addCurrentTabEvent() {
-    $('.menu__pop-up').addEventListener('mousemove', event => {
-      if (this.calculateMouseMovement(event.clientX, event.clientY) < 5) {
-        this.toggleTabActivation();
-        this.activatedTab = event.target;
-        this.toggleTabActivation();
-      }
-
-      this.currentX = event.clientX;
-      this.currentY = event.clientY;
-    });
+    $('.menu__pop-up').addEventListener('mousemove', event =>
+      this.handleMouseMove(event)
+    );
   }
 
   init() {
