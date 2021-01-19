@@ -10,14 +10,14 @@ const trendImgCnt = 5;
 const themeImgCnt = 5;
 
 // const url = "https://7aebe337-b81c-42de-b89f-8c268823df03.mock.pstmn.io";
-window.onload = () => {
+window.addEventListener("DOMContentLoaded", () => {
   showBestContainer();
   showCarouselContainer();
   showThemeContainer();
   showTrendContainer();
   showRecentContainer();
   showInputContainer();
-}
+})
 
 const showBestContainer = () => {
   let bestImg = myDomApi.myQuerySelector("img.best-img");
