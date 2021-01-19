@@ -4,7 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "sass --watch sass:public/css & nodemon app.js",
+    "watch-sass": "sass --watch sass:public/css ",
+    "watch-webpack": "webpack --watch",
+    "start-client": "webpack serve --open",
+    "start-server": "nodemon app.js",
+    "start": "webpack --watch & webpack serve --open & sass --watch sass:public/css & nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,10 +22,21 @@
   },
   "homepage": "https://github.com/pajh0509/fe-w23-shoppinghow#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "core-js": "^3.8.3",
+    "express": "^4.17.1",
+    "webpack": "^5.15.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.1",
     "nodemon": "^2.0.7",
-    "sass": "^1.32.4"
+    "sass": "^1.32.4",
+    "webpack-cli": "^4.3.1",
+    "webpack-dev-server": "^3.11.2"
   }
 }

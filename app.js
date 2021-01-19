@@ -4,8 +4,9 @@ const port = 3000;
 
 const path = require('path');
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/dist'));
 app.get('/', (req, res)=> {
-    res.sendFile(path.join(__dirname + '/view/index.html'));
+    res.sendFile(path.join(__dirname + '/public/view/index.html'));
 });
 
 app.get('/items', (req, res) =>{
