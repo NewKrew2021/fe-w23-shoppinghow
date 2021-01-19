@@ -103,14 +103,18 @@ class Menu {
     return fetch(`${HOST}:${PORT}/api/menu`).then(res => res.json());
   }
   renderMenu(menuData) {
+    const mediumCategoryData = menuData.data[this.largeCategoryIndex];
+    const smallCategoryData =
+      menuData.data[this.largeCategoryIndex].data[this.mediumCategoryIndex];
+
     this.largeCategoryElement.innerHTML = this.createLargeCategoryElement(
       menuData.data
     );
     this.mediumCategoryElement.innerHTML = this.createMediumCategoryElement(
-      menuData.data[this.largeCategoryIndex].data
+      mediumCategoryData.data
     );
     this.smallCategoryElement.innerHTML = this.createSmallCategoryElement(
-      menuData.data[this.largeCategoryIndex].data[this.mediumCategoryIndex].data
+      smallCategoryData.data
     );
   }
 
