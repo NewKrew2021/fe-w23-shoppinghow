@@ -35,9 +35,13 @@ const initPage = function (data) {
 
     const categoryInfo = initCategory(categories);
     domAPI.querySelector("#category").appendChild(categoryInfo.boxDOM);
-    domAPI.querySelector(".category--large").style.display="block";
-    domAPI.querySelector(".category--medium").style.display="block";
-    domAPI.querySelector(".category--small").style.display="block";
+    domAPI.querySelector(".category--large").className="category--large--picked";
+    domAPI.querySelector(".category--medium").className="category--medium--picked";
+    domAPI.querySelector(".category--small").className="category--small--picked";
+
+    domAPI.querySelector(".category--large__item").className="category--large__item--picked";
+    domAPI.querySelector(".category--medium__item").className="category--medium__item--picked";
+    domAPI.querySelector(".category--small__item").className="category--small__item--picked";
 
     // 한 행씩 렌더링
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));
