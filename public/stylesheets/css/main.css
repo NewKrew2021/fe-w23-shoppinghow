@@ -34,6 +34,54 @@ input {
   padding: 8px 10px 5px 5px;
 }
 
+.search-input {
+  z-index: 205;
+}
+
+.keyword-list-left, .keyword-list-right {
+  width: 50%;
+  float: left;
+}
+
+.auto-list {
+  font-size: 16px;
+  letter-spacing: -0.4px;
+  color: black;
+  margin-bottom: 0.8em;
+}
+
+.auto-list:focus {
+  background-color: #eee;
+}
+
+.accent {
+  color: #f95139;
+}
+
+.rolled-box {
+  overflow: hidden;
+  position: absolute;
+  left: 30px;
+  top: 13px;
+  width: 170px;
+  height: 33px;
+  line-height: 22px;
+  text-align: left;
+}
+
+#rolled-list {
+  width: 170px;
+}
+
+.rolled-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: gray;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
 .keyword {
   display: none;
   z-index: 202;
@@ -276,6 +324,7 @@ input {
 
 .banner-img {
   width: 203px;
+  cursor: pointer;
 }
 
 .title {
@@ -611,6 +660,14 @@ input {
   font-size: 35px;
 }
 
+.bold {
+  font-weight: 700;
+}
+
+.gray {
+  color: gray;
+}
+
 .mg-top-40 {
   margin-top: 40px;
 }
@@ -623,11 +680,19 @@ input {
   margin-bottom: 40px;
 }
 
+.mg-bottom-20 {
+  margin-bottom: 20px;
+}
+
 .mg-top-210 {
   margin-top: 210px;
 }
 
 .mg-top-30 {
   margin-top: -30px;
+}
+
+.mg-top-20 {
+  margin-top: 20px;
 }
 /*# sourceMappingURL=main.css.map */

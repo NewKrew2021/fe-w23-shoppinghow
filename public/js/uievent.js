@@ -10,25 +10,27 @@
 import { dom, addHTML } from './util.js';
 import Storage from './storage.js';
 
-export default class UIevent{
-    constructor(MORE_INDEX){
+export default class UIevent {
+    constructor(obj) {
         /* 사용할 DOM 요소 추가 */
         this.clickedElement = dom('#expand').querySelector();
         this.expanded = dom('#row-more').querySelector();
         this.recentBtn = dom('#recent-btn').querySelector();
         this.innerPopup = dom('#popup-layer').querySelector();
         this.recentDiv = dom('#recent-btn').querySelector();
-        this.MORE_INDEX = MORE_INDEX;
+        this.loginBtn = dom('#login').querySelector();
+        this.MORE_INDEX = obj.MORE_INDEX;
+        this.COL = obj.COL;
     }
-    addMoreContent(col){
-        this.clickedElement.addEventListener('click', () => {
-            let expanded = dom('#row-more').querySelector();
-            let storages;
-            fetch('http://localhost:80/best')
-                .then(res => res.json())
-                .then(json => json.slice(this.MORE_INDEX, this.MORE_INDEX + col))
-                .then(data => data.forEach(element => {
-                    addHTML(expanded, `
+
+    addMoreContent() {
+        let expanded = dom('#row-more').querySelector();
+        let storages;
+        fetch('http://localhost:80/best')
+            .then(res => res.json())
+            .then(json => json.slice(this.MORE_INDEX, this.MORE_INDEX + this.COL))
+            .then(data => data.forEach(element => {
+                addHTML(expanded, `
                             <ul id="grid-ul-2" class="grid-ul">
                             <li class="grid-banner">
                             <img class="banner-img" src=${element.src}>
@@ -37,25 +39,33 @@ export default class UIevent{
                             <img class="theme-btn" src="/images/theme.png"></li>
                             </ul>
                     `)
-                }))
-                .then(data => { storages = new Storage(); })
-                .then(data => storages.clickSaveHandler())
-                .then(this.MORE_INDEX += col)
-        });
+            }))
+            .then(data => { storages = new Storage(); })
+            .then(data => storages.clickSaveHandler())
+            .then(() => { this.MORE_INDEX += this.COL }) //
+    }
+    showPopupLayer() {
+        const storages = new Storage();
+        this.innerPopup.style.display = "block";
+        storages.getLocalStorage();
     }
 
-    showPopupLayer(){
-        this.recentBtn.addEventListener('mouseover', () => {
-            this.innerPopup.style.display = "block";
-            // 마우스를 올릴 때, 로컬 스토리지의 모든 값을 가져와 출력한다. 
-            let storages = new Storage();
-            storages.getLocalStorage();
-        });
+    hidePopupLayer() {
+        this.innerPopup.style.display = "none";
     }
 
-    hidePopupLayer(){
-        this.recentDiv.addEventListener('mouseout', () => {
-            this.innerPopup.style.display = "none";
-        });
+    removeStorage() {
+        this.loginBtn.addEventListener('click', localStorage.clear());
+    }
+
+    onEvent() {
+        this.clickedElement.addEventListener('click', this.addMoreContent.bind(this));
+        this.recentBtn.addEventListener('mouseover', this.showPopupLayer.bind(this));
+        this.recentBtn.addEventListener('mouseout', this.hidePopupLayer.bind(this));
+        this.loginBtn.addEventListener('click', this.removeStorage.bind(this));
+    }
+
+    init() {
+        this.onEvent();
     }
 }

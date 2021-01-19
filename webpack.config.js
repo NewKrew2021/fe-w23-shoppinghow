@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const copyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     devtool: 'inline-source-map', // 디버깅을 위한 소스맵
@@ -19,15 +20,34 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['css-loader']
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(jpg|png|gif|svg)$/,
+                use: ['file-loader'],
             }
         ]
     },
-    plugins: [new HtmlWebpackPlugin(
-        {
+    plugins: [
+        new HtmlWebpackPlugin({
             template: './views/index.html'
-        }
-    )],
-    devServer :{
+        }),
+        new copyWebpackPlugin({
+            patterns: [
+                {
+                    from: "./public/stylesheets",
+                    to: "stylesheets"
+                },{
+                    from: "./public/images",
+                    to: "images"
+                }
+            ],
+        })
+    ],
+    devServer: {
         contentBase: __dirname + "/dist/",
         inline: true,
         hot: true,

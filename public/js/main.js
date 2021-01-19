@@ -12,8 +12,47 @@ import HotSlider from './hotslider.js';
 import Storage from './storage.js';
 
 export default class MainLayout {
-    constructor(){
+    constructor() {
         /* 객체를 전달받아 dom을 다룰 예정 */
+    }
+
+    addKeyword() {
+        const keyword = dom('.keyword-content').querySelector();
+        const keyleft = dom('.keyword-list-left').querySelector();
+        const keyright = dom('.keyword-list-right').querySelector();
+        const rolled = dom('#rolled-list').querySelector();
+        
+        /* 5개씩 분리해서 각각 가져오고 있지만 10개로 합칠 예정 */
+        fetch('http://localhost:80/topkey1')
+            .then(res => res.json())
+            .then(json => json.forEach(element => {
+                addHTML(keyleft,
+                    `<li class="auto-list">
+                    <span class='bold mg-right-8'>${element.id}</span>${element.name}</li>`
+                )
+            }))
+            .catch(console.error);
+
+        fetch('http://localhost:80/topkey2')
+            .then(res => res.json())
+            .then(json => json.forEach(element => {
+                addHTML(keyright,
+                    `<li class="auto-list">
+                    <span class='bold mg-right-8'>${element.id}</span>${element.name}</li>`
+                )
+            }))
+            .catch(console.error);
+
+        fetch('http://localhost:80/topkeyword')
+            .then(res => res.json())
+            .then(json => json.forEach((element, idx) => {
+                addHTML(rolled,
+                    `<li class="rolled-content font-20">${element.id}위 ${element.name}</li>`);
+                if (idx === json.length - 1){
+                    addHTML(rolled,
+                        `<li class="rolled-content font-20">${json[0].id}위 ${json[0].name}</li>`) 
+                }
+            }))
     }
 
     addNav() {
@@ -101,7 +140,7 @@ export default class MainLayout {
             .catch((error) => console.error(error))
     }
 
-    addGrid(){
+    addGrid() {
         const gridUL = dom('#grid-ul-1').querySelector();
         fetch('http://localhost:80/topgrid')
             .then(res => res.json())
@@ -114,5 +153,14 @@ export default class MainLayout {
                     <img class="theme-btn" src="/images/theme.png"></li>`)
             }))
             .catch((error) => console.error(error))
+    }
+
+    init() {
+        this.addKeyword();
+        this.addNav();
+        this.addLeftBanner();
+        this.addRightBanner();
+        this.addBottom();
+        this.addGrid();
     }
 }
