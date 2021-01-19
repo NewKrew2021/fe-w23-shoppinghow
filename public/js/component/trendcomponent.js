@@ -2,16 +2,14 @@ import {myDomApi} from "../util/mydomapi.js"
 import {URL} from "../url.js"
 import {MyPromise} from "../util/mypromise.js"
 
-let trendFirstIndex = 0;
-let clickStartTime, trendData;
-let isMouseUp = false;
-const changTime = 2000; //ms
-const trendImgCnt = 5;
+let [trendFirstIndex, isMouseUp, clickStartTime, trendData] = [0, false];
+const [changeTime, trendImgCnt] = [2000, 5];
 const prevBtn = myDomApi.myQuerySelector("#trendPrev");
 const nextBtn = myDomApi.myQuerySelector("#trendNext");
 
+
 const mySetTimeout = new MyPromise((resolve, reject) => {
-  setTimeout(() => resolve(), changTime);
+  setTimeout(resolve, changeTime);
 });
 
 const createTrendContainer = () => {
@@ -51,40 +49,30 @@ const createTrendContainer = () => {
 
 prevBtn.addEventListener("mousedown", () => {
   clickStartTime = new Date();
-  const checkPrevClick = setInterval((clickStartTime => {
-    if(isMouseUp) {
-      clearInterval(checkPrevClick);
-      mySetTimeout
-      .then(() => isMouseUp=false)
-      .catch(error => console.log(error));
-    }
-    else changeImg(trendFirstIndex += -2);
-  }),changTime);
+  isMouseUp = false;
+  const checkPrevClick = setTimeout((clickStartTime => {
+    if(isMouseUp===false) changeImg(trendFirstIndex += -2);
+  }),changeTime);
 });
 
 prevBtn.addEventListener("mouseup", () => {
   const clickTime = new Date() - clickStartTime;
   isMouseUp = true;
-  if(clickTime < changTime) changeImg(trendFirstIndex += -1);
+  if(clickTime < changeTime) changeImg(trendFirstIndex += -1);
 });
 
 nextBtn.addEventListener("mousedown", () => {
   clickStartTime = new Date();
-  const checkPrevClick = setInterval((clickStartTime => {
-    if(isMouseUp) {
-      clearInterval(checkPrevClick);
-      mySetTimeout
-      .then(() => isMouseUp=false)
-      .catch(error => console.log(error));
-    }
-    else changeImg(trendFirstIndex += 2);
-  }),changTime);
+  isMouseUp = false;
+  const checkNextClick = setTimeout((clickStartTime => {
+    if(isMouseUp===false) changeImg(trendFirstIndex += 2);
+  }),changeTime);
 });
 
 nextBtn.addEventListener("mouseup", () => {
   const clickTime = new Date() - clickStartTime;
   isMouseUp = true;
-  if(clickTime < changTime) changeImg(trendFirstIndex += 1);
+  if(clickTime < changeTime) changeImg(trendFirstIndex += 1);
 });
 
 const changeImg = curImg => {

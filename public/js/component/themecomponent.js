@@ -1,11 +1,9 @@
 import {URL} from "../url.js"
 import {myDomApi} from "../util/mydomapi.js"
 
-let themeData;
-let themeLength = 5;
-const themeImgCnt = 5;
-const extendCnt = 5;
-const moreBtn = myDomApi.myQuerySelector("#more");
+
+let [themeData, themeLength] = [ , 5];
+const [themeImgCnt, extendCnt, moreBtn] = [5, 5, myDomApi.myQuerySelector("#more")];
 
 const createThemeContainer = () => {
   let themeContainer = myDomApi.myQuerySelector("table.theme-container");
