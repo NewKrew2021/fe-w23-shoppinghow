@@ -3,34 +3,8 @@ import { $, deleteClassFromElement } from '../utils.js';
 const HOST = 'http://localhost';
 const PORT = 8000;
 
-const LARGE_CATEGORY = ['패션 / 뷰티', '가전 / 컴퓨터', '가구 / 생활 / 건강'];
-const MEDIUM_CATEGORY = [
-  '패션 / 뷰티',
-  '가전 / 컴퓨터',
-  '가구 / 생활 / 건강',
-  '패션 / 뷰티',
-  '가전 / 컴퓨터',
-  '가구 / 생활 / 건강',
-  '패션 / 뷰티',
-  '가전 / 컴퓨터',
-  '가구 / 생활 / 건강',
-  '패션 / 뷰티',
-  '가전 / 컴퓨터',
-  '가구 / 생활 / 건강',
-];
-const SMALL_CATEGORY = [
-  '패션 / 뷰티',
-  '가전 / 컴퓨터',
-  '가구 / 생활 / 건강',
-  '패션 / 뷰티',
-  '가전 / 컴퓨터',
-  '가구 / 생활 / 건강',
-  '패션 / 뷰티',
-  '가전 / 컴퓨터',
-  '가구 / 생활 / 건강',
-];
-
 const SQUARED = 2;
+const MOUSE_MAX_SPEED = 5;
 
 class Menu {
   constructor() {
@@ -106,7 +80,10 @@ class Menu {
   }
 
   handleMouseMove(event) {
-    if (this.calculateMouseMovement(event.clientX, event.clientY) < 5) {
+    if (
+      this.calculateMouseMovement(event.clientX, event.clientY) <
+      MOUSE_MAX_SPEED
+    ) {
       this.toggleTabActivation();
       this.activatedTab = event.target;
       this.toggleTabActivation();
