@@ -24,12 +24,17 @@ export function initHoverPopup() {
 
       // add mouse-leave event listener
       element.addEventListener('mouseleave', event => {
-        // set setTimeout handler
+        // directly hide
+        if (popupTarget.dataset.hoverSetTimeout == 0) {
+          popupTarget.classList.remove('show')
+          return
+        }
+        // or, set setTimeout handler
         popupTarget.dataset.hoverSetTimeout = setTimeout(() => {
           // hide the target after {POPUP_HIDE_DELAY}ms
           popupTarget.classList.remove('show')
           delete popupTarget.dataset.hoverSetTimeout
-        }, POPUP_HIDE_DELAY)
+        }, popupTarget.dataset.hoverHideDelay || POPUP_HIDE_DELAY)
       })
     })
 }
