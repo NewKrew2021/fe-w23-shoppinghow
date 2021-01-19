@@ -5,11 +5,7 @@ import SearchBox from './searchbox.js';
 
 /* 레이아웃 초기 구성 */
 const initLayout = new MainLayout();
-initLayout.addNav();
-initLayout.addLeftBanner();
-initLayout.addRightBanner();
-initLayout.addGrid();
-initLayout.addBottom();
+initLayout.init();
 
 /* 필요한 기능을 위한 이벤트 추가 - 최근 본 상품, 더보기 버튼, ...(추가) ... */
 const eventController = new UIevent({ COL : 5, MORE_INDEX : 0});

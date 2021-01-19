@@ -115,4 +115,12 @@ export default class MainLayout {
             }))
             .catch((error) => console.error(error))
     }
+
+    init(){
+        this.addNav();
+        this.addLeftBanner();
+        this.addRightBanner();
+        this.addBottom();
+        this.addGrid();
+    }
 }
