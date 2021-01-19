@@ -1,6 +1,7 @@
 const Router = require('koa-router');
 
 const productItemListData = require('../data/product-item-list.json');
+const menuData = require('../data/menu.json');
 
 const api = new Router();
 
@@ -22,6 +23,10 @@ api.get('/product', (ctx, next) => {
     productLineNumber * PRODUCT_NUMBER_IN_LINE,
     (productLineNumber + 1) * PRODUCT_NUMBER_IN_LINE
   );
+});
+
+api.get('/menu', (ctx, next) => {
+  ctx.body = menuData;
 });
 
 module.exports = api;

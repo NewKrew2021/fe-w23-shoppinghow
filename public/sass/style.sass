@@ -1,8 +1,10 @@
 $main-background-color: #eeeeee
-
+$menu-border-color: #cccccc
 $content-width : 1350px
 $product-item-width : 270px
 $tag-color : #e79924
+$header-nav-height : 60px
+$menu-width :100px
 
 body
   background: $main-background-color
@@ -69,7 +71,7 @@ li
   align-items: center
   justify-content: space-between
   width: $content-width
-  height: 60px
+  height: $header-nav-height
 
 .important-nav,
 .theme-nav
@@ -238,3 +240,59 @@ li
 
 .footer
   height: 300px
+
+.menu
+  height: $header-nav-height
+  width: $menu-width
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: center
+  &__icon
+    width: 30px
+    height: 30px
+    border-radius: 15px
+    background: #000000
+    margin-right: 10px
+  &__pop-up
+    top: $header-nav-height
+    left: 0px
+    display: flex
+    position: absolute
+    border: 1px solid #000000
+    .large-category, .medium-category, .small-category
+      box-sizing: border-box
+      width: 200px
+      height: 600px
+      padding: 0
+    .large-category
+      background: $main-background-color
+      &__tab
+        box-sizing: border-box
+        height: 50px
+        width: 100%
+        padding: 15px 0px 15px 30px
+        font-size: 20px
+
+    .medium-category, .small-category
+      font-size: 14px
+      background: #ffffff
+      border-left: solid 1px $menu-border-color
+      padding: 20px 30px
+    .medium-category
+      &__tab
+        width: 100%
+        height: 30px
+
+    .small-category
+      &__tab
+        width: 100%
+        height: 30px
+
+  .large-category__tab--activated
+    background: #ffffff
+    color: #ff0000
+  .medium-category__tab--activated
+    color: #ff0000
+  .small-category__tab--activated
+    text-decoration: underline
