@@ -3,6 +3,7 @@ import { DOMSearchAPI } from "./DOM_search_api.js";
 import { getBasicItemHTML, getBasicItemHTMLs, getBasicItemDOM, getBestItemHTML, 
     getCarouselItemDOM, getCarouselBoxHTML, getBoxDOM, getMarginDOM, getMoreBtnDOM, getSubjectDOM } from "./render.js";
 import { MyPromise } from "./promise.js";
+import { initCategory } from "./category.js";
 import "../css/common.css";
 import "../css/style.css";
 
@@ -30,7 +31,10 @@ const initPage = function (data) {
     const bests = data[1].items;
     const hots = data[2].items;
     const basics = data[3].items;
-    
+    const categories = data[4].data;
+
+    console.log(initCategory(categories));
+
     // 한 행씩 렌더링
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));
     mainContainerDOM.appendChild(getBoxDOM(getCarouselBoxHTML(), getBestItemHTML(bests[0])));
@@ -92,12 +96,12 @@ const initEventListener = function () {
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {
-    console.log("wwww");
     Promise.all([
         getItemData("carousel"),
         getItemData("best"),
         getItemData("hot"),
-        getItemData("basic", 0, 10)
+        getItemData("basic", 0, 10),
+        getItemData("category")
     ]).then(data => {
         myStorage.clear();
         initPage(data);
