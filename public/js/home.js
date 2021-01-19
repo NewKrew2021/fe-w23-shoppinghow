@@ -1,4 +1,4 @@
-(function () {
+export function initHome() {
     const container = document.querySelector("#container");
     let html = "";
 
@@ -32,7 +32,7 @@
     html+=`<div id="section3"></div>`;
     container.innerHTML += html;
 
-})();
+}
 
 function next(){
     const carousel=document.querySelector("#promotion-carousel");

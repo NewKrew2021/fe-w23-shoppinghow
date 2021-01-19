@@ -6,7 +6,7 @@ const path = require('path');
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/public/dist'));
 app.get('/', (req, res)=> {
-    res.sendFile(path.join(__dirname + '/public/dist/index.html'));
+    res.sendFile(path.join(__dirname + '/public/view/index.html'));
 });
 
 app.get('/items', (req, res) =>{
