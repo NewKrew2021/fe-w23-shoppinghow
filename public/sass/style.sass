@@ -1,9 +1,10 @@
 $main-background-color: #eeeeee
-
+$menu-border-color: #cccccc
 $content-width : 1350px
 $product-item-width : 270px
 $tag-color : #e79924
 $header-nav-height : 60px
+$menu-width :100px
 
 body
   background: $main-background-color
@@ -241,6 +242,9 @@ li
   height: 300px
 
 .menu
+  height: $header-nav-height
+  width: $menu-width
+  position: relative
   display: flex
   align-items: center
   justify-content: center
@@ -250,3 +254,18 @@ li
     border-radius: 15px
     background: #000000
     margin-right: 10px
+  &__pop-up
+    top: $header-nav-height
+    left: 0px
+    display: flex
+    position: absolute
+    border: 1px solid #000000
+    .large-category, .medium-category, .small-category
+      box-sizing: border-box
+      width: 200px
+      height: 600px
+    .large-category
+      background: $main-background-color
+    .medium-category, .small-category
+      background: #ffffff
+      border-left: solid 1px $menu-border-color
