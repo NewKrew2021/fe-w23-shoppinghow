@@ -2,6 +2,7 @@ import MainLayout from './main.js';
 import { dom } from './util.js';
 import UIevent from './uievent.js';
 import SearchBox from './searchbox.js';
+import Category from './category.js';
 
 /* 레이아웃 초기 구성 */
 const initLayout = new MainLayout();
@@ -14,3 +15,4 @@ eventController.init();
 /* 검색창 모듈 */
 const searchBox = new SearchBox();
 searchBox.showKeywordBox();
+searchBox.autoComplete();

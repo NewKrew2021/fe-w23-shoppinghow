@@ -7,6 +7,9 @@
 export function addHTML(node, text) {
     node.innerHTML += text;
 }
+export function innerHTML(node, text){
+    node.innerHTML = text;
+}
 /* Custom API Class */
 export class Custom {
     constructor(target) {
