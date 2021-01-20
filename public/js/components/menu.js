@@ -6,6 +6,12 @@ const PORT = 8000;
 const SQUARED = 2;
 const MOUSE_MAX_SPEED = 5;
 
+const MENU_TEMPLATE = {
+  categoryTab(type, title) {
+    return `<li class="${type}-category__tab">${title}</li>`;
+  },
+};
+
 class Menu {
   constructor() {
     this.menuData = null;
@@ -20,22 +26,10 @@ class Menu {
     this.currentY = 0;
   }
 
-  createLargeCategoryElement(menuData) {
-    return menuData.reduce((acc, { title }) => {
-      return acc + `<li class="large-category__tab">${title}</li>`;
-    }, '');
-  }
-
-  createMediumCategoryElement(mediumCategoryData) {
-    return mediumCategoryData.reduce((acc, { title }) => {
-      return acc + `<li class="medium-category__tab">${title}</li>`;
-    }, '');
-  }
-
-  createSmallCategoryElement(smallCategoryData) {
-    return smallCategoryData.reduce((acc, { title }) => {
-      return acc + `<li class="small-category__tab">${title}</li>`;
-    }, '');
+  createCategoryHTML(data, type) {
+    return data.reduce((acc, { title }) => {
+      return acc + MENU_TEMPLATE.categoryTab(type, title);
+    }, ``);
   }
 
   calculateMouseMovement(newX, newY) {
@@ -111,14 +105,19 @@ class Menu {
       this.mediumCategoryIndex
     ];
 
-    this.largeCategoryElement.innerHTML = this.createLargeCategoryElement(
-      this.menuData.data
+    this.largeCategoryElement.innerHTML = this.createCategoryHTML(
+      this.menuData.data,
+      'large'
     );
-    this.mediumCategoryElement.innerHTML = this.createMediumCategoryElement(
-      mediumCategoryData.data
+
+    this.mediumCategoryElement.innerHTML = this.createCategoryHTML(
+      mediumCategoryData.data,
+      'medium'
     );
-    this.smallCategoryElement.innerHTML = this.createSmallCategoryElement(
-      smallCategoryData.data
+
+    this.smallCategoryElement.innerHTML = this.createCategoryHTML(
+      smallCategoryData.data,
+      'small'
     );
   }
 
