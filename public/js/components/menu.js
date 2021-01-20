@@ -32,8 +32,6 @@ class Menu {
       small: 0,
     };
 
-    this.activatedTab = $('.large-category').children[0];
-
     this.currentX = 0;
     this.currentY = 0;
   }
@@ -58,17 +56,15 @@ class Menu {
     );
   }
 
-  toggleTabActivation() {
-    const targetClassName = this.activatedTab.className;
+  toggleTabActivation(activatedTab) {
+    const targetClassName = activatedTab.className;
 
     switch (targetClassName) {
       case 'large-category__tab':
         this.deletePrevActivation('large');
 
-        this.activeCategoryIndex['large'] = getIndexFromParent(
-          this.activatedTab
-        );
-        this.activatedTab.classList.add('large-category__tab--activated');
+        this.activeCategoryIndex['large'] = getIndexFromParent(activatedTab);
+        activatedTab.classList.add('large-category__tab--activated');
 
         this.activeCategoryIndex['medium'] = 0;
 
@@ -88,10 +84,8 @@ class Menu {
 
       case 'medium-category__tab':
         this.deletePrevActivation('medium');
-        this.activeCategoryIndex['medium'] = getIndexFromParent(
-          this.activatedTab
-        );
-        this.activatedTab.classList.add('medium-category__tab--activated');
+        this.activeCategoryIndex['medium'] = getIndexFromParent(activatedTab);
+        activatedTab.classList.add('medium-category__tab--activated');
 
         this.activeCategoryIndex['small'] = 0;
         this.categoryData['small'] = this.categoryData['large'].data[
@@ -104,10 +98,8 @@ class Menu {
       case 'small-category__tab':
         this.deletePrevActivation('small');
 
-        this.activeCategoryIndex['small'] = getIndexFromParent(
-          this.activatedTab
-        );
-        this.activatedTab.classList.add('small-category__tab--activated');
+        this.activeCategoryIndex['small'] = getIndexFromParent(activatedTab);
+        activatedTab.classList.add('small-category__tab--activated');
 
         break;
     }
@@ -119,9 +111,7 @@ class Menu {
       this.calculateMouseMovement(event.clientX, event.clientY) <
       MOUSE_MAX_SPEED
     ) {
-      // this.toggleTabActivation();
-      this.activatedTab = event.target;
-      this.toggleTabActivation();
+      this.toggleTabActivation(event.target);
     }
 
     this.currentX = event.clientX;
