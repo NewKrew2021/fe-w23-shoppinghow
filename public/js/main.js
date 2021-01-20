@@ -31,7 +31,7 @@ const initPage = function (data) {
     const bests = data[1].items;
     const hots = data[2].items;
     const basics = data[3].items;
-    const categories = data[4].data;
+    const categories = data[4];
 
     const categoryInfo = initCategory(categories);
     const categoryBtn = domAPI.querySelector("#category");

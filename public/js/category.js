@@ -1,41 +1,39 @@
 import { DOMSearchAPI } from "./DOM_search_api.js";
-/*
-    # String 형태 (transJsonToString 결과)
-     large: ["패션/뷰티", "가전/컴퓨터", "가구/생활/건강" ...]
-    medium: [["여성의류", "남성의류", "테마의류/잡화" ...], [], [], ...]
-     small: [[["니트/스웨터", "티셔츠", "가디건", ...], [], [], ...], [], ...]
-    
-    # CSS class
-    category--box
-
-    category--large, category--medium, category--small
-    category--large--picked, category--medium--picked, category--small--picked
-    
-    category--large__item, category--medium__item, category--small__item
-    category--large__item--picked, category--medium__item--picked, category--small__item--picked 
-*/
 
 const transJsonToString = function (data) {
-    const ret = {
-        large: [],
-        medium: [],
-        small: []
+    const ret = {};
+    function bfs(root) {
+        const q = [];
+        q.push([root, 0]);
+        while(q.length) {
+            const front = q.shift();
+            const node = front[0];
+            const h = front[1];
+
+            if(!node.data) continue;
+            const res = node.data.reduce((acc, cur) => {
+                if(cur.data) q.push([cur, h + 1]);
+                return [...acc, cur.title];
+            }, []);
+
+            if(ret[h]) ret[h].push(res);
+            else ret[h] = [res];
+        }
     }
-    data.forEach((large, i) => {
-        ret.large.push(large.title);
-        ret.medium.push([]);
-        ret.small.push([]);
-        large.data.forEach((medium, j) => {
-            ret.medium[i].push(medium.title);
-            ret.small[i].push([]);
-            medium.data.forEach((small) => {
-                ret.small[i][j].push(small.title);
-            });
-        });
-    });
+    bfs(data);
+    console.log(ret);
     return ret;
 }
-
+// string to html
+const func = function(data) {
+    const tpl = {
+        // 0: large, 1: medium, 2: small
+        0(title, ...idxs) { return `<div name="${idxs.join("-")}" class="category--large__item">${title}</div>`; },
+        1(title, ...idxs) { return `<div name="${idxs.join("-")}" class="category--medium__item">${title}</div>`; },
+        2(title, ...idxs) { return `<div name="${idxs.join("-")}" class="category--small__item">${title}</div>`; }
+    };
+    const ret = {};    
+}
 const transStringToHTML = function (data) {
     const ret = {
         large: `<div class="category--large--picked">`,
@@ -179,7 +177,7 @@ const pipe = (...funcs) => data => {
 export const initCategory = function (data) {
     return pipe(
         transJsonToString,
-        transStringToHTML,
+        func,
         transHTMLToDOM,
         setCategoryElement,
         addEventHandler,
