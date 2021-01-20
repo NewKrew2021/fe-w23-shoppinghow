@@ -56,15 +56,31 @@ class Menu {
 
     switch (targetClassName) {
       case 'large-category__tab':
-        this.activatedTab.classList.add('large-category__tab--activated');
-        break;
-      case 'large-category__tab large-category__tab--activated':
         deleteClassFromElement(
-          this.activatedTab,
+          this.categoryElement['large'].childNodes[
+            this.activatedCategoryIndex['large']
+          ],
           'large-category__tab--activated'
         );
+        this.activatedCategoryIndex['large'] = getIndexFromParent(
+          this.activatedTab
+        );
+        this.activatedTab.classList.add('large-category__tab--activated');
+
         break;
+
       case 'medium-category__tab':
+        // 삭제
+        deleteClassFromElement(
+          this.categoryElement['medium'].childNodes[
+            this.activatedCategoryIndex['medium']
+          ],
+          'medium-category__tab--activated'
+        );
+        this.activatedCategoryIndex['medium'] = getIndexFromParent(
+          this.activatedTab
+        );
+        // 추가
         this.activatedTab.classList.add('medium-category__tab--activated');
 
         this.activatedCategoryIndex['medium'] = getIndexFromParent(
@@ -78,22 +94,21 @@ class Menu {
         this.renderCategory('small');
 
         break;
-      case 'medium-category__tab medium-category__tab--activated':
-        deleteClassFromElement(
-          this.activatedTab,
-          'medium-category__tab--activated'
-        );
-        break;
+
       case 'small-category__tab':
-        this.activatedTab.classList.add('small-category__tab--activated');
+        deleteClassFromElement(
+          this.categoryElement['small'].childNodes[
+            this.activatedCategoryIndex['small']
+          ],
+          'small-category__tab--activated'
+        );
         this.activatedCategoryIndex['small'] = getIndexFromParent(
           this.activatedTab
         );
-        break;
-      case 'small-category__tab small-category__tab--activated':
-        deleteClassFromElement(
-          this.activatedTab,
-          'small-category__tab--activated'
+        // 추가
+        this.activatedTab.classList.add('small-category__tab--activated');
+        this.activatedCategoryIndex['small'] = getIndexFromParent(
+          this.activatedTab
         );
         break;
     }
