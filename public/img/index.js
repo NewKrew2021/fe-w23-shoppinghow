@@ -7,4 +7,5 @@ export const recentLogin = import("./recentLogin.png");
 export const searchBtn = import("./searchBtn.png");
 export const shwLogo = import("./shwLogo.png");
 export const themeIcon = import("./themeIcon.png");
-export const categotyBtn = import("./categoryBtn.png");
+export const categotyBtn1 = import("./categoryBtn1.png");
+export const categotyBtn2 = import("./categoryBtn2.png");

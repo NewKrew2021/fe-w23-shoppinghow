@@ -351,6 +351,14 @@ red {
   color: #f96247;
   background-color: #ffffff;
   border-right: 1px solid #ffffff;
+  border-top: 1px solid #bbbbbb;
+  border-bottom: 1px solid #bbbbbb;
+}
+
+.category-first-border {
+  color: #f96247;
+  background-color: #ffffff;
+  border-right: 1px solid #ffffff;
   border-bottom: 1px solid #bbbbbb;
 }
 
@@ -367,5 +375,21 @@ red {
 }
 
 .category-second-click {
+  color: #f96247;
+}
+
+.category-third {
+  width: 170px;
+  height: 33px;
+  padding-left: 20px;
+  text-align: left;
+  font-size: 13px;
+  line-height: 35px;
+  color: #2c2c2c;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.category-third:hover {
   color: #f96247;
 }
