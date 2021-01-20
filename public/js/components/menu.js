@@ -126,24 +126,26 @@ class Menu {
   }
 
   renderMenu() {
-    this.categoryData['medium'] = this.categoryData['large'].data[
-      this.largeCategoryIndex
-    ];
-
-    this.categoryData['small'] = this.categoryData['large'].data[
-      this.largeCategoryIndex
-    ].data[this.mediumCategoryIndex];
-
     this.renderCategory('large');
     this.renderCategory('medium');
     this.renderCategory('small');
   }
 
+  initMenuData(res) {
+    {
+      this.categoryData['large'] = res;
+      this.categoryData['medium'] = this.categoryData['large'].data[
+        this.largeCategoryIndex
+      ];
+      this.categoryData['small'] = this.categoryData['large'].data[
+        this.largeCategoryIndex
+      ].data[this.mediumCategoryIndex];
+    }
+  }
+
   init() {
     this.fetchMenuData()
-      .then(res => {
-        this.categoryData['large'] = res;
-      })
+      .then(res => this.initMenuData(res))
       .then(() => this.renderMenu());
 
     this.addCurrentTabEvent();
