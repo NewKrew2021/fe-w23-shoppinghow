@@ -133,6 +133,7 @@ export default class MainLayout {
     }
 
     addGrid() {
+        let storages;
         const gridUL = dom('#grid-ul-1').querySelector();
         fetch(this.gridBannerURL)
             .then(res => res.json())
@@ -144,6 +145,8 @@ export default class MainLayout {
                     <p class="subtext">${element.text}</p>
                     <img class="theme-btn" src="/images/theme.png"></li>`)
             }))
+            .then(data => { storages = new Storage(); })
+            .then(data => storages.clickSaveHandler())
             .catch((error) => console.error(error))
     }
 

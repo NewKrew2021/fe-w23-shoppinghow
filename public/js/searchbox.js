@@ -119,7 +119,6 @@ export default class SearchBox {
 
     init() {
         this.showKeywordBox();
-        //this.autoComplete();
         this.rollKeywords();
         this.fetchAllKeywords();
     }
