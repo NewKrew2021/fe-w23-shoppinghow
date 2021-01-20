@@ -25,7 +25,7 @@ export default class SearchBox {
     /* 케이스별 keyword 영역 표시 관련한 이벤트 */
     showKeywordBox() {
         /* 입력창에 입력을 시작할 때 */
-        this.search_input.addEventListener('input', (e) => {
+        this.search_input.addEventListener('keyup', (e) => {
             const value = e.target.value;
             if (value === '') {
                 this.autoInner.style.display = 'none';

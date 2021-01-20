@@ -11,6 +11,30 @@ export function innerHTML(node, text){
     node.innerHTML = text;
 }
 
+/* 스로틀 함수 */
+export function throttle(fn, delay) {
+    let timer
+    return function() {
+        if (!timer){
+            timer = setTimeout(() => {
+                timer = null
+                fn.apply(this, arguments)
+            }, delay)
+        }
+    }
+}
+
+/* 디바운스 함수 */
+export function debounce(fn, delay) {
+    let timer
+    return function() {
+        clearTimeout(timer);
+        timer = setTimeout(() => { // *
+            fn.apply(this, arguments);
+        }, delay);
+    }
+}
+
 /* Custom API Class */
 export class Custom {
     constructor(target) {
