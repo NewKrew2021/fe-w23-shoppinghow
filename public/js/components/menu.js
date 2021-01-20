@@ -56,15 +56,18 @@ class Menu {
     );
   }
 
+  activeTab(type, activatedTab) {
+    this.activeCategoryIndex[type] = getIndexFromParent(activatedTab);
+    activatedTab.classList.add(`${type}-category__tab--activated`);
+  }
+
   toggleTabActivation(activatedTab) {
     const targetClassName = activatedTab.className;
 
     switch (targetClassName) {
       case 'large-category__tab':
         this.deletePrevActivation('large');
-
-        this.activeCategoryIndex['large'] = getIndexFromParent(activatedTab);
-        activatedTab.classList.add('large-category__tab--activated');
+        this.activeTab('large', activatedTab);
 
         this.activeCategoryIndex['medium'] = 0;
 
@@ -84,8 +87,7 @@ class Menu {
 
       case 'medium-category__tab':
         this.deletePrevActivation('medium');
-        this.activeCategoryIndex['medium'] = getIndexFromParent(activatedTab);
-        activatedTab.classList.add('medium-category__tab--activated');
+        this.activeTab('medium', activatedTab);
 
         this.activeCategoryIndex['small'] = 0;
         this.categoryData['small'] = this.categoryData['large'].data[
@@ -97,9 +99,7 @@ class Menu {
 
       case 'small-category__tab':
         this.deletePrevActivation('small');
-
-        this.activeCategoryIndex['small'] = getIndexFromParent(activatedTab);
-        activatedTab.classList.add('small-category__tab--activated');
+        this.activeTab('small', activatedTab);
 
         break;
     }
