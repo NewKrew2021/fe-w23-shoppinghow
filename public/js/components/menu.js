@@ -14,9 +14,12 @@ const MENU_TEMPLATE = {
 
 class Menu {
   constructor() {
-    this.menuData = null;
-    this.mediumCategoryData = null;
-    this.smallCategoryData = null;
+    this.categoryData = {
+      large: null,
+      medium: null,
+      small: null,
+    };
+
     this.categoryElement = {
       large: $('.large-category'),
       medium: $('.medium-category'),
@@ -64,15 +67,11 @@ class Menu {
 
         this.mediumCategoryIndex = getIndexFromParent(this.activatedTab);
 
-        this.smallCategoryData = this.menuData.data[
+        this.categoryData['small'] = this.categoryData['large'].data[
           this.largeCategoryIndex
         ].data[this.mediumCategoryIndex];
-        console.log(this.smallCategoryData);
 
-        this.categoryElement['small'].innerHTML = this.createCategoryHTML(
-          this.smallCategoryData.data,
-          'small'
-        );
+        this.renderCategory('small');
 
         break;
       case 'medium-category__tab medium-category__tab--activated':
@@ -119,32 +118,31 @@ class Menu {
     return fetch(`${HOST}:${PORT}/api/menu`).then(res => res.json());
   }
 
+  renderCategory(type) {
+    this.categoryElement[type].innerHTML = this.createCategoryHTML(
+      this.categoryData[type].data,
+      type
+    );
+  }
+
   renderMenu() {
-    this.mediumCategoryData = this.menuData.data[this.largeCategoryIndex];
-    this.smallCategoryData = this.menuData.data[this.largeCategoryIndex].data[
-      this.mediumCategoryIndex
+    this.categoryData['medium'] = this.categoryData['large'].data[
+      this.largeCategoryIndex
     ];
 
-    this.categoryElement['large'].innerHTML = this.createCategoryHTML(
-      this.menuData.data,
-      'large'
-    );
+    this.categoryData['small'] = this.categoryData['large'].data[
+      this.largeCategoryIndex
+    ].data[this.mediumCategoryIndex];
 
-    this.categoryElement['medium'].innerHTML = this.createCategoryHTML(
-      this.mediumCategoryData.data,
-      'medium'
-    );
-
-    this.categoryElement['small'].innerHTML = this.createCategoryHTML(
-      this.smallCategoryData.data,
-      'small'
-    );
+    this.renderCategory('large');
+    this.renderCategory('medium');
+    this.renderCategory('small');
   }
 
   init() {
     this.fetchMenuData()
       .then(res => {
-        this.menuData = res;
+        this.categoryData['large'] = res;
       })
       .then(() => this.renderMenu());
 
