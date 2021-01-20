@@ -17,10 +17,11 @@ class Menu {
     this.menuData = null;
     this.mediumCategoryData = null;
     this.smallCategoryData = null;
-
-    this.largeCategoryElement = $('.large-category');
-    this.mediumCategoryElement = $('.medium-category');
-    this.smallCategoryElement = $('.small-category');
+    this.categoryElement = {
+      large: $('.large-category'),
+      medium: $('.medium-category'),
+      small: $('.small-category'),
+    };
 
     this.largeCategoryIndex = 0;
     this.mediumCategoryIndex = 0;
@@ -68,7 +69,7 @@ class Menu {
         ].data[this.mediumCategoryIndex];
         console.log(this.smallCategoryData);
 
-        this.smallCategoryElement.innerHTML = this.createCategoryHTML(
+        this.categoryElement['small'].innerHTML = this.createCategoryHTML(
           this.smallCategoryData.data,
           'small'
         );
@@ -124,17 +125,17 @@ class Menu {
       this.mediumCategoryIndex
     ];
 
-    this.largeCategoryElement.innerHTML = this.createCategoryHTML(
+    this.categoryElement['large'].innerHTML = this.createCategoryHTML(
       this.menuData.data,
       'large'
     );
 
-    this.mediumCategoryElement.innerHTML = this.createCategoryHTML(
+    this.categoryElement['medium'].innerHTML = this.createCategoryHTML(
       this.mediumCategoryData.data,
       'medium'
     );
 
-    this.smallCategoryElement.innerHTML = this.createCategoryHTML(
+    this.categoryElement['small'].innerHTML = this.createCategoryHTML(
       this.smallCategoryData.data,
       'small'
     );
