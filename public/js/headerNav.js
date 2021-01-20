@@ -2,8 +2,10 @@ export function initHeaderNav(){
     const nav=document.querySelector("#header-nav");
     let html="";
 
-    const category=`<img src ="public/image/category.png"></img>
-                <span>카테고리</span>`;
+    const category=`<span id="menu-btn">
+                    <img src ="public/image/category.png"></img>
+                    <span>카테고리</span>
+                </span>`;
     html+=category;
 
     (function(){

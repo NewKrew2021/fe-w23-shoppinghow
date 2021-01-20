@@ -3,7 +3,7 @@ import { data } from "./menu.json";
 export function initMenu() {
 
     const nav = document.querySelector("#header-nav");
-    const menu = createElementFromHTML(`<div id="menu">
+    const menu = createElementFromHTML(`<div id="menu" class="hide">
         <div id="first-layer"></div>
         <div id="second-layer"></div>
         <div id="third-layer"></div>
@@ -26,7 +26,6 @@ export function initMenu() {
                 setCurrentMenu(e.target.attributes.idx.value, 0,-1);
             }
             else if (e.target.className.includes('second-layer')) {
-                console.log(e.target.attributes.idx);
                 setCurrentMenu(e.target.attributes.firstLayerIdx.value, 
                     e.target.attributes.idx.value,
                     -1);
@@ -37,10 +36,15 @@ export function initMenu() {
             }
         }
     })
-    // menu.addEventListener("mouseover",(e)=>{
-    //     if(e.target.tagName==="LI")
-    //         e.target.classList.add("active");
-    // })
+    const menuBtn=nav.querySelector("#menu-btn");
+    menuBtn.addEventListener("mouseover",()=>{
+        menu.classList.remove("hide");
+        menu.classList.add("show");
+    });
+    menu.addEventListener("mouseleave",()=>{
+        menu.classList.remove("show");
+        menu.classList.add("hide");
+    })
 
     nav.appendChild(menu);
 
@@ -66,11 +70,9 @@ export function initMenu() {
         const firstLayer = menu.querySelector("#first-layer");
         const secondLayer = menu.querySelector("#second-layer");
         const thirdLayer = menu.querySelector("#third-layer");
-        
         firstLayer.innerHTML = fisrstLayerHtml;
         secondLayer.innerHTML = secondLayerHtml;
         thirdLayer.innerHTML = thirdLayerHtml;
-        
 
     }
     setCurrentMenu(0, 0);

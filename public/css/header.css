@@ -83,12 +83,17 @@ header nav #recent-item #recent-popup img {
   height: 100%;
   width: 100%;
 }
+header .hide {
+  display: none;
+}
+header .show {
+  display: inline-block;
+}
 header #menu {
   position: absolute;
   top: 120%;
   left: 5%;
   background-color: white;
-  display: inline-block;
   border: 1px solid black;
 }
 header #menu #first-layer {
