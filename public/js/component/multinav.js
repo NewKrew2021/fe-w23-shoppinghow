@@ -16,45 +16,79 @@ function getNavListItemHtmlString({ title, href }, hoverPopupTarget) {
     </li>`
 }
 
-export function appendMultiNav(wrapper) {
-  const subNavData = [[MULTINAV_DATA]]
-  let htmlString = `<div class="d-flex">`
+function getMultiNavHtmlString(id, dataList, depth, isMainNav = false) {
+  /*
 
-  // init sub-nav data list
-  for (let i = 1; i < MULTINAV_DEPTH; i++) {
-    subNavData.push([])
+  dataList: array of {
+    id?
+    title?
+    href?
+    data?
   }
 
-  // make nav and init next subNavData
-  for (let i = 0; i < MULTINAV_DEPTH; i++) {
-    // subNavData[i]: nav
-    htmlString += `<nav class="flex-1 ${i == 0 ? 'bg-light' : 'text-small'}">`
-    for (let j = 0; j < subNavData[i].length; j++) {
-      // subNavData[i][j]: ul
-      const subNavID = subNavData[i][j]?.id || ''
-      htmlString += `
-        <ul
-          id="${subNavID}"
-          class="nav-list nav-vertical ${i == 0 ? '' : 'hover-popup-target'}"
-          ${subNavID ? `data-hover-popup-target="#${subNavID}"` : ''}
-          data-hover-hide-delay="${HOVER_HIDE_DELAY}"
-        >`
-      for (let k = 0; k < subNavData[i][j].length; k++) {
-        // li = subNavData[i][j][k]
-        const nextNavData = subNavData[i][j][k].data
-        if (nextNavData) {
-          nextNavData.id = nextNavData.id || 'multinav-' + i + j + k;
-          subNavData[i + 1].push(nextNavData)
-        }
+  */
 
-        htmlString += getNavListItemHtmlString(subNavData[i][j][k], nextNavData?.id)
-      }
-      htmlString += `</ul>`
+  // array of { id, dataList }
+  const subNavDataList = []
+  let htmlString = '';
+
+  // open wrapper
+  htmlString += `
+    <div
+      id="${id}"
+      class="d-flex flex-${depth} ${isMainNav ? `` : `hover-popup-target`}"
+      ${isMainNav ? `` : `data-hover-popup-target="#${id}" data-hover-hide-delay="${HOVER_HIDE_DELAY}"`}
+    >`
+
+  // open nav
+  htmlString += `<nav class="flex-1">`
+
+  // open list
+  htmlString += `<ul class="nav-list nav-vertical">`
+
+  // for each list item,
+  htmlString += dataList.reduce((htmlString, data) => {
+    let subNavID
+
+    // if item has sub-nav,
+    if (data.data) { 
+      // make ID for sub-nav
+      subNavID = `${id}-sub${subNavDataList.length}`
+
+      // push sub-nav data to {subNavDataList}
+      subNavDataList.push({
+        id: subNavID,
+        dataList: data.data
+      })
     }
-    htmlString += `</nav>`
-  }
+
+    // make list item and return the accumulated
+    return htmlString + getNavListItemHtmlString(data, subNavID)
+  }, '')
+
+  // close list
+  htmlString += `</ul>`
+
+  // close nav
+  htmlString += `</nav>`
+
+  // append sub-nav (if exist)
+  htmlString += subNavDataList.reduce((htmlString, subNavData) =>
+    htmlString + getMultiNavHtmlString(subNavData.id, subNavData.dataList, depth - 1), '')
+
+  // close wrapper
   htmlString += `</div>`
 
+  // return complete HTML string
+  return htmlString
+}
 
-  wrapper.innerHTML += htmlString
+// append multinav to the wrapper
+export function appendMultiNav(wrapper) {
+  wrapper.innerHTML += getMultiNavHtmlString(
+    'multinav',     // id
+    MULTINAV_DATA,  // dataList
+    MULTINAV_DEPTH, // depth
+    true            // isMainNav
+  )
 }

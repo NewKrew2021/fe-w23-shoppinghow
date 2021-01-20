@@ -20,10 +20,7 @@ export default class MyPromise {
     this.nextType = undefined
 
     // call the callback with this
-    callback(
-      value => this.#resolve(value),
-      reason => this.#reject(reason)
-    )
+    callback(this.#resolve.bind(this), this.#reject.bind(this))
   }
 
   // add task into the task queue

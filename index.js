@@ -8,6 +8,11 @@ const port = 3000
 app.use(express.static('public'))
 app.use(express.static('views'))
 
+// parse application/json
+app.use(express.json())
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }))
+
 // use router
 app.use('/', routes)
 

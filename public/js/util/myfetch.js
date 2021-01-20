@@ -34,13 +34,13 @@ export function myFetch(url, init = {}) {
         resolve(request.response)
       }
 
+      // setup request
+      request.open(method, url)
+
       // set headers
       for (const header in headers) {
         request.setRequestHeader(header, headers[header])
       }
-
-      // setup request
-      request.open(method, url)
 
       // send the request
       request.send(body)
@@ -50,15 +50,26 @@ export function myFetch(url, init = {}) {
   })
 }
 
-// fetch item or item-list from the server
-export function fetchItems(route, data = {}) {
+export async function myFetchGET(url, query = {}) {
   // make query-string
-  if (Object.keys(data).length) {
-    route += '?' + objectToQueryString(data)
+  if (Object.keys(query).length) {
+    url += '?' + objectToQueryString(query)
   }
 
-  return myFetch(`/items${route}`)
-    .then(response => JSON.parse(response))
+  // return fetched data
+  return JSON.parse(await myFetch(url))
+}
+
+export async function myFetchPOST(url, body = {}) {
+  // make body and header
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  }
+
+  // return fetched data
+  return JSON.parse(await myFetch(url, options))
 }
 
 // convert object to query-string
