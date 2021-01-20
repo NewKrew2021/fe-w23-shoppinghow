@@ -95,9 +95,10 @@ header {
       left:5%;
       background-color: white;
       display: inline-block;
-      
+      border:1px solid black;
     #first-layer{
-        height: 100%;
+      //100% 적용 안되는 이유?
+        height: 600px;
         background-color: rgb(247,247,247);
         display:inline-block;
         vertical-align: top;
@@ -115,6 +116,14 @@ header {
         display:inline-block;
         vertical-align: top;
         padding-top:$padding-top;
+    }
+    .active{
+      background-color:white;
+      color:red;
+    }
+    .active-third{
+      background-color:white;
+      text-decoration: underline;
     }
     .first-layer{
         width:150px;

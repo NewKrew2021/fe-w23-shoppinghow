@@ -23,40 +23,54 @@ export function initMenu() {
 
         if (dist < THRESHOLD) {
             if (e.target.className.includes('first-layer')) {
-                setCurrentMenu(e.target.attributes.idx.value, 0);
+                setCurrentMenu(e.target.attributes.idx.value, 0,-1);
             }
             else if (e.target.className.includes('second-layer')) {
-                setCurrentMenu(e.target.attributes.parentIdx.value, e.target.attributes.idx.value);
+                console.log(e.target.attributes.idx);
+                setCurrentMenu(e.target.attributes.firstLayerIdx.value, 
+                    e.target.attributes.idx.value,
+                    -1);
+            }else if (e.target.className.includes('third-layer')) {
+                setCurrentMenu(e.target.attributes.firstLayerIdx.value, 
+                    e.target.attributes.secondLayerIdx.value,
+                    e.target.attributes.idx.value);
             }
         }
-
     })
+    // menu.addEventListener("mouseover",(e)=>{
+    //     if(e.target.tagName==="LI")
+    //         e.target.classList.add("active");
+    // })
+
     nav.appendChild(menu);
 
-    function setCurrentMenu(firstLayerIndex, secondLayerIndex) {
+    function setCurrentMenu(firstLayerIndex, secondLayerIndex,thirdLayerIndex) {
         const firstLayerData = data;
         const secondLayerData = firstLayerData[firstLayerIndex].data;
         const thirdLayerData = secondLayerData[secondLayerIndex].data;
 
         const fisrstLayerHtml = firstLayerData.reduce((acc, { title }, idx) => {
-            return acc + `<li class="first-layer" idx=${idx}>${title}</li>`
+            return acc + `<li class="first-layer ${idx===Number(firstLayerIndex)? "active":"" }" idx=${idx}>${title}</li>`
         }, "");
 
         const secondLayerHtml = secondLayerData.reduce((acc, { title }, idx) => {
-            return acc + `<li class="second-layer" parentIdx=${firstLayerIndex} idx=${idx}>${title}</li>`
+            return acc + `<li class="second-layer  ${idx===Number(secondLayerIndex)? "active":"" }" firstLayerIdx=${firstLayerIndex} idx=${idx}>${title}</li>`
         }, "");
 
-        const thirdLayerHtml = thirdLayerData.reduce((acc, { title }) => {
-            return acc + `<li class="third-layer">${title}</li>`
+        const thirdLayerHtml = thirdLayerData.reduce((acc, { title },idx) => {
+            return acc + `<li class="third-layer ${idx===Number(thirdLayerIndex)? "active-third":"" }" 
+            firstLayerIdx=${firstLayerIndex} secondLayerIdx=${secondLayerIndex} idx=${idx}>${title}</li>`
         }, "");
 
         const menu = document.querySelector("#menu");
         const firstLayer = menu.querySelector("#first-layer");
         const secondLayer = menu.querySelector("#second-layer");
         const thirdLayer = menu.querySelector("#third-layer");
+        
         firstLayer.innerHTML = fisrstLayerHtml;
         secondLayer.innerHTML = secondLayerHtml;
         thirdLayer.innerHTML = thirdLayerHtml;
+        
 
     }
     setCurrentMenu(0, 0);

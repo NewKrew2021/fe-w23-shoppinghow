@@ -89,9 +89,10 @@ header #menu {
   left: 5%;
   background-color: white;
   display: inline-block;
+  border: 1px solid black;
 }
 header #menu #first-layer {
-  height: 100%;
+  height: 600px;
   background-color: #f7f7f7;
   display: inline-block;
   vertical-align: top;
@@ -109,6 +110,14 @@ header #menu #third-layer {
   display: inline-block;
   vertical-align: top;
   padding-top: 5px;
+}
+header #menu .active {
+  background-color: white;
+  color: red;
+}
+header #menu .active-third {
+  background-color: white;
+  text-decoration: underline;
 }
 header #menu .first-layer {
   width: 150px;
