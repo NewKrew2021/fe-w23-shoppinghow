@@ -130,8 +130,9 @@ class CategoryMenu {
     );
   }
 
-  fetchMenuData() {
-    return fetch(`${HOST}:${PORT}/api/menu`).then(res => res.json());
+  async fetchMenuData() {
+    let menuData = await fetch(`${HOST}:${PORT}/api/menu`);
+    return menuData.json();
   }
 
   renderCategory(type) {
