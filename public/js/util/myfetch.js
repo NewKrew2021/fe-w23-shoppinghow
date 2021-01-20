@@ -34,13 +34,13 @@ export function myFetch(url, init = {}) {
         resolve(request.response)
       }
 
+      // setup request
+      request.open(method, url)
+
       // set headers
       for (const header in headers) {
         request.setRequestHeader(header, headers[header])
       }
-
-      // setup request
-      request.open(method, url)
 
       // send the request
       request.send(body)
