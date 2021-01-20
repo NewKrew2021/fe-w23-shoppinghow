@@ -26,9 +26,10 @@ export default class SearchBox {
     showKeywordBox() {
         /* 검색창에서 마우스를 떼면 포커스가 사라지게 (mouseout은 자식요소 모두) */
         this.search_blank.addEventListener('mouseleave', () => {
-            // setTimeout(() => {
-            //    this.search_input.blur();
-            // }, this.RELEASE_TIME);
+             setTimeout(() => {
+                this.search_input.blur();
+                this.selectIdx = -1;
+             }, this.RELEASE_TIME);
         });
         /* 입력창에 입력을 시작할 때 */
         this.search_input.addEventListener('keydown', (e) => {
@@ -55,6 +56,7 @@ export default class SearchBox {
                             this.selectIdx = 0;
                         }
                         autolistsDOWN[this.selectIdx].classList.add('selected');
+                        this.search_input.value = autolistsDOWN[this.selectIdx].textContent;
                         break;
 
                     case 38: // 위 방향키
@@ -62,11 +64,13 @@ export default class SearchBox {
                         if (dom('.selected').querySelector() !== undefined) {
                             dom('.selected').querySelector().classList.remove('selected');
                         }
-                        this.selectIdx--;
-                        autolistsUP[this.selectIdx].classList.add('selected');
+                        // 처음에 도달했을 경우
                         if (this.selectIdx === 0) {
                             this.selectIdx = autolistsUP.length;
                         }
+                        this.selectIdx--;
+                        autolistsUP[this.selectIdx].classList.add('selected');
+                        this.search_input.value = autolistsUP[this.selectIdx].textContent;
                         break;
                 }
             }
@@ -84,6 +88,7 @@ export default class SearchBox {
             this.search_input.value = "";
             innerHTML(this.autoInner, "");
             this.keywordInner.style.display = 'block';
+            this.selectIdx = -1;
         })
 
     }
