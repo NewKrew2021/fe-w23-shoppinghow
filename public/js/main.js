@@ -1,12 +1,8 @@
 /*
     main.js
-    
     초기 레이아웃을 구성하기 위한 클래스
-    (1) 상단 헤더 부분
-    (2) 첫번째 row의 grid 배너 사진 및 텍스트
-    (3) 두번째 row(bottom)의 배너 사진 및 텍스트
 */
-import { dom, addHTML } from './util.js';
+import { domTpl, dom, innerHTML, addHTML } from './util.js';
 import Slider from './slider.js';
 import HotSlider from './hotslider.js';
 import Storage from './storage.js';
@@ -22,55 +18,51 @@ export default class MainLayout {
     }
 
     addKeyword() {
-        const keyword = dom('.keyword-content').querySelector();
         const keyleft = dom('.keyword-list-left').querySelector();
         const keyright = dom('.keyword-list-right').querySelector();
         const rolled = dom('#rolled-list').querySelector();
-        
-        /* 5개씩 분리해서 각각 가져오고 있지만 10개로 합칠 예정 */
-        fetch(this.keywordURL)
-            .then(res => res.json())
-            .then(json => json.forEach((element, idx) => {
-                if (idx < this.keywordCnt / 2)
-                    addHTML(keyleft,`<li class="auto-list">
-                        <span class='bold mg-right-8'>${element.id}</span>${element.name}</li>`)
-                else
-                    addHTML(keyright,`<li class="auto-list">
-                        <span class='bold mg-right-8'>${element.id}</span>${element.name}</li>`)
-
-                addHTML(rolled,
-                    `<li class="rolled-content font-20">${element.id}위 ${element.name}</li>`);
-                if (idx === json.length - 1)
-                    addHTML(rolled,
-                        `<li class="rolled-content font-20">${json[0].id}위 ${json[0].name}</li>`) 
-            }))
-            .catch(console.error);
+        /* async, await 적용 */
+        async function inserData(){
+            try{
+                const res = await fetch(this.keywordURL);
+                const data = await res.json();
+                const createHTML = (data, type, s, e) => data.slice(s, e).reduce((acc, {id, name})=>{
+                    return acc + domTpl[type](id, name);
+                }, ``);
+                innerHTML(keyleft, createHTML(data, 'autoList', 0, this.keywordCnt/2));
+                innerHTML(keyright, createHTML(data, 'autoList', this.keywordCnt/2, this.keywordCnt));
+                innerHTML(rolled, createHTML(data, 'rollList', 0, this.keywordCnt));
+            }
+            catch (err){
+                console.error(err);
+            }
+        };
+        inserData.bind(this)();
     }
 
     addNav() {
         const top_nav_UL_1 = dom('#top-nav-ul-1').querySelector();
         const top_nav_UL_2 = dom('#top-nav-ul-2').querySelector();
-        addHTML(top_nav_UL_1,
-            `<li class="top-nav-li">핫딜</li>
-        <li class="top-nav-li">베스트100</li>
-        <li class="top-nav-li">할인특가</li>
-        <li class="top-nav-li">기획전</li>`)
-        addHTML(top_nav_UL_2,
-            `<li class="top-nav-li font-gray">#마스크</li>
-        <li class="top-nav-li font-gray">#스노우체인</li>
-        <li class="top-nav-li font-gray">#DIY키트</li>
-        <li class="top-nav-li font-gray">#비타민</li>
-        <li class="top-nav-li font-gray">#2021팬톤가구</li>`)
+        innerHTML(top_nav_UL_1, domTpl['headNav1']());
+        innerHTML(top_nav_UL_2, domTpl['headNav2']());
     }
 
     addLeftBanner() {
         const leftBanner = dom('.row-0-left').querySelector();
-        fetch(this.leftBannerURL)
-            .then(res => res.json())
-            .then(json => json.forEach(element => {
-                addHTML(leftBanner, `<img src=${element.src}>`)
-            }))
-            .catch((error) => console.error(error))
+        async function inserData(){
+            try{
+                const res = await fetch(this.leftBannerURL);
+                const data = await res.json();
+                const createHTML = (data, type) => data.reduce((acc, {src})=>{
+                    return acc + domTpl[type](src);
+                }, ``);
+                addHTML(leftBanner, createHTML(data, 'leftBanner'));
+            }
+            catch (err){
+                console.error(err);
+            }
+        };
+        inserData.bind(this)();
     }
 
     addRightBanner() {
@@ -87,20 +79,25 @@ export default class MainLayout {
             slideSpeed: 300,
             auto_slideSpeed: 300
         };
-        fetch(this.rightBannerURL)
-            .then(res => res.json())
-            .then(json => json.forEach(element => {
-                addHTML(slideList, `<div class="slide-content">
-                <img src=${element.src}></div>`)
-            }))
-            .then(data => {
+        async function inserData(){
+            try{
+                const res = await fetch(this.rightBannerURL);
+                const data = await res.json();
+                const createHTML = (data, type) => data.reduce((acc, {src})=>{
+                    return acc + domTpl[type](src);
+                }, ``);
+                innerHTML(slideList, createHTML(data, 'rightBanner'));
                 const slideObject = new Slider(target);
                 slideObject.init();
-            })
-            .catch((error) => console.error(error))
+            }
+            catch (err){
+                console.error(err);
+            }
+        };
+        inserData.bind(this)();
     }
 
-    addBottom() {
+    addHot() {
         const slideList = dom('.slide-list-2').querySelector();
         const target = {
             curSlideIndex: 0,
@@ -111,43 +108,44 @@ export default class MainLayout {
             slideLength: 5,
             pressedTime: 1500
         };
-        let storages;
-
-        fetch(this.hotBannerURL)
-            .then(res => res.json())
-            .then(json => json.forEach(element => {
-                addHTML(slideList,
-                    `<li class="slide-content-2">
-                <img class="banner-img" src=${element.src}>
-                <p class="title">${element.title}</p>
-                <p class="subtext">${element.text}</p>
-                <img class="theme-btn" src="/images/theme.png"></li>`)
-            }))
-            .then(data => { storages = new Storage(); })
-            .then(data => storages.clickSaveHandler())
-            .then(data => {
-                const tests = new HotSlider(target)
-                tests.init();
-            })
-            .catch((error) => console.error(error))
+        async function inserData(){
+            try{
+                const res = await fetch(this.hotBannerURL);
+                const data = await res.json();
+                const createHTML = (data, type) => data.reduce((acc, {src, title, text})=>{
+                    return acc + domTpl[type](src, title, text);
+                }, ``);
+                innerHTML(slideList, createHTML(data, 'hotBanner'));
+                const storages = new Storage();
+                storages.clickSaveHandler();
+                const slideObject = new HotSlider(target);
+                slideObject.init();
+            }
+            catch (err){
+                console.error(err);
+            }
+        };
+        inserData.bind(this)();
     }
 
     addGrid() {
-        let storages;
         const gridUL = dom('#grid-ul-1').querySelector();
-        fetch(this.gridBannerURL)
-            .then(res => res.json())
-            .then(json => json.forEach(element => {
-                addHTML(gridUL,
-                    `<li class="grid-banner">
-                    <img class="banner-img" src=${element.src}>
-                    <p class="title">${element.title}</p>
-                    <p class="subtext">${element.text}</p>
-                    <img class="theme-btn" src="/images/theme.png"></li>`)
-            }))
-            .then(data => { storages = new Storage(); })
-            .then(data => storages.clickSaveHandler())
-            .catch((error) => console.error(error))
+        async function inserData(){
+            try{
+                const res = await fetch(this.gridBannerURL);
+                const data = await res.json();
+                const createHTML = (data, type) => data.reduce((acc, {src, title, text})=>{
+                    return acc + domTpl[type](src, title, text);
+                }, ``);
+                innerHTML(gridUL, createHTML(data, 'gridBanner'));
+                const storages = new Storage();
+                storages.clickSaveHandler();
+            }
+            catch (err){
+                console.error(err);
+            }
+        };
+        inserData.bind(this)();
     }
 
     init() {
@@ -155,7 +153,7 @@ export default class MainLayout {
         this.addNav();
         this.addLeftBanner();
         this.addRightBanner();
-        this.addBottom();
+        this.addHot();
         this.addGrid();
     }
 }

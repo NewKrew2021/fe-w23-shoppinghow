@@ -78,7 +78,7 @@ export default class SearchBox {
 
             resultList.forEach((word) => {
                 let valueLength = value.length;
-                let startPos = word.search(value);
+                let startPos = word.search(value); // search는 정확히 일치하는 단어의 첫 위치를 반환한다.
 
                 // 만약 startPos가 -1이라면, word의 공백 때문에 그런 것이므로 getStartPos로 값 변경
                 if (startPos === -1) startPos = getStartPos(word, value);
