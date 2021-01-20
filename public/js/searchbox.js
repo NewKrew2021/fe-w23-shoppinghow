@@ -43,6 +43,7 @@ export default class SearchBox {
             this.rolledList.style.display = 'block';
             this.search_input.value = ""; // empty
             innerHTML(this.autoInner, "");
+            this.keywordInner.style.display = 'block';
         })
     }
 
