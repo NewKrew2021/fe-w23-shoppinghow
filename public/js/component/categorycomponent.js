@@ -97,7 +97,6 @@ const displayCategory = () => {
       if(depthFirst === dataObject["root"][0]) firstElement[idx].className = firstBorderClass;
       else firstElement[idx].className = firstClickClass;
       if(targetPointer === "FIRST") {
-        console.log(firstElement[idx].getBoundingClientRect())
         x1 = (firstElement[idx].getBoundingClientRect().left + firstElement[idx].getBoundingClientRect().right)/2;
         y1 = (firstElement[idx].getBoundingClientRect().top + firstElement[idx].getBoundingClientRect().bottom)/2;
       }
@@ -126,7 +125,6 @@ const displayCategory = () => {
         else {
           x3 = secondElement[idx].getBoundingClientRect().x;
           y3 = secondElement[idx].getBoundingClientRect().bottom;
-          console.log(secondElement[idx].getBoundingClientRect())
         }
       }
     }
@@ -148,13 +146,6 @@ const displayCategory = () => {
       }
     }
   }
-  console.log(targetPointer);
-  console.log(x1, y1);
-  console.log(x2, y2);
-  console.log(x3, y3);
-
-  
-
 }
 
 const categoryHover = () => {  
@@ -174,7 +165,6 @@ const categoryHover = () => {
       }
       else {
         targetPointer = "THIRD";
-        //depthThird
       }
     }
   })
@@ -182,14 +172,13 @@ const categoryHover = () => {
 
 const mouseMove = () => {
   categoryContainer.addEventListener("mousemove", event => {
-    // console.log(event);
     let line1 = (y2-y1)/(x2-x1)*(event.clientX-x1)-event.clientY+y1
     let line2 = (y3-y1)/(x3-x1)*(event.clientX-x1)-event.clientY+y1
     let line3 = x2-event.clientX;
-    console.log(line1, line2, line3);
+    // console.log(line1, line2, line3);
     if(line1<=0 && line2>=0 && line3>=0) canChange = false;
     else canChange = true;
-    console.log(canChange)
+    // console.log(canChange)
   })
 }
 
