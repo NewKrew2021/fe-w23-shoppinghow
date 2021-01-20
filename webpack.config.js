@@ -52,6 +52,9 @@ module.exports = {
         inline: true,
         hot: true,
         host: "localhost",
-        port: 9000
+        port: 9000,
+        watchOptions: {
+            poll: true
+        }
     }
 }

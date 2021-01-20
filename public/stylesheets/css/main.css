@@ -44,13 +44,17 @@ input {
 }
 
 .auto-list {
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: -0.4px;
   color: black;
-  margin-bottom: 0.8em;
+  padding: 0.5em;
 }
 
 .auto-list:focus {
+  background-color: #eee;
+}
+
+.selected {
   background-color: #eee;
 }
 
@@ -94,12 +98,14 @@ input {
   left: 0;
 }
 
-.keyword-inner {
+.keyword-content {
   padding: 2em;
 }
 
 .auto-complete {
   display: none;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .logo-img {
@@ -222,6 +228,11 @@ input {
 
 .nav-wrap {
   margin: 0 auto;
+}
+
+/* category */
+.category {
+  cursor: pointer;
 }
 
 .top-nav-ul {
@@ -694,5 +705,9 @@ input {
 
 .mg-top-20 {
   margin-top: 20px;
+}
+
+.mg-left-20 {
+  margin-left: 20px;
 }
 /*# sourceMappingURL=main.css.map */

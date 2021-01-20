@@ -41,14 +41,12 @@ export default class HotSlider{
 
     onEvents() {
         /* 이벤트 핸들러 등록 */
-        this.slidePrevBtn.addEventListener('mouseup', this.PrevBtnPressHandler(e).bind(this));
-        this.slidePrevBtn.addEventListener('mousedown', (e)=> {
-            e.target.src='/images/prev2_press_btn.png';
+        this.slidePrevBtn.addEventListener('mouseup', this.PrevBtnPressHandler.bind(this));
+        this.slidePrevBtn.addEventListener('mousedown', ()=> {
             this.mousedownTime = new Date().getTime();
         })   
-        this.slideNextBtn.addEventListener('mouseup', this.nextBtnPressHandler(e).bind(this));
-        this.slideNextBtn.addEventListener('mousedown', (e)=> {
-            e.target.src='/images/next2_press_btn.png';
+        this.slideNextBtn.addEventListener('mouseup', this.nextBtnPressHandler.bind(this));
+        this.slideNextBtn.addEventListener('mousedown', ()=> {
             this.mousedownTime = new Date().getTime();
         });
     }
@@ -59,9 +57,6 @@ export default class HotSlider{
         const JUMP = 2;
         let mouseupTime = new Date().getTime(),
               timeDifference = mouseupTime - this.mousedownTime;
-
-        /* 버튼 이미지 변경 */
-        e.target.src='/images/prev2_btn.png';
 
         if(timeDifference < this.PRESSED_TIME){
             this.slideList.style.transition = this.SLIDE_SPEED + "ms";
@@ -104,8 +99,7 @@ export default class HotSlider{
         const JUMP = 2;
         let mouseupTime = new Date().getTime(),
               timeDifference = mouseupTime - this.mousedownTime;
-        e.target.src='/images/next2_btn.png';
-
+              
         if (timeDifference < this.PRESSED_TIME){
             if (this.h_curSlideIndex <= this.slideLength - 1) {
                 this.slideList.style.transition = this.SLIDE_SPEED + "ms";
