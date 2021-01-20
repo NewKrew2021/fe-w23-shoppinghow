@@ -193,9 +193,8 @@ body {
 .category--box {
     width: 560px;
     height: 500px;
-    position: relative;
+    position: absolute;
     top:100%;
-    float: left;
     z-index: 5;
     box-sizing: border-box;
     border: 1px solid #000;

@@ -34,14 +34,16 @@ const initPage = function (data) {
     const categories = data[4].data;
 
     const categoryInfo = initCategory(categories);
-    domAPI.querySelector("#category").appendChild(categoryInfo.boxDOM);
-    domAPI.querySelector(".category--large").className="category--large--picked";
-    domAPI.querySelector(".category--medium").className="category--medium--picked";
-    domAPI.querySelector(".category--small").className="category--small--picked";
+    const categoryBtn = domAPI.querySelector("#category");
+    categoryBtn.appendChild(categoryInfo.boxDOM);
 
-    domAPI.querySelector(".category--large__item").className="category--large__item--picked";
-    domAPI.querySelector(".category--medium__item").className="category--medium__item--picked";
-    domAPI.querySelector(".category--small__item").className="category--small__item--picked";
+    categoryBtn.addEventListener("mouseover", (e) => {
+        categoryInfo.boxDOM.classList.remove("d-off");
+    });
+
+    categoryBtn.addEventListener("mouseout", (e) => {
+        categoryInfo.boxDOM.classList.add("d-off");
+    });
 
     // 한 행씩 렌더링
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));

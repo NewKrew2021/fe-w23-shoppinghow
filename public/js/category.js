@@ -1,13 +1,16 @@
 import { DOMSearchAPI } from "./DOM_search_api.js";
 /*
-    # Array(String) 형태
+    # String 형태 (transJsonToString 결과)
      large: ["패션/뷰티", "가전/컴퓨터", "가구/생활/건강" ...]
     medium: [["여성의류", "남성의류", "테마의류/잡화" ...], [], [], ...]
      small: [[["니트/스웨터", "티셔츠", "가디건", ...], [], [], ...], [], ...]
     
     # CSS class
     category--box
+
     category--large, category--medium, category--small
+    category--large--picked, category--medium--picked, category--small--picked
+    
     category--large__item, category--medium__item, category--small__item
     category--large__item--picked, category--medium__item--picked, category--small__item--picked 
 */
@@ -35,7 +38,7 @@ const transJsonToString = function (data) {
 
 const transStringToHTML = function (data) {
     const ret = {
-        large: `<div class="category--large">`,
+        large: `<div class="category--large--picked">`,
         medium: [],
         small: []
     };
@@ -63,7 +66,7 @@ const transStringToHTML = function (data) {
 const transHTMLToDOM = function (data) {
     // 카테고리 전체 창 요소
     const box = document.createElement("div");
-    box.setAttribute("class", "category--box horizontal");
+    box.setAttribute("class", "category--box horizontal d-off");
 
     // box 하위에 html 코드 삽입
     let html = data.large;
@@ -106,6 +109,14 @@ const setCategoryElement = function (data) {
     for (let largeItemDOM of largeItemDOMs) categoryInfo.largeItemDOMs.set(largeItemDOM.getAttribute("name"), largeItemDOM);
     for (let mediumItemDOM of mediumItemDOMs) categoryInfo.mediumItemDOMs.set(mediumItemDOM.getAttribute("name"), mediumItemDOM);
     for (let smallItemDOM of smallItemDOMs) categoryInfo.smallItemDOMs.set(smallItemDOM.getAttribute("name"), smallItemDOM);
+
+    // 초기화
+    categoryInfo.mediumDOMs.get("0").className = "category--medium--picked";
+    categoryInfo.smallDOMs.get("0-0").className = "category--small--picked";
+    
+    categoryInfo.largeItemDOMs.get("0").className = "category--large__item--picked";
+    categoryInfo.mediumItemDOMs.get("0-0").className = "category--medium__item--picked";
+
 
     return categoryInfo;
 }
