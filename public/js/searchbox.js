@@ -18,10 +18,11 @@ export default class SearchBox {
         this.ROLL_COUNT = input.COUNT;
         this.ROLL_SPEED = input.SPEED;
         this.ROLL_HEIGHT = input.HEIGHT;
+        this.RELEASE_TIME = input.RELEASE_TIME;
         this.index = 1;
     }
 
-    /* 케이스별 keyword 영역 표시 */
+    /* 케이스별 keyword 영역 표시 관련한 이벤트 */
     showKeywordBox() {
         /* 입력창에 입력을 시작할 때 */
         this.search_input.addEventListener('input', (e) => {
@@ -49,15 +50,18 @@ export default class SearchBox {
             innerHTML(this.autoInner, "");
             this.keywordInner.style.display = 'block';
         })
+        /* 검색창에서 마우스를 떼면 포커스가 사라지게 (mouseout은 자식요소 모두) */
+        this.search_blank.addEventListener('mouseleave', ()=>{
+            setTimeout(()=>{
+                this.search_input.blur();
+            }, this.RELEASE_TIME);
+        });
     }
 
     fetchAllKeywords() {
         fetch('http://localhost:80/allkeyword')
             .then(res => res.json())
-            .then(json => {
-                //console.log([...json]);
-                this.autoComplete([...json]);
-            });
+            .then(json => this.autoComplete(json));
     }
 
     /* 검색어 자동완성 */
