@@ -19,7 +19,7 @@ const MENU_TEMPLATE = {
   },
 };
 
-class Menu {
+class CategoryMenu {
   constructor() {
     this.categoryData = {
       large: null,
@@ -171,4 +171,4 @@ class Menu {
   }
 }
 
-export { Menu };
+export { CategoryMenu };
