@@ -4,7 +4,14 @@ import SearchBox from './searchbox.js';
 import Category from './category.js';
 
 /* 레이아웃 초기 구성 */
-const initLayout = new MainLayout();
+const initLayout = new MainLayout({
+    keywordURL : 'http://localhost:80/topkeyword',
+    leftBannerURL : 'http://localhost:80/topleft',
+    rightBannerURL : 'http://localhost:80/topright',
+    hotBannerURL : 'http://localhost:80/hot',
+    gridBannerURL : 'http://localhost:80/topgrid',
+    keywordCnt : 10
+});
 initLayout.init();
 
 /* 필요한 기능을 위한 이벤트 추가 - 최근 본 상품, 더보기 버튼, ...(추가) ... */

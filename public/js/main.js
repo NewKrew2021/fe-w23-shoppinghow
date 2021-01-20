@@ -12,8 +12,13 @@ import HotSlider from './hotslider.js';
 import Storage from './storage.js';
 
 export default class MainLayout {
-    constructor() {
-        /* 객체를 전달받아 dom을 다룰 예정 */
+    constructor(input) {
+        this.keywordURL = input.keywordURL;
+        this.leftBannerURL = input.leftBannerURL;
+        this.rightBannerURL = input.rightBannerURL;
+        this.hotBannerURL = input.hotBannerURL;
+        this.gridBannerURL = input.gridBannerURL;
+        this.keywordCnt = input.keywordCnt;
     }
 
     addKeyword() {
@@ -23,36 +28,23 @@ export default class MainLayout {
         const rolled = dom('#rolled-list').querySelector();
         
         /* 5개씩 분리해서 각각 가져오고 있지만 10개로 합칠 예정 */
-        fetch('http://localhost:80/topkey1')
-            .then(res => res.json())
-            .then(json => json.forEach(element => {
-                addHTML(keyleft,
-                    `<li class="auto-list">
-                    <span class='bold mg-right-8'>${element.id}</span>${element.name}</li>`
-                )
-            }))
-            .catch(console.error);
-
-        fetch('http://localhost:80/topkey2')
-            .then(res => res.json())
-            .then(json => json.forEach(element => {
-                addHTML(keyright,
-                    `<li class="auto-list">
-                    <span class='bold mg-right-8'>${element.id}</span>${element.name}</li>`
-                )
-            }))
-            .catch(console.error);
-
-        fetch('http://localhost:80/topkeyword')
+        fetch(this.keywordURL)
             .then(res => res.json())
             .then(json => json.forEach((element, idx) => {
+                if (idx < this.keywordCnt / 2)
+                    addHTML(keyleft,`<li class="auto-list">
+                        <span class='bold mg-right-8'>${element.id}</span>${element.name}</li>`)
+                else
+                    addHTML(keyright,`<li class="auto-list">
+                        <span class='bold mg-right-8'>${element.id}</span>${element.name}</li>`)
+
                 addHTML(rolled,
                     `<li class="rolled-content font-20">${element.id}위 ${element.name}</li>`);
-                if (idx === json.length - 1){
+                if (idx === json.length - 1)
                     addHTML(rolled,
                         `<li class="rolled-content font-20">${json[0].id}위 ${json[0].name}</li>`) 
-                }
             }))
+            .catch(console.error);
     }
 
     addNav() {
@@ -73,7 +65,7 @@ export default class MainLayout {
 
     addLeftBanner() {
         const leftBanner = dom('.row-0-left').querySelector();
-        fetch('http://localhost:80/topleft')
+        fetch(this.leftBannerURL)
             .then(res => res.json())
             .then(json => json.forEach(element => {
                 addHTML(leftBanner, `<img src=${element.src}>`)
@@ -95,11 +87,11 @@ export default class MainLayout {
             slideSpeed: 300,
             auto_slideSpeed: 300
         };
-        fetch('http://localhost:80/topright')
+        fetch(this.rightBannerURL)
             .then(res => res.json())
             .then(json => json.forEach(element => {
                 addHTML(slideList, `<div class="slide-content">
-            <img src=${element.src}></div>`)
+                <img src=${element.src}></div>`)
             }))
             .then(data => {
                 const slideObject = new Slider(target);
@@ -121,7 +113,7 @@ export default class MainLayout {
         };
         let storages;
 
-        fetch('http://localhost:80/hot')
+        fetch(this.hotBannerURL)
             .then(res => res.json())
             .then(json => json.forEach(element => {
                 addHTML(slideList,
@@ -142,7 +134,7 @@ export default class MainLayout {
 
     addGrid() {
         const gridUL = dom('#grid-ul-1').querySelector();
-        fetch('http://localhost:80/topgrid')
+        fetch(this.gridBannerURL)
             .then(res => res.json())
             .then(json => json.forEach(element => {
                 addHTML(gridUL,
