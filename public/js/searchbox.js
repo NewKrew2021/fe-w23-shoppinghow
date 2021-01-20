@@ -42,6 +42,7 @@ export default class SearchBox {
             this.keywordWrapper.style.display = 'none';
             this.rolledList.style.display = 'block';
             this.search_input.value = ""; // empty
+            innerHTML(this.autoInner, "");
         })
     }
 

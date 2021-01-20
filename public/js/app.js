@@ -1,5 +1,4 @@
 import MainLayout from './main.js';
-import { dom } from './util.js';
 import UIevent from './uievent.js';
 import SearchBox from './searchbox.js';
 import Category from './category.js';
