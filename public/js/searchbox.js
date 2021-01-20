@@ -19,26 +19,56 @@ export default class SearchBox {
         this.ROLL_HEIGHT = input.HEIGHT;
         this.RELEASE_TIME = input.RELEASE_TIME;
         this.index = 1;
+        this.selectIdx = -1;
     }
 
     /* 케이스별 keyword 영역 표시 관련한 이벤트 */
     showKeywordBox() {
         /* 검색창에서 마우스를 떼면 포커스가 사라지게 (mouseout은 자식요소 모두) */
         this.search_blank.addEventListener('mouseleave', () => {
-            setTimeout(() => {
-                this.search_input.blur();
-            }, this.RELEASE_TIME);
+            // setTimeout(() => {
+            //    this.search_input.blur();
+            // }, this.RELEASE_TIME);
         });
         /* 입력창에 입력을 시작할 때 */
-        this.search_input.addEventListener('keyup', (e) => {
+        this.search_input.addEventListener('keydown', (e) => {
             const value = e.target.value;
             if (value === '') {
-                this.autoInner.style.display = 'none';
+                innerHTML(this.autoInner, "");
                 this.keywordInner.style.display = 'block';
+                this.autoInner.style.display = 'none';
             }
             else {
                 this.autoInner.style.display = 'block';
                 this.keywordInner.style.display = 'none';
+
+                switch (e.keyCode) {
+                    case 40: // 아래 방향키
+                        let autolistsDOWN = this.autoInner.children;
+                        // 인덱스가 검색 결과 끝까지 왔을 경우 초기화
+                        if (dom('.selected').querySelector() !== undefined) {
+                            dom('.selected').querySelector().classList.remove('selected');
+                        }
+                        this.selectIdx++;
+                        // 끝에 도달했을 경우
+                        if (this.selectIdx === autolistsDOWN.length) {
+                            this.selectIdx = 0;
+                        }
+                        autolistsDOWN[this.selectIdx].classList.add('selected');
+                        break;
+
+                    case 38: // 위 방향키
+                        let autolistsUP = this.autoInner.children;
+                        if (dom('.selected').querySelector() !== undefined) {
+                            dom('.selected').querySelector().classList.remove('selected');
+                        }
+                        this.selectIdx--;
+                        autolistsUP[this.selectIdx].classList.add('selected');
+                        if (this.selectIdx === 0) {
+                            this.selectIdx = autolistsUP.length;
+                        }
+                        break;
+                }
             }
         });
         /* 검색창 어디라도 누르면 입력할 수 있게 포커스 주기 */
@@ -55,6 +85,7 @@ export default class SearchBox {
             innerHTML(this.autoInner, "");
             this.keywordInner.style.display = 'block';
         })
+
     }
 
     fetchAllKeywords() {
@@ -82,12 +113,14 @@ export default class SearchBox {
 
                 // 만약 startPos가 -1이라면, word의 공백 때문에 그런 것이므로 getStartPos로 값 변경
                 if (startPos === -1) startPos = getStartPos(word, value);
-                
+
                 // 입력한 단어와 꼭 맞게 강조될 수 있도록 endPos 설정 후 html 저장
                 let endPos = word.indexOf(value[valueLength - 1], startPos + valueLength - 1);
-                word = word.slice(0, startPos) + "<span class='accent'>"
-                    + word.slice(startPos, endPos + 1) + "</span>" + word.slice(endPos + 1);
-                resultHtml += `<li class="auto-list">${word}</li>`
+                word = word.slice(0, startPos)
+                    + "<span class='accent'>"
+                    + word.slice(startPos, endPos + 1)
+                    + "</span>" + word.slice(endPos + 1);
+                resultHtml += `<li class="auto-list"><span class='mg-left-20'>${word}</span></li>`
             });
             innerHTML(this.autoInner, resultHtml);
         })

@@ -31,7 +31,7 @@ export default class MainLayout {
                 }, ``);
                 innerHTML(keyleft, createHTML(data, 'autoList', 0, this.keywordCnt/2));
                 innerHTML(keyright, createHTML(data, 'autoList', this.keywordCnt/2, this.keywordCnt));
-                innerHTML(rolled, createHTML(data, 'rollList', 0, this.keywordCnt));
+                innerHTML(rolled, createHTML(data, 'rollList', 0, this.keywordCnt+1));
             }
             catch (err){
                 console.error(err);
