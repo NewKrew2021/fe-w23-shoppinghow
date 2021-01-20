@@ -389,3 +389,7 @@ red {
   cursor: pointer;
   background-color: #ffffff;
 }
+
+.category-third:hover {
+  color: #f96247;
+}
