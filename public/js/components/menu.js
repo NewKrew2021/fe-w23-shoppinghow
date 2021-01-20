@@ -115,16 +115,13 @@ class CategoryMenu {
     return;
   }
 
-  handleMouseMove(event) {
-    if (
-      this.calculateMouseMovement(event.clientX, event.clientY) <
-      MOUSE_MAX_SPEED
-    ) {
-      this.toggleTabActivation(event.target);
+  handleMouseMove({ clientX, clientY, target }) {
+    if (this.calculateMouseMovement(clientX, clientY) < MOUSE_MAX_SPEED) {
+      this.toggleTabActivation(target);
     }
 
-    this.currentX = event.clientX;
-    this.currentY = event.clientY;
+    this.currentX = clientX;
+    this.currentY = clientY;
   }
 
   addCurrentTabEvent() {
