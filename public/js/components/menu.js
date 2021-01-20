@@ -10,6 +10,9 @@ const MENU_TEMPLATE = {
   categoryTab(type, title) {
     return `<li class="${type}-category__tab">${title}</li>`;
   },
+  firstCategoryTab(type, title) {
+    return `<li class="${type}-category__tab ${type}-category__tab--activated">${title}</li>`;
+  },
 };
 
 class Menu {
@@ -37,7 +40,9 @@ class Menu {
   }
 
   createCategoryHTML(data, type) {
-    return data.reduce((acc, { title }) => {
+    return data.reduce((acc, { title }, index) => {
+      if (index === 0 && type !== 'small')
+        return acc + MENU_TEMPLATE.firstCategoryTab(type, title);
       return acc + MENU_TEMPLATE.categoryTab(type, title);
     }, ``);
   }
