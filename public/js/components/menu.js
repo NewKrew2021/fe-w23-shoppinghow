@@ -26,7 +26,7 @@ class Menu {
       small: $('.small-category'),
     };
 
-    this.activatedCategoryIndex = {
+    this.activeCategoryIndex = {
       large: 0,
       medium: 0,
       small: 0,
@@ -51,65 +51,64 @@ class Menu {
     );
   }
 
+  deletePrevActivation(type) {
+    deleteClassFromElement(
+      this.categoryElement[type].childNodes[this.activeCategoryIndex[type]],
+      `${type}-category__tab--activated`
+    );
+  }
+
   toggleTabActivation() {
     const targetClassName = this.activatedTab.className;
 
     switch (targetClassName) {
       case 'large-category__tab':
-        deleteClassFromElement(
-          this.categoryElement['large'].childNodes[
-            this.activatedCategoryIndex['large']
-          ],
-          'large-category__tab--activated'
-        );
-        this.activatedCategoryIndex['large'] = getIndexFromParent(
+        this.deletePrevActivation('large');
+
+        this.activeCategoryIndex['large'] = getIndexFromParent(
           this.activatedTab
         );
         this.activatedTab.classList.add('large-category__tab--activated');
 
+        this.activeCategoryIndex['medium'] = 0;
+
+        this.categoryData['medium'] = this.categoryData['large'].data[
+          this.activeCategoryIndex['large']
+        ];
+        this.renderCategory('medium');
+
+        this.activeCategoryIndex['small'] = 0;
+
+        this.categoryData['small'] = this.categoryData['large'].data[
+          this.activeCategoryIndex['large']
+        ].data[this.activeCategoryIndex['medium']];
+
+        this.renderCategory('small');
         break;
 
       case 'medium-category__tab':
-        // 삭제
-        deleteClassFromElement(
-          this.categoryElement['medium'].childNodes[
-            this.activatedCategoryIndex['medium']
-          ],
-          'medium-category__tab--activated'
-        );
-        this.activatedCategoryIndex['medium'] = getIndexFromParent(
+        this.deletePrevActivation('medium');
+        this.activeCategoryIndex['medium'] = getIndexFromParent(
           this.activatedTab
         );
-        // 추가
         this.activatedTab.classList.add('medium-category__tab--activated');
 
-        this.activatedCategoryIndex['medium'] = getIndexFromParent(
-          this.activatedTab
-        );
-
+        this.activeCategoryIndex['small'] = 0;
         this.categoryData['small'] = this.categoryData['large'].data[
-          this.activatedCategoryIndex['large']
-        ].data[this.activatedCategoryIndex['medium']];
+          this.activeCategoryIndex['large']
+        ].data[this.activeCategoryIndex['medium']];
 
         this.renderCategory('small');
-
         break;
 
       case 'small-category__tab':
-        deleteClassFromElement(
-          this.categoryElement['small'].childNodes[
-            this.activatedCategoryIndex['small']
-          ],
-          'small-category__tab--activated'
-        );
-        this.activatedCategoryIndex['small'] = getIndexFromParent(
+        this.deletePrevActivation('small');
+
+        this.activeCategoryIndex['small'] = getIndexFromParent(
           this.activatedTab
         );
-        // 추가
         this.activatedTab.classList.add('small-category__tab--activated');
-        this.activatedCategoryIndex['small'] = getIndexFromParent(
-          this.activatedTab
-        );
+
         break;
     }
     return;
@@ -120,7 +119,7 @@ class Menu {
       this.calculateMouseMovement(event.clientX, event.clientY) <
       MOUSE_MAX_SPEED
     ) {
-      this.toggleTabActivation();
+      // this.toggleTabActivation();
       this.activatedTab = event.target;
       this.toggleTabActivation();
     }
@@ -156,11 +155,11 @@ class Menu {
     {
       this.categoryData['large'] = res;
       this.categoryData['medium'] = this.categoryData['large'].data[
-        this.activatedCategoryIndex['large']
+        this.activeCategoryIndex['large']
       ];
       this.categoryData['small'] = this.categoryData['large'].data[
-        this.activatedCategoryIndex['large']
-      ].data[this.activatedCategoryIndex['medium']];
+        this.activeCategoryIndex['large']
+      ].data[this.activeCategoryIndex['medium']];
     }
   }
 
