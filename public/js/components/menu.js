@@ -26,9 +26,11 @@ class Menu {
       small: $('.small-category'),
     };
 
-    this.largeCategoryIndex = 0;
-    this.mediumCategoryIndex = 0;
-    this.smallCategoryIndex = 0;
+    this.activatedCategoryIndex = {
+      large: 0,
+      medium: 0,
+      small: 0,
+    };
 
     this.activatedTab = $('.large-category').children[0];
 
@@ -65,11 +67,13 @@ class Menu {
       case 'medium-category__tab':
         this.activatedTab.classList.add('medium-category__tab--activated');
 
-        this.mediumCategoryIndex = getIndexFromParent(this.activatedTab);
+        this.activatedCategoryIndex['medium'] = getIndexFromParent(
+          this.activatedTab
+        );
 
         this.categoryData['small'] = this.categoryData['large'].data[
-          this.largeCategoryIndex
-        ].data[this.mediumCategoryIndex];
+          this.activatedCategoryIndex['large']
+        ].data[this.activatedCategoryIndex['medium']];
 
         this.renderCategory('small');
 
@@ -82,7 +86,9 @@ class Menu {
         break;
       case 'small-category__tab':
         this.activatedTab.classList.add('small-category__tab--activated');
-        this.smallCategoryIndex = getIndexFromParent(this.activatedTab);
+        this.activatedCategoryIndex['small'] = getIndexFromParent(
+          this.activatedTab
+        );
         break;
       case 'small-category__tab small-category__tab--activated':
         deleteClassFromElement(
@@ -135,11 +141,11 @@ class Menu {
     {
       this.categoryData['large'] = res;
       this.categoryData['medium'] = this.categoryData['large'].data[
-        this.largeCategoryIndex
+        this.activatedCategoryIndex['large']
       ];
       this.categoryData['small'] = this.categoryData['large'].data[
-        this.largeCategoryIndex
-      ].data[this.mediumCategoryIndex];
+        this.activatedCategoryIndex['large']
+      ].data[this.activatedCategoryIndex['medium']];
     }
   }
 
