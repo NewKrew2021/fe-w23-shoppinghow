@@ -3,7 +3,7 @@
     쇼핑하우 검색창 관련 모듈
 */
 import { dom, addHTML, getCorrect, innerHTML } from './util.js';
-import { words } from '../data/keyword.js';
+//import { words } from '../data/keyword.js';
 
 export default class SearchBox {
     constructor(input) {
@@ -36,7 +36,7 @@ export default class SearchBox {
             }
         });
         /* 검색창 어디라도 누르면 입력할 수 있게 포커스 주기 */
-        this.search_blank.addEventListener('click', ()=>{
+        this.search_blank.addEventListener('click', () => {
             this.rolledList.style.display = 'none';
             this.keywordWrapper.style.display = 'block';
             this.search_input.focus();
@@ -51,8 +51,17 @@ export default class SearchBox {
         })
     }
 
+    fetchAllKeywords() {
+        fetch('http://localhost:80/allkeyword')
+            .then(res => res.json())
+            .then(json => {
+                //console.log([...json]);
+                this.autoComplete([...json]);
+            });
+    }
+
     /* 검색어 자동완성 */
-    autoComplete() {
+    autoComplete(words) {
         this.search_input.addEventListener('input', (e) => {
             function getCorrect(word) {
                 if (word.includes(value.replace(/(\s*)/g, "")) ||
@@ -60,7 +69,8 @@ export default class SearchBox {
                     return word;
             }
             const value = e.target.value.trim(); // 공백 제거
-            const resultList = words.filter(getCorrect); // 공백 포함 일치하는 input 문자열 모두 저장
+            let resultList = words.filter(getCorrect); // 공백 포함 일치하는 input 문자열 모두 저장
+            resultList = resultList.slice(0, 10); // 저장된 리스트를 최대 10개까지만 보이도록 함
             let resultHtml = '';
 
             resultList.forEach((word) => {
@@ -78,24 +88,24 @@ export default class SearchBox {
     }
 
     /* 키워드 롤링 */
-    rollKeywords(){
+    rollKeywords() {
         this.rolledList.style = "top: -4px";
         this.rolledList.style.transition = this.ROLL_SPEED + "ms";
         const rolling = () => {
-            if(this.index <= this.ROLL_COUNT){
+            if (this.index <= this.ROLL_COUNT) {
                 this.rolledList.style.transition =
                     this.ROLL_SPEED + "ms";
                 this.rolledList.style.transform =
-                    "translateY(-"+(this.ROLL_HEIGHT * this.index)+"px)";
+                    "translateY(-" + (this.ROLL_HEIGHT * this.index) + "px)";
             }
-            if(this.index == this.ROLL_COUNT){
-                setTimeout( ()=> {
+            if (this.index == this.ROLL_COUNT) {
+                setTimeout(() => {
                     this.rolledList.style.transition = "0ms";
                     this.rolledList.style.transform = "translateY(0px)";
                 }, this.ROLL_SPEED);
                 this.index = 0;
             }
-            setTimeout(()=>{
+            setTimeout(() => {
                 ++this.index;
                 rolling();
             }, 2000);
@@ -105,7 +115,8 @@ export default class SearchBox {
 
     init() {
         this.showKeywordBox();
-        this.autoComplete();
+        //this.autoComplete();
         this.rollKeywords();
+        this.fetchAllKeywords();
     }
 }
