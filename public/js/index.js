@@ -1,5 +1,4 @@
-import { appendImageCarousel, appendItemCard, appendMultiNav, initCarousel, initHoverPopup, initItemCardWrapper, initRecentWrapper } from './component'
-import { fetchItems, findOne } from './util'
+import { appendImageCarousel, appendItemCard, appendMultiNav, initCarousel, initHoverPopup, initItemCardWrapper, initRecentWrapper, initSearchBar } from './component'
 
 // initialize the page
 function initPage() {
@@ -69,6 +68,7 @@ function initPage() {
   initBestItems()
   initHotItem()
 
+  initSearchBar()
   initItemCardWrapper()
   initHoverPopup()
   initRecentWrapper(findOne('#recent_view'))
