@@ -12,3 +12,7 @@ css-loader추가
 - MyPromise 구현
 - category 작성중
 pipe사용해서 구현해보려 함
+
+**1.20(수)**
+- category UI 배치
+- category 함수들 리팩토링
