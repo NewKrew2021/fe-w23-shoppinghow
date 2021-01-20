@@ -1,3 +1,5 @@
+$flex-max: 5;
+
 .flex-center {
   align-items: center;
   justify-content: center;
@@ -7,8 +9,10 @@
   flex: auto;
 }
 
-.flex-1 {
-  flex: 1;
+@for $n from 1 to $flex-max {
+  .flex-#{$n} {
+    flex: $n;
+  }
 }
 
 .wrap {
