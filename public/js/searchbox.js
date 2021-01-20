@@ -128,6 +128,7 @@ export default class SearchBox {
                 resultHtml += `<li class="auto-list"><span class='mg-left-20'>${word}</span></li>`
             });
             innerHTML(this.autoInner, resultHtml);
+            this.selectIdx = -1;
         })
     }
 
