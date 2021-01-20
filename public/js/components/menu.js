@@ -15,13 +15,19 @@ const MENU_TEMPLATE = {
 class Menu {
   constructor() {
     this.menuData = null;
+    this.mediumCategoryData = null;
+    this.smallCategoryData = null;
+
     this.largeCategoryElement = $('.large-category');
     this.mediumCategoryElement = $('.medium-category');
     this.smallCategoryElement = $('.small-category');
-    this.activatedTab = $('.large-category').children[0];
+
     this.largeCategoryIndex = 0;
     this.mediumCategoryIndex = 0;
     this.smallCategoryIndex = 0;
+
+    this.activatedTab = $('.large-category').children[0];
+
     this.currentX = 0;
     this.currentY = 0;
   }
@@ -54,6 +60,19 @@ class Menu {
         break;
       case 'medium-category__tab':
         this.activatedTab.classList.add('medium-category__tab--activated');
+
+        this.mediumCategoryIndex = getIndexFromParent(this.activatedTab);
+
+        this.smallCategoryData = this.menuData.data[
+          this.largeCategoryIndex
+        ].data[this.mediumCategoryIndex];
+        console.log(this.smallCategoryData);
+
+        this.smallCategoryElement.innerHTML = this.createCategoryHTML(
+          this.smallCategoryData.data,
+          'small'
+        );
+
         break;
       case 'medium-category__tab medium-category__tab--activated':
         deleteClassFromElement(
@@ -100,8 +119,8 @@ class Menu {
   }
 
   renderMenu() {
-    const mediumCategoryData = this.menuData.data[this.largeCategoryIndex];
-    const smallCategoryData = this.menuData.data[this.largeCategoryIndex].data[
+    this.mediumCategoryData = this.menuData.data[this.largeCategoryIndex];
+    this.smallCategoryData = this.menuData.data[this.largeCategoryIndex].data[
       this.mediumCategoryIndex
     ];
 
@@ -111,12 +130,12 @@ class Menu {
     );
 
     this.mediumCategoryElement.innerHTML = this.createCategoryHTML(
-      mediumCategoryData.data,
+      this.mediumCategoryData.data,
       'medium'
     );
 
     this.smallCategoryElement.innerHTML = this.createCategoryHTML(
-      smallCategoryData.data,
+      this.smallCategoryData.data,
       'small'
     );
   }
