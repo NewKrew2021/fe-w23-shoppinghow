@@ -6,6 +6,10 @@ const PORT = 8000;
 const SQUARED = 2;
 const MOUSE_MAX_SPEED = 5;
 
+const SMALL = 'small';
+const MEDIUM = 'medium';
+const LARGE = 'large';
+
 const MENU_TEMPLATE = {
   categoryTab(type, title) {
     return `<li class="${type}-category__tab">${title}</li>`;
@@ -41,7 +45,7 @@ class Menu {
 
   createCategoryHTML(data, type) {
     return data.reduce((acc, { title }, index) => {
-      if (index === 0 && type !== 'small')
+      if (index === 0 && type !== SMALL)
         return acc + MENU_TEMPLATE.firstCategoryTab(type, title);
       return acc + MENU_TEMPLATE.categoryTab(type, title);
     }, ``);
@@ -68,19 +72,19 @@ class Menu {
 
   initCategory(type) {
     switch (type) {
-      case 'medium':
-        this.activeCategoryIndex['medium'] = 0;
+      case MEDIUM:
+        this.activeCategoryIndex[MEDIUM] = 0;
 
-        this.categoryData['medium'] = this.categoryData['large'].data[
-          this.activeCategoryIndex['large']
+        this.categoryData[MEDIUM] = this.categoryData[LARGE].data[
+          this.activeCategoryIndex[LARGE]
         ];
         break;
-      case 'small':
-        this.activeCategoryIndex['small'] = 0;
+      case SMALL:
+        this.activeCategoryIndex[SMALL] = 0;
 
-        this.categoryData['small'] = this.categoryData['large'].data[
-          this.activeCategoryIndex['large']
-        ].data[this.activeCategoryIndex['medium']];
+        this.categoryData[SMALL] = this.categoryData[LARGE].data[
+          this.activeCategoryIndex[LARGE]
+        ].data[this.activeCategoryIndex[MEDIUM]];
         break;
     }
   }
@@ -88,24 +92,24 @@ class Menu {
   toggleTabActivation(activatedTab) {
     switch (activatedTab.className) {
       case 'large-category__tab':
-        this.deletePrevActivation('large');
-        this.activeTab('large', activatedTab);
-        this.initCategory('medium');
-        this.renderCategory('medium');
-        this.initCategory('small');
-        this.renderCategory('small');
+        this.deletePrevActivation(LARGE);
+        this.activeTab(LARGE, activatedTab);
+        this.initCategory(MEDIUM);
+        this.renderCategory(MEDIUM);
+        this.initCategory(SMALL);
+        this.renderCategory(SMALL);
         break;
 
       case 'medium-category__tab':
-        this.deletePrevActivation('medium');
-        this.activeTab('medium', activatedTab);
-        this.initCategory('small');
-        this.renderCategory('small');
+        this.deletePrevActivation(MEDIUM);
+        this.activeTab(MEDIUM, activatedTab);
+        this.initCategory(SMALL);
+        this.renderCategory(SMALL);
         break;
 
       case 'small-category__tab':
-        this.deletePrevActivation('small');
-        this.activeTab('small', activatedTab);
+        this.deletePrevActivation(SMALL);
+        this.activeTab(SMALL, activatedTab);
         break;
     }
     return;
@@ -141,20 +145,20 @@ class Menu {
   }
 
   renderMenu() {
-    this.renderCategory('large');
-    this.renderCategory('medium');
-    this.renderCategory('small');
+    this.renderCategory(LARGE);
+    this.renderCategory(MEDIUM);
+    this.renderCategory(SMALL);
   }
 
   initMenuData(res) {
     {
-      this.categoryData['large'] = res;
-      this.categoryData['medium'] = this.categoryData['large'].data[
-        this.activeCategoryIndex['large']
+      this.categoryData[LARGE] = res;
+      this.categoryData[MEDIUM] = this.categoryData[LARGE].data[
+        this.activeCategoryIndex[LARGE]
       ];
-      this.categoryData['small'] = this.categoryData['large'].data[
-        this.activeCategoryIndex['large']
-      ].data[this.activeCategoryIndex['medium']];
+      this.categoryData[SMALL] = this.categoryData[LARGE].data[
+        this.activeCategoryIndex[LARGE]
+      ].data[this.activeCategoryIndex[MEDIUM]];
     }
   }
 
