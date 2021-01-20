@@ -1,5 +1,5 @@
 import {URL} from "../url.js"
-import {myDomApi} from "../util/mydomapi.js"
+import {myDomApi} from "../util/MyDomApi.js"
 
 let [themeData, themeLength] = [ , 5];
 const [extendCnt, moreBtn] = [5, myDomApi.myQuerySelector("#more")];

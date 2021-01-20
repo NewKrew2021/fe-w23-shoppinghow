@@ -1,4 +1,4 @@
-import {myDomApi} from "../util/mydomapi.js"
+import {myDomApi} from "../util/MyDomApi.js"
 import {URL} from "../url.js"
 
 let carouselIndex = 0;

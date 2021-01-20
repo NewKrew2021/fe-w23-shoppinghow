@@ -1,10 +1,10 @@
-import {createCarouselContainer} from "./component/carouselcomponent.js"
-import {createTrendContainer} from "./component/trendcomponent.js"
-import {createBestContainer} from "./component/bestcomponent.js"
-import {createRecentContainer} from "./component/recentcomponent.js"
-import {createInputContainer} from "./component/inputcomponent.js"
-import {createThemeContainer} from "./component/themecomponent.js"
-import {createCategoryContainer} from "./component/categorycomponent.js"
+import {createCarouselContainer} from "./component/CarouselView.js"
+import {createTrendContainer} from "./component/TrendView.js"
+import {createBestContainer} from "./component/BestView.js"
+import {createRecentContainer} from "./component/RecentView.js"
+import {createInputContainer} from "./component/InputView.js"
+import {createThemeContainer} from "./component/ThemeView.js"
+import {createCategoryContainer} from "./component/CategoryView.js"
 
 window.addEventListener("DOMContentLoaded", () => {
   createBestContainer();

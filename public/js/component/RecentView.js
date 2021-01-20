@@ -1,4 +1,4 @@
-import {myDomApi} from "../util/mydomapi.js"
+import {myDomApi} from "../util/MyDomApi.js"
 
 const recentBtn = myDomApi.myQuerySelector("button.category-recent");
 const popupLayer = myDomApi.myQuerySelector("div.recent-container");

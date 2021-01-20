@@ -5,25 +5,33 @@
 
 
 ## 구조
-  app.js : Express
+  app.js : Express  
   public  
   &nbsp;&nbsp;|- index.html  
   &nbsp;&nbsp;|- js  
   &nbsp;&nbsp;&nbsp;&nbsp;|- index.js  
-  &nbsp;&nbsp;&nbsp;&nbsp;|- myDomApi.js  
-  &nbsp;&nbsp;&nbsp;&nbsp;|- myPromise.js  
-  &nbsp;&nbsp;&nbsp;&nbsp;|- carousel.js  
-  &nbsp;&nbsp;&nbsp;&nbsp;|- best.js  
-  &nbsp;&nbsp;&nbsp;&nbsp;|- recent.js  
-  &nbsp;&nbsp;&nbsp;&nbsp;|- trend.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;|- url.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;|- util  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- MyDomApi.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- MyPromise.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;|- component  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- BestView.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- CarouselView.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- CategoryView.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- InputView.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- RecentView.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- ThemeView.js  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- TrendView.js  
   &nbsp;&nbsp;|- css  
-  &nbsp;&nbsp;&nbsp;&nbsp;|- style.css  
+  &nbsp;&nbsp;&nbsp;&nbsp;|- contents.css  
+  &nbsp;&nbsp;&nbsp;&nbsp;|- head.css  
   &nbsp;&nbsp;|- img  
-  &nbsp;&nbsp;&nbsp;&nbsp;|-   
+  &nbsp;&nbsp;&nbsp;&nbsp;|-  
+  &nbsp;&nbsp;|- sass  
 
 ## start
   - npm install
-  - pm2 start app.js
+  - npm start
   - url = localhost:3000
 
 ## Mock server specification - Postman
@@ -32,6 +40,7 @@
   - GET /carousel
   - GET /theme
   - GET /trend
+  - GET /category
 
 ## 2021-1-11
   - Node(npm), Express, pm2 설치, 로컬서버환경 구성
@@ -98,4 +107,10 @@
     - 메뉴 레이어 데이터 요청 후 레이아웃 만들기
     - 상위 레이어 상태에 따라 하위 레이어 나타내기, 현재 활성화된 레이어 표현
     - 하위 레이어 이동시 삼각형 구조에 따라 바로 갈수 있는 기능 구현
-      
+      - 조건
+        1. (y2-y1)/(x2-x1)*(x-x1)-y1+y1 <= 0
+        2. (y3-y1)/(x3-x1)*(x-x1)-y1+y1 >= 0
+        3. x2-x >= 0
+        을 모두 만족하면 현재 마우스 포인터는 삼각형 내에 존재함  
+        
+![image](https://user-images.githubusercontent.com/26708382/105160432-9549ff80-5b53-11eb-96bb-ad0bd7172526.png)

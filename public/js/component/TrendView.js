@@ -1,6 +1,6 @@
-import {myDomApi} from "../util/mydomapi.js"
+import {myDomApi} from "../util/MyDomApi.js"
 import {URL} from "../url.js"
-import {MyPromise} from "../util/mypromise.js"
+import {MyPromise} from "../util/MyPromise.js"
 
 let [trendFirstIndex, isMouseUp, clickStartTime, trendData] = [0, false];
 const [changeTime, trendImgCnt] = [2000, 5];
