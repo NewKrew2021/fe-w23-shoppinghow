@@ -1,4 +1,4 @@
-(function () {
+export function initHotCarouselSection () {
     const section = document.querySelector("#section3");
     let html = `<div>
                     <p>지금 뜨는 테마 카테고리</p>
@@ -53,8 +53,8 @@
             
         }).catch((err) => { console.log(err) });
     })();
-})();
-
+};
+//TODO: 함수 위치 이동하기
 function next(){
     const carousel=document.querySelector("#hot-carousel");
     const slides = carousel.querySelectorAll(".item");

@@ -6,7 +6,7 @@
   "scripts": {
     "watch-sass": "sass --watch sass:public/css ",
     "watch-webpack": "webpack --watch",
-    "start-client": "webpack --watch & webpack serve --open",
+    "start-client": "sass --watch sass:public/css & webpack --watch & webpack serve --open",
     "start-server": "nodemon app.js",
     "start": "webpack --watch & webpack serve --open & sass --watch sass:public/css & nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,6 +31,7 @@
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
+    "@types/node": "^14.14.21",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",

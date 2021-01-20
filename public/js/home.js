@@ -2,14 +2,14 @@ export function initHome() {
     const container = document.querySelector("#container");
     let html = "";
 
-    const bestPart = `<span id="best"><img src=/image/b100_kid.png></img></span>`;
+    const bestPart = `<span id="best"><img src=public/image/b100_kid.png></img></span>`;
     html += bestPart;
 
     (function () {
         const dataList = [
-            { position: "current", src: "/image/promotion1.png" },
-            { position: "next", src: "/image/promotion2.png" },
-            { position: "prev", src: "/image/promotion3.png" },
+            { position: "current", src: "public/image/promotion1.png" },
+            { position: "next", src: "public/image/promotion2.png" },
+            { position: "prev", src: "public/image/promotion3.png" },
         ];
 
         const promotion = dataList.reduce((acc, { position, src }) => {
@@ -34,6 +34,7 @@ export function initHome() {
 
 }
 
+//TODO: 리스너를 위 함수 안으로 넣기
 function next(){
     const carousel=document.querySelector("#promotion-carousel");
     const slides = carousel.querySelectorAll(".promotion-item");

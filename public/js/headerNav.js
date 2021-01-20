@@ -1,8 +1,8 @@
-(function(){
+export function initHeaderNav(){
     const nav=document.querySelector("#header-nav");
     let html="";
 
-    const category=`<img src ="/image/category.png"></img>
+    const category=`<img src ="public/image/category.png"></img>
                 <span>카테고리</span>`;
     html+=category;
 
@@ -36,11 +36,11 @@
 
     const sideNav=`
         <span>
-            <img src ="/image/login.png"></img>
+            <img src ="public/image/login.png"></img>
             <span>로그인</span>
         </span>
         <span id="recent-item">
-            <img src ="/image/recent_item.png"></img>
+            <img src ="public/image/recent_item.png"></img>
             <span>최근본 상품</span>
             <div id="recent-popup">
             </div>
@@ -50,9 +50,8 @@
    
     nav.innerHTML+=html;
 
-    const qs=new QuerySelector();
-    const recentItem=qs.query(document,"#recent-item");
-    const popup=qs.query(document,"#recent-popup");
+    const recentItem=document.querySelector("#recent-item");
+    const popup=document.querySelector("#recent-popup");
     recentItem.addEventListener("mouseenter",()=>{
         const popupData=JSON.parse(localStorage.getItem("popupData"));
         let html=popupData.reduce((acc,{src,href})=>{
@@ -69,5 +68,4 @@
         popup.style.display="none";
     });
 
-
-})();
+}
