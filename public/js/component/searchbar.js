@@ -1,4 +1,4 @@
-import { findOne } from "../util"
+import { findOne, myFetchPOST } from "../util"
 
 // init search bar
 export function initSearchBar() {
@@ -14,5 +14,10 @@ export function initSearchBar() {
     if (!keyword) {
       return
     }
+
+    // fetch recommended keywords
+    myFetchPOST('/search/recommend', { keyword })
+    .then(console.log)
+    .catch(console.log)
   })
 }
