@@ -11,25 +11,24 @@ export function initMenu() {
 
     let prevX = 0;
     let prevY = 0;
-    const THRESHOLD = 500;
+    const THRESHOLD = 1000;
 
-    menu.addEventListener("mouseover", (e) => {
+    menu.addEventListener("mousemove", (e) => {
         if (typeof e.target.attributes.idx === 'undefined') return;
         let curX = e.clientX;
         let curY = e.clientY;
         const dist = getDistance(prevX, curX, prevY, curY);
-
-        //console.log(dist);
-        if (dist < THRESHOLD) {
-            if (e.target.className.includes('first-layer')) {
-                setCurrentMenu(e.target.attributes.idx.value, 0, 0);
-            }
-            else if (e.target.className.includes('second-layer')) {
-                setCurrentMenu(e.target.attributes.parentIdx.value, e.target.attributes.idx.value, 0);
-            }
-        }
         prevX = curX;
         prevY = curY;
+
+        if (dist < THRESHOLD) {
+            if (e.target.className.includes('first-layer')) {
+                setCurrentMenu(e.target.attributes.idx.value, 0);
+            }
+            else if (e.target.className.includes('second-layer')) {
+                setCurrentMenu(e.target.attributes.parentIdx.value, e.target.attributes.idx.value);
+            }
+        }
 
     })
     nav.appendChild(menu);
@@ -59,8 +58,7 @@ export function initMenu() {
         secondLayer.innerHTML = secondLayerHtml;
         thirdLayer.innerHTML = thirdLayerHtml;
 
-        nav.innerHTML = "";
-        nav.appendChild(menu);
     }
     setCurrentMenu(0, 0);
+
 }

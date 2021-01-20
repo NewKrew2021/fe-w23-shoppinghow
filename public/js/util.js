@@ -4,6 +4,6 @@ function createElementFromHTML(htmlString) {
     return div.firstChild;
 }
 function getDistance(x1,x2,y1,y2) {
-    return Math.sqrt(Math.pow(x2-x1,2)*10000+Math.pow(y2-y1,2)*10000);
+    return Math.sqrt(Math.pow(x2-x1,2)*100000+Math.pow(y2-y1,2)*100000);
 }
 export {createElementFromHTML, getDistance}
