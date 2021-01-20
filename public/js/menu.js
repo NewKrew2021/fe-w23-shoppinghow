@@ -11,22 +11,15 @@ export function initMenu() {
 
     let prevX = 0;
     let prevY = 0;
-    let prevTime=new Date().getTime();
-    let throttle = null;
     const THRESHOLD = 500;
-
 
     menu.addEventListener("mouseover", (e) => {
         if (typeof e.target.attributes.idx === 'undefined') return;
         let curX = e.clientX;
         let curY = e.clientY;
-        let curTime=new Date().getTime();
         const dist = getDistance(prevX, curX, prevY, curY);
-        const timeSpent=curTime-prevTime;
-        const speed = dist/timeSpent*100000;
-        //console.log(speed);
 
-        console.log(dist);
+        //console.log(dist);
         if (dist < THRESHOLD) {
             if (e.target.className.includes('first-layer')) {
                 setCurrentMenu(e.target.attributes.idx.value, 0, 0);
@@ -38,14 +31,6 @@ export function initMenu() {
         prevX = curX;
         prevY = curY;
 
-        // // throttle
-        // if(!throttle) {
-        //     setTimeout(() => {
-        //         throttle = null;
-
-        //     }, 50);
-        // }
-        // throttle = true;
     })
     nav.appendChild(menu);
 
