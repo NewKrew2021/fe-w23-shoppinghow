@@ -83,47 +83,73 @@ header nav #recent-item #recent-popup img {
   height: 100%;
   width: 100%;
 }
+header .hide {
+  display: none;
+}
+header .show {
+  display: inline-block;
+}
 header #menu {
   position: absolute;
   top: 120%;
   left: 5%;
   background-color: white;
-  display: inline-block;
+  border: 1px solid black;
 }
 header #menu #first-layer {
-  height: 100%;
+  height: 600px;
   background-color: #f7f7f7;
   display: inline-block;
   vertical-align: top;
+  padding-top: 5px;
 }
 header #menu #second-layer {
   height: 100%;
   width: 200px;
   display: inline-block;
   vertical-align: top;
+  padding-top: 5px;
 }
 header #menu #third-layer {
   height: 100%;
   display: inline-block;
   vertical-align: top;
+  padding-top: 5px;
+}
+header #menu .active {
+  background-color: white;
+  color: red;
+}
+header #menu .active-third {
+  background-color: white;
+  text-decoration: underline;
 }
 header #menu .first-layer {
-  width: 180px;
+  width: 150px;
+  height: 45px;
   font-size: 18px;
-  margin: 20px;
   list-style: none;
+  vertical-align: center;
+  padding-left: 30px;
+  padding-top: 5px;
 }
 header #menu .second-layer {
-  width: 180px;
+  width: 160px;
+  height: 32px;
   font-size: 14px;
-  margin: 20px;
   list-style: none;
+  vertical-align: center;
+  padding-left: 30px;
+  padding-top: 5px;
 }
 header #menu .third-layer {
-  width: 180px;
+  height: 32px;
+  width: 160px;
   font-size: 12px;
-  margin: 20px;
   list-style: none;
+  vertical-align: center;
+  padding-left: 30px;
+  padding-top: 5px;
 }
 
 /*# sourceMappingURL=header.css.map */

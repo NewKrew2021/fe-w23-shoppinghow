@@ -87,47 +87,78 @@ header {
     }
 
   }
+
+  .hide{
+    display: none;
+  }
+  .show{
+    display: inline-block;
+  }
+
   #menu{
+    $padding-left: 30px;
+    $padding-top:5px;
       position:absolute;
       top:120%;
       left:5%;
       background-color: white;
-      display: inline-block;
+      border:1px solid black;
       
     #first-layer{
-        height: 100%;
+      //100% 적용 안되는 이유?
+        height: 600px;
         background-color: rgb(247,247,247);
         display:inline-block;
         vertical-align: top;
+        padding-top:$padding-top;
     }
     #second-layer{
         height: 100%;
         width: 200px;
         display:inline-block;
         vertical-align: top;
+        padding-top:$padding-top;
     }
     #third-layer{
         height: 100%;
         display:inline-block;
         vertical-align: top;
+        padding-top:$padding-top;
+    }
+    .active{
+      background-color:white;
+      color:red;
+    }
+    .active-third{
+      background-color:white;
+      text-decoration: underline;
     }
     .first-layer{
-        width:180px;
+        width:150px;
+        height:45px;
         font-size:18px;
-        margin:20px;
         list-style: none;
+        vertical-align: center;
+        padding-left:$padding-left;
+        padding-top:$padding-top;
     }
     .second-layer{
-        width:180px;
+        width:160px;
+        height: 32px;
         font-size:14px;
-        margin:20px;
         list-style: none;
+        vertical-align: center;
+        padding-left:$padding-left;
+        padding-top:$padding-top;
     }
     .third-layer{
-        width:180px;
+        height:32px;
+        width:160px;
         font-size:12px;
-        margin:20px;
         list-style: none;
+        vertical-align: center;
+        padding-left:$padding-left;
+        padding-top:$padding-top;
     }
   }
   

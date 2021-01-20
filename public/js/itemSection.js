@@ -1,6 +1,5 @@
-(function(){
-    const qs=new QuerySelector();
-    const section=qs.query(document,"#section2");
+export function initItemSection(){
+    const section=document.querySelector("#section2");
     let html="";
     let pageNum=0;
 
@@ -16,7 +15,7 @@
             return response.json();
         }).then((data)=>{
             const itemList=section.querySelector("#item-list");
-            li=data.items.reduce((acc,{href,src,title,subtitle,badge})=>{
+            const li=data.items.reduce((acc,{href,src,title,subtitle,badge})=>{
                 return acc+`<span class="item">
                                 <img src=${src} href=${href}></img>
                                 <div class="title">${title}</div>
@@ -37,10 +36,10 @@
     section.innerHTML=html;
 
     //리스트 전체에 item에 대한 클릭 이벤트 추가
-    const itemList=qs.query(document,"#item-list");
+    const itemList=document.querySelector("#item-list");
     itemList.addEventListener("click",(e)=>{
         const item=e.target.closest(".item");
-        const img=qs.query(item,"img");
+        const img=item.querySelector("img");
         const src=img.src;
         const href=img.attributes.href.value;
 
@@ -50,9 +49,9 @@
     });
 
     //더보기 클릭시 동작하는 리스너
-    const loadBtn=qs.query(section,"#load");
+    const loadBtn=section.querySelector("#load");
     loadBtn.addEventListener("click",(e)=>{
         fetchPage(pageNum);
     });
     
-})();
+};
