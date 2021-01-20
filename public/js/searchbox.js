@@ -21,8 +21,9 @@ export default class SearchBox {
         this.index = 1;
     }
 
-    /* 포커스 시 keyword 영역 표시 */
+    /* 케이스별 keyword 영역 표시 */
     showKeywordBox() {
+        /* 입력창에 입력을 시작할 때 */
         this.search_input.addEventListener('input', (e) => {
             const value = e.target.value;
             if (value === '') {
@@ -34,14 +35,17 @@ export default class SearchBox {
                 this.keywordInner.style.display = 'none';
             }
         });
-        this.search_input.addEventListener('focus', () => {
-            this.keywordWrapper.style.display = 'block';
+        /* 검색창 어디라도 누르면 입력할 수 있게 포커스 주기 */
+        this.search_blank.addEventListener('click', ()=>{
             this.rolledList.style.display = 'none';
+            this.keywordWrapper.style.display = 'block';
+            this.search_input.focus();
         })
+        /* 입력창 포커스가 해제될 때 */
         this.search_input.addEventListener('blur', () => {
             this.keywordWrapper.style.display = 'none';
             this.rolledList.style.display = 'block';
-            this.search_input.value = ""; // empty
+            this.search_input.value = "";
             innerHTML(this.autoInner, "");
             this.keywordInner.style.display = 'block';
         })
