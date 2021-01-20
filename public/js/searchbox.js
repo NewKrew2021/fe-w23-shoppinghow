@@ -2,8 +2,7 @@
     searchbox.js
     쇼핑하우 검색창 관련 모듈
 */
-import { dom, addHTML, getCorrect, innerHTML } from './util.js';
-//import { words } from '../data/keyword.js';
+import { dom, removeSpace, getStartPos, innerHTML } from './util.js';
 
 export default class SearchBox {
     constructor(input) {
@@ -24,6 +23,12 @@ export default class SearchBox {
 
     /* 케이스별 keyword 영역 표시 관련한 이벤트 */
     showKeywordBox() {
+        /* 검색창에서 마우스를 떼면 포커스가 사라지게 (mouseout은 자식요소 모두) */
+        this.search_blank.addEventListener('mouseleave', () => {
+            setTimeout(() => {
+                this.search_input.blur();
+            }, this.RELEASE_TIME);
+        });
         /* 입력창에 입력을 시작할 때 */
         this.search_input.addEventListener('keyup', (e) => {
             const value = e.target.value;
@@ -50,12 +55,6 @@ export default class SearchBox {
             innerHTML(this.autoInner, "");
             this.keywordInner.style.display = 'block';
         })
-        /* 검색창에서 마우스를 떼면 포커스가 사라지게 (mouseout은 자식요소 모두) */
-        this.search_blank.addEventListener('mouseleave', ()=>{
-            setTimeout(()=>{
-                this.search_input.blur();
-            }, this.RELEASE_TIME);
-        });
     }
 
     fetchAllKeywords() {
@@ -68,21 +67,24 @@ export default class SearchBox {
     autoComplete(words) {
         this.search_input.addEventListener('input', (e) => {
             function getCorrect(word) {
-                if (word.includes(value.replace(/(\s*)/g, "")) ||
-                    word.replace(/(\s*)/g, "").includes(value.replace(/(\s*)/g, "")))
+                if (word.includes(removeSpace(value)) ||
+                    removeSpace(word).includes(removeSpace(value))) {
                     return word;
+                }
             }
-            const value = e.target.value.trim(); // 공백 제거
-            let resultList = words.filter(getCorrect); // 공백 포함 일치하는 input 문자열 모두 저장
-            resultList = resultList.slice(0, 10); // 저장된 리스트를 최대 10개까지만 보이도록 함
-            let resultHtml = '';
+            const value = removeSpace(e.target.value); // 공백 검색의 일관성 위해서 입력중인 단어도 공백 제거
+            let resultList = words.filter(getCorrect).slice(0, 10); // 저장된 리스트를 최대 10개까지만 보이도록 함
+            let resultHtml = ''; // 공백 포함 일치하는 문자열 모두 저장
 
             resultList.forEach((word) => {
-                const valueLength = value.length;
-                const startPos = word.indexOf(value[0]);
+                let valueLength = value.length;
+                let startPos = word.search(value);
 
-                // startPos 이후부터 확인(2번째 파라미터)
-                const endPos = word.indexOf(value[valueLength - 1], startPos);
+                // 만약 startPos가 -1이라면, word의 공백 때문에 그런 것이므로 getStartPos로 값 변경
+                if (startPos === -1) startPos = getStartPos(word, value);
+                
+                // 입력한 단어와 꼭 맞게 강조될 수 있도록 endPos 설정 후 html 저장
+                let endPos = word.indexOf(value[valueLength - 1], startPos + valueLength - 1);
                 word = word.slice(0, startPos) + "<span class='accent'>"
                     + word.slice(startPos, endPos + 1) + "</span>" + word.slice(endPos + 1);
                 resultHtml += `<li class="auto-list">${word}</li>`
