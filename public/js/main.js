@@ -31,13 +31,19 @@ const initPage = function (data) {
     const bests = data[1].items;
     const hots = data[2].items;
     const basics = data[3].items;
-    const categories = data[4].data;
+    const categories = data[4];
 
     const categoryInfo = initCategory(categories);
-    domAPI.querySelector("#category").appendChild(categoryInfo.boxDOM);
-    domAPI.querySelector(".category--large").style.display="block";
-    domAPI.querySelector(".category--medium").style.display="block";
-    domAPI.querySelector(".category--small").style.display="block";
+    const categoryBtn = domAPI.querySelector("#category");
+    categoryBtn.appendChild(categoryInfo.boxDOM);
+
+    categoryBtn.addEventListener("mouseover", (e) => {
+        categoryInfo.boxDOM.classList.remove("d-off");
+    });
+
+    categoryBtn.addEventListener("mouseout", (e) => {
+        categoryInfo.boxDOM.classList.add("d-off");
+    });
 
     // 한 행씩 렌더링
     mainContainerDOM.appendChild(getMarginDOM(marginHeight));
