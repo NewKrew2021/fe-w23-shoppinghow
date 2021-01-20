@@ -46,9 +46,13 @@ node index.js
 ## Day7
 
 - [ ] webpack, Babel 부수적인 기능 적용
-- [ ] 메뉴 기능 구현
+- [x] 메뉴 기능 구현
 
 ## Day8
+
+- [ ] webpack, Babel 부수적인 기능 적용
+- [ ] 메뉴 선택 기능 구현
+- [ ] 검색 기능 구현
 
 ## Day9
 

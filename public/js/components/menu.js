@@ -6,36 +6,49 @@ const PORT = 8000;
 const SQUARED = 2;
 const MOUSE_MAX_SPEED = 5;
 
-class Menu {
+const SMALL = 'small';
+const MEDIUM = 'medium';
+const LARGE = 'large';
+
+const MENU_TEMPLATE = {
+  categoryTab(type, title) {
+    return `<li class="${type}-category__tab">${title}</li>`;
+  },
+  firstCategoryTab(type, title) {
+    return `<li class="${type}-category__tab ${type}-category__tab--activated">${title}</li>`;
+  },
+};
+
+class CategoryMenu {
   constructor() {
-    this.menuData = null;
-    this.largeCategoryElement = $('.large-category');
-    this.mediumCategoryElement = $('.medium-category');
-    this.smallCategoryElement = $('.small-category');
-    this.activatedTab = $('.large-category').children[0];
-    this.largeCategoryIndex = 0;
-    this.mediumCategoryIndex = 0;
-    this.smallCategoryIndex = 0;
+    this.categoryData = {
+      large: null,
+      medium: null,
+      small: null,
+    };
+
+    this.categoryElement = {
+      large: $('.large-category'),
+      medium: $('.medium-category'),
+      small: $('.small-category'),
+    };
+
+    this.activeCategoryIndex = {
+      large: 0,
+      medium: 0,
+      small: 0,
+    };
+
     this.currentX = 0;
     this.currentY = 0;
   }
 
-  createLargeCategoryElement(menuData) {
-    return menuData.reduce((acc, { title }) => {
-      return acc + `<li class="large-category__tab">${title}</li>`;
-    }, '');
-  }
-
-  createMediumCategoryElement(mediumCategoryData) {
-    return mediumCategoryData.reduce((acc, { title }) => {
-      return acc + `<li class="medium-category__tab">${title}</li>`;
-    }, '');
-  }
-
-  createSmallCategoryElement(smallCategoryData) {
-    return smallCategoryData.reduce((acc, { title }) => {
-      return acc + `<li class="small-category__tab">${title}</li>`;
-    }, '');
+  createCategoryHTML(data, type) {
+    return data.reduce((acc, { title }, index) => {
+      if (index === 0 && type !== SMALL)
+        return acc + MENU_TEMPLATE.firstCategoryTab(type, title);
+      return acc + MENU_TEMPLATE.categoryTab(type, title);
+    }, ``);
   }
 
   calculateMouseMovement(newX, newY) {
@@ -45,54 +58,70 @@ class Menu {
     );
   }
 
-  toggleTabActivation() {
-    const targetClassName = this.activatedTab.className;
+  deletePrevActivation(type) {
+    deleteClassFromElement(
+      this.categoryElement[type].childNodes[this.activeCategoryIndex[type]],
+      `${type}-category__tab--activated`
+    );
+  }
 
-    switch (targetClassName) {
+  activeTab(type, activatedTab) {
+    this.activeCategoryIndex[type] = getIndexFromParent(activatedTab);
+    activatedTab.classList.add(`${type}-category__tab--activated`);
+  }
+
+  initCategory(type) {
+    switch (type) {
+      case MEDIUM:
+        this.activeCategoryIndex[MEDIUM] = 0;
+
+        this.categoryData[MEDIUM] = this.categoryData[LARGE].data[
+          this.activeCategoryIndex[LARGE]
+        ];
+        break;
+      case SMALL:
+        this.activeCategoryIndex[SMALL] = 0;
+
+        this.categoryData[SMALL] = this.categoryData[LARGE].data[
+          this.activeCategoryIndex[LARGE]
+        ].data[this.activeCategoryIndex[MEDIUM]];
+        break;
+    }
+  }
+
+  toggleTabActivation(activatedTab) {
+    switch (activatedTab.className) {
       case 'large-category__tab':
-        this.activatedTab.classList.add('large-category__tab--activated');
+        this.deletePrevActivation(LARGE);
+        this.activeTab(LARGE, activatedTab);
+        this.initCategory(MEDIUM);
+        this.renderCategory(MEDIUM);
+        this.initCategory(SMALL);
+        this.renderCategory(SMALL);
         break;
-      case 'large-category__tab large-category__tab--activated':
-        deleteClassFromElement(
-          this.activatedTab,
-          'large-category__tab--activated'
-        );
-        break;
+
       case 'medium-category__tab':
-        this.activatedTab.classList.add('medium-category__tab--activated');
+        this.deletePrevActivation(MEDIUM);
+        this.activeTab(MEDIUM, activatedTab);
+        this.initCategory(SMALL);
+        this.renderCategory(SMALL);
         break;
-      case 'medium-category__tab medium-category__tab--activated':
-        deleteClassFromElement(
-          this.activatedTab,
-          'medium-category__tab--activated'
-        );
-        break;
+
       case 'small-category__tab':
-        this.activatedTab.classList.add('small-category__tab--activated');
-        this.smallCategoryIndex = getIndexFromParent(this.activatedTab);
-        break;
-      case 'small-category__tab small-category__tab--activated':
-        deleteClassFromElement(
-          this.activatedTab,
-          'small-category__tab--activated'
-        );
+        this.deletePrevActivation(SMALL);
+        this.activeTab(SMALL, activatedTab);
         break;
     }
     return;
   }
 
-  handleMouseMove(event) {
-    if (
-      this.calculateMouseMovement(event.clientX, event.clientY) <
-      MOUSE_MAX_SPEED
-    ) {
-      this.toggleTabActivation();
-      this.activatedTab = event.target;
-      this.toggleTabActivation();
+  handleMouseMove({ clientX, clientY, target }) {
+    if (this.calculateMouseMovement(clientX, clientY) < MOUSE_MAX_SPEED) {
+      this.toggleTabActivation(target);
     }
 
-    this.currentX = event.clientX;
-    this.currentY = event.clientY;
+    this.currentX = clientX;
+    this.currentY = clientY;
   }
 
   addCurrentTabEvent() {
@@ -101,36 +130,43 @@ class Menu {
     );
   }
 
-  fetchMenuData() {
-    return fetch(`${HOST}:${PORT}/api/menu`).then(res => res.json());
+  async fetchMenuData() {
+    let menuData = await fetch(`${HOST}:${PORT}/api/menu`);
+    return menuData.json();
+  }
+
+  renderCategory(type) {
+    this.categoryElement[type].innerHTML = this.createCategoryHTML(
+      this.categoryData[type].data,
+      type
+    );
   }
 
   renderMenu() {
-    const mediumCategoryData = this.menuData.data[this.largeCategoryIndex];
-    const smallCategoryData = this.menuData.data[this.largeCategoryIndex].data[
-      this.mediumCategoryIndex
-    ];
+    this.renderCategory(LARGE);
+    this.renderCategory(MEDIUM);
+    this.renderCategory(SMALL);
+  }
 
-    this.largeCategoryElement.innerHTML = this.createLargeCategoryElement(
-      this.menuData.data
-    );
-    this.mediumCategoryElement.innerHTML = this.createMediumCategoryElement(
-      mediumCategoryData.data
-    );
-    this.smallCategoryElement.innerHTML = this.createSmallCategoryElement(
-      smallCategoryData.data
-    );
+  initMenuData(res) {
+    {
+      this.categoryData[LARGE] = res;
+      this.categoryData[MEDIUM] = this.categoryData[LARGE].data[
+        this.activeCategoryIndex[LARGE]
+      ];
+      this.categoryData[SMALL] = this.categoryData[LARGE].data[
+        this.activeCategoryIndex[LARGE]
+      ].data[this.activeCategoryIndex[MEDIUM]];
+    }
   }
 
   init() {
     this.fetchMenuData()
-      .then(res => {
-        this.menuData = res;
-      })
+      .then(res => this.initMenuData(res))
       .then(() => this.renderMenu());
 
     this.addCurrentTabEvent();
   }
 }
 
-export { Menu };
+export { CategoryMenu };
