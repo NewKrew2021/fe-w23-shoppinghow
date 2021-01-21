@@ -1,7 +1,7 @@
 import {myDomApi} from "../util/MyDomApi.js"
 import {URL} from "../url.js"
 
-let searchDefaultPage, inputItem, inputItemLen, isClick = false, time=0;
+let searchDefaultPage, inputItem, inputItemLen, isClick = false, time=0, keyIndex=-1, keywordListLen;
 const inputCycleTime = 1500; //ms
 const inputDefault = ["부라타치즈","무스탕코트","오덴세시손느","구강세척기","게이밍의자", "현관코일매트","여성등산화","에어프라이어","접이식욕조","글라스텐다지기"]
 
@@ -14,6 +14,7 @@ const createInputContainer = () => {
   changeInput();
   inputBtnEventlistener();
   inputChangeEventListener();
+  inputKeyEventListener();
 }
 
 const createSearchDefaultPage = () => {
@@ -31,10 +32,7 @@ const createSearchDefaultPage = () => {
 const createSearchResultPage = (result, inputValue) => {
   let searchResultPage = ``
   result.map( keyword => {
-    console.log(keyword.indexOf(inputValue));
     let idx = keyword.indexOf(inputValue);
-    console.log();
-    console.log();
     keyword = keyword.substring(0, idx) +
               `<span class="font-bold">` +
               keyword.substring(idx, idx+inputValue.length) +
@@ -43,6 +41,7 @@ const createSearchResultPage = (result, inputValue) => {
     searchResultPage += `<div class="search-result">${keyword}</div>`
   })
   searchWindow.innerHTML = searchResultPage;
+  keyIndex=-1;
 }
 
 const changeInput = () =>{
@@ -80,11 +79,34 @@ const inputChangeEventListener = () => {
         if(result.length>9) break;
       }
     }
-    console.log(result, input.value);
-    createSearchResultPage(result, input.value);
+    keywordListLen = result.length;
+    if(input.value === "") {
+      input.className="search-input-clicked";
+      searchWindow.className = "search-window";
+      searchWindow.innerHTML = searchDefaultPage;
+    }
+    else createSearchResultPage(result, input.value);
   })
 }
 
+const inputKeyEventListener = () => {
+  input.addEventListener("keydown", res => {
+    let searchResultElement = myDomApi.myQuerySelectorAll("div.search-result");
+    if(searchResultElement === []) return;
+    if(res.key === "ArrowUp"){
+      if(keyIndex>-1) searchResultElement[keyIndex].className = "search-result"
+      keyIndex += -1;
+      if(keyIndex<0) keyIndex=0;
+      searchResultElement[keyIndex].className = "search-result search-result-active"
+    }
+    else if(res.key === "ArrowDown"){
+      if(keyIndex>-1) searchResultElement[keyIndex].className = "search-result"
+      keyIndex += 1;
+      if(keyIndex>=keywordListLen) keyIndex = keywordListLen - 1;
+      searchResultElement[keyIndex].className = "search-result search-result-active"
+    }
+  })
+}
 
 const requestInputItem = () => {
   const request = new Request(URL + "/input");

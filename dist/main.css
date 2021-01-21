@@ -128,7 +128,7 @@ body {
   width: 591px;
   margin-top: 73px;
   margin-left: 35%;
-  padding: 10px 20px 25px 40px;
+  padding: 10px 20px 25px 0px;
   border: 1px solid #f96247;
   border-radius: 10px;
   background-color: #ffffff;
@@ -140,29 +140,40 @@ body {
   color: #6d6d6d;
   font-weight: bold;
   font-size: 17px;
+  margin-left: 40px; 
 }
 
 .keyword {
   float: left;
-  width: 290px;
+  width: 240px;
   margin-top: 15px;
   font-size: 15px;
   text-align: left;
-  font-weight:500
+  font-weight:500;
+  cursor: pointer;
+  margin-left: 40px; 
 }
 
 .keyword-number {
   font-weight: bold;
   font-style: italic;
+  cursor: pointer;
 }
 
 .search-result {
-  width: 500px;
-  margin-top: 12px;
+  width: 571px;
+  height: 20px;
+  padding-top:5px;
+  padding-left: 40px;
   font-size: 15px;
   text-align: left;
   font-weight:500;
   color: #525252;
+  cursor: pointer;
+}
+
+.search-result-active {
+  background-color: #c0c0c0;
 }
 
 .font-bold {
