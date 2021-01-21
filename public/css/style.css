@@ -203,7 +203,6 @@ body {
     background-color: #c9d6de;
     width: 180px;
     height: 100%;
-    display: none;
 }
 .category--medium {
     background-color: #f0f5f9;
@@ -299,4 +298,14 @@ body {
     font-weight: normal;
     padding-top: 10px;
     text-decoration: underline;
+}
+.input-box {
+    width: 90%;
+    height: 80%;
+    margin-left: 20px;
+    padding-top: 12px;
+    font-size: 30px;
+}
+input:focus {
+    outline: none;
 }

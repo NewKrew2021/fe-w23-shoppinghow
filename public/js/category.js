@@ -1,170 +1,206 @@
 import { DOMSearchAPI } from "./DOM_search_api.js";
 
-const transJsonToString = function (data) {
-    const ret = {};
-    function bfs(root) {
-        const q = [];
-        q.push([root, 0]);
-        while(q.length) {
-            const front = q.shift();
-            const node = front[0];
-            const h = front[1];
-
-            if(!node.data) continue;
-            const res = node.data.reduce((acc, cur) => {
-                if(cur.data) q.push([cur, h + 1]);
-                return [...acc, cur.title];
-            }, []);
-
-            if(ret[h]) ret[h].push(res);
-            else ret[h] = [res];
-        }
-    }
-    bfs(data);
-    console.log(ret);
-    return ret;
-}
-// string to html
-const func = function(data) {
-    const tpl = {
-        // 0: large, 1: medium, 2: small
-        0(title, ...idxs) { return `<div name="${idxs.join("-")}" class="category--large__item">${title}</div>`; },
-        1(title, ...idxs) { return `<div name="${idxs.join("-")}" class="category--medium__item">${title}</div>`; },
-        2(title, ...idxs) { return `<div name="${idxs.join("-")}" class="category--small__item">${title}</div>`; }
-    };
-    const ret = {};    
-}
-const transStringToHTML = function (data) {
-    const ret = {
-        large: `<div class="category--large--picked">`,
-        medium: [],
-        small: []
-    };
-
-    data.large.forEach((largeItem, i) => {
-        ret.large += `<div name="${i}"class="category--large__item">${largeItem}</div>`;
-        let mediumHTML = `<div name="${i}" class="category--medium">`
-        ret.small.push([]);
-        data.medium[i].forEach((mediumItem, j) => {
-            mediumHTML += `<div name="${i}-${j}" class="category--medium__item">${mediumItem}</div>`;
-            let smallHTML = `<div name="${i}-${j}" class="category--small">`;
-            data.small[i][j].forEach((smallItem, k) => {
-                smallHTML += `<div name="${i}-${j}-${k}" class="category--small__item">${smallItem}</div>`;
-            })
-            smallHTML += "</div>";
-            ret.small[i].push(smallHTML);
+// name: "largeIndex-mediumIndex-smallIndex" name을 key로 각 DOM에 바로 접근하기 위함
+const addNameToJson = function (data) {
+    const dfs = function (node, h, idxArr) {
+        if (node.title) node.name = idxArr.slice(0, h + 1).join("-");
+        if (!node.data) return;
+        node.data.forEach((child, i) => {
+            idxArr[h + 1] = i;
+            dfs(child, h + 1, idxArr);
         })
-        mediumHTML += "</div>";
-        ret.medium.push(mediumHTML);
-    });
-    ret.large += "</div>";
-    return ret;
+    }
+    dfs(data, -1, []);
+    return data;
 }
 
-const transHTMLToDOM = function (data) {
-    // 카테고리 전체 창 요소
-    const box = document.createElement("div");
-    box.setAttribute("class", "category--box horizontal d-off");
+const transJsonToString = function (data) {
+    const name = {};
+    const title = {};
 
-    // box 하위에 html 코드 삽입
-    let html = data.large;
-    html += data.medium.reduce((acc, cur) => acc + cur, "");
-    data.small.forEach((arr) => {
-        html += arr.reduce((acc, cur) => acc + cur, "");
-    });
-    box.innerHTML = html;
+    // bfs
+    const q = [];
+    q.push([data, 0]);
+    while (q.length) {
+        const front = q.shift();
+        const node = front[0];
+        const h = front[1];
 
-    return box;
-}
+        if (!node.data) continue;
 
-const setCategoryElement = function (data) {
-    const categoryInfo = {
-        boxDOM: data,
+        const res = node.data.reduce((acc, cur) => {
+            if (cur.data) q.push([cur, h + 1]);
+            return [...acc, cur.title];
+        }, []);
 
-        mediumDOMs: new Map(),
-        smallDOMs: new Map(),
+        const ress = node.data.reduce((acc, cur) => {
+            return [...acc, cur.name];
+        }, []);
 
-        largeItemDOMs: new Map(),
-        mediumItemDOMs: new Map(),
-        smallItemDOMs: new Map(),
+        if (title[h]) title[h].push(res);
+        else title[h] = [res];
 
-        number: [0, 0, 0]
+        if (name[h]) name[h].push(ress);
+        else name[h] = [ress];
     }
 
-    // box를 root로 탐색한다. 
-    const dom = new DOMSearchAPI(data);
-    const mediumDOMs = dom.querySelectorAll(".category--medium");
-    const smallDOMs = dom.querySelectorAll(".category--small");
+    return { name, title };
+}
 
-    const largeItemDOMs = dom.querySelectorAll(".category--large__item");
-    const mediumItemDOMs = dom.querySelectorAll(".category--medium__item");
-    const smallItemDOMs = dom.querySelectorAll(".category--small__item");
+// string to html
+const transStringToHTML = function (data) {
+    // 0: large, 1: medium, 2: small
+    const boxTpl = {
+        0(html, name) { return `<div name="${name}" class="category--large">${html}</div>` },
+        1(html, name) { return `<div name="${name}" class="category--medium">${html}</div>` },
+        2(html, name) { return `<div name="${name}" class="category--small">${html}</div>` },
+    };
+    const itemTpl = {
+        0(title, name) { return `<div name="${name}" class="category--large__item">${title}</div>`; },
+        1(title, name) { return `<div name="${name}" class="category--medium__item">${title}</div>`; },
+        2(title, name) { return `<div name="${name}" class="category--small__item">${title}</div>`; }
+    };
 
-    // categoryInfo 객체의 map에 저장
-    for (let mediumDOM of mediumDOMs) categoryInfo.mediumDOMs.set(mediumDOM.getAttribute("name"), mediumDOM);
-    for (let smallDOM of smallDOMs) categoryInfo.smallDOMs.set(smallDOM.getAttribute("name"), smallDOM);
+    let html = "";
+    for (let h in data.title) {
+        html += data.title[h].reduce((acc, cur, i) => {
+            const res = cur.reduce((acc, cur, j) => {
+                return acc + itemTpl[h](cur, data.name[h][i][j]);
+            }, "");
+            let name = data.name[h][i][0].split("-");
+            name.pop();
+            return acc + boxTpl[h](res, name.join("-"));
+        }, "");
+    }
+    return html;
+}
 
-    for (let largeItemDOM of largeItemDOMs) categoryInfo.largeItemDOMs.set(largeItemDOM.getAttribute("name"), largeItemDOM);
-    for (let mediumItemDOM of mediumItemDOMs) categoryInfo.mediumItemDOMs.set(mediumItemDOM.getAttribute("name"), mediumItemDOM);
-    for (let smallItemDOM of smallItemDOMs) categoryInfo.smallItemDOMs.set(smallItemDOM.getAttribute("name"), smallItemDOM);
+const transHTMLToDOM = function (html) {
+    // 카테고리 전체 창 요소
+    const element = document.createElement("div");
+    element.setAttribute("class", "category--box horizontal d-off");
+
+    element.innerHTML = html;
+
+    return element;
+}
+
+const setCategoryElement = function (DOM) {
+    const boxDOMs = {};
+    const itemDOMs = {};
+
+    // box를 root로 탐색해서 결과 저장
+    const domapi = new DOMSearchAPI(DOM);
+
+    const DOMs = [];
+    const mediumDOMs = domapi.querySelectorAll(".category--medium");
+    const smallDOMs = domapi.querySelectorAll(".category--small");
+
+    const largeItemDOMs = domapi.querySelectorAll(".category--large__item");
+    const mediumItemDOMs = domapi.querySelectorAll(".category--medium__item");
+    const smallItemDOMs = domapi.querySelectorAll(".category--small__item");
+
+    [...mediumDOMs, ...smallDOMs].forEach(dom => {
+        boxDOMs[dom.getAttribute("name")] = dom;
+    });
+    [...largeItemDOMs, ...mediumItemDOMs, ...smallItemDOMs].forEach(dom => {
+        itemDOMs[dom.getAttribute("name")] = dom;
+    });
 
     // 초기화
-    categoryInfo.mediumDOMs.get("0").className = "category--medium--picked";
-    categoryInfo.smallDOMs.get("0-0").className = "category--small--picked";
-    
-    categoryInfo.largeItemDOMs.get("0").className = "category--large__item--picked";
-    categoryInfo.mediumItemDOMs.get("0-0").className = "category--medium__item--picked";
+    boxDOMs["0"].className = "category--medium--picked";
+    boxDOMs["0-0"].className = "category--small--picked";
 
+    itemDOMs["0"].className = "category--large__item--picked";
+    itemDOMs["0-0"].className = "category--medium__item--picked";
 
-    return categoryInfo;
+    return {
+        DOM: DOM,
+        boxDOMs: boxDOMs,
+        itemDOMs: itemDOMs,
+        picked: "0-0"
+    }
+}
+
+const handler = function (categoryInfo, name) {
+    const len = name.split("-").length;
+    switch (len) {
+        case 1:
+
+            categoryInfo.itemDOMs[categoryInfo.picked.slice(0, 1)].className = "category--large__item";
+            categoryInfo.itemDOMs[name].className = "category--large__item--picked";
+
+            categoryInfo.boxDOMs[categoryInfo.picked.slice(0, 1)].className = "category--medium";
+            categoryInfo.boxDOMs[name].className = "category--medium--picked";
+            name += "-0";
+
+            categoryInfo.boxDOMs[categoryInfo.picked].className = "category--small";
+            categoryInfo.boxDOMs[name].className = "category--small--picked";
+
+            categoryInfo.itemDOMs[categoryInfo.picked].className = "category--medium__item";
+            categoryInfo.itemDOMs[name].className = "category--medium__item--picked";
+
+            categoryInfo.picked = name;
+            break;
+        case 2:
+            categoryInfo.boxDOMs[categoryInfo.picked].className = "category--small";
+            categoryInfo.boxDOMs[name].className = "category--small--picked";
+
+            categoryInfo.itemDOMs[categoryInfo.picked].className = "category--medium__item";
+            categoryInfo.itemDOMs[name].className = "category--medium__item--picked";
+
+            categoryInfo.picked = name;
+            break;
+        case 3:
+            categoryInfo.itemDOMs[name].className = "category--small__item--picked";
+            break;
+    }
+}
+const equation = function (x1, y1, x2, y2) {
+    return function (x) {
+        return ((y2 - y1) / (x2 - x1)) * (x - x1) + y1;
+    }
 }
 
 const addEventHandler = function (categoryInfo) {
-    categoryInfo.refresh = function (number) {
-        const ijk = number.split("-");
-        switch (ijk.length) {
-            case 1: // large item
-                categoryInfo.mediumItemDOMs.get(categoryInfo.number.slice(0, 2).join("-")).className = "category--medium__item";
-                categoryInfo.smallItemDOMs.get(categoryInfo.number.join("-")).className = "category--small__item";
-
-                categoryInfo.mediumDOMs.get(categoryInfo.number.slice(0, 1).join("-")).className = "category--medium";
-                categoryInfo.smallDOMs.get(categoryInfo.number.slice(0, 2).join("-")).className = "category--small";
-
-                categoryInfo.largeItemDOMs.get(categoryInfo.number.slice(0, 1).join("")).className = "category--large__item";
-                categoryInfo.largeItemDOMs.get(number).className = "category--large__item--picked";
-
-                categoryInfo.number = [number, 0, 0];
-                categoryInfo.mediumDOMs.get(categoryInfo.number.slice(0, 1).join("-")).className = "category--medium--picked";
-                categoryInfo.smallDOMs.get(categoryInfo.number.slice(0, 2).join("-")).className = "category--small--picked";
-                categoryInfo.mediumItemDOMs.get(categoryInfo.number.slice(0, 2).join("-")).className = "category--medium__item--picked";
-                break;
-            case 2: // medium item
-                categoryInfo.smallDOMs.get(categoryInfo.number.slice(0, 2).join("-")).className = "category--small";
-                categoryInfo.smallDOMs.get(number).className = "category--small--picked";
-
-                categoryInfo.mediumItemDOMs.get(categoryInfo.number.slice(0, 2).join("-")).className = "category--medium__item";
-                categoryInfo.mediumItemDOMs.get(number).className = "category--medium__item--picked";
-
-                categoryInfo.smallItemDOMs.get(categoryInfo.number.join("-")).className = "category--small__item";
-
-                categoryInfo.number = [...number.split("-"), 0];
-                break;
-            case 3:
-                categoryInfo.smallItemDOMs.get(categoryInfo.number.join("-")).className = "category--small__item";
-                categoryInfo.smallItemDOMs.get(number).className = "category--small__item--picked";
-                
-                categoryInfo.number = [...number.split("-")];
-                break;
+    const MoE = 3; // 오차 범위
+    categoryInfo.DOM.addEventListener("mouseout", (e) => {
+        if (e.target.className.indexOf("item") === -1) return;
+        if (e.target.className.indexOf("small__item") !== -1) return;
+        const domXY = e.target.getBoundingClientRect();
+        const x1 =  e.clientX - 1;
+        const y1 = e.clientY;
+        const x2 = domXY.right;
+        if (y1 <= domXY.top + MoE) { // 위
+            const y2 = categoryInfo.DOM.getBoundingClientRect().top;
+            categoryInfo.getY = equation(x1, y1, x2, y2);
+            categoryInfo.dir = "up";
         }
-    }
-    categoryInfo.boxDOM.addEventListener("mouseover", (e) => {
-        const target = e.target; // 캐싱
-        const number = target.getAttribute("name");
-        if(number) {
-            categoryInfo.refresh(number);
+        else if (y1 >= domXY.bottom - MoE) { // 아래
+            const y2 = categoryInfo.DOM.getBoundingClientRect().bottom;
+            categoryInfo.getY = equation(x1, y1, x2, y2);
+            categoryInfo.dir = "down";
+
+        }
+        else {
+            categoryInfo.dir = "left or right";
         }
     });
+    categoryInfo.DOM.addEventListener("mousemove", (e) => {
+        if (e.target.className.indexOf("item") === -1) return;
+        const x = e.clientX;
+        const y = e.clientY;
+        if ((categoryInfo.dir === "up") && (y > categoryInfo.getY(x))) return;
+        else if ((categoryInfo.dir === "down") && (y < categoryInfo.getY(x))) return;
 
+        const name = e.target.getAttribute("name");
+        handler(categoryInfo, name, categoryInfo.picked);
+    });
+    categoryInfo.DOM.addEventListener("mouseout", (e) => {
+        if (e.target.className.indexOf("small__item") === -1) return;
+        const name = e.target.getAttribute("name");
+        categoryInfo.itemDOMs[name].className = "category--small__item";
+    });
     return categoryInfo;
 }
 
@@ -174,12 +210,13 @@ const pipe = (...funcs) => data => {
     }, data);
 };
 
-export const initCategory = function (data) {
+export const getCategoryDOM = function (data) {
     return pipe(
+        addNameToJson,
         transJsonToString,
-        func,
+        transStringToHTML,
         transHTMLToDOM,
         setCategoryElement,
-        addEventHandler,
+        addEventHandler
     )(data);
 };
