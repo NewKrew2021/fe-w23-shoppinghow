@@ -31,8 +31,13 @@ api.get('/menu', (ctx, next) => {
 });
 
 api.get('/recommand', (ctx, next) => {
-  console.log(ctx.request.query.word);
-  ctx.body = recommand;
+  const searchingWord = ctx.query.word;
+
+  const filteredWord = recommand.data.filter(word =>
+    word.includes(searchingWord)
+  );
+
+  ctx.body = filteredWord;
 });
 
 module.exports = api;

@@ -58,6 +58,9 @@ class SearchBox {
   }
 
   init() {
+    this.getRecommandData('감')
+      .then(res => res.json())
+      .then(res => console.log(res));
     this.addFocusEvent();
   }
 }
