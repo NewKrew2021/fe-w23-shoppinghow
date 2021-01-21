@@ -1,5 +1,6 @@
 $colors: (
   "white": #ffffff,
+  "bright": #f7f7f8,
   "light": #eeeeee,
   "gray": #999999,
   "dark": #242526,
@@ -10,6 +11,9 @@ $colors: (
     color: $color-value;
   }
   .bg-#{$color-name} {
+    background-color: $color-value;
+  }
+  .hover-bg-#{$color-name}:hover {
     background-color: $color-value;
   }
 }
