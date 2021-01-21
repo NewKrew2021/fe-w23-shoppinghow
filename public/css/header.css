@@ -34,8 +34,10 @@ header #search #dropdown {
   z-index: 2;
   padding: 12px 0px 12px 0px;
 }
-header #search #dropdown .keyword-li {
+header #search #dropdown .active {
   background-color: lightgray;
+}
+header #search #dropdown .keyword-li {
   list-style: none;
   font-size: 15px;
   padding: 5px 5px 5px 15px;
@@ -120,6 +122,9 @@ header .hide {
 }
 header .show {
   display: inline-block;
+}
+header .show-block {
+  display: block;
 }
 header #menu {
   position: absolute;

@@ -35,8 +35,10 @@ header {
       z-index: 2;
       $padding:12px;
       padding :$padding 0px $padding 0px;
-      .keyword-li{
+      .active{
         background-color: lightgray;
+      }
+      .keyword-li{
         list-style: none;
         font-size:15px;
         padding:5px 5px 5px 15px;
@@ -129,6 +131,9 @@ header {
   }
   .show{
     display: inline-block;
+  }
+  .show-block{
+    display: block;
   }
 
   #menu{
