@@ -41,5 +41,5 @@ function initDomAPI () {
     return {querySelector, querySelectorAll};
 }
 
-const CustomDomAPI = initDomAPI();
-export default CustomDomAPI;
+const dapi = initDomAPI();
+export default dapi;

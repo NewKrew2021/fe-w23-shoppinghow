@@ -1,38 +1,38 @@
 import API from '../utils/api.js';
-import CustomDomAPI from '../utils/CustomDomAPI.js';
-import * as Card from './card.js';
+import dapi from '../utils/CustomDomAPI.js';
+import CardTemplate from './card.js';
 
-class Products {
+class ProductView {
     constructor() {
         this.startIdx = 0
-        this.htmlElement = CustomDomAPI.querySelector('.products');
-        this.button = CustomDomAPI.querySelector('.more-button');
         this.onClickMoreButton = this.onClickMoreButton.bind(this);
+        this.onClickElement = this.onClickElement.bind(this);
         this.getMoreProducts = this.getMoreProducts.bind(this);
+        this.init();
+    }
+    
+    init() {        
+        this.htmlElement = dapi.querySelector('.products');
+        this.button = dapi.querySelector('.more-button');
         this.getProducts();
-        this.htmlElement.addEventListener('click', (e) => {
-            this.onClickElement(e.target);
-        })
+        this.htmlElement.addEventListener('click', this.onClickElement);
         this.button.addEventListener('click', this.onClickMoreButton);
     }
     
     getMoreProducts() {
         this.startIdx = this.startIdx + 5;
-        let count = 0;
         API.getMoreItems(this.startIdx).then((res)=> {
-            const innerHtml = res.data.reduce((acc, item) => {
-                count ++;
-                return acc + Card.getCardTemplate(item, 'card-' + (this.startIdx + count).toString());
+            const innerHtml = res.data.reduce((acc, item, index) => {
+                return acc + CardTemplate.get(item, 'card-' + (this.startIdx + index).toString());
             }, '')
             this.htmlElement.innerHTML = String(this.htmlElement.innerHTML) + innerHtml;
         });
     }
+    
     getProducts() {
         API.getItems().then((res)=> {
-            let count = 0;
-            const innerHtml = res.data.reduce((acc, item) => {
-                count ++;
-                return acc + Card.getCardTemplate(item, 'card-' + count.toString());
+            const innerHtml = res.data.reduce((acc, item, index) => {
+                return acc + CardTemplate.get(item, 'card-' + index.toString());
             }, '')
             this.htmlElement.innerHTML = innerHtml;
         });
@@ -43,7 +43,7 @@ class Products {
     onClickMoreButton() {
         this.getMoreProducts();
     }
-    onClickElement(target) {
+    onClickElement({target}) {
         target = target.closest('.card');
         if (!target) return;
         let localStorageRecentItems = localStorage.getItem("recent-items");
@@ -58,4 +58,11 @@ class Products {
 
 };
 
-export default Products;
+class ProductRenderer {
+    constructor() {
+
+    }
+
+}
+
+export default ProductView;

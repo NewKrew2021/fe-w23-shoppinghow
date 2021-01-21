@@ -1,7 +1,6 @@
 import categoryData from '../data/categoryData';
-import CustomDomAPI from '../utils/CustomDomAPI';
+import dapi from '../utils/CustomDomAPI';
 import '../css/CategoryNavbar.css';
-
 
 const ColumnId = {"first-category": 0, "second-category": 1, "third-category": 2};
 const CONTAINER_CLASSNAME = ".category__container"
@@ -31,65 +30,64 @@ class CategoryNavbarManager {
         this.currentCol = 0;
         this.timerForMouseStop = undefined;
         this.onEnterCol = this.onEnterCol.bind(this);
-        this.renderer = new CategoryNavbarRenderer();
-        this.button = CustomDomAPI.querySelector(BUTTON_CLASSNAME);
-        this.container = CustomDomAPI.querySelector(CONTAINER_CLASSNAME);
+        this.onMouseStop = this.onMouseStop.bind(this);
         this.init();
     }
-
+    
     init() {
+        this.button = dapi.querySelector(BUTTON_CLASSNAME);
+        this.container = dapi.querySelector(CONTAINER_CLASSNAME);
+        this.renderer = new CategoryNavbarRenderer();
         this.button.addEventListener('mouseenter', (e) => {
             this.container.className="category__container active";
         })
         this.container.addEventListener('mouseleave', () => {
             this.container.className="category__container non-active";
         })
-        // this.timerForMouseStop = ;
         document.querySelectorAll('.category__container > div').forEach(element => {
             element.addEventListener('mouseenter', this.onEnterCol);
         });
     }
 
     getDataForCol(index) {
-        let colData = {};
-        if (index === 2) return;
-        if (index === 0) {
-            colData = categoryData.data[this.currentIndexes[0]].data 
-        } else if (index === 1) {
-            colData = categoryData.data[this.currentIndexes[0]].data[this.currentIndexes[1]].data
+        // 마지막 컬럼의 경우 대상 하위 컬럼이 없기 때문에 업데이트하지 않는다.
+        if (index === ColumnId.length - 1) return;
+        
+        let colData = categoryData.data;
+        for (let i = 0; i <= index; i++) {
+            colData = colData[this.currentIndexes[i]].data;
         }
         return colData;
     }
 
-    onEnterCol(e) {
-        const columnEle = e.currentTarget;
-        const enteredCol = ColumnId[e.currentTarget.className];
+    onEnterCol({currentTarget}) {
+        const enteredCol = ColumnId[currentTarget.className];
         if (enteredCol === this.currentCol) return;
-        
-        this.currentCol = ColumnId[e.currentTarget.className];
-        // columnEle.addEventListener('mouseover', () => {
-        // })
-        if (this.currentCol < 2) {
-            columnEle.addEventListener('mousemove', (e) => {
-                const index = e.target.closest('li').getAttribute('data-index');
-                clearTimeout(this.timerForMouseStop);
-                this.timerForMouseStop = setTimeout(() => {
-                    if (!e.target.closest('li') || this.currentIndexes[this.currentCol] === index) {
-                        return;
-                    }
-                    this.currentIndexes[this.currentCol] = index;
-                    if (this.currentCol === 0) {
-                        this.currentIndexes[this.currentCol + 1] = 0;
-                        this.renderer.updateColumn(this.currentCol + 1, this.getDataForCol(this.currentCol + 1));
-                    }
-                    // 첫번째 메뉴에서는 active를 유지시킨다.
-                    // this.renderer.selectIndex(this.currentCol, index);
-                    this.renderer.updateColumn(
-                        this.currentCol, this.getDataForCol(this.currentCol)
-                    );
-                }, 100);
-            })
+
+        this.currentCol = enteredCol;
+        if (this.currentCol !== ColumnId.length - 1) {
+            currentTarget.addEventListener('mousemove', this.onMouseStop)
         }
+    }
+    
+    onMouseStop(e) {
+        const index = e.target.closest('li').getAttribute('data-index');
+        clearTimeout(this.timerForMouseStop);
+        this.timerForMouseStop = setTimeout(() => {
+            if (!e.target.closest('li') || this.currentIndexes[this.currentCol] === index) {
+                return;
+            }
+            this.currentIndexes[this.currentCol] = index;
+            // TODO : 해당 인덱스 항목에 active class 추가하기
+            if (this.currentCol === 0) {
+                // 첫 번째 컬럼에서 인덱스가 업데이트된 경우, 맨 마지막 컬럼의 인덱스도 0으로 초기화 후 업데이트 해 준다.
+                this.currentIndexes[this.currentCol + 1] = 0;
+                this.renderer.updateColumn(this.currentCol + 1, this.getDataForCol(this.currentCol + 1));
+            }
+            this.renderer.updateColumn(
+                this.currentCol, this.getDataForCol(this.currentCol)
+            );
+        }, 100);
     }
 
     onChangeCurrentCol() {
@@ -104,7 +102,7 @@ class CategoryNavbarRenderer {
         this.renderFirstCol = this.renderFirstCol.bind(this);
         this.renderSecondCol = this.renderSecondCol.bind(this);
         this.renderThirdCol = this.renderThirdCol.bind(this);
-        this.container = CustomDomAPI.querySelector(CONTAINER_CLASSNAME);
+        this.container = dapi.querySelector(CONTAINER_CLASSNAME);
         this.initialRender();
     }
 
@@ -126,17 +124,17 @@ class CategoryNavbarRenderer {
     }
 
     renderFirstCol(colData) {
-        const firstColEle = CustomDomAPI.querySelector(".first-category");
+        const firstColEle = dapi.querySelector(".first-category");
         firstColEle.innerHTML = this.renderList(colData);
     }
 
     renderSecondCol(colData) {
-        const secondColEle = CustomDomAPI.querySelector(".second-category");
+        const secondColEle = dapi.querySelector(".second-category");
         secondColEle.innerHTML = this.renderList(colData);
     }
 
     renderThirdCol(colData) {
-        const thirdColEle = CustomDomAPI.querySelector(".third-category");
+        const thirdColEle = dapi.querySelector(".third-category");
         thirdColEle.innerHTML = this.renderList(colData);
     }
 
@@ -161,7 +159,6 @@ class CategoryNavbarRenderer {
         } else if (currentCol === 0) {
             this.renderSecondCol(colData);
         }
-
     }
 };
 
