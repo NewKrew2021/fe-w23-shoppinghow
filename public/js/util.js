@@ -104,12 +104,13 @@ export function throttle(fn, delay) {
 
 /* 디바운스 함수 */
 export function debounce(fn, delay) {
-    let timer
-    return function() {
-        clearTimeout(timer);
-        timer = setTimeout(() => { // *
-            fn.apply(this, arguments);
-        }, delay);
+    let timer = null;
+    return function(...args) {
+        if (timer){
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() =>  // *
+            fn(...args), delay);
     }
 }
 
