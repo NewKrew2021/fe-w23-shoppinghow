@@ -7,7 +7,7 @@ function getNavListItemHtmlString({ title, href }, hoverPopupTarget) {
   return `
     <li
       role="button"
-      class="nav-item"
+      class="nav-item hover-bg-white"
       ${hoverPopupTarget ? `data-hover-popup-target="#${hoverPopupTarget}"` : ''}
     >
     ${href ? `<a href="${href}">` : ``}
@@ -36,7 +36,7 @@ function getMultiNavHtmlString(id, dataList, depth, isMainNav = false) {
   htmlString += `
     <div
       id="${id}"
-      class="d-flex flex-${depth} ${isMainNav ? `` : `hover-popup-target`}"
+      class="d-flex flex-${depth} ${isMainNav ? `bg-light` : `bg-white hover-popup-target text-small`}"
       ${isMainNav ? `` : `data-hover-popup-target="#${id}" data-hover-hide-delay="${HOVER_HIDE_DELAY}"`}
     >`
 
