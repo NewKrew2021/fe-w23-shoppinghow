@@ -22,21 +22,21 @@ const MENU_TEMPLATE = {
 class CategoryMenu {
   constructor() {
     this.categoryData = {
-      large: null,
-      medium: null,
-      small: null,
+      [LARGE]: null,
+      [MEDIUM]: null,
+      [SMALL]: null,
     };
 
     this.categoryElement = {
-      large: $('.large-category'),
-      medium: $('.medium-category'),
-      small: $('.small-category'),
+      [LARGE]: $('.large-category'),
+      [MEDIUM]: $('.medium-category'),
+      [SMALL]: $('.small-category'),
     };
 
     this.activeCategoryIndex = {
-      large: 0,
-      medium: 0,
-      small: 0,
+      [LARGE]: 0,
+      [MEDIUM]: 0,
+      [SMALL]: 0,
     };
 
     this.currentX = 0;
