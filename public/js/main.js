@@ -8,13 +8,14 @@ import HotSlider from './hotslider.js';
 import Storage from './storage.js';
 
 export default class MainLayout {
-    constructor(input) {
-        this.keywordURL = input.keywordURL;
-        this.leftBannerURL = input.leftBannerURL;
-        this.rightBannerURL = input.rightBannerURL;
-        this.hotBannerURL = input.hotBannerURL;
-        this.gridBannerURL = input.gridBannerURL;
-        this.keywordCnt = input.keywordCnt;
+    constructor({keywordURL, leftBannerURL, rightBannerURL,
+        hotBannerURL, gridBannerURL, keywordCnt}) {
+        this.keywordURL = keywordURL;
+        this.leftBannerURL = leftBannerURL;
+        this.rightBannerURL = rightBannerURL;
+        this.hotBannerURL = hotBannerURL;
+        this.gridBannerURL = gridBannerURL;
+        this.keywordCnt = keywordCnt;
     }
 
     addKeyword() {
