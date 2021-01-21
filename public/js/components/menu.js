@@ -11,6 +11,7 @@ const MEDIUM = 'medium';
 const LARGE = 'large';
 const MENU_POP_UP = 'menu__pop-up';
 const CATEGORY_MENU = 'menu';
+const ICON = 'menu__icon';
 
 const MENU_TEMPLATE = {
   categoryTab(type, title) {
@@ -35,6 +36,7 @@ class CategoryMenu {
       [LARGE]: $('.large-category'),
       [MEDIUM]: $('.medium-category'),
       [SMALL]: $('.small-category'),
+      [ICON]: $(`.${ICON}`),
     };
 
     this.activeCategoryIndex = {
@@ -164,24 +166,32 @@ class CategoryMenu {
     }
   }
 
+  addActiveClass(type) {
+    this.categoryElement[type].classList.add(`${type}--activated`);
+  }
+
+  deleteActiveClass(type) {
+    deleteClassFromElement(this.categoryElement[type], `${type}--activated`);
+  }
+
   addMouseOverEvent() {
     this.categoryElement[CATEGORY_MENU].addEventListener('mouseenter', () => {
-      this.categoryElement[MENU_POP_UP].style.display = 'flex';
-      $('.menu__icon').classList.add('menu__icon--activated');
-      $('.menu__icon').innerText = '✕';
+      this.addActiveClass(MENU_POP_UP);
+      this.addActiveClass(ICON);
+      this.categoryElement[ICON].innerText = '✕';
     });
 
     this.categoryElement[CATEGORY_MENU].addEventListener('mouseleave', () => {
-      this.categoryElement[MENU_POP_UP].style.display = 'none';
-      deleteClassFromElement($('.menu__icon'), 'menu__icon--activated');
-      $('.menu__icon').innerText = '☰';
+      this.deleteActiveClass(MENU_POP_UP);
+      this.deleteActiveClass(ICON);
+      this.categoryElement[ICON].innerText = '☰';
     });
   }
 
   init() {
     this.fetchMenuData()
       .then(res => this.initMenuData(res))
-      .then(() => this.renderMenu());
+      .then(this.renderMenu.bind(this));
     this.addMouseOverEvent();
     this.addCurrentTabEvent();
   }
