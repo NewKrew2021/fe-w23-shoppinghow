@@ -255,9 +255,9 @@ li
     background: #000000
     margin-right: 10px
   &__pop-up
+    display: none
     top: $header-nav-height
     left: 0px
-    display: flex
     position: absolute
     border: 1px solid #000000
     .large-category, .medium-category, .small-category
@@ -276,6 +276,8 @@ li
         padding: 15px 0px 15px 30px
         font-size: 20px
         cursor: pointer
+        &:hover
+          color: brown
 
     .medium-category, .small-category
       font-size: 14px

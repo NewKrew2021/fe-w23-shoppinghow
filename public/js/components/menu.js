@@ -9,6 +9,8 @@ const MOUSE_MAX_SPEED = 5;
 const SMALL = 'small';
 const MEDIUM = 'medium';
 const LARGE = 'large';
+const MENU_POP_UP = 'menu__pop-up';
+const CATEGORY_MENU = 'menu';
 
 const MENU_TEMPLATE = {
   categoryTab(type, title) {
@@ -28,6 +30,8 @@ class CategoryMenu {
     };
 
     this.categoryElement = {
+      [CATEGORY_MENU]: $('.menu'),
+      [MENU_POP_UP]: $(`.${MENU_POP_UP}`),
       [LARGE]: $('.large-category'),
       [MEDIUM]: $('.medium-category'),
       [SMALL]: $('.small-category'),
@@ -160,11 +164,21 @@ class CategoryMenu {
     }
   }
 
+  addMouseOverEvent() {
+    this.categoryElement[CATEGORY_MENU].addEventListener('mouseenter', () => {
+      this.categoryElement[MENU_POP_UP].style.display = 'flex';
+    });
+
+    this.categoryElement[CATEGORY_MENU].addEventListener('mouseleave', () => {
+      this.categoryElement[MENU_POP_UP].style.display = 'none';
+    });
+  }
+
   init() {
     this.fetchMenuData()
       .then(res => this.initMenuData(res))
       .then(() => this.renderMenu());
-
+    this.addMouseOverEvent();
     this.addCurrentTabEvent();
   }
 }
