@@ -45,21 +45,19 @@ class SearchBox {
     });
   }
 
-  init() {
-    let params = { param1: 'value1', param2: 'value2' };
-
+  getRecommandData(searchingWord) {
+    let params = { word: searchingWord };
     let query = Object.keys(params)
       .map(
         key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
       )
       .join('&');
 
-    fetch(`${HOST}:${PORT}/api/recommand?${query}`, {
-      method: 'POST',
-      body: JSON.stringify({ name: 'puba' }),
-    })
-      .then(res => res.json())
-      .then(res => console.log(res.data));
+    let url = `${HOST}:${PORT}/api/recommand?${query}`;
+    return fetch(url);
+  }
+
+  init() {
     this.addFocusEvent();
   }
 }
