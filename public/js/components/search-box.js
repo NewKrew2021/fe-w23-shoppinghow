@@ -26,13 +26,17 @@ class SearchBox {
     );
   }
 
+  addEventOnElement(elementType, eventType, callbackFunction) {
+    this.HTMLelement[elementType].addEventListener(eventType, callbackFunction);
+  }
+
   addFocusEvent() {
-    this.HTMLelement.input.addEventListener('focus', event => {
+    addEventOnElement('input', 'focus', () => {
       this.addFocusStyle('recommand');
       this.addFocusStyle('searchBox');
     });
 
-    this.HTMLelement.input.addEventListener('blur', event => {
+    this.addEventOnElement('input', 'blur', () => {
       this.deleteFocusStyle('recommand');
       this.deleteFocusStyle('searchBox');
     });
