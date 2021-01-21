@@ -5,6 +5,7 @@ header {
   background-color: white;
   font-family: sans-serif;
   z-index: 10000000;
+  overflow: hidden;
 }
 header #banner {
   display: flex;
@@ -17,12 +18,21 @@ header #logo {
   height: 51px;
   width: 110px;
 }
+header .focus {
+  border: 1px solid orange;
+}
+header .blur {
+  border: 1px solid gainsboro;
+}
 header #search-bar {
+  outline: none;
   height: 54px;
   width: 640px;
   border-radius: 10px;
   margin-left: 10px;
-  border: 1px solid gainsboro;
+  font-size: 20px;
+  color: gray;
+  padding-left: 15px;
 }
 header #search-button {
   position: relative;
