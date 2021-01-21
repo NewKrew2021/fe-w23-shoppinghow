@@ -10,6 +10,7 @@ const CLASS_NAME = {
 
 class SearchBox {
   constructor() {
+    this.recommandList = [];
     this.HTMLelement = {
       searchBox: $(`.${CLASS_NAME.searchBox}`),
       input: $('.search-box__input'),
@@ -45,7 +46,7 @@ class SearchBox {
     });
   }
 
-  getRecommandData(searchingWord) {
+  fetchData(searchingWord) {
     let params = { word: searchingWord };
     let query = Object.keys(params)
       .map(
@@ -57,10 +58,24 @@ class SearchBox {
     return fetch(url);
   }
 
+  renderRecommand(recommandList) {
+    return recommandList.reduce((acc, item) => {
+      return acc + `<li class="search-recommand__item">${item}</li>`;
+    }, ``);
+  }
+
+  async getRecommand() {
+    let recommandList = await this.fetchData(
+      this.HTMLelement['input'].value
+    ).then(res => res.json());
+
+    this.HTMLelement['recommand'].innerHTML = this.renderRecommand(
+      recommandList
+    );
+  }
+
   init() {
-    this.getRecommandData('감')
-      .then(res => res.json())
-      .then(res => console.log(res));
+    this.addEventOnElement('input', 'keyup', this.getRecommand.bind(this));
     this.addFocusEvent();
   }
 }
