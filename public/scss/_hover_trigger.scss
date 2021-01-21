@@ -9,3 +9,7 @@
 .hover-popup-target:not(.show) {
   display: none;
 }
+
+[data-hover-toggle-group]:not(.show) {
+  display: none;
+}

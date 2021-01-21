@@ -1,13 +1,16 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: './public/js',
+  entry: './webpack-entry.js',
   output: {
-    path: path.resolve(__dirname, 'public/js/dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'script.bundle.js'
   },
   module: {
     rules: [
+
+      // rule for js
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
@@ -34,8 +37,33 @@ module.exports = {
             ]
           }
         }
+      },
+
+      // rule for css
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // inject CSS into the DOM
+          { loader: 'style-loader' },
+          // interprets @import and url() like import/require() and will resolve them
+          {
+            loader: 'css-loader',
+            options: {
+              modules: { // enable CSS modules and their configuration
+              localIdentName:'[local]'
+              }
+            }
+          },
+          // loads a Sass/SCSS file and compiles it to CSS
+          { loader: 'sass-loader' }
+        ]
       }
     ]
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './views/index.html'
+    })
+  ],
   mode: 'development'
 };

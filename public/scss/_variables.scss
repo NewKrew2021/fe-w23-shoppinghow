@@ -1,0 +1,35 @@
+$percentages: (
+  "0": 0%,
+  "10": 10%,
+  "20": 20%,
+  "25": 25%,
+  "33": 33.33333333333333%,
+  "40": 40%,
+  "50": 50%,
+  "60": 60%,
+  "80": 80%,
+  "100": 100%,
+);
+
+$sizes: map-merge(
+  $percentages,
+  (
+    "auto": auto,
+  )
+);
+
+// color
+$color-white: #ffffff;
+$color-bright: #f7f7f8;
+$color-light: #eeeeee;
+$color-gray: #999999;
+$color-dark: #242526;
+$color-orangered: #f95139;
+$colors: (
+  "white": $color-white,
+  "bright": $color-bright,
+  "light": $color-light,
+  "gray": $color-gray,
+  "dark": $color-dark,
+  "orangered": $color-orangered,
+);

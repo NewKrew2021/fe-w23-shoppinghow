@@ -5,20 +5,20 @@ input {
   outline: none;
 
   &.highlight:focus {
-    border-color: #f95139;
+    border-color: $color-orangered;
   }
 }
 
 .input-focus-show {
   background-color: #ffffff;
   border-radius: 0.75rem;
-  border: 1px solid #f95139;
+  border: 1px solid $color-orangered;
   margin-top: -1px;
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
-  padding: 1.5rem;
+  z-index: 1;
 }
 
 input:focus + .input-focus-show {

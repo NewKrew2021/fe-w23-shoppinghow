@@ -1,4 +1,4 @@
-import { appendImageCarousel, appendItemCard, appendMultiNav, initCarousel, initHoverPopup, initItemCardWrapper, initRecentWrapper, initSearchBar } from './component'
+import { appendImageCarousel, appendItemCard, appendMultiNav, initCarousel, initHoverPopup, initHoverToggle, initItemCardWrapper, initRecentWrapper, initSearchBar } from './component'
 import { myFetchGET, findOne } from './util'
 
 // initialize the page
@@ -72,6 +72,7 @@ function initPage() {
   initSearchBar()
   initItemCardWrapper()
   initHoverPopup()
+  initHoverToggle()
   initRecentWrapper(findOne('#recent_view'))
 }
 

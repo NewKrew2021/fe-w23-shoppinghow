@@ -1,5 +1,5 @@
 export * from './carousel'
-export * from './hover_popup'
+export * from './hover_trigger'
 export * from './item_card'
 export * from './multinav'
 export * from './recent'

@@ -1,15 +1,11 @@
-$colors: (
-  "white": #ffffff,
-  "light": #eeeeee,
-  "gray": #999999,
-  "dark": #242526,
-);
-
 @each $color-name, $color-value in $colors {
   .#{$color-name} {
     color: $color-value;
   }
   .bg-#{$color-name} {
+    background-color: $color-value;
+  }
+  .hover-bg-#{$color-name}:hover {
     background-color: $color-value;
   }
 }
