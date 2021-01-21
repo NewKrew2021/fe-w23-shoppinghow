@@ -17,7 +17,7 @@ export default class Category {
     }
 
     /* 카테고리 데이터 추가 */
-    showCategoryData() {
+    addCategoryData() {
         /* async, await 적용 */
         async function inserData() {
             try {
@@ -25,28 +25,21 @@ export default class Category {
                 const data = await res.json();
 
                 /* 맨 처음에는 상위 0번째 요소들로 기본 표시 */
-                const createHTML = ({data, type, on = ''}) => data.reduce((acc, { title }, idx) => {
+                const mainTabObj = { data: data, type: 'mainCategory', on: "on" };
+                const subTabObj = [{ data: data[0].data, type: 'subCategory', on: "sub-on" },
+                { data: data[0].data[0].data, type: 'lowCategory' }];
+                const createHTML = ({ data, type, on = '' }) => data.reduce((acc, { title }, idx) => {
                     let str = '';
                     if (idx === 0) str = on;
                     return acc + domTpl[type](str, title, idx);
                 }, ``);
-                const mainTabObj = {data : data, type : 'mainCategory', on : "on"};
-                const subTabObj = [{data : data[0].data, type : 'subCategory', on : "sub-on"},
-                                   {data : data[0].data[0].data, type : 'lowCategory'}];
-
                 innerHTML(this.mainTab, createHTML(mainTabObj));
                 innerHTML(this.subTab_01, createHTML(subTabObj[0]));
                 innerHTML(this.subTab_02, createHTML(subTabObj[1]));
 
-                /* 마우스에 따라 메인탭에 on 넣기 */
-                this.mainTab.addEventListener('mouseover', (e) => {
-                    if (e.target.getAttribute('main-idx')) {
-                        dom('.on').querySelector().classList.remove('on');
-                        e.target.classList.add('on');
-                    }
-                })
+                /* on이 표시된 곳의 idx를 구하고 그 값으로 소분류의 값들을 대체 */
+                
 
-                /* on이 표시된 곳의 main-idx를 구하고 그 값으로 소분류의 값들을 대체 */
             }
             catch (err) {
                 console.error(err);
@@ -54,24 +47,36 @@ export default class Category {
         };
         inserData.bind(this)();
     }
-
     showCategory() {
         this.categoryBtn.src = '/images/close_btn.png';
         this.innerCategory.style.display = 'block';
-        /* + category div 영역 보이기 */
     }
     closeCategory() {
         this.categoryBtn.src = '/images/category_btn.png';
         this.innerCategory.style.display = 'none';
-        /* + category div 영역 감추기 */
     }
+
+    /* 탭별 카테고리 선택 기능 */
+    selectCategory() {
+        /* 마우스에 따라 메인탭에 on 넣기 */
+        this.mainTab.addEventListener('mouseover', (e) => {
+            const mainIdx = e.target.getAttribute('main-idx');
+            if (mainIdx) {
+                dom('.on').querySelector().classList.remove('on');
+                e.target.classList.add('on');
+                console.log(mainIdx);
+            }
+        })
+    }
+
     onEvents() {
         this.category.addEventListener('mouseover', this.showCategory.bind(this));
         //this.category.addEventListener('mouseout', this.closeCategory.bind(this));
     }
 
     init() {
-        this.showCategoryData();
+        this.addCategoryData();
         this.onEvents();
+        this.selectCategory();
     }
 }

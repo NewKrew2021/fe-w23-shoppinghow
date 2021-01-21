@@ -59,7 +59,7 @@ export const domTpl = {
         return `<li class="sub-tab-list ${on}" sub-idx=${idx}>${title}</li>`
     },
     lowCategory(on = '', title, idx){
-        return `<li class="sub-tab-list" last-idx=${idx}><a href='#'>${title}</li>`
+        return `<li class="last-tab-list" last-idx=${idx}><a href='#'>${title}</li>`
     }
 };
 

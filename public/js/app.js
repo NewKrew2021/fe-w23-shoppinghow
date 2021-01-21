@@ -17,6 +17,7 @@ const uiEventObj = {
     MORE_INDEX : 0
 }
 const searchBoxObj = {
+    allkeywordURL : 'http://localhost:80/allkeyword',
     RELEASE_TIME : 350,
     COUNT : 10,
     SPEED : 600,

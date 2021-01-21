@@ -5,7 +5,7 @@
 import { dom, removeSpace, getStartPos, innerHTML } from './util.js';
 
 export default class SearchBox {
-    constructor({ RELEASE_TIME, COUNT, SPEED, HEIGHT }) {
+    constructor({ allkeywordURL, RELEASE_TIME, COUNT, SPEED, HEIGHT }) {
         this.search_blank = dom('.search-blank').querySelector();
         this.keywordWrapper = dom('.keyword').querySelector();
         this.keywordInner = dom('.keyword-inner').querySelector();
@@ -18,6 +18,7 @@ export default class SearchBox {
         this.ROLL_SPEED = SPEED;
         this.ROLL_HEIGHT = HEIGHT;
         this.RELEASE_TIME = RELEASE_TIME;
+        this.allkeywordURL = allkeywordURL;
         this.index = 1;
         this.selectIdx = -1;
     }
@@ -90,13 +91,14 @@ export default class SearchBox {
             this.keywordInner.style.display = 'block';
             this.selectIdx = -1;
         })
-
     }
 
     fetchAllKeywords() {
-        fetch('http://localhost:80/allkeyword')
-            .then(res => res.json())
-            .then(json => this.autoComplete(json));
+        (async function(){
+            const res = await fetch(this.allkeywordURL);
+            const json = await res.json();
+            return json;
+        }).bind(this)().then(json => this.autoComplete(json));
     }
 
     /* 검색어 자동완성 */
