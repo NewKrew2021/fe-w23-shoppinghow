@@ -3,3 +3,11 @@
     스마트 카테고리 영역
 */
 import { dom } from './util.js'
+
+export default class Category{
+
+    constructor(){
+        
+    }
+
+}
