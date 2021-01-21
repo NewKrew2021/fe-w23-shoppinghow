@@ -2,7 +2,7 @@ import {myDomApi} from "../util/MyDomApi.js"
 import {URL} from "../url.js"
 
 let canChange = true;
-let x1, x2, x3, y1, y2, y3, x4, y4, targetPointer="FIRST";
+let x1, x2, x3, y1, y2, y3, x4, y4, targetPointer="FIRST", curEvent;
 let [numOfFirst, numOfSecond, numOfThird] = [10, 15, 15];
 let depthFirst, depthSecond, categoryData, categoryFirst, categorySecond, categoryThird, dataObject = {};
 
@@ -145,16 +145,16 @@ const displayCategory = () => {
   }
 }
 
-const setTargetPointer = (targetClassName) => {
-  if(targetClassName===firstClass || targetClassName===firstClickClass || targetClassName===firstBorderClass){
+const setTargetPointer = (target) => {
+  if(target.className===firstClass || target.className===firstClickClass || target.className===firstBorderClass){
     targetPointer = "FIRST";
-    depthFirst = event.target.innerHTML;
+    depthFirst = target.innerHTML;
     depthSecond = dataObject[depthFirst][0];
     displayCategory();
   }
-  else if(targetClassName===secondClass || targetClassName===secondClickClass){
+  else if(target.className===secondClass || target.className===secondClickClass){
     targetPointer = "SECOND";
-    depthSecond = event.target.innerHTML;
+    depthSecond = target.innerHTML;
     displayCategory();
   }
   else targetPointer = "THIRD";
@@ -162,25 +162,40 @@ const setTargetPointer = (targetClassName) => {
 
 const categoryHover = () => {  
   categoryContainer.addEventListener("mouseover", event => {
-    if(event.target.innerHTML !== `` && canChange){
+    if(event.target.innerHTML === ``) return;
+    if(canChange) {
       x1 = x4 = event.clientX;
-      setTargetPointer(event.target.className)
+      setTargetPointer(event.target)
     }
+    isStay(event);
   })
+}
+
+const isStay = (prevEvent) => {
+  setTimeout(()=>{
+    if(curEvent.target === prevEvent.target) {
+      x1 = x4 = curEvent.clientX;
+      setTargetPointer(curEvent.target)
+    }
+  }, 250);
 }
 
 const mouseMove = () => {
   categoryContainer.addEventListener("mousemove", event => {
+    curEvent = event;
     let line1 = (y2-y1)/(x2-x1)*(event.clientX-x1)-event.clientY+y1
-    let line2 = (y3-y1)/(x3-x1)*(event.clientX-x1)-event.clientY+y1
+    let line2 = (y3-y4)/(x3-x4)*(event.clientX-x4)-event.clientY+y4
     let line3 = x2-event.clientX;
     let line4 = x4-event.clientX;
+    
     if(line1<=0 && line2>=0 && line3>=0 && line4<=0) canChange = false;
     else {
-      if(canChange === false) setTargetPointer(event.target.className);
+      if(canChange === false) {
+        x1 = x4 = event.clientX;
+        setTargetPointer(event.target);
+      }
       canChange = true;
     } 
-    console.log(canChange)
   })
 }
 

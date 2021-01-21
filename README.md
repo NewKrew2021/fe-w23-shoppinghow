@@ -111,6 +111,7 @@
         1. (y2-y1)/(x2-x1)*(x-x1)-y1+y1 <= 0
         2. (y3-y1)/(x3-x1)*(x-x1)-y1+y1 >= 0
         3. x2-x >= 0
+        4. x4-x <= 0
         을 모두 만족하면 현재 마우스 포인터는 삼각형 내에 존재함  
         
-![image](https://user-images.githubusercontent.com/26708382/105160432-9549ff80-5b53-11eb-96bb-ad0bd7172526.png)
+![img](https://user-images.githubusercontent.com/26708382/105276488-db02d880-5be4-11eb-80cd-eb4678033a5d.png)
