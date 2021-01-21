@@ -1,4 +1,4 @@
-import { createElementFromHTML } from "./util";
+import { createElementFromHTML ,getMatchingPisition} from "./util";
 
 export function initSearchBar(){
     const search = document.querySelector("#search");
@@ -10,9 +10,14 @@ export function initSearchBar(){
         .then((response) => {
             return response.json();
         }).then((data) => {
-            //TODO:data.keywordData를 이용한 작업
-            const li=data.keywordData.reduce((acc,text)=>
-                acc+`<li class="keyword-li">${text}</li>`
+            const li=data.keywordData.reduce((acc,text)=>{
+                const pos=getMatchingPisition(text,keyword);
+                return acc+`<li class="keyword-li">
+                <span>${text.substring(0,pos.matchStart)}</span><!--
+                --><span class="match">${text.substring(pos.matchStart,pos.matchEnd)}</span><!--
+                --><span>${text.substring(pos.matchEnd)}</span>
+                </li>`
+            }
             ,"");
             dropdown.innerHTML=li;
         }).catch((err) => { console.log(err) });

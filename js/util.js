@@ -7,15 +7,15 @@
 const isMatch=(base,keyword_)=>{
     const keyword=keyword_.replaceAll(" ","");
     for(let i = 0 ; i < base.length;i++){
-        let j=0;
-        let pass=0;
-        for(;j<keyword.length;j++){
-            if(base[j+pass]===' ') {
+        let j;
+        let pass;
+        for(j=0,pass=0;j<keyword.length;j++){
+            if(base[i+j+pass]===' ') {
                 pass++; 
                 j--;
                 continue;
             }
-            if(base[j+pass]!==keyword[j]) break;
+            if(base[i+j+pass]!==keyword[j]) break;
         }
         if(keyword.length===j) return true;
     }

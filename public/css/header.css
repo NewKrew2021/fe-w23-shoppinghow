@@ -38,10 +38,18 @@ header #search #dropdown .keyword-li {
   background-color: lightgray;
   list-style: none;
   font-size: 15px;
-  padding: 5px;
+  padding: 5px 5px 5px 15px;
+}
+header #search #dropdown .keyword-li span {
+  display: flat;
+  padding: 0px;
+}
+header #search #dropdown .keyword-li .match {
+  color: orangered;
 }
 header #search #search-bar {
   outline: none;
+  padding-left: 12px;
   height: 54px;
   width: 640px;
   border-radius: 10px;
