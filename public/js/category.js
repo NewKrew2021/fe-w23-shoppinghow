@@ -53,11 +53,16 @@ export default class Category {
             if (mainIdx) { // 유효한 인덱스일 경우
                 dom('.on').querySelector().classList.remove('on');
                 e.target.classList.add('on');
-                
                 const subObj_01 = { data: json[mainIdx].data, type: 'subCategory', on: "sub-on" };
                 innerHTML(this.subTab_01, createHTML(subObj_01));
             }
-            
+        })
+        this.subTab_01.addEventListener('mouseover', (e)=>{
+            const subIdx = e.target.getAttribute('sub-idx');
+            if(subIdx){ // 유효한 인덱스일 경우
+                dom('.sub-on').querySelector().classList.remove('sub-on');
+                e.target.classList.add('sub-on');
+            }
         })
     }
     showCategory() {
