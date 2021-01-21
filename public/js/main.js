@@ -4,6 +4,7 @@ import { getBasicItemHTML, getBasicItemHTMLs, getBasicItemDOM, getBestItemHTML,
     getCarouselItemDOM, getCarouselBoxHTML, getBoxDOM, getMarginDOM, getMoreBtnDOM, getSubjectDOM } from "./render.js";
 import { MyPromise } from "./promise.js";
 import { getCategoryDOM } from "./category.js";
+import {  } from "./search.js";
 import "../css/common.css";
 import "../css/style.css";
 
@@ -32,6 +33,10 @@ const initPage = function (data) {
     const hots = data[2].items;
     const basics = data[3].items;
     const categories = data[4];
+
+    document.querySelector(".input-box").addEventListener("input", () => {
+        console.log("input");
+    });
 
     const categoryInfo = getCategoryDOM(categories);
     const categoryBtn = domAPI.querySelector("#category");

@@ -1,8 +1,6 @@
 import { DOMSearchAPI } from "./DOM_search_api.js";
 
-
-
-// name: "largeIndex-mediumIndex-smallIndex"
+// name: "largeIndex-mediumIndex-smallIndex" name을 key로 각 DOM에 바로 접근하기 위함
 const addNameToJson = function (data) {
     const dfs = function (node, h, idxArr) {
         if (node.title) node.name = idxArr.slice(0, h + 1).join("-");
@@ -48,6 +46,7 @@ const transJsonToString = function (data) {
 
     return { name, title };
 }
+
 // string to html
 const transStringToHTML = function (data) {
     // 0: large, 1: medium, 2: small
@@ -157,7 +156,7 @@ const handler = function (categoryInfo, name) {
             break;
     }
 }
-const eqt = function (x1, y1, x2, y2) {
+const equation = function (x1, y1, x2, y2) {
     return function (x) {
         return ((y2 - y1) / (x2 - x1)) * (x - x1) + y1;
     }
@@ -169,17 +168,17 @@ const addEventHandler = function (categoryInfo) {
         if (e.target.className.indexOf("item") === -1) return;
         if (e.target.className.indexOf("small__item") !== -1) return;
         const domXY = e.target.getBoundingClientRect();
-        categoryInfo.x1 = e.clientX - 1;
-        categoryInfo.y1 = e.clientY;
-        categoryInfo.x2 = domXY.right;
-        if (categoryInfo.y1 <= domXY.top + MoE) { // 위
-            categoryInfo.y2 = categoryInfo.DOM.getBoundingClientRect().top;
-            categoryInfo.getY = eqt(categoryInfo.x1, categoryInfo.y1, categoryInfo.x2, categoryInfo.y2);
+        const x1 =  e.clientX - 1;
+        const y1 = e.clientY;
+        const x2 = domXY.right;
+        if (y1 <= domXY.top + MoE) { // 위
+            const y2 = categoryInfo.DOM.getBoundingClientRect().top;
+            categoryInfo.getY = equation(x1, y1, x2, y2);
             categoryInfo.dir = "up";
         }
-        else if (categoryInfo.y1 >= domXY.bottom - MoE) { // 아래
-            categoryInfo.y2 = categoryInfo.DOM.getBoundingClientRect().bottom;
-            categoryInfo.getY = eqt(categoryInfo.x1, categoryInfo.y1, categoryInfo.x2, categoryInfo.y2);
+        else if (y1 >= domXY.bottom - MoE) { // 아래
+            const y2 = categoryInfo.DOM.getBoundingClientRect().bottom;
+            categoryInfo.getY = equation(x1, y1, x2, y2);
             categoryInfo.dir = "down";
 
         }
@@ -191,12 +190,8 @@ const addEventHandler = function (categoryInfo) {
         if (e.target.className.indexOf("item") === -1) return;
         const x = e.clientX;
         const y = e.clientY;
-        if (categoryInfo.dir === "up") {
-            if (y > categoryInfo.getY(x)) return;
-        }
-        else if (categoryInfo.dir === "down") {
-            if (y < categoryInfo.getY(x)) return;
-        }
+        if ((categoryInfo.dir === "up") && (y > categoryInfo.getY(x))) return;
+        else if ((categoryInfo.dir === "down") && (y < categoryInfo.getY(x))) return;
 
         const name = e.target.getAttribute("name");
         handler(categoryInfo, name, categoryInfo.picked);

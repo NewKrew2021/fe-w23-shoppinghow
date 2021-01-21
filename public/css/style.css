@@ -299,3 +299,13 @@ body {
     padding-top: 10px;
     text-decoration: underline;
 }
+.input-box {
+    width: 90%;
+    height: 80%;
+    margin-left: 20px;
+    padding-top: 12px;
+    font-size: 30px;
+}
+input:focus {
+    outline: none;
+}

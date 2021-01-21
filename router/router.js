@@ -4,6 +4,8 @@ module.exports = function(app, fs) {
     let hotData;
     let basicData;
     let categoryData;
+    let wordData;
+
     fs.readFile(__dirname + "/../data/carousel_promotion.json", "utf8", function(err, data) {
         carouselData = data;
     });
@@ -19,7 +21,9 @@ module.exports = function(app, fs) {
     fs.readFile(__dirname + "/../data/category.json", "utf8", function(err, data) {
         categoryData = data;
     });
-
+    fs.readFile(__dirname + "/../data/word.json", "utf8", function(err, data) {
+        wordData = data;
+    });
     /* app.get("/", function(req, res) {
         res.render("index.html");
     }); */
@@ -46,5 +50,9 @@ module.exports = function(app, fs) {
     });
     app.get("/category", (req, res) => {
         res.end(categoryData);
+    });
+    app.get("/word", (req, res) => {
+        const keyword = req.query.keyword;
+        
     });
 }
