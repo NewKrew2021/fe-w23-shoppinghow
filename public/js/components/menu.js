@@ -167,10 +167,14 @@ class CategoryMenu {
   addMouseOverEvent() {
     this.categoryElement[CATEGORY_MENU].addEventListener('mouseenter', () => {
       this.categoryElement[MENU_POP_UP].style.display = 'flex';
+      $('.menu__icon').classList.add('menu__icon--activated');
+      $('.menu__icon').innerText = '✕';
     });
 
     this.categoryElement[CATEGORY_MENU].addEventListener('mouseleave', () => {
       this.categoryElement[MENU_POP_UP].style.display = 'none';
+      deleteClassFromElement($('.menu__icon'), 'menu__icon--activated');
+      $('.menu__icon').innerText = '☰';
     });
   }
 
