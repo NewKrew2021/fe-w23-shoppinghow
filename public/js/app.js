@@ -23,3 +23,5 @@ const searchBox = new SearchBox({ RELEASE_TIME : 350, COUNT : 10, SPEED : 600, H
 searchBox.init();
 
 /* 카테고리 모듈 */
+const category = new Category();
+category.init();

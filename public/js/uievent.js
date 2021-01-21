@@ -19,8 +19,6 @@ export default class UIevent {
         this.innerPopup = dom('#popup-layer').querySelector();
         this.recentDiv = dom('#recent-btn').querySelector();
         this.loginBtn = dom('#login').querySelector();
-        this.category = dom('.category').querySelector();
-        this.categoryBtn = dom('.category-btn').querySelector();
 
         this.MORE_INDEX = obj.MORE_INDEX;
         this.COL = obj.COL;
@@ -61,22 +59,11 @@ export default class UIevent {
         this.loginBtn.addEventListener('click', localStorage.clear());
     }
 
-    showCategory(){
-        this.categoryBtn.src = '/images/close_btn.png';
-        /* + category div 영역 보이기 */
-    }
-    closeCategory(){
-        this.categoryBtn.src = '/images/category_btn.png';
-        /* + category div 영역 감추기 */
-    }
-
     onEvent() {
         this.clickedElement.addEventListener('click', this.addMoreContent.bind(this));
         this.recentBtn.addEventListener('mouseover', this.showPopupLayer.bind(this));
         this.recentBtn.addEventListener('mouseout', this.hidePopupLayer.bind(this));
         this.loginBtn.addEventListener('click', this.removeStorage.bind(this));
-        this.category.addEventListener('mouseover', this.showCategory.bind(this));
-        this.category.addEventListener('mouseout', this.closeCategory.bind(this));
     }
 
     init() {

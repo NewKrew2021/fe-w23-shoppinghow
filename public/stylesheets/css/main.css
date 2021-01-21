@@ -233,6 +233,7 @@ input {
 /* category */
 .category {
   cursor: pointer;
+  height: 45px;
 }
 
 .top-nav-ul {
@@ -513,10 +514,11 @@ input {
 
 /* category */
 .inner-category {
+  display: none;
   background-color: #ffffff;
   position: absolute;
-  top: 34px;
-  left: -26px;
+  top: 42px;
+  left: -27px;
   border: 1px solid gray;
   width: 561px;
   height: 495px;
@@ -544,6 +546,12 @@ input {
   padding-left: 20px;
   height: 45px;
   line-height: 45px;
+}
+
+.main-tab-list:hover {
+  background-color: #ffffff;
+  color: #f95139;
+  border-right: 1px solid #ffffff;
 }
 
 .sub-tab {
