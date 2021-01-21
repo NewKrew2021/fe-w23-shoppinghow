@@ -51,6 +51,15 @@ export const domTpl = {
         <p class="title">${title}</p>
         <p class="subtext">${text}</p>
         <img class="theme-btn" src="/images/theme.png"></li>`
+    },
+    mainCategory(on, title, idx){
+        return `<li class="main-tab-list ${on}" main-idx=${idx}>${title}</li>`
+    },
+    subCategory(on, title, idx){
+        return `<li class="sub-tab-list ${on}" sub-idx=${idx}>${title}</li>`
+    },
+    lowCategory(on = '', title, idx){
+        return `<li class="last-tab-list" last-idx=${idx}><a href='#'>${title}</li>`
     }
 };
 
@@ -60,7 +69,7 @@ export function removeSpace(str){
 }
 
 /* 검색하고자 하는 단어의 정확한 첫 위치를 반환하는 함수 */
-export function getStartPos(word, input) {
+export function getStartPos({word, input}) {
     // 현재 입력 중인 단어의 첫글자 위치를 word에서 찾고, 자른다.
     let startPos = word.indexOf(input[0]);
     let temp_word = word.slice(startPos);

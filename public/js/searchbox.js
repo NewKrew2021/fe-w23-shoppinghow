@@ -5,7 +5,7 @@
 import { dom, removeSpace, getStartPos, innerHTML } from './util.js';
 
 export default class SearchBox {
-    constructor(input) {
+    constructor({ allkeywordURL, RELEASE_TIME, COUNT, SPEED, HEIGHT }) {
         this.search_blank = dom('.search-blank').querySelector();
         this.keywordWrapper = dom('.keyword').querySelector();
         this.keywordInner = dom('.keyword-inner').querySelector();
@@ -14,10 +14,11 @@ export default class SearchBox {
         this.search_box = dom('.search-box').querySelector();
         this.rolledList = dom('#rolled-list').querySelector();
 
-        this.ROLL_COUNT = input.COUNT;
-        this.ROLL_SPEED = input.SPEED;
-        this.ROLL_HEIGHT = input.HEIGHT;
-        this.RELEASE_TIME = input.RELEASE_TIME;
+        this.ROLL_COUNT = COUNT;
+        this.ROLL_SPEED = SPEED;
+        this.ROLL_HEIGHT = HEIGHT;
+        this.RELEASE_TIME = RELEASE_TIME;
+        this.allkeywordURL = allkeywordURL;
         this.index = 1;
         this.selectIdx = -1;
     }
@@ -90,13 +91,14 @@ export default class SearchBox {
             this.keywordInner.style.display = 'block';
             this.selectIdx = -1;
         })
-
     }
 
     fetchAllKeywords() {
-        fetch('http://localhost:80/allkeyword')
-            .then(res => res.json())
-            .then(json => this.autoComplete(json));
+        (async function(){
+            const res = await fetch(this.allkeywordURL);
+            const json = await res.json();
+            return json;
+        }).bind(this)().then(json => this.autoComplete(json));
     }
 
     /* 검색어 자동완성 */
@@ -117,7 +119,7 @@ export default class SearchBox {
                 let startPos = word.search(value); // search는 정확히 일치하는 단어의 첫 위치를 반환한다.
 
                 // 만약 startPos가 -1이라면, word의 공백 때문에 그런 것이므로 getStartPos로 값 변경
-                if (startPos === -1) startPos = getStartPos(word, value);
+                if (startPos === -1) startPos = getStartPos({word : word, input : value});
 
                 // 입력한 단어와 꼭 맞게 강조될 수 있도록 endPos 설정 후 html 저장
                 let endPos = word.indexOf(value[valueLength - 1], startPos + valueLength - 1);

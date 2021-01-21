@@ -11,7 +11,7 @@ import { dom, addHTML } from './util.js';
 import Storage from './storage.js';
 
 export default class UIevent {
-    constructor(obj) {
+    constructor({COL, MORE_INDEX}) {
         /* 사용할 DOM 요소 추가 */
         this.clickedElement = dom('#expand').querySelector();
         this.expanded = dom('#row-more').querySelector();
@@ -19,8 +19,9 @@ export default class UIevent {
         this.innerPopup = dom('#popup-layer').querySelector();
         this.recentDiv = dom('#recent-btn').querySelector();
         this.loginBtn = dom('#login').querySelector();
-        this.MORE_INDEX = obj.MORE_INDEX;
-        this.COL = obj.COL;
+
+        this.COL = COL;
+        this.MORE_INDEX = MORE_INDEX;
     }
 
     addMoreContent() {

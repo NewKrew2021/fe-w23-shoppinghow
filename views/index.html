@@ -42,10 +42,25 @@
             <!-- 내비게이션 -->
             <div id="top-nav" class="mg-top-40 flex">
                 <div class="nav-wrap flex">
-                    <div class="category flex">
-                        <img class="mg-right-6" src="/images/category_btn.png">
+                    <div class="category flex relative">
+                        <img class="category-btn mg-right-6" src="/images/category_btn.png">
                         카테고리
                         <span class="line-bar">|</span>
+                        <div id="category-wrapper" class="inner-category">
+                            <!-- 대분류(메인탭)-->
+                            <ul class="main-tab"></ul>
+                            <!-- 중, 소분류 -->
+                            <div class="category-list">
+                                <!-- 중분류 -->
+                                <ul id="sub-tab-01" class="sub-tab">
+                                    <li class="sub-tab-list"></li>
+                                </ul>
+                                <!-- 소분류 -->
+                                <ul id="sub-tab-02" class="sub-tab">
+                                    <li class="sub-tab-list"></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <ul id="top-nav-ul-1"></ul>
                     <span class="line-bar">|</span>
