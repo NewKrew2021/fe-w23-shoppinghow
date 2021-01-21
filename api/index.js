@@ -30,7 +30,8 @@ api.get('/menu', (ctx, next) => {
   ctx.body = menuData;
 });
 
-api.get('/recommand', (ctx, next) => {
+api.post('/recommand', (ctx, next) => {
+  console.log(ctx.request.query.param1);
   ctx.body = recommand;
 });
 

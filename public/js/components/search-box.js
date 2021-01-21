@@ -1,5 +1,8 @@
 import { $, deleteClassFromElement } from '../utils';
 
+const HOST = 'http://localhost';
+const PORT = 8000;
+
 const CLASS_NAME = {
   searchBox: 'search-box',
   recommand: 'search-recommand',
@@ -31,7 +34,7 @@ class SearchBox {
   }
 
   addFocusEvent() {
-    addEventOnElement('input', 'focus', () => {
+    this.addEventOnElement('input', 'focus', () => {
       this.addFocusStyle('recommand');
       this.addFocusStyle('searchBox');
     });
@@ -43,6 +46,20 @@ class SearchBox {
   }
 
   init() {
+    let params = { param1: 'value1', param2: 'value2' };
+
+    let query = Object.keys(params)
+      .map(
+        key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+      )
+      .join('&');
+
+    fetch(`${HOST}:${PORT}/api/recommand?${query}`, {
+      method: 'POST',
+      body: JSON.stringify({ name: 'puba' }),
+    })
+      .then(res => res.json())
+      .then(res => console.log(res.data));
     this.addFocusEvent();
   }
 }
