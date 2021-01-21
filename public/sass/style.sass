@@ -43,8 +43,11 @@ li
     height: 55px
 
 .search-box
+  position: relative
   border: 1px solid #cccccc
-  height: 40px
+  box-sizing: border-box
+  height: 50px
+  width: 600px
   border-radius: 10px
   margin-left: 30px
   display: flex
@@ -52,6 +55,25 @@ li
   justify-content: center
   column-gap: 10px
   padding: 5px 20px
+
+  .search-recommand
+    // display: none
+    padding: 0px
+    background: #ffffff
+    box-sizing: border-box
+    position: absolute
+    left: 0
+    top: 50px
+    width: 600px
+    height: 300px
+    border: #ff0000 1px solid
+    border-radius: 10px
+    &__item
+
+      padding: 5px 30px
+      margin: 5px 0px
+      &:hover
+        background: #dddddd
 
   &__input
     width: 550px
