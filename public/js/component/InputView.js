@@ -31,6 +31,7 @@ const createSearchDefaultPage = () => {
 
 const createSearchResultPage = (result, inputValue) => {
   let searchResultPage = ``
+  if(result.length===0) searchResultPage = `<div class="search-result">추천 키워드가 없습니다.</div>`
   result.map( keyword => {
     let idx = keyword.indexOf(inputValue);
     keyword = keyword.substring(0, idx) +
