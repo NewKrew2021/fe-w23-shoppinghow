@@ -3,7 +3,7 @@ import { DOMSearchAPI } from "./DOM_search_api.js";
 import { getBasicItemHTML, getBasicItemHTMLs, getBasicItemDOM, getBestItemHTML, 
     getCarouselItemDOM, getCarouselBoxHTML, getBoxDOM, getMarginDOM, getMoreBtnDOM, getSubjectDOM } from "./render.js";
 import { MyPromise } from "./promise.js";
-import { initCategory } from "./category.js";
+import { getCategoryDOM } from "./category.js";
 import "../css/common.css";
 import "../css/style.css";
 
@@ -33,16 +33,16 @@ const initPage = function (data) {
     const basics = data[3].items;
     const categories = data[4];
 
-    const categoryInfo = initCategory(categories);
+    const categoryInfo = getCategoryDOM(categories);
     const categoryBtn = domAPI.querySelector("#category");
-    categoryBtn.appendChild(categoryInfo.boxDOM);
+    categoryBtn.appendChild(categoryInfo.DOM);
 
     categoryBtn.addEventListener("mouseover", (e) => {
-        categoryInfo.boxDOM.classList.remove("d-off");
+        categoryInfo.DOM.classList.remove("d-off");
     });
 
     categoryBtn.addEventListener("mouseout", (e) => {
-        categoryInfo.boxDOM.classList.add("d-off");
+        categoryInfo.DOM.classList.add("d-off");
     });
 
     // 한 행씩 렌더링
