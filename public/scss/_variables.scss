@@ -17,3 +17,19 @@ $sizes: map-merge(
     "auto": auto,
   )
 );
+
+// color
+$color-white: #ffffff;
+$color-bright: #f7f7f8;
+$color-light: #eeeeee;
+$color-gray: #999999;
+$color-dark: #242526;
+$color-orangered: #f95139;
+$colors: (
+  "white": $color-white,
+  "bright": $color-bright,
+  "light": $color-light,
+  "gray": $color-gray,
+  "dark": $color-dark,
+  "orangered": $color-orangered,
+);

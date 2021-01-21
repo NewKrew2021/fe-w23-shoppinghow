@@ -2,14 +2,14 @@ import { findOne, myFetchGET, myFetchPOST } from "../util"
 
 const htmlElements = {}
 
-function initRecommendBox(box, data) {
+function initRecommendBox(box, data, keyword) {
   // {data} is array of recommended keywords(string)
 
   function getListItemHtmlString(text) {
     return `
       <li>
         <a href="#" class="d-block hover-bg-bright px-4 py-2">
-          ${text}
+          ${text.replace(keyword, `<span class="orangered">${keyword}</span>`)}
         </a>
       </li>`
   }
@@ -80,7 +80,7 @@ async function inputEventHandler() {
 
   // fetch and show recommended keywords
   const recommendData = await myFetchPOST('/search/recommend', { keyword })
-  initRecommendBox(htmlElements.search_recommend, recommendData)
+  initRecommendBox(htmlElements.search_recommend, recommendData, keyword)
 }
 
 // init search bar
