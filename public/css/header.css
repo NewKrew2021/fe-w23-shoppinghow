@@ -4,7 +4,6 @@ header {
   height: 150px;
   background-color: white;
   font-family: sans-serif;
-  z-index: 10000000;
   overflow: hidden;
 }
 header #banner {
@@ -18,23 +17,38 @@ header #logo {
   height: 51px;
   width: 110px;
 }
-header .focus {
-  border: 1px solid orange;
+header #search {
+  margin-left: 10px;
 }
-header .blur {
+header #search .focus {
+  border: 1px solid orangered;
+}
+header #search .blur {
   border: 1px solid gainsboro;
 }
-header #search-bar {
+header #search #dropdown {
+  position: absolute;
+  background-color: white;
+  width: 640px;
+  border-radius: 10px;
+  z-index: 2;
+  padding: 12px 0px 12px 0px;
+}
+header #search #dropdown .keyword-li {
+  background-color: lightgray;
+  list-style: none;
+  font-size: 15px;
+  padding: 5px;
+}
+header #search #search-bar {
   outline: none;
   height: 54px;
   width: 640px;
   border-radius: 10px;
-  margin-left: 10px;
   font-size: 20px;
   color: gray;
-  padding-left: 15px;
 }
-header #search-button {
+header #search #search-button {
   position: relative;
   background-color: white;
   top: 10px;
@@ -43,7 +57,7 @@ header #search-button {
   height: 26px;
   width: 26px;
 }
-header #search-img {
+header #search #search-img {
   height: 26px;
   width: 26px;
 }
