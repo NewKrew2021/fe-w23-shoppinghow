@@ -528,6 +528,7 @@ input {
 .category-list {
   float: left;
   height: 100%;
+  cursor: pointer;
 }
 
 .main-tab {
@@ -546,12 +547,17 @@ input {
   padding-left: 20px;
   height: 45px;
   line-height: 45px;
+  cursor: pointer;
 }
 
-.main-tab-list:hover {
+.on {
   background-color: #ffffff;
   color: #f95139;
-  border-right: 1px solid #ffffff;
+}
+
+.sub-on {
+  background-color: #ffffff;
+  color: #f95139;
 }
 
 .sub-tab {
@@ -563,6 +569,7 @@ input {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   overflow-y: auto;
+  padding-top: 1em;
 }
 
 .sub-tab-list {
@@ -571,6 +578,16 @@ input {
   line-height: 34px;
   font-size: 14px;
   padding-left: 25px;
+  letter-spacing: -0.01em;
+}
+
+.sub-tab-list > a:link {
+  text-decoration: none;
+  color: #454545;
+}
+
+.sub-tab-list > a:hover {
+  text-decoration: underline;
 }
 
 .pd-5 {

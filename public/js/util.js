@@ -52,8 +52,14 @@ export const domTpl = {
         <p class="subtext">${text}</p>
         <img class="theme-btn" src="/images/theme.png"></li>`
     },
-    mainCategory(title, idx){
-        return `<li class="main-tab-list" main-idx=${idx}>${title}</li>`
+    mainCategory(on, title, idx){
+        return `<li class="main-tab-list ${on}" main-idx=${idx}>${title}</li>`
+    },
+    subCategory(on, title, idx){
+        return `<li class="sub-tab-list ${on}" sub-idx=${idx}>${title}</li>`
+    },
+    lowCategory(on = '', title, idx){
+        return `<li class="sub-tab-list" last-idx=${idx}><a href='#'>${title}</li>`
     }
 };
 
