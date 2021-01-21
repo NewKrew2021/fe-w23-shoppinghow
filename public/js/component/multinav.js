@@ -3,12 +3,12 @@ import MultiNavData from './multinav_data.json'
 const { depth: MULTINAV_DEPTH, data: MULTINAV_DATA } = MultiNavData
 const HOVER_HIDE_DELAY = 0
 
-function getNavListItemHtmlString({ title, href }, hoverPopupTarget) {
+function getNavListItemHtmlString({ title, href }, hoverToggleTarget) {
   return `
     <li
       role="button"
       class="nav-item hover-bg-white"
-      ${hoverPopupTarget ? `data-hover-popup-target="#${hoverPopupTarget}"` : ''}
+      ${hoverToggleTarget ? `data-hover-toggle-target="#${hoverToggleTarget}"` : ''}
     >
     ${href ? `<a href="${href}">` : ``}
       ${title}
@@ -36,8 +36,9 @@ function getMultiNavHtmlString(id, dataList, depth, isMainNav = false) {
   htmlString += `
     <div
       id="${id}"
-      class="d-flex flex-${depth} ${isMainNav ? `bg-light` : `bg-white hover-popup-target text-small`}"
-      ${isMainNav ? `` : `data-hover-popup-target="#${id}" data-hover-hide-delay="${HOVER_HIDE_DELAY}"`}
+      class="d-flex flex-${depth} ${isMainNav ? `bg-light` : `bg-white text-small`}"
+      ${isMainNav ? `` : `data-hover-toggle-group="multinav-depth-${depth}"`}
+      data-hover-hide-delay="${HOVER_HIDE_DELAY}"
     >`
 
   // open nav
