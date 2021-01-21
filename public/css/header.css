@@ -4,7 +4,7 @@ header {
   height: 150px;
   background-color: white;
   font-family: sans-serif;
-  z-index: 10000000;
+  overflow: hidden;
 }
 header #banner {
   display: flex;
@@ -17,14 +17,48 @@ header #logo {
   height: 51px;
   width: 110px;
 }
-header #search-bar {
+header #search {
+  margin-left: 10px;
+}
+header #search .focus {
+  border: 1px solid orangered;
+}
+header #search .blur {
+  border: 1px solid gainsboro;
+}
+header #search #dropdown {
+  position: absolute;
+  background-color: white;
+  width: 640px;
+  border-radius: 10px;
+  z-index: 2;
+  padding: 12px 0px 12px 0px;
+}
+header #search #dropdown .active {
+  background-color: lightgray;
+}
+header #search #dropdown .keyword-li {
+  list-style: none;
+  font-size: 15px;
+  padding: 5px 5px 5px 15px;
+}
+header #search #dropdown .keyword-li span {
+  display: flat;
+  padding: 0px;
+}
+header #search #dropdown .keyword-li .match {
+  color: orangered;
+}
+header #search #search-bar {
+  outline: none;
+  padding-left: 12px;
   height: 54px;
   width: 640px;
   border-radius: 10px;
-  margin-left: 10px;
-  border: 1px solid gainsboro;
+  font-size: 20px;
+  color: gray;
 }
-header #search-button {
+header #search #search-button {
   position: relative;
   background-color: white;
   top: 10px;
@@ -33,7 +67,7 @@ header #search-button {
   height: 26px;
   width: 26px;
 }
-header #search-img {
+header #search #search-img {
   height: 26px;
   width: 26px;
 }
@@ -88,6 +122,9 @@ header .hide {
 }
 header .show {
   display: inline-block;
+}
+header .show-block {
+  display: block;
 }
 header #menu {
   position: absolute;
