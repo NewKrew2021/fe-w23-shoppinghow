@@ -2,6 +2,7 @@ const Router = require('koa-router');
 
 const productItemListData = require('../data/product-item-list.json');
 const menuData = require('../data/menu.json');
+const recommand = require('../data/recommand.json');
 
 const api = new Router();
 
@@ -27,6 +28,16 @@ api.get('/product', (ctx, next) => {
 
 api.get('/menu', (ctx, next) => {
   ctx.body = menuData;
+});
+
+api.get('/recommand', (ctx, next) => {
+  const searchingWord = ctx.query.word;
+
+  const filteredWord = recommand.data.filter(word =>
+    word.includes(searchingWord)
+  );
+
+  ctx.body = filteredWord;
 });
 
 module.exports = api;

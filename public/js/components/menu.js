@@ -9,6 +9,9 @@ const MOUSE_MAX_SPEED = 5;
 const SMALL = 'small';
 const MEDIUM = 'medium';
 const LARGE = 'large';
+const MENU_POP_UP = 'menu__pop-up';
+const CATEGORY_MENU = 'menu';
+const ICON = 'menu__icon';
 
 const MENU_TEMPLATE = {
   categoryTab(type, title) {
@@ -22,21 +25,24 @@ const MENU_TEMPLATE = {
 class CategoryMenu {
   constructor() {
     this.categoryData = {
-      large: null,
-      medium: null,
-      small: null,
+      [LARGE]: null,
+      [MEDIUM]: null,
+      [SMALL]: null,
     };
 
     this.categoryElement = {
-      large: $('.large-category'),
-      medium: $('.medium-category'),
-      small: $('.small-category'),
+      [CATEGORY_MENU]: $('.menu'),
+      [MENU_POP_UP]: $(`.${MENU_POP_UP}`),
+      [LARGE]: $('.large-category'),
+      [MEDIUM]: $('.medium-category'),
+      [SMALL]: $('.small-category'),
+      [ICON]: $(`.${ICON}`),
     };
 
     this.activeCategoryIndex = {
-      large: 0,
-      medium: 0,
-      small: 0,
+      [LARGE]: 0,
+      [MEDIUM]: 0,
+      [SMALL]: 0,
     };
 
     this.currentX = 0;
@@ -160,11 +166,33 @@ class CategoryMenu {
     }
   }
 
+  addActiveClass(type) {
+    this.categoryElement[type].classList.add(`${type}--activated`);
+  }
+
+  deleteActiveClass(type) {
+    deleteClassFromElement(this.categoryElement[type], `${type}--activated`);
+  }
+
+  addMouseOverEvent() {
+    this.categoryElement[CATEGORY_MENU].addEventListener('mouseenter', () => {
+      this.addActiveClass(MENU_POP_UP);
+      this.addActiveClass(ICON);
+      this.categoryElement[ICON].innerText = '✕';
+    });
+
+    this.categoryElement[CATEGORY_MENU].addEventListener('mouseleave', () => {
+      this.deleteActiveClass(MENU_POP_UP);
+      this.deleteActiveClass(ICON);
+      this.categoryElement[ICON].innerText = '☰';
+    });
+  }
+
   init() {
     this.fetchMenuData()
       .then(res => this.initMenuData(res))
-      .then(() => this.renderMenu());
-
+      .then(this.renderMenu.bind(this));
+    this.addMouseOverEvent();
     this.addCurrentTabEvent();
   }
 }
