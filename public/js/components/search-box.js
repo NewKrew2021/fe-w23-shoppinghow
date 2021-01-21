@@ -8,6 +8,12 @@ const CLASS_NAME = {
   recommand: 'search-recommand',
 };
 
+const SEARCHBOX_TEMPLATE = {
+  recommandItem(item) {
+    return `<li class="search-recommand__item">${item}</li>`;
+  },
+};
+
 class SearchBox {
   constructor() {
     this.recommandList = [];
@@ -60,7 +66,7 @@ class SearchBox {
 
   renderRecommand(recommandList) {
     return recommandList.reduce((acc, item) => {
-      return acc + `<li class="search-recommand__item">${item}</li>`;
+      return acc + SEARCHBOX_TEMPLATE.recommandItem(item);
     }, ``);
   }
 
