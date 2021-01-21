@@ -46,22 +46,27 @@ export default class Category {
             if (idx === 0) str = on;
             return acc + domTpl[type](str, title, idx);
         }, ``);
+        let mainIdx, subIdx;
+
         /* on이 표시된 곳의 idx를 구하고 그 값으로 소분류의 값들을 대체 */
-        /* 마우스에 따라 메인탭에 on 넣기 */
         this.mainTab.addEventListener('mouseover', (e) => {
-            const mainIdx = e.target.getAttribute('main-idx');
+            mainIdx = e.target.getAttribute('main-idx');
             if (mainIdx) { // 유효한 인덱스일 경우
                 dom('.on').querySelector().classList.remove('on');
                 e.target.classList.add('on');
                 const subObj_01 = { data: json[mainIdx].data, type: 'subCategory', on: "sub-on" };
+                const subObj_02 = { data: json[mainIdx].data[0].data, type: 'lowCategory'};
                 innerHTML(this.subTab_01, createHTML(subObj_01));
+                innerHTML(this.subTab_02, createHTML(subObj_02));
             }
         })
         this.subTab_01.addEventListener('mouseover', (e)=>{
-            const subIdx = e.target.getAttribute('sub-idx');
+            subIdx = e.target.getAttribute('sub-idx');
             if(subIdx){ // 유효한 인덱스일 경우
                 dom('.sub-on').querySelector().classList.remove('sub-on');
                 e.target.classList.add('sub-on');
+                const subObj_02 = { data: json[mainIdx].data[subIdx].data, type: 'lowCategory'};
+                innerHTML(this.subTab_02, createHTML(subObj_02));
             }
         })
     }
