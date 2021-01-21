@@ -2,7 +2,7 @@ import {myDomApi} from "../util/MyDomApi.js"
 import {URL} from "../url.js"
 
 let canChange = true;
-let x1, x2, x3, y1, y2, y3, targetPointer="FIRST";
+let x1, x2, x3, y1, y2, y3, x4, y4, targetPointer="FIRST", curEvent;
 let [numOfFirst, numOfSecond, numOfThird] = [10, 15, 15];
 let depthFirst, depthSecond, categoryData, categoryFirst, categorySecond, categoryThird, dataObject = {};
 
@@ -17,7 +17,6 @@ let categoryContainer = myDomApi.myQuerySelector("div.category-layer");
 let categoryImage = myDomApi.myQuerySelector("img.category-img");
 const categoryBtn = myDomApi.myQuerySelector("button.layer-btn");
 const menuLayer = myDomApi.myQuerySelector("div.category-layer");
-
 
 
 const displayCategoryContainer = () => {
@@ -84,8 +83,6 @@ const makeDataObject = (result) => {
   dataObject["root"] = firstList;
   depthFirst = categoryData[0].title;
   depthSecond = categoryData[0].data[0].title;
-  // console.log(depthFirst, depthSecond);
-  // console.log(dataObject);
 }
 
 const displayCategory = () => {
@@ -97,8 +94,8 @@ const displayCategory = () => {
       if(depthFirst === dataObject["root"][0]) firstElement[idx].className = firstBorderClass;
       else firstElement[idx].className = firstClickClass;
       if(targetPointer === "FIRST") {
-        x1 = (firstElement[idx].getBoundingClientRect().left + firstElement[idx].getBoundingClientRect().right)/2;
-        y1 = (firstElement[idx].getBoundingClientRect().top + firstElement[idx].getBoundingClientRect().bottom)/2;
+        y1 = firstElement[idx].getBoundingClientRect().top;
+        y4 = firstElement[idx].getBoundingClientRect().bottom;
       }
     }
     else firstElement[idx].className = firstClass;
@@ -109,8 +106,8 @@ const displayCategory = () => {
     if(depthSecond === dataObject[depthFirst][idx]) {
       secondElement[idx].className = secondClickClass;
       if(targetPointer === "SECOND") {
-        x1 = (secondElement[idx].getBoundingClientRect().left + secondElement[idx].getBoundingClientRect().right)/2;
-        y1 = (secondElement[idx].getBoundingClientRect().top + secondElement[idx].getBoundingClientRect().bottom)/2;
+        y1 = secondElement[idx].getBoundingClientRect().top;
+        y4 = secondElement[idx].getBoundingClientRect().bottom;
       }
     }
     else secondElement[idx].className = secondClass;
@@ -148,37 +145,57 @@ const displayCategory = () => {
   }
 }
 
+const setTargetPointer = (target) => {
+  if(target.className===firstClass || target.className===firstClickClass || target.className===firstBorderClass){
+    targetPointer = "FIRST";
+    depthFirst = target.innerHTML;
+    depthSecond = dataObject[depthFirst][0];
+    displayCategory();
+  }
+  else if(target.className===secondClass || target.className===secondClickClass){
+    targetPointer = "SECOND";
+    depthSecond = target.innerHTML;
+    displayCategory();
+  }
+  else targetPointer = "THIRD";
+}
+
 const categoryHover = () => {  
   categoryContainer.addEventListener("mouseover", event => {
-    if(event.target.innerHTML !== `` && canChange){
-      const targetClassName = event.target.className;
-      if(targetClassName===firstClass || targetClassName===firstClickClass || targetClassName===firstBorderClass){
-        targetPointer = "FIRST";
-        depthFirst = event.target.innerHTML;
-        depthSecond = dataObject[depthFirst][0];
-        displayCategory();
-      }
-      else if(targetClassName===secondClass || targetClassName===secondClickClass){
-        targetPointer = "SECOND";
-        depthSecond = event.target.innerHTML;
-        displayCategory();
-      }
-      else {
-        targetPointer = "THIRD";
-      }
+    if(event.target.innerHTML === ``) return;
+    if(canChange) {
+      x1 = x4 = event.clientX;
+      setTargetPointer(event.target)
     }
+    isStay(event);
   })
+}
+
+const isStay = (prevEvent) => {
+  setTimeout(()=>{
+    if(curEvent.target === prevEvent.target) {
+      x1 = x4 = curEvent.clientX;
+      setTargetPointer(curEvent.target)
+    }
+  }, 250);
 }
 
 const mouseMove = () => {
   categoryContainer.addEventListener("mousemove", event => {
+    curEvent = event;
     let line1 = (y2-y1)/(x2-x1)*(event.clientX-x1)-event.clientY+y1
-    let line2 = (y3-y1)/(x3-x1)*(event.clientX-x1)-event.clientY+y1
+    let line2 = (y3-y4)/(x3-x4)*(event.clientX-x4)-event.clientY+y4
     let line3 = x2-event.clientX;
-    // console.log(line1, line2, line3);
-    if(line1<=0 && line2>=0 && line3>=0) canChange = false;
-    else canChange = true;
-    // console.log(canChange)
+    let line4 = x4-event.clientX;
+    
+    if(line1<=0 && line2>=0 && line3>=0 && line4<=0) canChange = false;
+    else {
+      if(canChange === false) {
+        x1 = x4 = event.clientX;
+        setTargetPointer(event.target);
+      }
+      canChange = true;
+    } 
   })
 }
 
