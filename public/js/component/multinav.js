@@ -7,11 +7,11 @@ function getNavListItemHtmlString({ title, href }, hoverToggleTarget) {
   return `
     <li
       role="button"
-      class="nav-item hover-bg-white"
+      class="hover-bg-white"
       ${hoverToggleTarget ? `data-hover-toggle-target="#${hoverToggleTarget}"` : ''}
     >
     ${href ? `<a href="${href}">` : ``}
-      ${title}
+      <p class="px-3 py-2 m-0">${title}</p>
     ${href ? `</a>` : ``}
     </li>`
 }
