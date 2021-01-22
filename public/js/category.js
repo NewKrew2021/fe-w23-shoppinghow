@@ -3,7 +3,8 @@
     스마트 카테고리 영역
     카테고리 관련 기능들
 */
-import { dom, domTpl, debounce, innerHTML } from './util.js'
+import { dom, debounce, innerHTML } from './util.js'
+import { domTpl } from './tpl.js'
 
 export default class Category {
     constructor({ URL }) {

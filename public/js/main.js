@@ -2,7 +2,8 @@
     main.js
     초기 레이아웃을 구성하기 위한 클래스
 */
-import { domTpl, dom, innerHTML, addHTML } from './util.js';
+import { dom, innerHTML, addHTML } from './util.js';
+import { domTpl } from './tpl.js'
 import Slider from './slider.js';
 import HotSlider from './hotslider.js';
 import Storage from './storage.js';
