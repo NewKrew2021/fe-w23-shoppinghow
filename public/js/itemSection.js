@@ -25,7 +25,7 @@ export function initItemSection(){
             },"");
             pageNum++;
             itemList.innerHTML+=li;
-        }).catch((err)=>{console.log(err)});
+        }).catch(console.log);
     }
     fetchPage(pageNum);
 
