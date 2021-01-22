@@ -8,16 +8,15 @@ export function initSearchBar(){
     let dropdownLen=-1;
     let dropdownIndex=-1;
 
-    const dropdownHTML = `<div id="dropdown" class="focus hide">drop down</div>`;
+    const dropdownHTML = `<div id="dropdown" class="hide"></div>`;
     const dropdown=createElementFromHTML(dropdownHTML); 
     search.appendChild(dropdown);
     const liList=dropdown.childNodes;
 
     searchBar.addEventListener("input",(e)=>{
         const keyword=e.target.value;
-        dropdown.classList.remove("hide");
         dropdown.classList.add("show-block");
-
+        dropdown.classList.add("focus");
         if(keyword===currentKeyword) return;
         currentKeyword=keyword;
         fetch("http://localhost:3000/keyword-result?"
@@ -28,6 +27,7 @@ export function initSearchBar(){
             const keywordData=data.keywordData;
             dropdownInit=false;
             dropdownIndex=keywordData.length-1;
+            //if(keywordData.length===0) return;
             dropdownLen=keywordData.length;
             const li=keywordData.reduce((acc,text)=>{
                 const pos=getMatchingPisition(text,keyword);
