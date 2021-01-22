@@ -1,3 +1,4 @@
+import images from "../images";
 import API from "../utils/api";
 import dapi from "../utils/CustomDomAPI";
 
@@ -6,7 +7,10 @@ const ACTIVE_NEXT = "active-next";
 const VISIBLE = "visible";
 const NON_VISIBLE = "non-visible";
 
-const config = {
+const defaultConfig = {
+    containerClassName: 'slideshow',
+    prevButtonClassName: 'prev-button',
+    nextButtonClassName: 'next-button',
     /**
      * 한 번에 보여주는 슬라이드 개수
      */
@@ -14,11 +18,18 @@ const config = {
     /**
      * 한 번에 업데이트되는 슬라이드 개수
      */
-    updateSlideNum: 1
+    updateSlideNum: 1,
+    dataFetchFunction: API.getBannerCarouselData,
+    getSlideTemplate({url}) {        
+        return `<div class="slide">
+            <img src="${url}">
+        </div>`;
+    },
 }
 
 class SlideShowView {
-    constructor() {
+    constructor(config = defaultConfig) {
+        this.config = config;
         this.slideHtmls = [];
         this.currentSlideIdx = 0;
         this.onClickPrev = this.onClickPrev.bind(this);
@@ -27,26 +38,29 @@ class SlideShowView {
     }
     
     async init() {
-        this.visibleGroup = document.querySelector('.slideshow > .visible');
-        this.nonVisibleGroup = document.querySelector('.slideshow > .non-visible');
+        const {prevButtonClassName, nextButtonClassName, containerClassName} = this.config;
+        this.element = dapi.querySelector(`.${containerClassName}`);
+        this.visibleGroup = dapi.querySelector(`.${VISIBLE}`, this.element);
+        this.nonVisibleGroup = dapi.querySelector(`.${NON_VISIBLE}`, this.element);
+        this.prevButton = dapi.querySelector(`.${prevButtonClassName}`, this.element);
+        this.nextButton = dapi.querySelector(`.${nextButtonClassName}`, this.element);
+
         await this.getBannerCarouselData();
         this.initialRender();
-
-        const prevButton = dapi.querySelector('.left-icon');
-        prevButton.addEventListener('click', this.onClickPrev);
-
-        const nextButton = dapi.querySelector('.right-icon');
-        nextButton.addEventListener('click', this.onClickNext);
+        this.prevButton.addEventListener('click', this.onClickPrev);
+        this.nextButton.addEventListener('click', this.onClickNext);
     }
 
     async getBannerCarouselData() {
-        const res = await API.getBannerCarouselData();
+        const res = await this.config.dataFetchFunction();
         res.data.forEach((slide) => {
-            this.slideHtmls.push(this.getSlideTemplate(slide));
+            this.slideHtmls.push(this.config.getSlideTemplate(slide));
         });
     }
 
     initialRender() {
+        this.prevButton.innerHTML = `<img class="banner__panel__slideshow__left-icon left-icon" src="${images.leftArrowIcon}"></img>`
+        this.nextButton.innerHTML = `<img class="banner__panel__slideshow__right-icon right-icon" src="${images.rightArrowIcon}"></img>`
         this.visibleGroup.innerHTML = this.renderSlides(this.currentSlideIdx);
     }
     
@@ -55,22 +69,17 @@ class SlideShowView {
      * @param {Number} cur 
      */
     renderSlides (cur) {
+        const {slideNumPerPage, updateSlideNum} = this.config;
         let innerHTML = "";
-        for (let i = 0; i < config.slideNumPerPage + 2 * config.updateSlideNum; i++) {
-            let index = cur + i - config.updateSlideNum;
-            index = index % (config.slideNumPerPage + 2 * config.updateSlideNum)
+        for (let i = 0; i < slideNumPerPage + 2 * updateSlideNum; i++) {
+            let index = cur + i - updateSlideNum;
+            index = index % (slideNumPerPage + 2 * updateSlideNum)
             if (index < 0) {
-                index = index + config.slideNumPerPage + 2 * config.updateSlideNum;
+                index = index + slideNumPerPage + 2 * updateSlideNum;
             }
             innerHTML += this.slideHtmls[index];
         }
         return innerHTML;
-    }
-
-    getSlideTemplate({url}) {        
-        return `<div class="slide">
-            <img src="${url}">
-        </div>`;
     }
 
     switchGroupVisibility() {

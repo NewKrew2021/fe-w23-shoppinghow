@@ -27,14 +27,6 @@ $slide-width: 765px;
     }
 }
 
-.visible {
-    opacity: 1;
-}
-
-.non-visible {
-    opacity: 0;
-}
-
 .active-next {
     transform: translateX(-($slide-width)-($slide-width));
     transition: transform .2s ease-out;  

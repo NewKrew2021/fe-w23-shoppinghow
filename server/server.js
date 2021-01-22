@@ -13,7 +13,7 @@ server.use(middlewares);
 // APIs
 // Get carousel images.
 server.get('/carousel', (req, res) => {
-    res.send(db.get('carousel').value());
+    res.send({data: db.get('carousel').value()});
 })
 
 // Get the first banner image.

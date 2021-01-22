@@ -21,12 +21,6 @@
   .slide img {
     margin: 0 140px; }
 
-.visible {
-  opacity: 1; }
-
-.non-visible {
-  opacity: 0; }
-
 .active-next {
   transform: translateX(-1530px);
   transition: transform .2s ease-out; }

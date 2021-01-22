@@ -1,8 +1,8 @@
 import images from "../images";
 const CardTemplate = (
     function() {
-        function get ({href, title, subtitle, badge}, id) {
-            return `<div class="card" id="${id}">
+        function get ({href, title, subtitle, badge}, id = undefined) {
+            return `<div class="card" ${id ? "id="+id: ''}>
                 <img class="card__image" src="${href}">
                 <div class="card__title">
                     ${title}
