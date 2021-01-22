@@ -63,9 +63,7 @@ export function initHoverToggle() {
     element.addEventListener('mouseenter', enterHoverToggleTrigger)
 
     // show the first element in each group
-    const toggleTarget = findOne(element.dataset.hoverToggleTarget)
-    const firstElementInGroup = findOne(`[data-hover-toggle-group="${toggleTarget.dataset.hoverToggleGroup}"]`)
-    firstElementInGroup.classList.add('show')
+    enterHoverToggleTrigger({ target: element })
   })
 }
 
