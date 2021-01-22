@@ -13,6 +13,8 @@ const MENU_POP_UP = 'menu__pop-up';
 const CATEGORY_MENU = 'menu';
 const ICON = 'menu__icon';
 
+const INTERVAL_TIME = 1000;
+
 const MENU_TEMPLATE = {
   categoryTab(type, title) {
     return `<li class="${type}-category__tab">${title}</li>`;
@@ -24,6 +26,7 @@ const MENU_TEMPLATE = {
 
 class CategoryMenu {
   constructor() {
+    this.menuInterval = null;
     this.categoryData = {
       [LARGE]: null,
       [MEDIUM]: null,
@@ -173,18 +176,24 @@ class CategoryMenu {
   deleteActiveClass(type) {
     deleteClassFromElement(this.categoryElement[type], `${type}--activated`);
   }
+  closeMenu() {
+    this.deleteActiveClass(MENU_POP_UP);
+    this.deleteActiveClass(ICON);
+    this.categoryElement[ICON].innerText = '☰';
+  }
 
   addMouseOverEvent() {
     this.categoryElement[CATEGORY_MENU].addEventListener('mouseenter', () => {
+      if (this.menuInterval) {
+        clearInterval(this.menuInterval);
+      }
       this.addActiveClass(MENU_POP_UP);
       this.addActiveClass(ICON);
       this.categoryElement[ICON].innerText = '✕';
     });
 
     this.categoryElement[CATEGORY_MENU].addEventListener('mouseleave', () => {
-      this.deleteActiveClass(MENU_POP_UP);
-      this.deleteActiveClass(ICON);
-      this.categoryElement[ICON].innerText = '☰';
+      this.menuInterval = setInterval(this.closeMenu.bind(this), INTERVAL_TIME);
     });
   }
 
