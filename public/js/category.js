@@ -122,6 +122,16 @@ const setCategoryElement = function (DOM) {
     }
 }
 
+// (x1, y1), (x2, y2) 두 점을 지나는 직선 방정식
+const equation = function (x1, y1, x2, y2) {
+    return function (x) {
+        return ((y2 - y1) / (x2 - x1)) * (x - x1) + y1;
+    }
+}
+
+const handler_ = function(type, {}) {
+    
+}
 const handler = function (categoryInfo, name) {
     const len = name.split("-").length;
     switch (len) {
@@ -156,11 +166,7 @@ const handler = function (categoryInfo, name) {
             break;
     }
 }
-const equation = function (x1, y1, x2, y2) {
-    return function (x) {
-        return ((y2 - y1) / (x2 - x1)) * (x - x1) + y1;
-    }
-}
+
 
 const addEventHandler = function (categoryInfo) {
     const MoE = 3; // 오차 범위

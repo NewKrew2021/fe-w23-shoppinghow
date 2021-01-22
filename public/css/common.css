@@ -69,3 +69,12 @@
 .border-radius {
     border-radius: 10px;
 }
+.font-bold {
+    font-weight: bold;
+}
+.lpd-5p {
+    padding-left: 5%;
+}
+.text-red {
+    color: red;
+}

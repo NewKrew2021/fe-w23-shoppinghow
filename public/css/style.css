@@ -17,8 +17,9 @@ body {
     height: 100%;
 }
 .header__search {
-    width: 500px;
+    width: 800px;
     height: 100%;
+    position: relative;
     margin-left: 20px;
     box-sizing: border-box;
     border-radius: 10px;
@@ -300,12 +301,37 @@ body {
     text-decoration: underline;
 }
 .input-box {
-    width: 90%;
+    width: 96%;
     height: 80%;
-    margin-left: 20px;
     padding-top: 12px;
+    margin-left: 3%;
     font-size: 30px;
 }
 input:focus {
     outline: none;
+}
+.top-searched-box {
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    background-color: #fff;
+    z-index: 3;
+}
+.suggestion-box {
+    width: 100%;
+    min-height: 50px;
+    position: absolute;
+    top: 100%;
+    background-color: #fff;
+    z-index: 3;
+}
+.top-searched-item {
+    width: 100%;
+    padding-bottom: 3%;
+    cursor: pointer;
+}
+.suggestion-item {
+    width: 100%;
+    padding-bottom: 3%;
+    cursor: pointer;
 }
