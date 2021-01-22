@@ -7,16 +7,16 @@ function getNavListItemHtmlString({ title, href }, hoverToggleTarget) {
   return `
     <li
       role="button"
-      class="nav-item hover-bg-white"
+      class="hover-bg-white"
       ${hoverToggleTarget ? `data-hover-toggle-target="#${hoverToggleTarget}"` : ''}
     >
     ${href ? `<a href="${href}">` : ``}
-      ${title}
+      <p class="px-3 py-2 m-0">${title}</p>
     ${href ? `</a>` : ``}
     </li>`
 }
 
-function getMultiNavHtmlString(id, dataList, depth, isMainNav = false) {
+function getMultiNavHtmlString({ group, id, dataList, depth, isMainNav = false }) {
   /*
 
   dataList: array of {
@@ -37,7 +37,7 @@ function getMultiNavHtmlString(id, dataList, depth, isMainNav = false) {
     <div
       id="${id}"
       class="d-flex flex-${depth} ${isMainNav ? `bg-light` : `bg-white text-small`}"
-      ${isMainNav ? `` : `data-hover-toggle-group="multinav-depth-${depth}"`}
+      ${isMainNav ? `` : `data-hover-toggle-group="${group}"`}
       data-hover-hide-delay="${HOVER_HIDE_DELAY}"
     >`
 
@@ -58,8 +58,10 @@ function getMultiNavHtmlString(id, dataList, depth, isMainNav = false) {
 
       // push sub-nav data to {subNavDataList}
       subNavDataList.push({
+        group: id,
         id: subNavID,
-        dataList: data.data
+        dataList: data.data,
+        depth: depth - 1,
       })
     }
 
@@ -75,7 +77,7 @@ function getMultiNavHtmlString(id, dataList, depth, isMainNav = false) {
 
   // append sub-nav (if exist)
   htmlString += subNavDataList.reduce((htmlString, subNavData) =>
-    htmlString + getMultiNavHtmlString(subNavData.id, subNavData.dataList, depth - 1), '')
+    htmlString + getMultiNavHtmlString(subNavData), '')
 
   // close wrapper
   htmlString += `</div>`
@@ -86,10 +88,12 @@ function getMultiNavHtmlString(id, dataList, depth, isMainNav = false) {
 
 // append multinav to the wrapper
 export function appendMultiNav(wrapper) {
-  wrapper.innerHTML += getMultiNavHtmlString(
-    'multinav',     // id
-    MULTINAV_DATA,  // dataList
-    MULTINAV_DEPTH, // depth
-    true            // isMainNav
-  )
+  const navData = {
+    id:        'multinav',
+    dataList:  MULTINAV_DATA,
+    depth:     MULTINAV_DEPTH,
+    isMainNav: true,
+  }
+
+  wrapper.innerHTML += getMultiNavHtmlString(navData)
 }
