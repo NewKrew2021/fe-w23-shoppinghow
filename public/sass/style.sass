@@ -5,6 +5,7 @@ $product-item-width : 270px
 $tag-color : #e79924
 $header-nav-height : 60px
 $menu-width :100px
+$highlight-color : #ff0000
 
 body
   background: $main-background-color
@@ -56,7 +57,7 @@ li
   column-gap: 10px
   padding: 5px 20px
   &__focus
-    border: 1px solid #ff0000
+    border: 1px solid $highlight-color
 
   .search-recommand
     display: none
@@ -68,7 +69,7 @@ li
     top: 50px
     width: 600px
     height: 300px
-    border: #ff0000 1px solid
+    border: $highlight-color 1px solid
     border-radius: 10px
     overflow: scroll
     &__focus
@@ -76,6 +77,8 @@ li
     &__item
       padding: 5px 30px
       margin: 5px 0px
+      &--highlight
+        color: $highlight-color
       &:hover
         background: #dddddd
 
@@ -172,7 +175,7 @@ li
     display: flex
     column-gap: 5px
     .more-product-text__count
-      color: #ff0000
+      color: $highlight-color
       font-weight: bolder
     .more-product-text__total-count
       font-weight: bolder
@@ -285,7 +288,7 @@ li
     background: #000000
     margin-right: 10px
     &--activated
-      background: #ff0000
+      background: $highlight-color
   &__pop-up
     display: none
     top: $header-nav-height
@@ -336,8 +339,8 @@ li
 
   .large-category__tab--activated
     background: #ffffff
-    color: #ff0000
+    color: $highlight-color
   .medium-category__tab--activated
-    color: #ff0000
+    color: $highlight-color
   .small-category__tab--activated
     text-decoration: underline

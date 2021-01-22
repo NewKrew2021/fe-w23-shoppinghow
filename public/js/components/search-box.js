@@ -3,14 +3,24 @@ import { $, deleteClassFromElement } from '../utils';
 const HOST = 'http://localhost';
 const PORT = 8000;
 
+const INTERVAL_TIME = 1000;
+
 const CLASS_NAME = {
   searchBox: 'search-box',
   recommand: 'search-recommand',
 };
 
 const SEARCHBOX_TEMPLATE = {
-  recommandItem(item) {
-    return `<li class="search-recommand__item">${item}</li>`;
+  recommandItem(item, searchingWord) {
+    let highlightIndex = item.indexOf(searchingWord);
+
+    return `<li class="search-recommand__item" data-value="${item}">${item.slice(
+      0,
+      highlightIndex
+    )}<span class="search-recommand__item--highlight">${item.substr(
+      highlightIndex,
+      searchingWord.length
+    )}</span>${item.slice(highlightIndex + searchingWord.length)}</li>`;
   },
 };
 
@@ -23,6 +33,7 @@ class SearchBox {
       button: $('.search-box__button'),
       recommand: $(`.${CLASS_NAME.recommand}`),
     };
+    this.inputInterval = null;
   }
 
   addFocusStyle(type) {
@@ -66,14 +77,31 @@ class SearchBox {
 
   renderRecommand(recommandList) {
     return recommandList.reduce((acc, item) => {
-      return acc + SEARCHBOX_TEMPLATE.recommandItem(item);
+      return (
+        acc +
+        SEARCHBOX_TEMPLATE.recommandItem(item, this.HTMLelement['input'].value)
+      );
     }, ``);
   }
 
+  addItemClickEvent() {
+    this.HTMLelement['recommand'].addEventListener('mouseover', event => {
+      if (event.target.className === 'search-recommand__item')
+        this.HTMLelement['input'].value = event.target.dataset.value;
+    });
+  }
+
+  inputDebounce(newEvent) {
+    if (this.inputInterval) {
+      clearInterval(this.inputInterval);
+    }
+    this.inputInterval = setInterval(newEvent, INTERVAL_TIME);
+  }
+
   async getRecommand() {
-    let recommandList = await this.fetchData(
-      this.HTMLelement['input'].value
-    ).then(res => res.json());
+    if (this.HTMLelement['input'].value === '') return;
+    let res = await this.fetchData(this.HTMLelement['input'].value);
+    let recommandList = await res.json();
 
     this.HTMLelement['recommand'].innerHTML = this.renderRecommand(
       recommandList
@@ -81,8 +109,13 @@ class SearchBox {
   }
 
   init() {
-    this.addEventOnElement('input', 'keyup', this.getRecommand.bind(this));
+    this.addEventOnElement(
+      'input',
+      'keyup',
+      this.inputDebounce(this.getRecommand.bind(this))
+    );
     this.addFocusEvent();
+    this.addItemClickEvent();
   }
 }
 
