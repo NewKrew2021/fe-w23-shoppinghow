@@ -33,6 +33,13 @@ menuLayer.addEventListener("mouseover", displayCategoryContainer);
 categoryBtn.addEventListener("mouseout", nonDisplayCategoryContainer);
 menuLayer.addEventListener("mouseout", nonDisplayCategoryContainer);
 
+async function requestCategoryItem(){
+  const request = new Request(URL + "/category");
+  const response = await fetch(request);
+  const result = await response.text();
+  return result;
+}
+
 const createCategoryContainer = () => {
   categoryContainer.innerHTML = `
           <div class="category-depth depth-1"></div>
@@ -49,20 +56,13 @@ const createCategoryContainer = () => {
     categorySecond.innerHTML += `<div class="${secondClass}"></div>`;
     categoryThird.innerHTML += `<div class="${thirdClass}"></div>`;
   }
-  requestCategoryItem();
+  requestCategoryItem()
+  .then(result => makeDataObject(result))
+  .then(displayCategory)
+  
   categoryHover();
   mouseMove();
 }
-
-const requestCategoryItem = () => {
-  const request = new Request(URL + "/category");
-  fetch(request)
-  .then(response => response.text())
-  .then(result => makeDataObject(result))
-  .then(displayCategory)
-  .catch(error => console.log('error', error));
-}
-
 
 const makeDataObject = (result) => {
   categoryData = JSON.parse(result)["data"];

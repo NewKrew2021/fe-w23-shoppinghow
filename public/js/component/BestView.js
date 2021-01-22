@@ -2,11 +2,15 @@ import {myDomApi} from "../util/MyDomApi.js"
 import {URL} from "../url.js"
 
 const createBestContainer = () => {
+  requestBestItem()
+  .then(result => putBestItems(result));
+}
+
+async function requestBestItem() {
   const request = new Request(URL + "/best");
-  fetch(request)
-  .then(response => response.text())
-  .then(result => putBestItems(result))
-  .catch(error => console.log('error', error));
+  const response = await fetch(request);
+  const result = await response.text();
+  return result
 }
 
 const putBestItems = (result) => {

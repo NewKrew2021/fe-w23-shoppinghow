@@ -26,19 +26,19 @@ const createTrendContainer = () => {
     `
   }
   trendContainer.innerHTML += newLayout;
-  requestTrendItem();
-}
-
-const requestTrendItem = () => {
-  const request = new Request(URL + "/trend");
-  fetch(request)
-  .then(response => response.text())
+  requestTrendItem()
   .then(result => {
     trendData = JSON.parse(result)["items"];
     putTrendItem();
   })
-  .then(trendClickListener())
-  .catch(error => console.log('error', error));
+  .then(trendClickListener)
+}
+
+async function requestTrendItem() {
+  const request = new Request(URL + "/trend");
+  const response = await fetch(request);
+  const result = await response.text();
+  return result;
 }
 
 const putTrendItem = () => {

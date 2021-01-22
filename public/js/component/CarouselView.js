@@ -27,6 +27,20 @@ const nonDisplayDot = "dot active";
 const displayCarouselClass = "carousel fade display";
 const nonDisplayCarouselClass= "carousel fade non-display";
 
+
+const createCarouselContainer = () => {
+  requestCarouselItem().
+  then(result => putCarouselImage(result))
+  .then(showImgs)
+}
+
+async function requestCarouselItem() {
+  const request = new Request(URL + "/carousel");
+  const response = await fetch(request);
+  const result = await response.text();
+  return result;
+}
+
 const changeImg = curImg => {
   const imgs = myDomApi.myQuerySelectorAll("div.carousel");
   const dots = myDomApi.myQuerySelectorAll("span.dot");
@@ -50,14 +64,6 @@ const showImgs = () => {
   setTimeout(showImgs, carouselCycleTime);
 }
 
-const createCarouselContainer = () => {
-  const request = new Request(URL + "/carousel");
-  fetch(request)
-  .then(response => response.text())
-  .then(result => { putCarouselImage(result) })
-  .then(showImgs())
-  .catch(error => console.log('error', error));   
-}
 
 const putCarouselImage = (result) => {
   let idx=0;

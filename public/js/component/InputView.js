@@ -9,7 +9,11 @@ const input = myDomApi.myQuerySelector("input.search-input");
 const searchWindow = myDomApi.myQuerySelector("div.search-window");
 
 const createInputContainer = () => {
-  requestInputItem();
+  requestInputItem()
+  .then(result => {
+    inputItem = JSON.parse(result)["data"];
+    inputItemLen = inputItem.length;
+  })
   createSearchDefaultPage();
   changeInput();
   inputBtnEventlistener();
@@ -109,15 +113,11 @@ const inputKeyEventListener = () => {
   })
 }
 
-const requestInputItem = () => {
+async function requestInputItem() {
   const request = new Request(URL + "/input");
-  fetch(request)
-  .then(response => response.text())
-  .then(result => {
-    inputItem = JSON.parse(result)["data"];
-    inputItemLen = inputItem.length;
-  })
-  .catch(error => console.log('error', error));
+  const response = await fetch(request);
+  const result = await response.text()
+  return result;
 }
 
 export {createInputContainer}

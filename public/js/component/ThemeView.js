@@ -6,19 +6,19 @@ const [extendCnt, moreBtn] = [5, myDomApi.myQuerySelector("#more")];
 
 const createThemeContainer = () => {
   createLayout();
-  requestThemeItem();
-}
-
-const requestThemeItem = () => {
-  const request = new Request(URL + "/theme");
-  fetch(request)
-  .then(response => response.text())
+  requestThemeItem()
   .then(result => {
     themeData = JSON.parse(result)["items"];
     putThemeItem();
   })
-  .then(themeClickListener())
-  .catch(error => console.log('error', error));
+  .then(themeClickListener)
+}
+
+async function requestThemeItem() {
+  const request = new Request(URL + "/theme");
+  const response = await fetch(request);
+  const result = await response.text();
+  return result;
 }
 
 const putThemeItem = () => {
