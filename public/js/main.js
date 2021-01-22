@@ -89,6 +89,7 @@ export default class MainLayout {
                 }, ``);
                 innerHTML(slideList, createHTML(data, 'rightBanner'));
                 const slideObject = new Slider(target);
+                debugger;
                 slideObject.init();
             }
             catch (err){

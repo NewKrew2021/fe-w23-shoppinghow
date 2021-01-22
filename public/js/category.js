@@ -58,15 +58,14 @@ export default class Category {
 
         this.mainTab.addEventListener('mouseover', (e) => {
             mainIdx = e.target.getAttribute('main-idx');
-            if (mainIdx) { // 유효한 인덱스일 경우
-                dom('.on').querySelector().classList.remove('on');
-                e.target.classList.add('on');
-                const subObj_01 = { data: json[mainIdx].data, type: 'subCategory', on: "sub-on" };
-                const subObj_02 = { data: json[mainIdx].data[0].data, type: 'lowCategory' };
-                innerHTML(this.subTab_01, createHTML(subObj_01));
-                innerHTML(this.subTab_02, createHTML(subObj_02)); // 메인 탭을 바꾸면 소분류는 처음으로 고정 위해
-            }
-            else mainIdx = len - 1; // 없는 영역의 오류 방지
+            if (!mainIdx) mainIdx = len -1;
+            // 유효한 인덱스일 경우
+            dom('.on').querySelector().classList.remove('on');
+            e.target.classList.add('on');
+            const subObj_01 = { data: json[mainIdx].data, type: 'subCategory', on: "sub-on" };
+            const subObj_02 = { data: json[mainIdx].data[0].data, type: 'lowCategory' };
+            innerHTML(this.subTab_01, createHTML(subObj_01));
+            innerHTML(this.subTab_02, createHTML(subObj_02)); // 메인 탭을 바꾸면 소분류는 처음으로 고정 위해
         })
         this.subTab_01.addEventListener('mouseover', (e) => {
             subIdx = e.target.getAttribute('sub-idx');
