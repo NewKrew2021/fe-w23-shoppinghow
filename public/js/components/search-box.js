@@ -3,6 +3,8 @@ import { $, deleteClassFromElement } from '../utils';
 const HOST = 'http://localhost';
 const PORT = 8000;
 
+const INTERVAL_TIME = 1000;
+
 const CLASS_NAME = {
   searchBox: 'search-box',
   recommand: 'search-recommand',
@@ -31,6 +33,7 @@ class SearchBox {
       button: $('.search-box__button'),
       recommand: $(`.${CLASS_NAME.recommand}`),
     };
+    this.inputInterval = null;
   }
 
   addFocusStyle(type) {
@@ -88,6 +91,13 @@ class SearchBox {
     });
   }
 
+  inputDebounce(newEvent) {
+    if (this.inputInterval) {
+      clearInterval(this.inputInterval);
+    }
+    this.inputInterval = setInterval(newEvent, INTERVAL_TIME);
+  }
+
   async getRecommand() {
     if (this.HTMLelement['input'].value === '') return;
     let recommandList = await this.fetchData(
@@ -100,7 +110,11 @@ class SearchBox {
   }
 
   init() {
-    this.addEventOnElement('input', 'keyup', this.getRecommand.bind(this));
+    this.addEventOnElement(
+      'input',
+      'keyup',
+      this.inputDebounce(this.getRecommand.bind(this))
+    );
     this.addFocusEvent();
     this.addItemClickEvent();
   }
