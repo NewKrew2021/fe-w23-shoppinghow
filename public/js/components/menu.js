@@ -25,7 +25,7 @@ const MENU_TEMPLATE = {
 };
 
 class CategoryMenu {
-  constructor() {
+  constructor(categoryList) {
     this.menuInterval = null;
     this.categoryData = {
       [LARGE]: null,
@@ -36,9 +36,9 @@ class CategoryMenu {
     this.categoryElement = {
       [CATEGORY_MENU]: $('.menu'),
       [MENU_POP_UP]: $(`.${MENU_POP_UP}`),
-      [LARGE]: $('.large-category'),
-      [MEDIUM]: $('.medium-category'),
-      [SMALL]: $('.small-category'),
+      [LARGE]: $(`.${categoryList[0]}-category`),
+      [MEDIUM]: $(`.${categoryList[1]}-category`),
+      [SMALL]: $(`.${categoryList[2]}-category`),
       [ICON]: $(`.${ICON}`),
     };
 
