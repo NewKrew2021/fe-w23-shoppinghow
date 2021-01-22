@@ -9,8 +9,16 @@ const CLASS_NAME = {
 };
 
 const SEARCHBOX_TEMPLATE = {
-  recommandItem(item) {
-    return `<li class="search-recommand__item">${item}</li>`;
+  recommandItem(item, searchingWord) {
+    let highlightIndex = item.indexOf(searchingWord);
+
+    return `<li class="search-recommand__item">${item.slice(
+      0,
+      highlightIndex
+    )}<span class="search-recommand__item--highlight">${item.substr(
+      highlightIndex,
+      searchingWord.length
+    )}</span>${item.slice(highlightIndex + searchingWord.length)}</li>`;
   },
 };
 
@@ -66,11 +74,15 @@ class SearchBox {
 
   renderRecommand(recommandList) {
     return recommandList.reduce((acc, item) => {
-      return acc + SEARCHBOX_TEMPLATE.recommandItem(item);
+      return (
+        acc +
+        SEARCHBOX_TEMPLATE.recommandItem(item, this.HTMLelement['input'].value)
+      );
     }, ``);
   }
 
   async getRecommand() {
+    if (this.HTMLelement['input'].value === '') return;
     let recommandList = await this.fetchData(
       this.HTMLelement['input'].value
     ).then(res => res.json());
