@@ -1,5 +1,6 @@
 import {URL} from "../url.js"
 import {myDomApi} from "../util/MyDomApi.js"
+import {HtmlTemplate} from "../util/HtmlTemplate.js"
 
 let [themeData, themeLength] = [ , 5];
 const [extendCnt, moreBtn] = [5, myDomApi.myQuerySelector("#more")];
@@ -36,25 +37,20 @@ const extendLayout = () => {
   createLayout();
   themeLength += extendCnt;
   putThemeItem();
-  moreBtn.innerHTML = `
-      더보기 ( <red>${themeLength/extendCnt}</red> / ${Math.floor(themeData.length/extendCnt)} 건 ) 
-  `
+  moreBtn.innerHTML = 
+      HtmlTemplate.themeMoreBtn.front + `${themeLength/extendCnt}` +
+      HtmlTemplate.themeMoreBtn.mid + `${Math.floor(themeData.length/extendCnt)}` +
+      HtmlTemplate.themeMoreBtn.back;
+  
 }
 
 const createLayout = () => {
   let themeContainer = myDomApi.myQuerySelector("table.theme-container");
   let newLayout = "<tbody style='display:inline-block'>";
   for(let idx = 0; idx < extendCnt; idx++) {
-    newLayout += `
-      <th class="theme">
-        <img class="theme-img">
-        <div class="theme-title"></div>
-        <div class="theme-info"></div>
-        <img class="theme-icon" src="img/themeIcon.png"></img>
-      </th>
-    `
+    newLayout += HtmlTemplate.themeLayout;
   }
-  themeContainer.innerHTML += newLayout + "</tbody>";
+  themeContainer.innerHTML += newLayout + HtmlTemplate.themeTbody;
 }
 
 const themeClickListener = () => {
