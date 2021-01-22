@@ -3,7 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './public/js/main.js',
+  // entry: './public/js/main.js',
+  entry: './app.js',
   output: {
     path: path.resolve(__dirname, 'public/dist'),
     filename: 'bundle.js',
@@ -18,7 +19,7 @@ module.exports = {
         },
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.s?[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
           'style-loader',

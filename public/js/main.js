@@ -4,8 +4,6 @@ import { Carousel } from './components/carousel.js';
 import { CategoryMenu } from './components/menu.js';
 import { SearchBox } from './components/search-box';
 
-require('../sass/style.sass');
-
 const CAROUSEL_LINE_NUMBER = 15;
 
 const init = () => {
@@ -26,4 +24,4 @@ const init = () => {
   });
 };
 
-init();
+export { init };
