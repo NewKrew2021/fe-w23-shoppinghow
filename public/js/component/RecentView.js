@@ -1,3 +1,4 @@
+import { HtmlTemplate } from "../util/HtmlTemplate.js";
 import {myDomApi} from "../util/MyDomApi.js"
 
 const recentBtn = myDomApi.myQuerySelector("button.category-recent");
@@ -17,7 +18,8 @@ const createRecentContainer = () => {
   if(shoppingList !== null) {
     let imgList = Object.keys(shoppingList);
     for(let idx=0; idx<Math.min(9, imgList.length); idx++){
-      recentContainer.innerHTML += `<img class="recent-img" src="${imgList[idx]}"></img>`
+      recentContainer.innerHTML += HtmlTemplate.recentImg.front + imgList[idx] +
+                                   HtmlTemplate.recentImg.back;
     }
   } 
 }

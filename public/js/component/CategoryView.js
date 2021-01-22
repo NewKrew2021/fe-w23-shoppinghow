@@ -1,5 +1,6 @@
 import {myDomApi} from "../util/MyDomApi.js"
 import {URL} from "../url.js"
+import {HtmlTemplate} from "../util/HtmlTemplate.js"
 
 let canChange = true;
 let x1, x2, x3, y1, y2, y3, x4, y4, targetPointer="FIRST", curEvent;
@@ -33,36 +34,35 @@ menuLayer.addEventListener("mouseover", displayCategoryContainer);
 categoryBtn.addEventListener("mouseout", nonDisplayCategoryContainer);
 menuLayer.addEventListener("mouseout", nonDisplayCategoryContainer);
 
+async function requestCategoryItem(){
+  const request = new Request(URL + "/category");
+  const response = await fetch(request);
+  const result = await response.text();
+  return result;
+}
+
 const createCategoryContainer = () => {
-  categoryContainer.innerHTML = `
-          <div class="category-depth depth-1"></div>
-          <div class="category-depth depth-2"></div>
-          <div class="category-depth depth-3"></div>
-        `
+  categoryContainer.innerHTML = HtmlTemplate.categoryDefault;
   categoryFirst = myDomApi.myQuerySelector("div.depth-1");
   categorySecond = myDomApi.myQuerySelector("div.depth-2");
   categoryThird = myDomApi.myQuerySelector("div.depth-3");
   for(let idx=0; idx<numOfFirst; idx++){
-    categoryFirst.innerHTML += `<div class="${firstClass}"></div>`;
+    categoryFirst.innerHTML += HtmlTemplate.divDefault.front + firstClass +
+                                HtmlTemplate.divDefault.back;
   }
   for(let idx=0; idx<numOfSecond; idx++){
-    categorySecond.innerHTML += `<div class="${secondClass}"></div>`;
-    categoryThird.innerHTML += `<div class="${thirdClass}"></div>`;
+    categorySecond.innerHTML += HtmlTemplate.divDefault.front + secondClass +
+                                HtmlTemplate.divDefault.back;
+    categoryThird.innerHTML += HtmlTemplate.divDefault.front + thirdClass +
+                                HtmlTemplate.divDefault.back;
   }
-  requestCategoryItem();
+  requestCategoryItem()
+  .then(result => makeDataObject(result))
+  .then(displayCategory)
+  
   categoryHover();
   mouseMove();
 }
-
-const requestCategoryItem = () => {
-  const request = new Request(URL + "/category");
-  fetch(request)
-  .then(response => response.text())
-  .then(result => makeDataObject(result))
-  .then(displayCategory)
-  .catch(error => console.log('error', error));
-}
-
 
 const makeDataObject = (result) => {
   categoryData = JSON.parse(result)["data"];

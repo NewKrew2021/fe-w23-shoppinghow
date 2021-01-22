@@ -1,5 +1,6 @@
 import {myDomApi} from "../util/MyDomApi.js"
 import {URL} from "../url.js"
+import {HtmlTemplate} from "../util/HtmlTemplate.js"
 
 let searchDefaultPage, inputItem, inputItemLen, isClick = false, time=0, keyIndex=-1, keywordListLen;
 const inputCycleTime = 1500; //ms
@@ -9,7 +10,11 @@ const input = myDomApi.myQuerySelector("input.search-input");
 const searchWindow = myDomApi.myQuerySelector("div.search-window");
 
 const createInputContainer = () => {
-  requestInputItem();
+  requestInputItem()
+  .then(result => {
+    inputItem = JSON.parse(result)["data"];
+    inputItemLen = inputItem.length;
+  })
   createSearchDefaultPage();
   changeInput();
   inputBtnEventlistener();
@@ -18,28 +23,32 @@ const createInputContainer = () => {
 }
 
 const createSearchDefaultPage = () => {
-  searchDefaultPage = `
-      <div class="keyword-title">인기 쇼핑 키워드</div>
-  `
-  inputDefault.forEach( (rank, idx) => {
-    searchDefaultPage += `
-    <div class="keyword"><span class="keyword-number">${idx+1}</span>&nbsp;&nbsp;&nbsp;${rank}</div>
-    `
+  let rank = [];
+  for(let idx=0; idx<inputDefault.length/2; idx++){
+    rank.push([idx+1, inputDefault[idx]]);
+    rank.push([idx+6, inputDefault[idx+5]]);
+  }
+  searchDefaultPage = HtmlTemplate.searchDefault;
+  rank.forEach( keyword => {
+    searchDefaultPage += HtmlTemplate.searchExtend.front + keyword[0] + 
+                         HtmlTemplate.searchExtend.mid + keyword[1] + 
+                         HtmlTemplate.searchExtend.back;
   })
   searchWindow.innerHTML = searchDefaultPage;
 }
 
 const createSearchResultPage = (result, inputValue) => {
   let searchResultPage = ``
-  if(result.length===0) searchResultPage = `<div class="search-result">추천 키워드가 없습니다.</div>`
+  if(result.length===0) searchResultPage = HtmlTemplate.searchNoResult;
   result.map( keyword => {
     let idx = keyword.indexOf(inputValue);
     keyword = keyword.substring(0, idx) +
-              `<span class="font-bold">` +
+              HtmlTemplate.searchResult.front +
               keyword.substring(idx, idx+inputValue.length) +
-              `</span>` +
+              HtmlTemplate.searchResult.mid1 +
               keyword.substring(idx+inputValue.length);
-    searchResultPage += `<div class="search-result">${keyword}</div>`
+    searchResultPage += HtmlTemplate.searchResult.mid2 + 
+                        keyword + HtmlTemplate.searchResult.back;
   })
   searchWindow.innerHTML = searchResultPage;
   keyIndex=-1;
@@ -109,15 +118,11 @@ const inputKeyEventListener = () => {
   })
 }
 
-const requestInputItem = () => {
+async function requestInputItem() {
   const request = new Request(URL + "/input");
-  fetch(request)
-  .then(response => response.text())
-  .then(result => {
-    inputItem = JSON.parse(result)["data"];
-    inputItemLen = inputItem.length;
-  })
-  .catch(error => console.log('error', error));
+  const response = await fetch(request);
+  const result = await response.text()
+  return result;
 }
 
 export {createInputContainer}

@@ -1,6 +1,7 @@
 import {myDomApi} from "../util/MyDomApi.js"
-import {URL} from "../url.js"
 import {MyPromise} from "../util/MyPromise.js"
+import {HtmlTemplate} from "../util/HtmlTemplate.js"
+import {URL} from "../url.js"
 
 let [trendFirstIndex, isMouseUp, clickStartTime, trendData] = [0, false];
 const [changeTime, trendImgCnt] = [2000, 5];
@@ -14,31 +15,24 @@ const mySetTimeout = new MyPromise((resolve, reject) => {
 const createTrendContainer = () => {
   let trendContainer = myDomApi.myQuerySelector("table.trend-container");
   let newLayout = "";
-  trendContainer.innerHTML += `<caption class="trend-caption">지금 뜨는 테마 카테고리</caption>`;
+  trendContainer.innerHTML += HtmlTemplate.trendTitle;
   for(let idx=0; idx<trendImgCnt; idx++) {
-    newLayout += `
-      <th class="trend">
-        <img class="trend-img"">
-        <div class="trend-title"></div>
-        <div class="trend-info"></div>
-        <img class="trend-icon" src="img/themeIcon.png"></img>
-      </th>
-    `
+    newLayout += HtmlTemplate.trendLayout;
   }
   trendContainer.innerHTML += newLayout;
-  requestTrendItem();
-}
-
-const requestTrendItem = () => {
-  const request = new Request(URL + "/trend");
-  fetch(request)
-  .then(response => response.text())
+  requestTrendItem()
   .then(result => {
     trendData = JSON.parse(result)["items"];
     putTrendItem();
   })
-  .then(trendClickListener())
-  .catch(error => console.log('error', error));
+  .then(trendClickListener)
+}
+
+async function requestTrendItem() {
+  const request = new Request(URL + "/trend");
+  const response = await fetch(request);
+  const result = await response.text();
+  return result;
 }
 
 const putTrendItem = () => {
