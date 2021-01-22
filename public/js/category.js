@@ -23,27 +23,24 @@ export default class Category {
     }
 
     /* 데이터 가져오고 추가하기 */
-    addCategoryData() {
-        (async function () {
-            const res = await fetch(this.categoryURL);
-            const json = await res.json();
-            this.mainTabLen = json.length;
+    async addCategoryData() {
+       const res = await fetch(this.categoryURL);
+       const json = await res.json();
+       this.mainTabLen = json.length;
 
-            /* 맨 처음에는 상위 0번째 요소들로 기본 표시 */
-            const mainTabObj = { data: json, type: 'mainCategory', on: "on" };
-            const subTabObj = [{ data: json[0].data, type: 'subCategory', on: "sub-on" },
-            { data: json[0].data[0].data, type: 'lowCategory' }];
-            const createHTML = ({ data, type, on = '' }) => data.reduce((acc, { title }, idx) => {
-                let str = '';
-                if (idx === 0) str = on;
-                return acc + domTpl[type](str, title, idx);
-            }, ``);
-            innerHTML(this.mainTab, createHTML(mainTabObj));
-            innerHTML(this.subTab_01, createHTML(subTabObj[0]));
-            innerHTML(this.subTab_02, createHTML(subTabObj[1]));
-
-            return json;
-        }).bind(this)().then(json => this.selectCategory({ json: json, len: this.mainTabLen }));
+       // 맨 처음에는 상위 0번째 요소들로 기본 표시 
+       const mainTabObj = { data: json, type: 'mainCategory', on: "on" };
+       const subTabObj = [{ data: json[0].data, type: 'subCategory', on: "sub-on" },
+       { data: json[0].data[0].data, type: 'lowCategory' }];
+       const createHTML = ({ data, type, on = '' }) => data.reduce((acc, { title }, idx) => {
+           let str = '';
+           if (idx === 0) str = on;
+           return acc + domTpl[type](str, title, idx);
+       }, ``);
+       innerHTML(this.mainTab, createHTML(mainTabObj));
+       innerHTML(this.subTab_01, createHTML(subTabObj[0]));
+       innerHTML(this.subTab_02, createHTML(subTabObj[1]));
+       this.selectCategory({json : json, len : this.mainTabLen});
     }
 
     /* 카테고리 데이터 추가 */
