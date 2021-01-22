@@ -12,7 +12,7 @@ const SEARCHBOX_TEMPLATE = {
   recommandItem(item, searchingWord) {
     let highlightIndex = item.indexOf(searchingWord);
 
-    return `<li class="search-recommand__item">${item.slice(
+    return `<li class="search-recommand__item" data-value="${item}">${item.slice(
       0,
       highlightIndex
     )}<span class="search-recommand__item--highlight">${item.substr(
@@ -81,6 +81,13 @@ class SearchBox {
     }, ``);
   }
 
+  addItemClickEvent() {
+    this.HTMLelement['recommand'].addEventListener('mouseover', event => {
+      if (event.target.className === 'search-recommand__item')
+        this.HTMLelement['input'].value = event.target.dataset.value;
+    });
+  }
+
   async getRecommand() {
     if (this.HTMLelement['input'].value === '') return;
     let recommandList = await this.fetchData(
@@ -95,6 +102,7 @@ class SearchBox {
   init() {
     this.addEventOnElement('input', 'keyup', this.getRecommand.bind(this));
     this.addFocusEvent();
+    this.addItemClickEvent();
   }
 }
 
