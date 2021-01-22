@@ -49,9 +49,8 @@ export function initHotCarouselSection () {
                 throw new Error("Bad response from server");
             return response.json();
         }).then((data) => {
-            createCarousel(data.items);
-            
-        }).catch((err) => { console.log(err) });
+            createCarousel(data.items);  
+        }).catch(console.log);
     })();
 };
 //TODO: 함수 위치 이동하기

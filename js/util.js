@@ -5,21 +5,13 @@
  *                         "남 자겨 울바 지", "남 자 겨 울 바 지"
  */
 const isMatch=(base,keyword_)=>{
+    //keyword:"남자겨울바지"
+    //reduced:"남 ?자 ?겨 ?울 ? 바 ?지 ?"
     const keyword=keyword_.replaceAll(" ","");
-    for(let i = 0 ; i < base.length;i++){
-        let j;
-        let pass;
-        for(j=0,pass=0;j<keyword.length;j++){
-            if(base[i+j+pass]===' ') {
-                pass++; 
-                j--;
-                continue;
-            }
-            if(base[i+j+pass]!==keyword[j]) break;
-        }
-        if(keyword.length===j) return true;
-    }
-    return false;
+    const mapped=Array.prototype.map.call(keyword,(c)=>c+" ?");
+    const reduced=mapped.reduce((acc,cur)=> acc+cur,"");
+    const reg = new RegExp(reduced);
+    return reg.test(base);
 };
 
 module.exports = {

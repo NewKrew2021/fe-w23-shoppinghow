@@ -6,7 +6,7 @@ function createElementFromHTML(htmlString) {
 function getDistance(x1,x2,y1,y2) {
     return Math.sqrt(Math.pow(x2-x1,2)*100000+Math.pow(y2-y1,2)*100000);
 }
-function getMatchingPisition(base,keyword_){
+function getMatchingPosition(base,keyword_){
     const position={
         matchStart:-1,
         matchEnd:-1
@@ -33,4 +33,4 @@ function getMatchingPisition(base,keyword_){
 };
 
 
-export {createElementFromHTML, getDistance,getMatchingPisition}
+export {createElementFromHTML, getDistance,getMatchingPosition}
