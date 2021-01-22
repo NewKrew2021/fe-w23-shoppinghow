@@ -197,7 +197,7 @@ class CategoryMenu {
     });
   }
 
-  init() {
+  async init() {
     this.fetchMenuData()
       .then(res => this.initMenuData(res))
       .then(this.renderMenu.bind(this));

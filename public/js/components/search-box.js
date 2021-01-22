@@ -100,9 +100,8 @@ class SearchBox {
 
   async getRecommand() {
     if (this.HTMLelement['input'].value === '') return;
-    let recommandList = await this.fetchData(
-      this.HTMLelement['input'].value
-    ).then(res => res.json());
+    let res = await this.fetchData(this.HTMLelement['input'].value);
+    let recommandList = await res.json();
 
     this.HTMLelement['recommand'].innerHTML = this.renderRecommand(
       recommandList
