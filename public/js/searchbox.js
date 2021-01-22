@@ -2,7 +2,7 @@
     searchbox.js
     쇼핑하우 검색창 관련 모듈
 */
-import { dom, removeSpace, getStartPos, innerHTML } from './util.js';
+import { dom, removeSpace, getStartPos, html } from './util.js';
 
 export default class SearchBox {
     constructor({ allkeywordURL, RELEASE_TIME, COUNT, SPEED, HEIGHT }) {
@@ -36,7 +36,7 @@ export default class SearchBox {
         this.search_input.addEventListener('keydown', (e) => {
             const value = e.target.value;
             if (value === '') {
-                innerHTML(this.autoInner, "");
+                html(this.autoInner, "");
                 this.keywordInner.style.display = 'block';
                 this.autoInner.style.display = 'none';
             }
@@ -87,7 +87,7 @@ export default class SearchBox {
             this.keywordWrapper.style.display = 'none';
             this.rolledList.style.display = 'block';
             this.search_input.value = "";
-            innerHTML(this.autoInner, "");
+            html(this.autoInner, "");
             this.keywordInner.style.display = 'block';
             this.selectIdx = -1;
         })
@@ -127,7 +127,7 @@ export default class SearchBox {
                     + "</span>" + word.slice(endPos + 1);
                 resultHtml += `<li class="auto-list"><span class='mg-left-20'>${word}</span></li>`
             });
-            innerHTML(this.autoInner, resultHtml);
+            html(this.autoInner, resultHtml);
             this.selectIdx = -1;
         })
     }

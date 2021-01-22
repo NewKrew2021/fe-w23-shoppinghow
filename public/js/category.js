@@ -3,7 +3,7 @@
     스마트 카테고리 영역
     카테고리 관련 기능들
 */
-import { dom, debounce, innerHTML } from './util.js'
+import { dom, debounce, html } from './util.js'
 import { domTpl } from './tpl.js'
 
 export default class Category {
@@ -37,9 +37,9 @@ export default class Category {
            if (idx === 0) str = on;
            return acc + domTpl[type](str, title, idx);
        }, ``);
-       innerHTML(this.mainTab, createHTML(mainTabObj));
-       innerHTML(this.subTab_01, createHTML(subTabObj[0]));
-       innerHTML(this.subTab_02, createHTML(subTabObj[1]));
+       html(this.mainTab, createHTML(mainTabObj));
+       html(this.subTab_01, createHTML(subTabObj[0]));
+       html(this.subTab_02, createHTML(subTabObj[1]));
        this.selectCategory({json : json, len : this.mainTabLen});
     }
 
@@ -62,8 +62,8 @@ export default class Category {
             e.target.classList.add('on');
             const subObj_01 = { data: json[mainIdx].data, type: 'subCategory', on: "sub-on" };
             const subObj_02 = { data: json[mainIdx].data[0].data, type: 'lowCategory' };
-            innerHTML(this.subTab_01, createHTML(subObj_01));
-            innerHTML(this.subTab_02, createHTML(subObj_02)); // 메인 탭을 바꾸면 소분류는 처음으로 고정 위해
+            html(this.subTab_01, createHTML(subObj_01));
+            html(this.subTab_02, createHTML(subObj_02)); // 메인 탭을 바꾸면 소분류는 처음으로 고정 위해
         })
         this.subTab_01.addEventListener('mouseover', (e) => {
             subIdx = e.target.getAttribute('sub-idx');
@@ -71,7 +71,7 @@ export default class Category {
                 dom('.sub-on').querySelector().classList.remove('sub-on');
                 e.target.classList.add('sub-on');
                 const subObj_02 = { data: json[mainIdx].data[subIdx].data, type: 'lowCategory' };
-                innerHTML(this.subTab_02, createHTML(subObj_02));
+                html(this.subTab_02, createHTML(subObj_02));
             }
         })
     }

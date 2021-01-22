@@ -6,7 +6,7 @@
 export function addHTML(node, text) {
     node.innerHTML += text;
 }
-export function innerHTML(node, text){
+export function html(node, text){
     node.innerHTML = text;
 }
 /* 공백을 제거하는 함수 */
