@@ -599,6 +599,10 @@ input {
   text-decoration: underline;
 }
 
+.last-tab-list > a:visited {
+  color: #454545;
+}
+
 .pd-5 {
   padding: 5px;
 }

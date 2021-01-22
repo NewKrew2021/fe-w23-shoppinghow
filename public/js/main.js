@@ -2,7 +2,8 @@
     main.js
     초기 레이아웃을 구성하기 위한 클래스
 */
-import { domTpl, dom, innerHTML, addHTML } from './util.js';
+import { dom, html, addHTML } from './util.js';
+import { domTpl } from './tpl.js'
 import Slider from './slider.js';
 import HotSlider from './hotslider.js';
 import Storage from './storage.js';
@@ -30,9 +31,9 @@ export default class MainLayout {
                 const createHTML = (data, type, s, e) => data.slice(s, e).reduce((acc, {id, name})=>{
                     return acc + domTpl[type](id, name);
                 }, ``);
-                innerHTML(keyleft, createHTML(data, 'autoList', 0, this.keywordCnt/2));
-                innerHTML(keyright, createHTML(data, 'autoList', this.keywordCnt/2, this.keywordCnt));
-                innerHTML(rolled, createHTML(data, 'rollList', 0, this.keywordCnt+1));
+                html(keyleft, createHTML(data, 'autoList', 0, this.keywordCnt/2));
+                html(keyright, createHTML(data, 'autoList', this.keywordCnt/2, this.keywordCnt));
+                html(rolled, createHTML(data, 'rollList', 0, this.keywordCnt+1));
             }
             catch (err){
                 console.error(err);
@@ -44,8 +45,8 @@ export default class MainLayout {
     addNav() {
         const top_nav_UL_1 = dom('#top-nav-ul-1').querySelector();
         const top_nav_UL_2 = dom('#top-nav-ul-2').querySelector();
-        innerHTML(top_nav_UL_1, domTpl['headNav1']());
-        innerHTML(top_nav_UL_2, domTpl['headNav2']());
+        html(top_nav_UL_1, domTpl['headNav1']());
+        html(top_nav_UL_2, domTpl['headNav2']());
     }
 
     addLeftBanner() {
@@ -87,7 +88,7 @@ export default class MainLayout {
                 const createHTML = (data, type) => data.reduce((acc, {src})=>{
                     return acc + domTpl[type](src);
                 }, ``);
-                innerHTML(slideList, createHTML(data, 'rightBanner'));
+                html(slideList, createHTML(data, 'rightBanner'));
                 const slideObject = new Slider(target);
                 slideObject.init();
             }
@@ -116,7 +117,7 @@ export default class MainLayout {
                 const createHTML = (data, type) => data.reduce((acc, {src, title, text})=>{
                     return acc + domTpl[type](src, title, text);
                 }, ``);
-                innerHTML(slideList, createHTML(data, 'hotBanner'));
+                html(slideList, createHTML(data, 'hotBanner'));
                 const storages = new Storage();
                 storages.clickSaveHandler();
                 const slideObject = new HotSlider(target);
@@ -138,7 +139,7 @@ export default class MainLayout {
                 const createHTML = (data, type) => data.reduce((acc, {src, title, text})=>{
                     return acc + domTpl[type](src, title, text);
                 }, ``);
-                innerHTML(gridUL, createHTML(data, 'gridBanner'));
+                html(gridUL, createHTML(data, 'gridBanner'));
                 const storages = new Storage();
                 storages.clickSaveHandler();
             }

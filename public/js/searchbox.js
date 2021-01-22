@@ -2,7 +2,7 @@
     searchbox.js
     쇼핑하우 검색창 관련 모듈
 */
-import { dom, removeSpace, getStartPos, innerHTML } from './util.js';
+import { dom, removeSpace, getStartPos, html } from './util.js';
 
 export default class SearchBox {
     constructor({ allkeywordURL, RELEASE_TIME, COUNT, SPEED, HEIGHT }) {
@@ -27,16 +27,16 @@ export default class SearchBox {
     showKeywordBox() {
         /* 검색창에서 마우스를 떼면 포커스가 사라지게 (mouseout은 자식요소 모두) */
         this.search_blank.addEventListener('mouseleave', () => {
-             setTimeout(() => {
+            setTimeout(() => {
                 this.search_input.blur();
                 this.selectIdx = -1;
-             }, this.RELEASE_TIME);
+            }, this.RELEASE_TIME);
         });
         /* 입력창에 입력을 시작할 때 */
         this.search_input.addEventListener('keydown', (e) => {
             const value = e.target.value;
             if (value === '') {
-                innerHTML(this.autoInner, "");
+                html(this.autoInner, "");
                 this.keywordInner.style.display = 'block';
                 this.autoInner.style.display = 'none';
             }
@@ -87,18 +87,16 @@ export default class SearchBox {
             this.keywordWrapper.style.display = 'none';
             this.rolledList.style.display = 'block';
             this.search_input.value = "";
-            innerHTML(this.autoInner, "");
+            html(this.autoInner, "");
             this.keywordInner.style.display = 'block';
             this.selectIdx = -1;
         })
     }
 
-    fetchAllKeywords() {
-        (async function(){
-            const res = await fetch(this.allkeywordURL);
-            const json = await res.json();
-            return json;
-        }).bind(this)().then(json => this.autoComplete(json));
+    async fetchAllKeywords() {
+        const res = await fetch(this.allkeywordURL);
+        const json = await res.json();
+        this.autoComplete(json);
     }
 
     /* 검색어 자동완성 */
@@ -119,7 +117,7 @@ export default class SearchBox {
                 let startPos = word.search(value); // search는 정확히 일치하는 단어의 첫 위치를 반환한다.
 
                 // 만약 startPos가 -1이라면, word의 공백 때문에 그런 것이므로 getStartPos로 값 변경
-                if (startPos === -1) startPos = getStartPos({word : word, input : value});
+                if (startPos === -1) startPos = getStartPos({ word: word, input: value });
 
                 // 입력한 단어와 꼭 맞게 강조될 수 있도록 endPos 설정 후 html 저장
                 let endPos = word.indexOf(value[valueLength - 1], startPos + valueLength - 1);
@@ -129,7 +127,7 @@ export default class SearchBox {
                     + "</span>" + word.slice(endPos + 1);
                 resultHtml += `<li class="auto-list"><span class='mg-left-20'>${word}</span></li>`
             });
-            innerHTML(this.autoInner, resultHtml);
+            html(this.autoInner, resultHtml);
             this.selectIdx = -1;
         })
     }
